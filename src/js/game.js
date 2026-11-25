@@ -1003,18 +1003,19 @@
             this.popEffect({kind:'hitRing',x:fxX,y:fxY-12,tier,life:.38});
           const transformText=oldRunnerNumber>t.supply.number ? `${oldRunnerNumber} ÷ ${t.supply.number} = ${runner.number}` : `${oldRunnerNumber} × ${t.supply.number} = ${runner.number}`;
           updateMatchHint(`${transformText} ✓ · Combo ${this.combo} · +${outcome.delta}`);
-          if(this.fever)audio.feverHit(this.combo);else audio.combo(runner.successes);
+          if(this.inferno&&tier===3){/* mega cue already played above */}
+          else if(this.fever)audio.feverHit(this.combo);else audio.combo(runner.successes);
         }else{
           this.wrong++;runner.mood='angry';runner.moodTimer=1.25;
           if(outcome.ended){
             showMessage('FEVER OVER! COMBO RESET',1300);
-            this.popEffect({kind:'feverEnd',text:'FEVER OVER',x:W/2,y:H*.38,life:1.15});
+            this.popEffect({kind:'feverEnd',text:'FEVER OVER',x:W/2,y:H*.38,life:.34});
             audio.feverEnd();
           }else audio.wrong();
           if(outcome.delta<0)this.popEffect({kind:'score',text:`−${Math.abs(outcome.delta)}`,x:fxX,y:fxY-42,color:'#db5344',life:1.05});
-          else this.popEffect({kind:'combo',text:'0 PENALTY!',x:fxX,y:fxY-65,life:1.25});
+          else this.popEffect({kind:'combo',text:'0 PENALTY!',x:fxX,y:fxY-65,life:.42});
           this.popEffect({kind:'bonk',x:fxX,y:fxY-22,life:.7});
-          this.popEffect({kind:'bubble',text:outcome.ended?'NO MORE FEVER!':pick(this.rng,['HEY!','OUCH!','RUDE!']),x:fxX,y:fxY-68,life:.88});
+          if(!outcome.ended)this.popEffect({kind:'bubble',text:pick(this.rng,['HEY!','OUCH!','RUDE!']),x:fxX,y:fxY-68,life:.48});
           updateMatchHint(`${t.supply.number} and ${runner.number}: no match · ${outcome.delta} points · combo reset`);
         }
         // The runner might have left the screen during the throwing pose.
@@ -1600,17 +1601,25 @@
     if(t.elapsed>.41)return;
     const runner=runners.find(r=>r.id===t.runnerId);if(!runner)return;
     const f=clamp(t.elapsed/.41,0,1);
-    // A good delivery lands in the runner's hands; a bad one bonks the head.
     const endX=game.runnerX(runner);
     const endY=runner.y+runnerVisualOffset(runner)+(matches(t.supply.number,runner.number)?-12:-38)*runnerScale(runner);
-    const x=mix(117,endX,f),y=mix(188,endY,f)-Math.sin(f*Math.PI)*(t.feverAtRelease?108:68);
-    ctx.save();ctx.globalAlpha=.45;
-    for(let i=0;i<3;i++)circle(mix(117,x,Math.max(0,f-i*.075)),mix(188,y,Math.max(0,f-i*.075))+i*3,2.6,'#fffbe5');
+    const inferno=t.feverAtRelease&&game.inferno;
+    const arc=t.feverAtRelease?108:68;
+    const point=q=>[mix(117,endX,q),mix(188,endY,q)-Math.sin(q*Math.PI)*arc];
+    const [x,y]=point(f);
+    ctx.save();
+    // Trail follows the actual moving target. Keep it behind the flying supply.
+    const count=t.feverAtRelease?(inferno?6:4):3;
+    for(let i=count;i>=1;i--){
+      const q=Math.max(0,f-i*.045),[px,py]=point(q);
+      ctx.globalAlpha=(1-i/(count+1))*(inferno?.47:t.feverAtRelease?.4:.2);
+      const col=inferno?(i%3===0?'#ed9dd5':i%2?'#ffe4a5':'#8ed9ed'):t.feverAtRelease?'#ffd779':'#fffbe5';
+      circle(px,py,inferno?3.7:t.feverAtRelease?2.8:2.2,col);
+    }
     ctx.restore();
-    if(t.feverAtRelease){ctx.save();ctx.globalAlpha=.8;for(let j=1;j<=4;j++){const q=Math.max(0,f-j*.055);label('✦',mix(117,endX,q),mix(188,endY,q)-Math.sin(q*Math.PI)*108,13+j%2*3,j%2?'#ffe56c':'#fff');}ctx.restore();}
     drawSupply(t.supply,x,y,t.feverAtRelease?25:20,f*TAU*(t.feverAtRelease?3:1.5),true);
   }
-  function drawEffect(f){
+    function drawEffect(f){
     const p=f.age/f.life,alpha=clamp(1-p*1.2,0,1);
     ctx.save();ctx.globalAlpha=alpha;
     if(f.kind==='score'){
