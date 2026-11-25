@@ -25,6 +25,24 @@ async def check(browser, width, height):
     assert dims['width']>0
     assert dims['tray']<=dims['viewport']+3,(width,height,dims)
 
+    # Without changing the canvas size, the complete in-game stack should
+    # share any leftover height between its top and bottom margins.
+    margins=await page.evaluate("""() => {
+      const screen=document.querySelector('#gameScreen');
+      const parts=[screen.querySelector('.scoreboard'),
+                   document.querySelector('#comboPanel'),
+                   document.querySelector('#sceneShell'),
+                   screen.querySelector('.game-control-strip')];
+      const bounds=screen.getBoundingClientRect();
+      const first=parts[0].getBoundingClientRect();
+      const last=parts[parts.length-1].getBoundingClientRect();
+      return {top:first.top-bounds.top,bottom:bounds.bottom-last.bottom,
+              align:getComputedStyle(screen).justifyContent};
+    }""")
+    assert margins['align']=='center',(width,height,margins)
+    if margins['top']>3 or margins['bottom']>3:
+        assert abs(margins['top']-margins['bottom'])<=4,(width,height,margins)
+
     # Regression: the tray tap changes the hand immediately and confirms the
     # swap AT THE VOLUNTEER'S HAND, without a SWAPPED text effect. The view
     # and touch zones remain identical on narrow and tall phones.
