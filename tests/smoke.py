@@ -24,6 +24,49 @@ async def check(browser, width, height):
     assert not errors, (width,height,errors)
     assert dims['width']>0
     assert dims['tray']<=dims['viewport']+3,(width,height,dims)
+
+    # Regression: the tray tap changes the hand immediately and confirms the
+    # swap AT THE VOLUNTEER'S HAND, without a SWAPPED text effect. The view
+    # and touch zones remain identical on narrow and tall phones.
+    before=await page.evaluate("""() => {
+      const g=window.SnackDashDebug.getGame();
+      return {held:g.supplies.held.number,tray:g.supplies.queue[0].number,
+              phase:g.phase};
+    }""")
+    assert before['phase']=='playing',(width,height,before)
+    scene=await page.locator('#scene').bounding_box()
+    await page.mouse.click(scene['x']+scene['width']*(50/390),
+                           scene['y']+scene['height']*(89/700))
+    after=await page.evaluate("""() => {
+      const g=window.SnackDashDebug.getGame();
+      return {held:g.supplies.held.number,tray:g.supplies.queue[0].number,
+              cue:g.swapCue && {...g.swapCue},
+              swapLabel:g.effects.some(e=>e.text==='SWAPPED!')};
+    }""")
+    assert after['held']==before['tray'],(width,height,before,after)
+    assert after['tray']==before['held'],(width,height,before,after)
+    assert after['cue'] is not None and after['cue']['number']==before['tray'],after
+    assert not after['swapLabel'],after
+
+    # A second tap during the cue resets it instead of queuing a long effect.
+    await page.mouse.click(scene['x']+scene['width']*(122/390),
+                           scene['y']+scene['height']*(89/700))
+    next_cue=await page.evaluate("""() => {
+      const g=window.SnackDashDebug.getGame();
+      return {cue:g.swapCue && {...g.swapCue},held:g.supplies.held.number};
+    }""")
+    assert next_cue['cue'] and next_cue['cue']['number']==next_cue['held'],next_cue
+
+    # Immediate throw is allowed: the visual cue cannot lock input.
+    can_throw=await page.evaluate("""() => {
+      const g=window.SnackDashDebug.getGame();
+      const r=g.runners.find(r=>g.onScreen(r) && r.y>120 && r.y<600);
+      if(!r)return false;
+      g.tryThrow(g.runnerX(r), r.y+5);
+      return !!g.throwing && g.swapCue===null;
+    }""")
+    assert can_throw,(width,height,"swap cue blocked an immediate throw")
+    assert not errors,(width,height,errors)
     await page.close()
 
 
