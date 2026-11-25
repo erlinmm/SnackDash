@@ -37,104 +37,311 @@
   });
 
 
-  const SCENE_THEMES={
-    tokyo:['grid','cherry','lantern','tower','#e9a4bf'],
-    seoul:['grid','ginkgo','poster','seoul','#d9c66c'],
-    london:['stone','hedge','rail','westminster','#d4ac7d'],
-    berlin:['setts','linden','bear','gate','#94c3b3'],
-    amsterdam:['brick','tulip','bicycle','canal','#80c9c9'],
-    paris:['cobble','flowers','lamp','eiffel','#c4a1dd'],
-    boston:['brick','maple','marathon','townhouses','#e6c661'],
-    chicago:['stone','shrubs','bridge','chicago','#7ac9b4'],
-    newyork:['grid','tree','subway','manhattan','#e1c766'],
-    sydney:['stone','grass','harbour','opera','#92d4e4']
-  };
+  // The street is composed for the REAL visible left verge (x < roadLeft(y)).
+  // Signatures use distinct shapes and large foreground props, not flag labels.
+  // Entries: paving, plant, furniture, skyline, accent, sky, stone, outline.
+  const SCENE_THEMES=Object.freeze({
+    tokyo:['slab','cherry','japanese','tokyo','#ef8fac','#f9e5ec','#d9dce6','#81465f'],
+    seoul:['grid','ginkgo','korean','seoul','#f1c85a','#e1eaf3','#d5dae2','#555b89'],
+    london:['stone','hedge','postbox','westminster','#d9ae70','#dce7ec','#d7d2c9','#5b6372'],
+    berlin:['setts','linden','bear','gate','#8acaaf','#e1ebe4','#bfcac5','#536d67'],
+    amsterdam:['brick','tulip','bike','canal','#f1a66a','#d9edf0','#d9ad90','#755c65'],
+    paris:['cobble','flowers','cafe','eiffel','#c7a4ec','#f2e5ed','#e7d4c8','#6f5788'],
+    boston:['herring','maple','marathon','townhouses','#f0ca57','#f7e7dd','#be8475','#795962'],
+    chicago:['slate','shrubs','elevated','chicago','#81dbb3','#daebe7','#bac9c8','#4b7580'],
+    newyork:['grid','tree','subway','manhattan','#f9c965','#e6e9ed','#c6c7c3','#566277'],
+    sydney:['sand','eucalyptus','harbour','opera','#8bdce9','#d9f0f1','#e8dcc1','#527f91']
+  });
   const reducedMotion=()=>typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function drawCityLandmark(theme){
-    const type=theme[3],color=theme[4];
-    ctx.save();ctx.globalAlpha=.43;ctx.fillStyle=color;ctx.strokeStyle=color;ctx.lineWidth=4;
-    const rect=(x,y,w,h)=>ctx.fillRect(x,y,w,h);
-    const poly=(p)=>{ctx.beginPath();p.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill()};
-    if(type==='tower'||type==='seoul'){
-      poly([[305,229],[326,158],[330,107],[338,107],[342,158],[365,229]]);
-      rect(317,169,37,4);rect(311,206,47,4);rect(332,87,4,25);
-      if(type==='seoul')rect(321,143,27,13);
-    }else if(type==='westminster'){
-      rect(280,188,109,41);rect(310,104,22,125);
-      poly([[308,104],[321,83],[335,104]]);rect(319,73,4,15);
-      circle(321,132,8,'#f5e9c7',color,2);
-      for(let x=284;x<387;x+=12)rect(x,200,6,13);
-    }else if(type==='gate'){
-      rect(282,151,104,12);rect(286,141,96,7);
-      for(let x=288;x<385;x+=23)rect(x,164,10,65);
-      rect(281,225,108,6);
-    }else if(type==='canal'){
-      for(let x=280;x<390;x+=26){rect(x,170-(x%3)*7,23,60);poly([[x-1,170-(x%3)*7],[x+11,151-(x%3)*7],[x+24,170-(x%3)*7]])}
-      ctx.beginPath();ctx.arc(336,245,55,Math.PI,0);ctx.stroke();
-    }else if(type==='eiffel'){
-      poly([[334,94],[327,153],[294,229],[306,229],[337,159],[365,229],[376,229],[343,153]]);
-      rect(318,164,38,5);rect(309,202,57,5);rect(336,80,4,20);
-    }else if(type==='townhouses'){
-      for(let x=275;x<390;x+=28){rect(x,173+(x%3)*4,25,57);poly([[x-1,174+(x%3)*4],[x+12,153+(x%3)*4],[x+26,174+(x%3)*4]])}
-    }else if(type==='chicago'||type==='manhattan'){
-      for(let i=0;i<8;i++)rect(276+i*15,228-(36+i*31%76),13,36+i*31%76);
-      if(type==='manhattan'){rect(333,109,19,119);rect(340,92,4,20)}
-      else{rect(277,226,111,5);for(let x=281;x<388;x+=17)rect(x,215,3,12)}
-    }else if(type==='opera'){
-      for(let i=0;i<4;i++){let x=281+i*25;poly([[x,226],[x+11,164-i%2*12],[x+23,226]])}
-      rect(279,226,110,5);ctx.beginPath();ctx.arc(363,228,51,Math.PI,Math.PI*1.9);ctx.stroke();
-    }
-    ctx.restore();
+  function cityPoly(points,fill,stroke,width=2){
+    ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));
+    ctx.closePath();ctx.fillStyle=fill;ctx.fill();
+    if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.lineJoin='round';ctx.stroke();}
   }
-  function drawCityPavement(theme,t){
-    const edge=y=>roadCenter(y)-roadHalfWidth(y);
-    // Road covers the entire lower right; clip both sides to true verge.
+  function cityRect(x,y,w,h,fill,stroke,width=1.5){
+    ctx.fillStyle=fill;ctx.fillRect(x,y,w,h);
+    if(stroke){ctx.lineWidth=width;ctx.strokeStyle=stroke;ctx.strokeRect(x,y,w,h);}
+  }
+  function cityArc(x,y,r,start,end,col,width=2){
+    ctx.beginPath();ctx.arc(x,y,r,start,end);ctx.strokeStyle=col;ctx.lineWidth=width;ctx.stroke();
+  }
+  function cityEllipse(x,y,rx,ry,fill,stroke,angle=0){
+    ctx.beginPath();ctx.ellipse(x,y,rx,ry,angle,0,TAU);ctx.fillStyle=fill;ctx.fill();
+    if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1.5;ctx.stroke();}
+  }
+  function drawCityPavement(theme){
+    const pattern=theme[0],stone=theme[6],ink=theme[7];
+    const left=y=>roadCenter(y)-roadHalfWidth(y)-6;
+    const right=y=>roadCenter(y)+roadHalfWidth(y)+6;
     for(const side of ['left','right']){
       ctx.save();ctx.beginPath();
       if(side==='left'){
-        ctx.moveTo(0,0);ctx.lineTo(Math.max(0,edge(0)-5),0);
-        for(let y=5;y<=H;y+=5)ctx.lineTo(Math.max(0,edge(y)-5),y);
+        ctx.moveTo(0,0);ctx.lineTo(Math.max(0,left(0)),0);
+        for(let y=5;y<=H;y+=5)ctx.lineTo(Math.max(0,left(y)),y);
         ctx.lineTo(0,H);
       }else{
-        const right=y=>roadCenter(y)+roadHalfWidth(y);
-        ctx.moveTo(W,0);ctx.lineTo(Math.min(W,right(0)+5),0);
-        for(let y=5;y<=H;y+=5)ctx.lineTo(Math.min(W,right(y)+5),y);
+        ctx.moveTo(W,0);ctx.lineTo(Math.min(W,right(0)),0);
+        for(let y=5;y<=H;y+=5)ctx.lineTo(Math.min(W,right(y)),y);
         ctx.lineTo(W,H);
       }
       ctx.closePath();ctx.clip();
-      ctx.fillStyle=theme[0]==='brick'?'#d3b6a4':theme[0]==='cobble'?'#e5d5c6':'#d7d9d3';
-      ctx.fillRect(0,0,W,H);
-      const step=theme[0]==='brick'?14:theme[0]==='cobble'?19:27;
-      ctx.strokeStyle='rgba(80,88,95,.18)';ctx.lineWidth=1;
-      for(let y=7;y<500;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
-      for(let x=0;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,500);ctx.stroke()}
-      const positions=side==='left'?[[14,289,12],[16,382,16],[17,440,17]]:[[371,276,10],[378,365,13]];
-      for(const [x,y,r] of positions){
-        if(['tulip','flowers','grass'].includes(theme[1])){
-          for(let j=-1;j<=1;j++){line(x+j*6,y+8,x+j*6,y-r,theme[4],2);circle(x+j*6,y-r,4,theme[4])}
-        }else if(['hedge','shrubs'].includes(theme[1])){
-          roundedRect(x-r,y-r/2,2*r,r,5,'#8bbf8c','#759e7b',1);
-        }else{
-          line(x,y+12,x,y-r, '#857f6d',3);
-          for(let j=0;j<5;j++){let a=j*TAU/5;circle(x+Math.cos(a)*r*.65,y-r+Math.sin(a)*r*.6,r*.46,theme[1]==='cherry'?'#f3b5cd':theme[1]==='ginkgo'?'#e5cd72':'#9fc4a2')}
+      ctx.fillStyle=stone;ctx.fillRect(0,0,W,H);
+      ctx.strokeStyle=ink;ctx.globalAlpha=.25;ctx.lineWidth=1.1;
+      if(pattern==='herring'||pattern==='brick'){
+        for(let y=145,row=0;y<490;y+=15,row++){
+          const off=row%2?12:0;
+          for(let x=-20+off;x<220;x+=26){
+            ctx.strokeRect(x,y,25,14);
+            if(pattern==='herring')line(x+4,y+2,x+20,y+12,ink,1);
+          }
         }
-      }
-      if(side==='left'){
-        const x=11,y=331;
-        if(['rail','bridge','harbour'].includes(theme[2])){
-          for(let k=0;k<3;k++)line(x+k*11,y,x+k*11,y+29,'#6c7e87',2);
-          line(x,y+7,x+25,y+7,'#6c7e87',2);
-        }else if(theme[2]==='bicycle'){
-          circle(x,y+13,6,null,'#67727b',2);circle(x+21,y+13,6,null,'#67727b',2);
-          line(x,y+13,x+10,y+2,'#67727b',2);line(x+10,y+2,x+21,y+13,'#67727b',2);
-        }else{
-          line(x+5,y,x+5,y+28,'#737c87',2);
-          roundedRect(x-3,y-11,16,13,3,theme[4],'#737c87',1);
+      }else if(pattern==='cobble'||pattern==='setts'){
+        for(let y=146,row=0;y<490;y+=16,row++){
+          for(let x=-10+row%2*10;x<220;x+=23){
+            ctx.beginPath();ctx.ellipse(x+10,y+8,11,6,0,0,TAU);ctx.stroke();
+          }
         }
+      }else if(pattern==='sand'){
+        for(let y=156;y<490;y+=26){
+          for(let x=0;x<220;x+=38){
+            ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+29,y);ctx.stroke();
+          }
+        }
+      }else{
+        const dx=pattern==='slate'?41:pattern==='stone'?36:pattern==='slab'?31:27;
+        const dy=pattern==='stone'?27:pattern==='slate'?36:30;
+        for(let y=147;y<490;y+=dy){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(220,y);ctx.stroke();}
+        for(let x=0;x<220;x+=dx){ctx.beginPath();ctx.moveTo(x,145);ctx.lineTo(x,490);ctx.stroke();}
       }
       ctx.restore();
     }
   }
+  function drawCityLandmark(theme){
+    // Prominent postcard silhouette entirely on the visible UPPER-LEFT verge.
+    // The table and volunteer are drawn later and remain in the foreground.
+    const id=theme[3],c=theme[4],ink=theme[7],sky=theme[5];
+    ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    if(id==='tokyo'){
+      // Red/white lattice of Tokyo Tower plus a little tiled roof.
+      cityPoly([[79,240],[104,177],[109,155],[115,155],[120,177],[145,240],[132,240],[112,188],[91,240]],'#e86464',ink,2.4);
+      for(let y of [182,198,216,235])line(85+(y-180)*.18,y,139-(y-180)*.18,y,'#fff2e4',3);
+      line(100,193,124,220,'#fff2e4',2);line(125,194,103,223,'#fff2e4',2);
+      cityRect(99,183,26,7,'#fdf4e4',ink);cityRect(109,139,5,20,'#d95568');
+      cityPoly([[12,233],[19,220],[53,220],[62,233]],'#715d74',ink);
+      cityRect(15,232,45,11,'#bd8587',ink);
+    }else if(id==='seoul'){
+      cityPoly([[3,238],[38,209],[66,217],[92,200],[136,221],[154,238]],'#a1b6a9',ink);
+      cityRect(99,160,10,75,'#e8e5da',ink);
+      cityEllipse(104,174,16,8,'#9b8bb6',ink);cityRect(93,177,22,8,'#ede0ec',ink);
+      cityRect(102,143,4,18,'#765f8c');cityEllipse(104,139,4,4,c,ink);
+      cityRect(22,205,17,29,'#bed2da',ink);cityRect(43,197,15,37,'#acc8d9',ink);
+    }else if(id==='westminster'){
+      // Elizabeth Tower clock face and the repeated Palace of Westminster bays.
+      cityRect(9,214,138,26,'#bb9b85',ink,2);
+      for(let x=15;x<145;x+=16){cityPoly([[x,215],[x+7,204],[x+14,215]],'#b9a9a3',ink,1.2);cityRect(x+4,222,7,13,'#6c7688');}
+      cityRect(91,164,26,75,'#d4b9a1',ink,2.5);
+      cityPoly([[88,164],[104,146],[120,164]],'#7b7288',ink,2);
+      cityRect(103,133,3,18,ink);cityEllipse(104,188,9,9,'#fff0cf',ink);
+      line(104,188,104,182,ink,1.8);line(104,188,109,190,ink,1.8);
+      for(let x of [92,101,110])cityRect(x,216,3,16,'#8c7774');
+    }else if(id==='gate'){
+      cityRect(19,194,124,10,'#aab9ab',ink,2);cityRect(24,183,113,10,'#c2cfc4',ink);
+      cityPoly([[17,184],[81,171],[144,184]],'#9cb2a5',ink,2);
+      for(let x=27;x<137;x+=22){cityRect(x,204,13,36,'#bdcabe',ink,1.8);cityRect(x+3,208,7,29,'#e3e7db');}
+      cityRect(15,237,132,7,'#7e9b93',ink);
+      // Quadriga on top: small but recognizably above the columned gate.
+      cityEllipse(85,167,16,5,ink);circle(71,162,4,ink);circle(94,162,4,ink);
+    }else if(id==='canal'){
+      const hs=[43,56,49,61];
+      for(let i=0;i<4;i++){
+        const x=11+i*32,w=29,h=hs[i],top=237-h;
+        cityRect(x,top,w,h,['#c38276','#e5ad8a','#9c9abb','#c77984'][i],ink,2);
+        cityPoly([[x,top],[x+7,top-11],[x+15,top-14],[x+22,top-11],[x+w,top]],['#ba736e','#d79778','#8f8aad','#b96d7c'][i],ink,2);
+        for(let j=0;j<2;j++)cityRect(x+7,top+13+j*16,12,9,'#ffe6c0',ink,1);
+      }
+      cityArc(77,247,62,Math.PI,TAU,ink,5);
+      line(14,244,143,244,'#699fa8',5);
+    }else if(id==='eiffel'){
+      // Open lattice and crossbars read much better at 390 logical pixels.
+      cityPoly([[88,150],[79,187],[43,240],[59,240],[90,194],[121,240],[137,240],[101,187],[94,150]],'#b296a8',ink,2.5);
+      for(let y of [175,197,216,230])line(60+(y-175)*.30,y,120-(y-175)*.30,y,'#f6e4d1',2.6);
+      line(66,220,108,182,ink,1.4);line(115,220,74,182,ink,1.4);
+      cityRect(84,162,16,7,'#927596',ink);cityRect(90,137,4,14,ink);
+      cityPoly([[7,227],[13,211],[42,211],[47,227]],'#d79bae',ink);
+      cityRect(6,227,42,9,'#d8b69f',ink);
+    }else if(id==='townhouses'){
+      const cols=['#b96f60','#d69a74','#a86f72','#cd896b'];
+      for(let i=0;i<4;i++){
+        const x=9+i*34,y=179+i%2*6;
+        cityRect(x,y,31,61,cols[i],ink,1.7);
+        cityPoly([[x-2,y],[x+15,y-17],[x+33,y]],'#835b5b',ink,2);
+        cityRect(x+9,y+13,12,13,'#ffe2c6',ink,1.4);
+        cityRect(x+9,y+36,12,14,'#ffe2c6',ink,1.4);
+        cityRect(x+22,y-19,5,10,'#795151');
+      }
+    }else if(id==='chicago'){
+      const hs=[42,58,76,52,88,64];
+      for(let i=0;i<hs.length;i++){
+        const x=9+i*23,y=239-hs[i];
+        cityRect(x,y,21,hs[i],i%2?'#9db6b8':'#7195a5',ink,1.6);
+        for(let yy=y+8;yy<235;yy+=12){line(x+5,yy,x+17,yy,'#daede4',1.6);}
+      }
+      cityRect(72,139,15,100,'#6d8597',ink,2);cityRect(76,122,2,18,ink);cityRect(82,125,2,15,ink);
+      line(7,241,147,241,'#557b8a',5);
+    }else if(id==='manhattan'){
+      const hs=[41,59,78,47,69,45];
+      for(let i=0;i<6;i++){
+        const x=7+i*23,y=240-hs[i];
+        cityRect(x,y,21,hs[i],i%2?'#a2a6b5':'#788ba2',ink,1.5);
+        for(let yy=y+9;yy<234;yy+=13)for(let xx=x+5;xx<x+21;xx+=8)cityRect(xx,yy,3,5,'#ffe4ac');
+      }
+      cityRect(76,154,20,86,'#96a5b8',ink,2);
+      cityPoly([[73,155],[86,143],[99,155]],'#8496aa',ink);
+      cityRect(84,123,4,22,ink);cityRect(86,114,1.6,10,ink);
+    }else if(id==='opera'){
+      cityPoly([[6,242],[6,229],[137,229],[151,243]],'#8bbfc5',ink,2);
+      cityPoly([[20,227],[23,220],[42,177],[58,222],[59,227]],'#fff7e9',ink,2.5);
+      cityPoly([[44,228],[62,189],[80,227]],'#fff5e7',ink,2.5);
+      cityPoly([[76,228],[100,185],[117,227]],'#fcf0e6',ink,2.5);
+      ctx.beginPath();ctx.ellipse(88,236,59,29,0,Math.PI,TAU);ctx.strokeStyle='#5f929f';ctx.lineWidth=5;ctx.stroke();
+      for(let x=47;x<139;x+=20)line(x,230,x,242,'#5f929f',2);
+      line(6,242,150,242,'#6caaba',3);
+    }
+    ctx.restore();
+  }
+  function drawCityPlants(theme,time){
+    // A large middle-distance plant and recognisable textures on the near verge.
+    const plant=theme[1],ink=theme[7],accent=theme[4];
+    const sway=reducedMotion()?0:Math.sin(time*1.1)*1.4;
+    ctx.save();ctx.lineCap='round';
+    if(plant==='cherry'||plant==='ginkgo'||plant==='linden'||plant==='maple'||plant==='tree'||plant==='eucalyptus'){
+      const trunk=plant==='eucalyptus'?'#d4c6b2':'#927967';
+      line(36,355,40+sway,298,trunk,7);
+      line(40,309,62+sway,283,trunk,4);
+      line(40,318,20+sway,288,trunk,3);
+      for(let i=0;i<9;i++){
+        const x=40+Math.cos(i*TAU/9)*30+sway,y=281+Math.sin(i*TAU/9)*22;
+        if(plant==='ginkgo'){
+          cityPoly([[x,y+7],[x-10,y-7],[x,y-13],[x+10,y-7]],i%2?'#f3d978':'#dbb64d',ink,1.2);
+        }else if(plant==='eucalyptus'){
+          cityEllipse(x,y,14,5,i%2?'#7fbbb1':'#b2d5b9',ink,-.75);
+        }else if(plant==='maple'){
+          cityPoly([[x,y-13],[x-5,y-5],[x-13,y-6],[x-7,y+3],[x-9,y+12],[x,y+7],[x+9,y+12],[x+7,y+3],[x+13,y-6],[x+5,y-5]],i%2?'#efaf77':'#c77b59',ink,1);
+        }else{
+          circle(x,y,plant==='cherry'?13:15,plant==='cherry'?(i%2?'#f9c3d8':'#f0a7c1'):(plant==='linden'?'#a9d0a0':'#9cbe99'),ink,1);
+        }
+      }
+      if(plant==='cherry'){
+        for(let i=0;i<12;i++){const x=9+(i*19)%92,y=267+(i*23)%57;circle(x,y,2.8,i%2?'#fff3e9':'#e883b1');}
+      }
+    }else if(plant==='hedge'||plant==='shrubs'){
+      for(let i=0;i<3;i++){
+        const x=13+i*24,y=349-i*10;
+        roundedRect(x-12,y-15,25,24,4,plant==='hedge'?'#87a985':'#72ac9a',ink,2);
+        circle(x+4,y-18,8,plant==='hedge'?'#b4cf94':'#9bcea7',ink,1);
+      }
+      if(plant==='hedge')for(let i=0;i<8;i++)circle(8+i*9,359-i%3*4,2.9,i%2?'#f1d37a':'#f9aeb9');
+    }else if(plant==='flowers'||plant==='tulip'){
+      roundedRect(1,363,82,14,4,plant==='tulip'?'#ab806e':'#8c7695',ink,2);
+      for(let i=0;i<8;i++){
+        const x=6+i*10,y=358-(i%3)*6;
+        line(x,y+5,x+1,y-14,'#528f74',2.4);
+        cityPoly([[x-6,y-12],[x-4,y-20],[x,y-16],[x+5,y-21],[x+7,y-12],[x,y-6]],i%3===0?'#e9b359':i%2?'#f4a5ba':'#d7b1ef',ink,1);
+      }
+    }else if(plant==='grass'){
+      for(let i=0;i<10;i++)line(7+i*8,373,7+i*8+(i%2?7:-5),347-(i%3)*7,i%2?'#7db6ad':'#acd4a4',2.6);
+    }
+    ctx.restore();
+  }
+  function drawCityFurniture(theme){
+    const kind=theme[2],ink=theme[7],a=theme[4];
+    ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    if(kind==='japanese'){
+      // Sloped-roof stone lantern and vermilion festival ribbon.
+      cityRect(12,327,19,37,'#e6cbac',ink,2);
+      cityPoly([[7,329],[22,316],[36,329]],'#d96e73',ink,2);
+      cityRect(16,332,12,16,'#fff0bd',ink,2);
+      cityRect(19,363,7,14,'#b49492',ink);line(48,339,75,333,'#d87896',3);
+      for(let i=0;i<4;i++)circle(51+i*7,332-i*.7,4,'#ffc0d1');
+    }else if(kind==='korean'){
+      // Tall modern sign + golden ginkgo planter, markedly unlike Tokyo.
+      cityRect(13,322,29,46,'#4a567d',ink,2);
+      cityRect(17,327,21,15,'#f8d77b',ink);cityRect(19,347,17,17,'#aaacd8',ink);
+      line(22,333,33,333,'#665079',2);line(24,354,33,354,'#f5eef8',2);
+      roundedRect(50,360,33,16,4,'#758a88',ink,2);
+    }else if(kind==='postbox'){
+      // London: a red pillar box and cast-iron rail, not generic foliage.
+      roundedRect(9,325,25,50,6,'#db4e51',ink,2.6);
+      cityEllipse(21,325,13,7,'#e7615f',ink);
+      cityRect(13,337,18,4,'#fff4de',ink);
+      cityRect(16,352,12,8,'#b83d46');circle(21,365,2,'#edd4a2');
+      for(let i=0;i<4;i++){const x=43+i*10;line(x,349,x,376,'#373d4b',3);}
+      line(41,352,82,352,'#343b46',3);
+    }else if(kind==='bear'){
+      // Berlin bear sculpture on geometric plinth, with bright linden planting.
+      cityRect(8,366,48,10,'#abbcb6',ink,2);
+      cityEllipse(33,344,15,20,'#866d67',ink);
+      circle(28,322,6,'#866d67',ink,1);circle(40,322,6,'#866d67',ink,1);
+      circle(34,327,12,'#967d72',ink,2);circle(30,326,2,'#332f35');circle(38,326,2,'#332f35');
+      for(let i=0;i<4;i++)cityEllipse(63+i*5,363-i%2*5,5,8,'#95c5a0',ink);
+    }else if(kind==='bike'){
+      // Amsterdam: full bicycle silhouette + canal railing / tulip boxes.
+      for(let x of [17,62])circle(x,352,14,'#f8eee4',ink,2.4);
+      line(17,352,37,326,'#d77b66',3.5);line(37,326,62,352,'#d77b66',3.5);
+      line(62,352,17,352,'#d77b66',3);line(37,326,44,352,'#d77b66',3);
+      line(32,322,42,322,ink,2);line(57,323,67,323,ink,2.2);
+      line(57,323,62,352,ink,2);
+    }else if(kind==='cafe'){
+      // Paris: double globe streetlamp and café parasol/counter.
+      line(19,378,19,315,ink,4);cityArc(19,318,13,Math.PI,TAU,ink,3);
+      circle(7,316,7,'#fff0c6',ink,1.8);circle(31,316,7,'#fff0c6',ink,1.8);
+      cityPoly([[43,348],[65,329],[86,348]],'#dca3c7',ink,2);
+      line(65,348,65,371,ink,2);line(50,358,78,358,ink,2.5);
+      line(53,358,49,375,ink,2);line(75,358,79,375,ink,2);
+    }else if(kind==='marathon'){
+      // Boston: blue/gold race marker and an old-fashioned streetlamp.
+      line(13,317,13,377,ink,3);cityEllipse(13,317,7,9,'#fff1c7',ink);
+      roundedRect(24,330,54,31,6,'#377eae',ink,2.5);
+      label('26.2',51,343,18,'#ffe170');label('BOSTON',51,353,7,'#ffffff');
+      line(24,363,78,363,'#f6ce64',4);
+    }else if(kind==='elevated'){
+      // Chicago: underside of the "L" viaduct, truss and riveted support.
+      cityRect(7,311,86,10,'#637a8b',ink,2);
+      for(let x=12;x<94;x+=16){line(x,310,x+12,321,'#a2d3c3',2);circle(x,316,1.8,'#e8d9a9');}
+      cityRect(26,321,12,55,'#647d88',ink,2);
+      for(let y=334;y<375;y+=13)line(27,y,37,y+6,'#c1d8cb',1.8);
+      roundedRect(48,359,31,15,4,'#6bb49d',ink,2);
+    }else if(kind==='subway'){
+      // NYC: unmistakable subway roundel beside a red hydrant.
+      line(19,333,19,373,ink,4);circle(19,321,14,'#397aa2',ink,2.4);
+      label('M',19,321,16,'#fff3df');
+      roundedRect(44,347,21,27,5,'#d55854',ink,2);
+      roundedRect(50,339,9,10,3,'#e77663',ink,1.5);
+      line(42,361,68,361,ink,4);circle(44,361,5,'#d55854',ink);circle(66,361,5,'#d55854',ink);
+    }else if(kind==='harbour'){
+      // Sydney: bright harbour rail and eucalyptus beside coastal grasses.
+      for(let i=0;i<4;i++){const x=8+i*22;line(x,342,x,377,'#fbfbf0',5);line(x,342,x,377,ink,1);}
+      line(5,347,83,347,'#f8faf4',6);line(5,348,83,348,ink,1.3);
+      for(let i=0;i<6;i++)cityEllipse(9+i*12,373-i%3*4,9,3,i%2?'#b4d8bd':'#7dbbb6',null,-.5);
+    }
+    ctx.restore();
+  }
+  function drawCityDetails(time){
+    const city=CITIES[game?.config?.cityIndex||0];
+    const theme=SCENE_THEMES[city.id]||SCENE_THEMES.tokyo;
+    drawCityPavement(theme);
+    drawCityLandmark(theme);
+    // The foreground features have a strict visible-verge clipping mask.
+    ctx.save();ctx.beginPath();ctx.moveTo(0,255);
+    for(let y=255;y<=480;y+=5){
+      const edge=Math.max(0,roadCenter(y)-roadHalfWidth(y)-7);
+      ctx.lineTo(edge,y);
+    }
+    ctx.lineTo(0,480);ctx.closePath();ctx.clip();
+    drawCityPlants(theme,time);drawCityFurniture(theme);
+    ctx.restore();
+  }
+
   const W=390,H=700,GOAL=10,TAU=Math.PI*2;
   const $=id=>document.getElementById(id);
   const canvas=$('scene'), ctx=canvas.getContext('2d',{alpha:false});
@@ -1226,8 +1433,8 @@
   /* ---------- Draw the world ---------- */
   function drawGround(t){
     const theme=SCENE_THEMES[CITIES[game?.config?.cityIndex||0].id]||SCENE_THEMES.tokyo;
-    ctx.fillStyle='#d9e8df';ctx.fillRect(0,0,W,H);
-    drawCityLandmark(theme);drawCityPavement(theme,t);
+    ctx.fillStyle=theme[5];ctx.fillRect(0,0,W,H);
+    drawCityDetails(t);
   }
     function drawRoad(_t){
     const city=CITIES[game?.config?.cityIndex||0],style=CITY_VISUALS[city.id]||CITY_VISUALS.tokyo;
