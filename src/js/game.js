@@ -144,6 +144,7 @@
     wrong(){this.tone(235,.17,.065,'square');this.tone(171,.26,.06,'triangle',.14);}
     combo(streak){this.correct();if(streak>1){[1047,1319,1568].slice(0,Math.min(3,streak-1)).forEach((f,i)=>this.tone(f,.16,.055,'triangle',.19+i*.075));}}
     grab(){this.tone(460,.08,.027,'triangle');this.tone(670,.09,.027,'triangle',.07);}
+    swapConfirm(){this.tone(660,.065,.028,'triangle');this.tone(988,.09,.025,'sine',.05);}
     victory(){[523,659,784,1047,784,1047,1319].forEach((f,i)=>this.tone(f,.18,.065,'triangle',i*.16));}
     fail(){[460,390,310].forEach((f,i)=>this.tone(f,.22,.045,'triangle',i*.18));}
     feverStart(){[587,740,880,1175,1480].forEach((f,i)=>this.tone(f,.23,.07,'triangle',i*.095));}
@@ -451,7 +452,7 @@
       this.combo=0;this.fever=false;this.inferno=false;this.maxCombo=0;this.feverImpact=0;this.feverHits=0;this.usedSupplies=[];
       this.hitstopRemaining=0;this.shakeRemaining=0;this.shakePower=0;this.impactClock=0;this.impactFlash=0;
       this.remaining=config.seconds;this.sceneTime=0;this.phase='countdown';this.countdown=1.5;
-      this.lastCountdownDigit=4;this.throwing=null;this.effects=[];this.confetti=[];
+      this.lastCountdownDigit=4;this.throwing=null;this.swapCue=null;this.effects=[];this.confetti=[];
       this.goFlash=0;this.celebrationTime=0;this.resultsShown=false;this.fanfarePlayed=false;
       this.lastCheck=0;this.cheerFlash=0;this.emergencyRefills=0;
       this.populate(numbers);
@@ -575,6 +576,12 @@
         }
       }
       this.sceneTime+=dt;
+      // A replacement cue belongs to the hand, not the tray. It never holds
+      // input or queues exchanges: the newest swap restarts this short cue.
+      if(this.swapCue){
+        this.swapCue.age+=dt;
+        if(this.swapCue.age>=this.swapCue.duration)this.swapCue=null;
+      }
       if(this.phase==='countdown'){
         this.countdown-=dt;
         const digit=Math.max(0,Math.ceil(this.countdown));
@@ -942,9 +949,10 @@
       const previousHand=this.supplies.held.number;
       [this.supplies.held,this.supplies.queue[i]]=[this.supplies.queue[i],this.supplies.held];
       this.learning.recordSwap(previousHand);
-      this.popEffect({kind:'combo',text:'SWAPPED!',x:50+i*72,y:62,life:.62});
-      audio.grab();this.assertReady();this.syncHUD();
-      updateMatchHint(`Now holding ${this.supplies.held.number} — tap a matching runner!`);
+      // Confirm at the volunteer's HAND, below the touch point. Do not put
+      // text or effects on the tray, where the player's finger covers them.
+      this.swapCue={age:0,duration:.36,number:this.supplies.held.number};
+      audio.swapConfirm();this.assertReady();this.syncHUD();
       return true;
     }
     tryThrow(x,y){
@@ -964,6 +972,7 @@
         if((ellipse<1.38||hairOnly)&&rank<score){nearest=r;score=rank;}
       }
       if(!nearest){showMessage('TAP A RUNNER!',650);return;}
+      this.swapCue=null; // A throw cancels the cue; the new supply is already active.
       this.throwing={runnerId:nearest.id,supply:this.supplies.held,elapsed:0,hit:false,reloaded:false,feverAtRelease:this.fever};
       audio.throw();
     }
@@ -1073,7 +1082,7 @@
         a.y-b.y);
       for(const r of sorted)drawRunner(r,this.sceneTime,this.runnerX(r));
       drawTable(this.supplies.queue,this.sceneTime);
-      drawVolunteer(this.sceneTime,this.throwing,this.phase,this.celebrationTime,this.supplies.held,this.config.level,this.fever);
+      drawVolunteer(this.sceneTime,this.throwing,this.phase,this.celebrationTime,this.supplies.held,this.config.level,this.fever,this.swapCue);
       if(this.phase==='celebrate' && this.config.level===100){
         // Special Level 10 gag: a heroic accidental water-bottle toss and catch.
         const time=this.celebrationTime;
@@ -1364,10 +1373,12 @@
     });
     ctx.restore();
   }
-  function drawVolunteer(t,throwing,phase,celebrationTime,held,level,fever){
+  function drawVolunteer(t,throwing,phase,celebrationTime,held,level,fever,swapCue){
     const x=102,y=202;
     ctx.save();ctx.translate(x,y);
     let jump=0,lean=0,arm=0;
+    const swapP=swapCue&&!throwing?clamp(swapCue.age/swapCue.duration,0,1):1;
+    const swapPulse=swapCue&&!throwing?Math.sin(Math.PI*swapP):0;
     const isDancing=phase==='celebrate';
     if(isDancing){jump=-Math.abs(Math.sin(celebrationTime*11))*21;lean=Math.sin(celebrationTime*7)*.1;arm=Math.sin(celebrationTime*12)*.3;}
     else if(throwing){
@@ -1376,6 +1387,8 @@
       lean=p<.41?Math.sin(p/.41*Math.PI)*(showtime?.39:.17):0;
       arm=p<.41?Math.sin(p/.41*Math.PI)*(showtime?1.9:.9):0;
     }
+    // The volunteer gives a tiny approving nod and looks towards the new snack.
+    if(swapPulse>0)lean+=.065*swapPulse;
     ctx.translate(0,jump+(fever&&!throwing?-Math.abs(Math.sin(t*11))*4:0));ctx.rotate(lean);ctx.scale(.57,.57);
     // Ground shadow and floppy shoes.
     ctx.fillStyle='rgba(57,78,72,.19)';ctx.beginPath();ctx.ellipse(0,56-jump*.2,30,7,0,0,TAU);ctx.fill();
@@ -1401,6 +1414,9 @@
         line(-24,-9,-45,-37,'#e8b68d',9);
         label('✦',-53,-49,21,'#f9d45a');
       }
+    }else if(swapPulse>0){
+      line(21,-4,36,-11-8*swapPulse,'#e8b68d',9);
+      line(36,-11-8*swapPulse,34,-22-8*swapPulse,'#e8b68d',8);
     }else{
       line(21,-4,36,-11,'#e8b68d',9);
       line(36,-11,34,-22,'#e8b68d',8);
@@ -1412,14 +1428,37 @@
     const closed=isDancing;
     if(closed){
       ctx.beginPath();ctx.arc(-8,-33,4,Math.PI*1.13,Math.PI*1.87);ctx.arc(8,-33,4,Math.PI*1.13,Math.PI*1.87);ctx.strokeStyle='#514149';ctx.lineWidth=2.4;ctx.stroke();
-    }else{circle(-8,-34,2.8,'#342f3a');circle(8,-34,2.8,'#342f3a');}
+    }else{circle(-8+2*swapPulse,-34,2.8,'#342f3a');circle(8+2*swapPulse,-34,2.8,'#342f3a');}
     ctx.strokeStyle='#ae554b';ctx.lineWidth=2.7;ctx.beginPath();
     if(isDancing){ctx.arc(0,-24,10,0,Math.PI);ctx.lineTo(-10,-24);ctx.fillStyle='#9e5045';ctx.fill();}
     else ctx.arc(0,-24,7,0,Math.PI);
     ctx.stroke();
     // Never show the previous number on the hand after release. The queue
     // advances on impact (.41s), before the new hand item appears (.55s).
-    if(!isDancing && (!throwing||throwing.elapsed>.55))drawSupply(held,38,-26,24,Math.sin(t*2)*.09,true,2);
+    if(!isDancing && (!throwing||throwing.elapsed>.55)){
+      if(swapPulse>0){
+        // Draw the attention halo UNDER the hand's number, so the digits stay
+        // crisp even during Fever/Inferno and on the smallest mobile viewport.
+        ctx.save();
+        ctx.globalAlpha=.32*swapPulse;
+        circle(38,-26,48,'#ffe69a');
+        ctx.globalAlpha=.72*swapPulse;
+        ctx.strokeStyle='#e7a23b';ctx.lineWidth=3.5;
+        ctx.beginPath();ctx.arc(38,-26,42+11*swapP,0,TAU);ctx.stroke();
+        ctx.restore();
+      }
+      // The new item is ACTIVE immediately; the hand simply lifts and
+      // enlarges it briefly. Rapid taps reset this same animation.
+      drawSupply(held,38,-26-9*swapPulse,24*(1+.25*swapPulse),
+        Math.sin(t*2)*.09+swapPulse*.06,true,2+.18*swapPulse);
+      if(swapPulse>0){
+        ctx.save();ctx.globalAlpha=.85*swapPulse;
+        label('✦',38-48,-26-29,17,'#ffb73d');
+        label('✦',38+59,-26-28,20,'#ffd35b');
+        label('✧',38+56,-26+38,15,'#f6a966');
+        ctx.restore();
+      }
+    }
     if(isDancing){
       for(let i=0;i<3;i++){
         const px=-34+i*35,py=-96-Math.abs(Math.sin(t*9+i))*18;
