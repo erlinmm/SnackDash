@@ -951,7 +951,8 @@
       this.learning.recordSwap(previousHand);
       // Confirm at the volunteer's HAND, below the touch point. Do not put
       // text or effects on the tray, where the player's finger covers them.
-      this.swapCue={age:0,duration:.36,number:this.supplies.held.number};
+      this.swapCue={age:0,duration:.45,number:this.supplies.held.number,
+        mode:this.inferno?'inferno':this.fever?'fever':'normal'};
       audio.swapConfirm();this.assertReady();this.syncHUD();
       return true;
     }
@@ -1082,6 +1083,7 @@
         a.y-b.y);
       for(const r of sorted)drawRunner(r,this.sceneTime,this.runnerX(r));
       drawTable(this.supplies.queue,this.sceneTime);
+      drawSwapCelebration(this.swapCue,this.sceneTime); // Large effects sit behind the hand and its readable digits.
       drawVolunteer(this.sceneTime,this.throwing,this.phase,this.celebrationTime,this.supplies.held,this.config.level,this.fever,this.swapCue);
       if(this.phase==='celebrate' && this.config.level===100){
         // Special Level 10 gag: a heroic accidental water-bottle toss and catch.
@@ -1373,6 +1375,97 @@
     });
     ctx.restore();
   }
+  function drawSwapCelebration(cue,t){
+    if(!cue)return;
+    const p=clamp(cue.age/cue.duration,0,1);
+    const pop=Math.sin(Math.PI*p);
+    const fade=Math.pow(1-p,.75);
+    const mode=cue.mode||'normal';
+    // The hand is at (102,202) + the volunteer's 0.57x transform.
+    // Effects radiate up to ~100 canvas units around that fixed location;
+    // the drawing itself remains fixed and the new supply is rendered above.
+    const cx=124,cy=187-5*pop;
+    const cold=mode==='inferno',hot=mode==='fever';
+    const starColors=cold?['#fff7a0','#ff7bbd','#76ebff','#dba0ff']:
+      hot?['#fff1a5','#ffd355','#ff9d46','#ff7069']:
+      ['#ffca52','#fff8ae','#78d9da','#ffffff'];
+    ctx.save();
+    // Keep big bursts outside the finger-covered tray numbers and away
+    // from most runners. No layout, character, or hitbox coordinates move.
+    ctx.beginPath();ctx.rect(5,137,264,176);ctx.clip();
+    // Expand a subtle aura away from the hand, without covering its digits.
+    ctx.globalAlpha=(cold?.38:hot?.30:.24)*fade;
+    circle(cx,cy,44+34*p,cold?'#f4a2ff':hot?'#ffb24d':'#ffe9a0');
+    ctx.globalAlpha=.85*fade;
+    ctx.lineWidth=cold?7:hot?5:4;
+    ctx.strokeStyle=cold?'#ff64cc':hot?'#ffac3c':'#f5bf55';
+    ctx.beginPath();ctx.arc(cx,cy,38+61*p,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.60*fade;
+    ctx.strokeStyle=cold?'#93eeff':'#fff7be';
+    ctx.lineWidth=cold?4:2.5;
+    ctx.beginPath();ctx.arc(cx,cy,28+84*p,0,TAU);ctx.stroke();
+
+    if(hot){
+      // Fever: tall, lively orange/red flame tongues surrounding the hand.
+      // Their bases and tips are separated from the readable number.
+      for(let i=0;i<9;i++){
+        const x=cx-49+i*12;
+        const y=cy+22+Math.sin(i*2+t*9)*5;
+        const rise=(30+(i%4)*11)*(.55+.55*pop);
+        const sway=Math.sin(t*18+i*1.8)*8;
+        ctx.save();ctx.globalAlpha=.24+.70*fade;
+        ctx.beginPath();ctx.moveTo(x-7,y);
+        ctx.quadraticCurveTo(x-17,y-rise*.47,x+sway,y-rise);
+        ctx.quadraticCurveTo(x+17,y-rise*.52,x+8,y);
+        ctx.closePath();
+        ctx.fillStyle=i%3===0?'#ff633d':i%3===1?'#ff9637':'#ffca46';
+        ctx.fill();
+        ctx.restore();
+      }
+    }else if(cold){
+      // Inferno: a comic-book burst and broad, separate shockwave rings.
+      // The effect ends quickly and has no full-screen flash.
+      ctx.save();
+      ctx.globalAlpha=.56*fade;
+      ctx.beginPath();
+      const rays=14;
+      for(let i=0;i<rays*2;i++){
+        const a=-Math.PI/2+i*Math.PI/rays;
+        const r=(i%2===0?78:43)*(0.65+.50*p);
+        const x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r;
+        if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.closePath();ctx.fillStyle='#ff86d7';ctx.fill();
+      ctx.lineWidth=4;ctx.strokeStyle='#ffe96e';ctx.stroke();
+      ctx.restore();
+      for(let i=0;i<16;i++){
+        const a=i*TAU/16-.25;
+        const inner=50+8*p,outer=75+48*p+(i%3)*9;
+        ctx.save();ctx.globalAlpha=.90*fade;
+        ctx.strokeStyle=starColors[i%4];ctx.lineWidth=3.5+(i%3);
+        line(cx+Math.cos(a)*inner,cy+Math.sin(a)*inner,
+          cx+Math.cos(a)*outer,cy+Math.sin(a)*outer,ctx.strokeStyle,ctx.lineWidth);
+        ctx.restore();
+      }
+    }
+
+    // Big stars are shared by all three modes. Most travel outside the hand,
+    // so their movement and scale draw the eye to the raised new supply.
+    const count=cold?15:hot?12:10;
+    for(let i=0;i<count;i++){
+      const a=-Math.PI*.86+i*TAU/count+(i%2)*.17;
+      const reach=40+(i%3)*10+(cold?67:hot?54:43)*p;
+      const x=cx+Math.cos(a)*reach;
+      const y=cy+Math.sin(a)*reach;
+      ctx.save();ctx.globalAlpha=(.75+.25*Math.sin(t*23+i))*fade;
+      ctx.shadowColor=starColors[i%4];ctx.shadowBlur=cold?10:7;
+      const size=(cold?32:hot?29:26)+(i%4)*3;
+      label(i%4===0?'★':'✦',x,y,size*(.80+.23*pop),starColors[i%4]);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
   function drawVolunteer(t,throwing,phase,celebrationTime,held,level,fever,swapCue){
     const x=102,y=202;
     ctx.save();ctx.translate(x,y);
@@ -1453,9 +1546,9 @@
         Math.sin(t*2)*.09+swapPulse*.06,true,2+.18*swapPulse);
       if(swapPulse>0){
         ctx.save();ctx.globalAlpha=.85*swapPulse;
-        label('✦',38-48,-26-29,17,'#ffb73d');
-        label('✦',38+59,-26-28,20,'#ffd35b');
-        label('✧',38+56,-26+38,15,'#f6a966');
+        label('✦',38-54,-26-42,30,'#ffb73d');
+        label('✦',38+68,-26-42,36,'#ffd35b');
+        label('✧',38+66,-26+51,28,'#f6a966');
         ctx.restore();
       }
     }
