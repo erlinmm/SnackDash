@@ -42,3 +42,30 @@ jobs:
             dist/Snack_Dash.html
             dist/Snack_Dash_HTML.zip
           if-no-files-found: error
+
+  # Post a mobile-friendly downloadable build ONLY after the full CI job
+  # passes. Every main-branch run receives a unique build-N tag and prerelease.
+  # Stable v* releases remain under the separate manual publishing pipeline.
+  publish-mobile-build:
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: SnackDash-HTML
+          path: dist
+      - name: Publish mobile download in GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: build-${{ github.run_number }}
+          AUTO_BUILD_RELEASE: 'true'
+        shell: bash
+        run: |
+          bash -n scripts/publish_release.sh
+          bash scripts/publish_release.sh
