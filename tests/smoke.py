@@ -152,6 +152,85 @@ async def check_fullscreen_flow(browser):
     await page.close()
 
 
+async def check_city_invitation(browser):
+    # Give the otherwise self-contained HTML a stable localStorage origin
+    # without hosting or making any network request.
+    context=await browser.new_context(viewport={'width':390,'height':844},device_scale_factor=1)
+    await context.route('https://snackdash.example/**',lambda route: route.fulfill(
+        status=200,content_type='text/html',body=HTML.read_text(encoding='utf-8')))
+    page=await context.new_page()
+    errors=[]
+    page.on('pageerror',lambda e: errors.append(str(e)))
+    await page.goto('https://snackdash.example/')
+    assert await page.locator('#cityInvitationOverlay').is_hidden()
+
+    # Eight wins should never make the next city available.
+    await page.evaluate("""() => {
+      const saved=window.SnackDashDebug.getPrefs();
+      for(let i=2;i<=9;i++)saved.best[i]=10;
+      window.SnackDashDebug.reconcileCityUnlocks();
+    }""")
+    assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==1
+    assert await page.locator('#cityInvitationOverlay').is_hidden()
+
+    # The ninth win is recorded during gameplay, but the result is about the
+    # race alone. The new city is committed and announced on menu entry.
+    await page.locator('#startBtn').click()
+    await page.evaluate("""() => {
+      const g=window.SnackDashDebug.getGame();
+      g.score=12;
+      g.finish();
+      g.showResults(true);
+    }""")
+    assert 'CITY UNLOCKED' not in await page.locator('#resultHeading').inner_text()
+    assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==1
+    await page.locator('#levelsBtn').click()
+    assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==2
+    assert await page.locator('#cityInvitationOverlay').is_visible()
+    assert await page.locator('#cityInvitationName').inner_text()=='SEOUL'
+    assert 'Seoul Marathon Organising Committee' in await page.locator('#cityInvitationText').inner_text()
+    assert await page.evaluate('window.SnackDashDebug.getPendingInvitation()')==1
+    await page.locator('#cityInvitationLater').click()
+    assert await page.locator('#cityInvitationOverlay').is_hidden()
+    assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==2
+    state=await page.evaluate("""() => JSON.parse(localStorage.getItem('snackDashSaveV2'))""")
+    assert state['unlockedCities']==2 and 1 in state['invitationsAcknowledged'],state
+    assert '10' not in state['best'],'the tenth Tokyo race must remain unfinished'
+
+    # Reload keeps the city unlocked but does not repeat a read postcard.
+    await page.reload()
+    assert await page.locator('#cityInvitationOverlay').is_hidden()
+    assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==2
+    await page.close()
+
+    # A player who wins the ninth race and quits without returning to levels
+    # receives the invitation on the next launch.
+    page=await context.new_page()
+    await page.add_init_script("""() => {
+      const best={};
+      for(let i=11;i<=19;i++)best[i]=10;
+      localStorage.setItem('snackDashSaveV2',JSON.stringify({
+        best:{...JSON.parse(localStorage.getItem('snackDashSaveV2')||'{}').best,...best},
+        selectedCity:1,sound:true,unlockedCities:2,
+        invitationsAcknowledged:[1]
+      }));
+    }""")
+    await page.goto('https://snackdash.example/')
+    assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==3
+    assert await page.locator('#cityInvitationOverlay').is_visible()
+    assert await page.locator('#cityInvitationName').inner_text()=='LONDON'
+    await page.reload()
+    assert await page.locator('#cityInvitationOverlay').is_visible(), 'unacknowledged invitation should survive reopening'
+    await page.locator('#cityInvitationVisit').click()
+    assert await page.locator('#cityInvitationOverlay').is_hidden()
+    assert await page.locator('#cityTitle').inner_text()=='LONDON'
+    await page.reload()
+    assert await page.locator('#cityInvitationOverlay').is_hidden()
+    assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==3
+    assert not errors,errors
+    await context.close()
+
+
 async def main():
     async with async_playwright() as p:
         browser=await p.chromium.launch(headless=True, executable_path=os.environ.get('PLAYWRIGHT_CHROMIUM_EXECUTABLE') or None, args=['--no-sandbox'])
@@ -160,6 +239,8 @@ async def main():
             print('Smoke passed:',dims)
         await check_fullscreen_flow(browser)
         print('Fullscreen flow passed: serve → level select → serve')
+        await check_city_invitation(browser)
+        print('City invitations passed: 8/10, 9/10, restart, and acknowledgment')
         await browser.close()
 
 
