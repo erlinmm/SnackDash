@@ -58,7 +58,7 @@
           <div><span class="eyebrow">✦ THE GREAT SNACK TOUR ✦</span><h2>100 races · 10 cities</h2></div>
           <div class="progress-badge" id="progressBadge">0 / 100 won</div>
         </div>
-        <p class="world-subtitle">Every city starts easy and builds to a tricky tenth race. Win all 10 to unlock the next city!</p>
+        <p class="world-subtitle">Every city starts easy and builds to a tricky tenth race. Win 9 races in each city to receive an invitation to the next!</p>
         <div class="tour-map" id="cityMap" aria-label="Choose a marathon city"></div>
         <div class="passport-card" id="cityDetail" aria-label="Select a race">
           <div class="passport-header">
@@ -76,6 +76,28 @@
       </section>
       <p class="save-hint">🔒 Your city stamps and best scores are saved on this device.</p>
     </section>
+
+    <!-- The invitation uses exactly the same postcard artwork as the city map. -->
+    <div class="city-invitation-overlay hidden" id="cityInvitationOverlay" role="dialog" aria-modal="true"
+      aria-labelledby="cityInvitationTitle" aria-describedby="cityInvitationText">
+      <div class="city-invitation-card">
+        <div class="city-invitation-eyebrow">✉️ SPECIAL DELIVERY!</div>
+        <h2 id="cityInvitationTitle">A NEW CITY AWAITS!</h2>
+        <div class="city-invitation-postcard" id="cityInvitationPostcard">
+          <span class="city-postcard">
+            <span class="city-postmark" id="cityInvitationNumber">02 / 10</span>
+            <span class="city-emblem" id="cityInvitationIcon">🎏</span>
+            <span class="city-skyline" id="cityInvitationLandmark">NAMSAN TOWER</span>
+          </span>
+          <span class="city-name" id="cityInvitationName">SEOUL</span>
+          <span class="city-country" id="cityInvitationSubtitle">City Lights Dash</span>
+        </div>
+        <p id="cityInvitationText">You've received an invitation from the marathon organising committee!</p>
+        <div class="city-invitation-stamp">✦ YOU'RE INVITED ✦</div>
+        <button class="btn btn-primary city-invitation-action" id="cityInvitationVisit" type="button">VISIT NEW CITY ➜</button>
+        <button class="btn btn-outline city-invitation-action" id="cityInvitationLater" type="button">KEEP EXPLORING</button>
+      </div>
+    </div>
 
     <section class="game-screen hidden" id="gameScreen" aria-label="Snack Dash gameplay">
       <div class="scoreboard">
