@@ -270,4 +270,40 @@ button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #0d929
   .app.in-game .hand-rule strong { font-size:10px; }
   .app.in-game .hand-rule span { font-size:9px; }
 }
-  
+
+/* Postcard invitation: reuse city-map artwork, sized for phone and desktop. */
+.city-invitation-overlay{
+  position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(14px + env(safe-area-inset-bottom,0px));
+  background:rgba(37,51,67,.72);overscroll-behavior:contain;overflow-y:auto;
+}
+.city-invitation-card{
+  --city-color:#8d9fe5;--city-sky:#e7e8ff;
+  width:min(100%,370px);max-height:calc(100dvh - 24px);overflow-y:auto;
+  background:#fff9e8;border:3px solid #394a55;border-radius:23px;
+  box-shadow:6px 8px 0 rgba(17,32,45,.3);padding:20px 18px 18px;text-align:center;
+}
+.city-invitation-eyebrow{font-size:12px;letter-spacing:1.6px;font-weight:1000;color:#b46b50}
+.city-invitation-card h2{font-size:clamp(21px,6vw,28px);letter-spacing:-.8px;margin:7px 0 14px;color:#e4714a}
+.city-invitation-postcard{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  background:#fffef8;border:2px solid var(--city-color);border-radius:17px;
+  padding:10px 11px 12px;transform:rotate(-1.3deg);
+  box-shadow:3px 4px 0 color-mix(in srgb,var(--city-color) 38%,white);
+}
+.city-invitation-postcard .city-postcard{width:100%;height:140px;min-height:0;border-radius:12px}
+.city-invitation-postcard .city-emblem{font-size:77px}
+.city-invitation-postcard .city-postmark{font-size:11px}
+.city-invitation-postcard .city-skyline{font-size:10px}
+.city-invitation-postcard .city-name{font-size:clamp(22px,6.5vw,29px);margin-top:5px}
+.city-invitation-postcard .city-country{font-size:11px;min-height:0}
+.city-invitation-card p{font-size:13px;line-height:1.55;font-weight:700;margin:14px 0 9px;color:#46556a}
+.city-invitation-stamp{display:inline-block;font-weight:1000;letter-spacing:1px;color:#a55d48;font-size:10px;border:2px dashed #cd9975;border-radius:9px;padding:5px 9px;margin-bottom:13px}
+.city-invitation-action{width:100%;margin-top:7px;min-height:44px}
+@media(max-height:600px){
+ .city-invitation-card{padding:10px 13px}
+ .city-invitation-card h2{margin:4px 0 8px}
+ .city-invitation-postcard .city-postcard{height:80px}
+ .city-invitation-postcard .city-emblem{font-size:48px}
+ .city-invitation-card p{margin:8px 0 5px}
+}
