@@ -1961,7 +1961,7 @@
     const active=fullscreenIsActive();
     for(const id of ['menuFullscreenBtn','gameFullscreenBtn']){
       const button=$(id);
-      button.textContent=active?'⛶':'⛶';
+      button.textContent=active?'❐':'⛶';
       button.setAttribute('aria-pressed',String(active));
       button.setAttribute('aria-label',active?'Exit fullscreen':'Enter fullscreen');
       button.title=active?'Exit fullscreen':'Enter fullscreen';
