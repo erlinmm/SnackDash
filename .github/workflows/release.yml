@@ -52,6 +52,7 @@ jobs:
         run: |
           node --check src/js/math.js
           node --check src/js/game.js
+          bash -n scripts/publish_release.sh
           node --test tests/test_math.cjs
           python -m unittest discover -s tests -p 'test_*.py'
           python scripts/build.py --zip
@@ -60,20 +61,8 @@ jobs:
           python -m pip install playwright==1.58.0
           python -m playwright install --with-deps chromium
           python tests/smoke.py
-      - name: Publish versioned downloadable assets
+      - name: Publish GitHub Release with retries
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
-        run: |
-          args=(--repo "$GITHUB_REPOSITORY"
-                --title "Snack Dash $RELEASE_TAG"
-                --generate-notes)
-          if [[ "$GITHUB_EVENT_NAME" == 'workflow_dispatch' ]]; then
-            # A manual run creates a new release tag at the selected commit.
-            # Existing versions are never moved or silently overwritten.
-            args+=(--target "$GITHUB_SHA")
-          else
-            args+=(--verify-tag)
-          fi
-          gh release create "$RELEASE_TAG" \
-            dist/Snack_Dash.html dist/Snack_Dash_HTML.zip "${args[@]}"
+        run: bash scripts/publish_release.sh
