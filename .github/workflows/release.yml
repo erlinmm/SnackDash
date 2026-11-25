@@ -5,8 +5,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version (for example 1.0, 1.0.1, or v26.0.0)'
+        description: 'Version (digits only): use 1.0, NOT 1.p. Default creates v1.0.0'
         required: true
+        default: '1.0'
         type: string
 permissions:
   contents: write
@@ -31,7 +32,7 @@ jobs:
             suffix="${BASH_REMATCH[5]}"
             normalized="v${major}.${minor}.${patch}${suffix}"
           else
-            echo "::error::Invalid release version '$RELEASE_TAG'. Use 1.0, 1.0.1, v1.0.0 or v1.0.0-rc.1"
+            echo "::error::Invalid version '$RELEASE_TAG'. The version must contain digits, e.g. 1.0 (zero), not 1.p (letter p). Use 1.0 or 1.0.1."
             exit 1
           fi
           if [[ "$GITHUB_EVENT_NAME" == "push" && "$RELEASE_TAG" != "$normalized" ]]; then
