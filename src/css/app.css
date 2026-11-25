@@ -459,3 +459,25 @@ button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #0d929
   .combo-panel.fever .fever-plaque,.combo-panel.fever .combo-indicator strong,
   .combo-panel.inferno,.combo-panel.inferno .fever-plaque{animation:none!important}
 }
+/* Fit the complete portrait road into the actual safe viewport, including tablets. */
+html:has(.app.in-game),body:has(.app.in-game){height:100%;overflow:hidden;overscroll-behavior:none}
+.app.in-game{width:100%;max-width:none;height:100vh;height:100dvh;height:var(--game-height,100dvh);margin:0 auto;overflow:hidden;padding:max(2px,env(safe-area-inset-top)) max(4px,env(safe-area-inset-right)) max(2px,env(safe-area-inset-bottom)) max(4px,env(safe-area-inset-left))}
+.app.in-game .topbar,.app.in-game .game-footnote{display:none!important}
+.app.in-game .game-screen{height:100%;min-height:0;gap:4px;justify-content:center;width:100%}
+.app.in-game .scene-shell{flex:0 0 auto;margin:0;max-width:100%;touch-action:none}
+.app.in-game .scene-shell canvas{touch-action:none}
+.app.in-game .scoreboard,.app.in-game .combo-panel,.app.in-game .game-control-strip{flex:0 0 auto}
+.app:not(.in-game){padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom));padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}
+.result-overlay.mobile-fullscreen{position:fixed;inset:0;z-index:30;padding:max(9px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(9px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));overflow-y:auto}
+.result-overlay.mobile-fullscreen .result-card{max-height:calc(100dvh - 24px);overflow-y:auto;max-width:360px}
+@media (orientation:landscape) and (max-height:619px) and (min-width:560px){
+ .app.in-game .game-screen{display:grid;grid-template-columns:minmax(0,1fr) clamp(245px,40%,300px);grid-template-rows:auto auto 1fr;align-content:center;align-items:center;justify-items:center}
+ .app.in-game .scene-shell{grid-column:1;grid-row:1/4;align-self:center}
+ .app.in-game .scoreboard{grid-column:2;grid-row:1;flex-wrap:wrap;justify-content:center}
+ .app.in-game .combo-panel{grid-column:2;grid-row:2}
+ .app.in-game .game-control-strip{grid-column:2;grid-row:3;align-self:start}
+ .app.in-game .scoreboard .small-btn{min-width:32px;min-height:40px}
+ .app.in-game .scoreboard .small-btn span{display:none}
+ .app.in-game .score-pill{min-width:40px;height:40px;padding:3px}
+ .app.in-game .score-pill strong{font-size:17px}
+}

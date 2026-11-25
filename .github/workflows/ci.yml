@@ -90,11 +90,9 @@ jobs:
         with:
           name: SnackDash-HTML
           path: dist
+      - uses: actions/checkout@v4
       - name: Prepare website
-        run: |
-          mkdir -p site
-          cp dist/Snack_Dash.html site/index.html
-          test -s site/index.html
+        run: python scripts/build_pwa.py dist/Snack_Dash.html site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

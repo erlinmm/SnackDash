@@ -396,6 +396,8 @@
   const SHORTS=['#39495d','#5a5687','#3f7884','#886d62','#687a61','#7a4d59'];
   const EMOJI={water:'💧',banana:'🍌',apple:'🍎',orange:'🍊',bar:'🍫',juice:'🧃'};
   const CATCH_SPEED_MULTIPLIERS=[1,3,5,8,10];
+  const FEVER_SPEED_MULTIPLIERS=[2,4,6,9,11];
+  const INFERNO_SPEED_MULTIPLIERS=[3,6,8,10,12];
   const BIG_REWARD_JUMP=20, HEAVY_REWARD_IMPACT=30;
   const MESSAGES=['YOU GOT THIS!','LOOK AT THOSE LEGS!','KEEP THE SNACKS COMING!'];
   // Original city-themed comic bubbles and festival edging for Fever mode.
@@ -601,7 +603,7 @@
   const approach=(from,to,step)=>from<to?Math.min(to,from+step):Math.max(to,from-step);
 
   // V20: Movement and overtaking are independent of traffic collisions.
-  // Each runner retains their own speed, including the 3×/5×/8×/10× boosts.
+  // Each runner retains their own mode-specific speed and catch boosts.
   // Lane changes are visual steering only: a runner may overtake in the same
   // lane if all three lanes are occupied. No vault, braking, or yielding.
   class TrafficDirector {
@@ -609,7 +611,10 @@
       this.game=game;this.elapsed=0;this.replans=0;this.laneChanges=0;
       this.yields=0;this.cooperativeYields=0;
     }
-    speed(r){return r.baseSpeed*CATCH_SPEED_MULTIPLIERS[Math.min(r.successes,4)];}
+    speed(r){
+      const multipliers=this.game.inferno?INFERNO_SPEED_MULTIPLIERS:this.game.fever?FEVER_SPEED_MULTIPLIERS:CATCH_SPEED_MULTIPLIERS;
+      return r.baseSpeed*multipliers[Math.min(r.successes,4)];
+    }
     laneOffset(r,index){return LANES[index]+r.laneJitter;}
     // Choose the least crowded future path while avoiding rapid lane changes.
     // There is no blocking logic: a runner ALWAYS advances at full speed.
@@ -2222,47 +2227,23 @@
     $('selectedMeta').textContent=`${cfg.raceBand} · ${cfg.runners} runners · ${cfg.seconds} sec · ${cfg.minMatches===cfg.maxMatches?cfg.minMatches:`${cfg.minMatches}–${cfg.maxMatches}`} matches · supply 2–${cfg.supplyMax}`;
   }
   function sizeScene(){
-    const isPhone=window.innerWidth<=530;
-    // A transformed scene-shell is a containing block for position:fixed.
-    // Keep the results dialog in document.body on phones so it cannot be
-    // clipped by the perspective canvas or the small fitted scene.
+    const screen=$('gameScreen'), app=$('app');
     const result=$('resultOverlay');
-    if(isPhone && result.parentElement!==document.body){
+    if(result.parentElement!==document.body){
       document.body.appendChild(result);
       result.classList.add('mobile-fullscreen');
-    }else if(!isPhone && result.parentElement!==stage){
-      stage.appendChild(result);
-      result.classList.remove('mobile-fullscreen');
     }
-    if(isPhone){
-      // Read the *actual* HUD heights, rather than assuming a fixed reserve.
-      // Mobile browser chrome, safe-area insets, and Fever labels all change
-      // the space available for the canvas.
-      const screen=$('gameScreen');
-      const availableWidth=screen.clientWidth;
-      const parts=[screen.querySelector('.scoreboard'),$('comboPanel'),
-        screen.querySelector('.game-control-strip')];
-      const footnote=screen.querySelector('.game-footnote');
-      if(footnote && getComputedStyle(footnote).display!=='none')parts.push(footnote);
+    if(app.classList.contains('in-game')){
+      const vv=window.visualViewport;
+      app.style.setProperty('--game-height',Math.floor(vv?vv.height:window.innerHeight)+'px');
       const style=getComputedStyle(screen);
       const gap=parseFloat(style.rowGap||style.gap)||0;
-      let occupied=parts.reduce((sum,part)=>sum+part.getBoundingClientRect().height,0);
-      occupied+=gap*Math.max(0,parts.length-1);
-      const vv=window.visualViewport;
-      const viewportHeight=vv ? vv.height : window.innerHeight;
-      const screenTop=screen.getBoundingClientRect().top;
-      const appStyle=getComputedStyle($('app'));
-      const bottomPad=parseFloat(appStyle.paddingBottom)||0;
-      const topPad=parseFloat(appStyle.paddingTop)||0;
-      const usableHeight=Math.max(0,viewportHeight-screenTop-bottomPad-topPad-4);
-      // Extra reserve avoids clipping when browser chrome or bottom bars jump.
-      const remaining=Math.max(0,usableHeight-occupied-8);
-      const naturalWidth=remaining*W/H;
-      stage.style.width=Math.max(1,Math.floor(Math.min(availableWidth,390,naturalWidth)))+'px';
-    }else{
-      const widthBound=Math.max(235,window.innerWidth-48);
-      const heightBound=Math.max(235,(window.innerHeight-245)*W/H);
-      stage.style.width=Math.floor(Math.min(440,widthBound,heightBound))+'px';
+      const landscape=window.innerWidth>window.innerHeight && window.innerHeight<620 && window.innerWidth>=560;
+      const parts=[screen.querySelector('.scoreboard'),$('comboPanel'),screen.querySelector('.game-control-strip')];
+      const border=stage.offsetWidth-stage.clientWidth;
+      const maxHeight=landscape?screen.clientHeight:screen.clientHeight-parts.reduce((sum,part)=>sum+part.getBoundingClientRect().height,0)-gap*3;
+      const maxWidth=landscape?Math.max(1,screen.clientWidth-Math.min(300,Math.max(245,screen.clientWidth*.4))-gap):screen.clientWidth;
+      stage.style.width=Math.max(1,Math.floor(Math.min(maxWidth,(maxHeight-border)*W/H+border)))+'px';
     }
     const ratio=Math.min(window.devicePixelRatio||1,2.5);
     if(canvas.width!==Math.round(W*ratio)||canvas.height!==Math.round(H*ratio)){
@@ -2274,7 +2255,11 @@
   // Fullscreen is shared between level selection and gameplay. Browser
   // policy requires a user gesture to enter, but switching screens does not
   // change this mode; use the two dedicated buttons to toggle it.
+  const standalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;
+  let installPrompt=null;
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
   function enterRaceFullscreen(){
+    if(standalone())return;
     const root=document.documentElement;
     if(document.fullscreenElement||document.webkitFullscreenElement)return;
     const request=root.requestFullscreen||root.webkitRequestFullscreen;
@@ -2306,15 +2291,19 @@
     const active=fullscreenIsActive();
     for(const id of ['menuFullscreenBtn','gameFullscreenBtn']){
       const button=$(id);
-      button.textContent=active?'❐':'⛶';
+      button.textContent=standalone()?'✓':active?'❐':'⛶';
+      if(standalone()){button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Installed app');button.title='Installed app';continue;}
       button.setAttribute('aria-pressed',String(active));
       button.setAttribute('aria-label',active?'Exit fullscreen':'Enter fullscreen');
       button.title=active?'Exit fullscreen':'Enter fullscreen';
     }
   }
   function toggleFullscreen(){
+    if(standalone())return;
     if(fullscreenIsActive())leaveRaceFullscreen();
-    else enterRaceFullscreen();
+    else if(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen)enterRaceFullscreen();
+    else if(installPrompt){installPrompt.prompt();installPrompt=null;}
+    else window.alert('For a larger screen, open the browser share or menu and choose Add to Home Screen or Install app.');
   }
   function showMenu(){
     // Keep fullscreen active when returning to level selection.

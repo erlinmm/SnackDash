@@ -345,7 +345,7 @@ async def check_city_mode_rendering(browser):
 async def main():
     async with async_playwright() as p:
         browser=await p.chromium.launch(headless=True, executable_path=os.environ.get('PLAYWRIGHT_CHROMIUM_EXECUTABLE') or None, args=['--no-sandbox'])
-        for dims in [(320,568),(360,740),(390,844),(414,896)]:
+        for dims in [(320,568),(360,740),(390,844),(414,896),(430,932),(768,1024),(820,1180),(844,390)]:
             await check(browser,*dims)
             print('Smoke passed:',dims)
         await check_fullscreen_flow(browser)
