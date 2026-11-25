@@ -1788,7 +1788,7 @@
     $('cityInvitationLandmark').textContent=city.landmark;
     $('cityInvitationName').textContent=city.name;
     $('cityInvitationSubtitle').textContent=city.subtitle;
-    const invitationCityName=city.name.toLowerCase().replace(/\\b\\w/g,ch=>ch.toUpperCase());
+    const invitationCityName=city.name.toLowerCase().replace(/\b\w/g,ch=>ch.toUpperCase());
     $('cityInvitationText').textContent=
       `You've received a special invitation from the ${invitationCityName} Marathon Organising Committee! They'd love you to serve at their races.`;
     $('cityInvitationVisit').textContent=`VISIT ${city.name} ➜`;
