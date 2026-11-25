@@ -56,6 +56,20 @@ async def check(browser, width, height):
       return {cue:g.swapCue && {...g.swapCue},held:g.supplies.held.number};
     }""")
     assert next_cue['cue'] and next_cue['cue']['number']==next_cue['held'],next_cue
+    assert next_cue['cue']['mode']=='normal',next_cue
+
+    # The same hand-centered visual burst switches its theme in Fever/Inferno.
+    # Force only the mode flags; all actual swap and touch logic stays intact.
+    for mode in ('fever','inferno'):
+        effect=await page.evaluate("""(mode) => {
+          const g=window.SnackDashDebug.getGame();
+          g.fever=true;g.inferno=mode==='inferno';
+          const swapOk=g.trySwap(50,89);
+          if(swapOk)g.draw(); // Exercise all Canvas burst paths.
+          return {swapOk,mode:g.swapCue && g.swapCue.mode,number:g.supplies.held.number};
+        }""",mode)
+        assert effect['swapOk'] and effect['mode']==mode,(width,height,effect)
+    assert not errors,(width,height,errors)
 
     # Immediate throw is allowed: the visual cue cannot lock input.
     can_throw=await page.evaluate("""() => {
