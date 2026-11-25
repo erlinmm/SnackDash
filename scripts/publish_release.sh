@@ -17,7 +17,7 @@ done
 # Manual runs create a lightweight tag explicitly. A previous failed attempt
 # may have created this tag; reuse it only when it targets this exact commit.
 if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
-  previous="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha 2>/dev/null || true)"
+  previous="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha 2>/dev/null)" || previous=""
   if [[ -n "$previous" && "$previous" != "$GITHUB_SHA" ]]; then
     echo "::error::Tag $RELEASE_TAG already targets another commit: $previous"
     exit 1
@@ -30,7 +30,7 @@ if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
         tagged=true
         break
       fi
-      previous="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha 2>/dev/null || true)"
+      previous="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha 2>/dev/null)" || previous=""
       if [[ "$previous" == "$GITHUB_SHA" ]]; then
         tagged=true
         break
