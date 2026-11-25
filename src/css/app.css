@@ -224,7 +224,9 @@ button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #0d929
     margin:0 auto; overflow:hidden;
   }
   .app.in-game .topbar, .app.in-game .game-footnote { display:none!important; }
-  .app.in-game .game-screen { height:100%; min-height:0; gap:4px; justify-content:flex-start; width:100%; }
+  /* Center the entire HUD + road + hand group in spare viewport space.
+     Do not alter the road's aspect ratio, actual scene size, or any artwork. */
+  .app.in-game .game-screen { height:100%; min-height:0; gap:4px; justify-content:center; width:100%; }
   .app.in-game .scoreboard { flex:0 0 auto; }
   .app.in-game .score-pill { min-width:48px; height:46px; padding:4px 6px; }
   .app.in-game .score-pill strong { font-size:19px; }
