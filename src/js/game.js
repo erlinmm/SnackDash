@@ -55,6 +55,7 @@
 
   // City-by-city volunteer composition, in existing 390 × 700 canvas units.
   // All dependent hand/flight/feedback positions derive from this one source.
+  const VOLUNTEER_SCALE=.64;
   const VOLUNTEER_SCENES=Object.freeze({
     tokyo:     {x:90,y:214,shirt:'#167d98'},
     seoul:     {x:92,y:214,shirt:'#ba406d'},
@@ -73,8 +74,8 @@
   }
   function volunteerHandPoint(cityIndex){
     const scene=volunteerScene(cityIndex);
-    // Exact neutral held supply position inside drawVolunteer: (38,-26) × .57.
-    return {x:scene.x+38*.57,y:scene.y-26*.57};
+    // Exact neutral held supply position inside drawVolunteer: (38,-26) × VOLUNTEER_SCALE.
+    return {x:scene.x+38*VOLUNTEER_SCALE,y:scene.y-26*VOLUNTEER_SCALE};
   }
 
   const reducedMotion=()=>typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -365,7 +366,7 @@
 
     // A single compact skyline at the far LEFT. It stays above the plant
     // and behind the volunteer; the previous 150px-wide skyline hid the head.
-    ctx.save();ctx.translate(-8,92);ctx.scale(.5,.6);
+    ctx.save();ctx.translate(-21,54);ctx.scale(.62,.75);
     drawCityLandmark(theme);ctx.restore();
 
     // Split planting and furniture into separate depth bands, not overlapping
@@ -1774,7 +1775,7 @@
     }
     // The volunteer gives a tiny approving nod and looks towards the new snack.
     if(swapPulse>0)lean+=.065*swapPulse;
-    ctx.translate(0,jump+(fever&&!throwing?-Math.abs(Math.sin(t*11))*4:0));ctx.rotate(lean);ctx.scale(.57,.57);
+    ctx.translate(0,jump+(fever&&!throwing?-Math.abs(Math.sin(t*11))*4:0));ctx.rotate(lean);ctx.scale(VOLUNTEER_SCALE,VOLUNTEER_SCALE);
     // Thin cream separation contour behind the dark head/torso silhouette.
     // It is attached to the character, not a spotlight over runner numbers.
     ctx.save();
