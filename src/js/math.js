@@ -90,11 +90,13 @@
       pace:1+(event-1)*.01
     };
   });
+  // A city's marathon committee invites the player to the next city after
+  // ANY nine of its ten races have been won. The tenth race stays playable.
+  // This computes eligibility only: the UI commits unlocks on menu entry.
   function cityUnlockedCount(best){
     let count=1;
     for(let i=0;i<CITIES.length-1;i++){
-      const complete=Array.from({length:10},(_,j)=>i*10+j+1).every(level=>(best?.[level]??-Infinity)>=10);
-      if(!complete)break;
+      if(cityCleared(best,i)<9)break;
       count++;
     }
     return count;
