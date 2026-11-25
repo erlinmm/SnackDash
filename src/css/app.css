@@ -370,3 +370,92 @@ button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #0d929
   .app.in-game .scoreboard .time-pill {flex-basis:63px}
   .app.in-game .scoreboard .total-pill strong {font-size:15px}
 }
+
+/* City streetscape refresh: warm flow in Fever, focused stage in Inferno. */
+.combo-panel.fever:not(.inferno){
+  background:linear-gradient(105deg,#fff1c5,#ffe5cb);
+  border-color:#e6b764;box-shadow:0 0 10px #e7ad6870;
+}
+.combo-panel.fever:not(.inferno) .fever-plaque{
+  background:linear-gradient(120deg,#d48a37,#f5cb71);
+  border-color:#f8df92;color:#51371f;text-shadow:none;
+  box-shadow:0 1px 0 #b78346;
+  animation:feverPlaquePulse 1.1s ease-in-out infinite alternate;
+}
+.combo-panel.fever:not(.inferno) .combo-indicator strong{
+  color:#88552b;text-shadow:none;animation:none;
+}
+.combo-panel.inferno{
+  background:linear-gradient(100deg,#261b55,#48316e);
+  border-color:#e3c572;box-shadow:0 0 12px #7860b077;
+  animation:none;
+}
+.combo-panel.inferno .fever-plaque{
+  background:linear-gradient(110deg,#382568,#59428c);
+  border-color:#ecd37b;box-shadow:0 0 9px #9a85cf77;
+  animation:none;
+}
+.combo-panel.inferno .combo-indicator strong{
+  color:#ffe6a1;text-shadow:none;
+}
+@media(prefers-reduced-motion:reduce){
+  .combo-panel.fever .fever-plaque,
+  .combo-panel.fever .combo-indicator strong,
+  .combo-panel.inferno{animation:none!important}
+}
+
+/* High-energy mode identities: animation lives in the existing HUD height. */
+@keyframes snackFeverBeat{
+  0%{transform:scale(.985);filter:saturate(1) brightness(1)}
+  100%{transform:scale(1.035);filter:saturate(1.3) brightness(1.13)}
+}
+@keyframes snackInfernoLights{
+  0%{background-position:0% 48%;filter:saturate(1)}
+  50%{background-position:95% 52%;filter:saturate(1.23)}
+  100%{background-position:0% 48%;filter:saturate(1)}
+}
+.combo-panel.fever:not(.inferno){
+  background:linear-gradient(100deg,#ffe1ab,#ffd2b9 48%,#fff3b3);
+  border-color:#efa84f;
+  box-shadow:0 0 19px #f4a655aa,inset 0 0 12px #fff2a7;
+}
+.combo-panel.fever:not(.inferno) .fever-plaque{
+  background:linear-gradient(120deg,#bd2c55,#ed6a32 55%,#ffc44e);
+  color:#fff9e8;border-color:#ffdb7f;
+  text-shadow:0 2px 1px #8c2f37,0 0 9px #ffe6b6;
+  box-shadow:0 2px 0 #8a3941,0 0 15px #f68e54,inset 0 1px 0 #fff2b6;
+  animation:snackFeverBeat .7s ease-in-out infinite alternate;
+}
+.combo-panel.fever:not(.inferno) .combo-indicator strong{
+  color:#bd3045;text-shadow:0 2px #ffe58d,0 0 10px #ff9b68;
+  font-size:clamp(18px,5.1vw,25px);
+  animation:snackFeverBeat .55s ease-in-out infinite alternate;
+}
+.combo-panel.inferno{
+  background:linear-gradient(110deg,#28105f,#632196,#cf3d9f,#54229e,#251354);
+  background-size:260% 250%;border-color:#ffe37c;
+  box-shadow:0 0 24px #b061ffbb,inset 0 0 12px #f995f899;
+  animation:snackInfernoLights 1.95s ease-in-out infinite;
+}
+.combo-panel.inferno .fever-plaque{
+  background:linear-gradient(115deg,#5a19ad,#e146a6,#ef853a,#5a19ad);
+  background-size:260% 100%;
+  color:#fff4b5;border:2px solid #fff1a0;
+  text-shadow:0 2px #3a1356,0 0 13px #ffe19e;
+  box-shadow:0 1px 0 #5c2189,0 0 18px #ee78f8;
+  animation:snackInfernoLights 1.15s linear infinite;
+}
+.combo-panel.inferno .combo-indicator strong{
+  font-size:clamp(20px,5.8vw,26px);
+  color:#ffe47e;text-shadow:0 2px #55116d,0 0 11px #ffc973,0 0 19px #e19eff;
+}
+.scene-shell.fever-active:not(.inferno-active){
+  border-color:#e88d7d;box-shadow:0 0 0 3px #ffdb80,0 0 23px 5px #ffb96e83;
+}
+.scene-shell.inferno-active{
+  border-color:#ffed85;box-shadow:0 0 0 3px #ae65f5,0 0 26px 7px #d16cebbb;
+}
+@media(prefers-reduced-motion:reduce){
+  .combo-panel.fever .fever-plaque,.combo-panel.fever .combo-indicator strong,
+  .combo-panel.inferno,.combo-panel.inferno .fever-plaque{animation:none!important}
+}

@@ -36,6 +36,356 @@
     athens:{road:'#c7ae69',edge:'#8d7638',stripe:'#fff6d8',verge:'#d9eabf',decor:'laurel'}
   });
 
+
+  // The street is composed for the REAL visible left verge (x < roadLeft(y)).
+  // Signatures use distinct shapes and large foreground props, not flag labels.
+  // Entries: paving, plant, furniture, skyline, accent, sky, stone, outline.
+  const SCENE_THEMES=Object.freeze({
+    tokyo:['slab','cherry','japanese','tokyo','#ef8fac','#f9e5ec','#d9dce6','#81465f'],
+    seoul:['grid','ginkgo','korean','seoul','#f1c85a','#e1eaf3','#d5dae2','#555b89'],
+    london:['stone','hedge','postbox','westminster','#d9ae70','#dce7ec','#d7d2c9','#5b6372'],
+    berlin:['setts','linden','bear','gate','#8acaaf','#e1ebe4','#bfcac5','#536d67'],
+    amsterdam:['brick','tulip','bike','canal','#f1a66a','#d9edf0','#d9ad90','#755c65'],
+    paris:['cobble','flowers','cafe','eiffel','#c7a4ec','#f2e5ed','#e7d4c8','#6f5788'],
+    boston:['herring','maple','marathon','townhouses','#f0ca57','#f7e7dd','#be8475','#795962'],
+    chicago:['slate','shrubs','elevated','chicago','#81dbb3','#daebe7','#bac9c8','#4b7580'],
+    newyork:['grid','tree','subway','manhattan','#f9c965','#e6e9ed','#c6c7c3','#566277'],
+    sydney:['sand','eucalyptus','harbour','opera','#8bdce9','#d9f0f1','#e8dcc1','#527f91']
+  });
+
+  // City-by-city volunteer composition, in existing 390 × 700 canvas units.
+  // All dependent hand/flight/feedback positions derive from this one source.
+  const VOLUNTEER_SCALE=.64;
+  const VOLUNTEER_SCENES=Object.freeze({
+    tokyo:     {x:90,y:214,shirt:'#167d98'},
+    seoul:     {x:92,y:214,shirt:'#ba406d'},
+    london:    {x:92,y:216,shirt:'#246fa7'},
+    berlin:    {x:102,y:202,shirt:'#ce6451'},
+    amsterdam: {x:90,y:216,shirt:'#2475b9'},
+    paris:     {x:92,y:214,shirt:'#168889'},
+    boston:    {x:102,y:202,shirt:'#2785b8'},
+    chicago:   {x:98,y:208,shirt:'#e29a38'},
+    newyork:   {x:90,y:214,shirt:'#df6655'},
+    sydney:    {x:92,y:216,shirt:'#c85d43'}
+  });
+  function volunteerScene(cityIndex){
+    const city=CITIES[cityIndex??game?.config?.cityIndex??0];
+    return VOLUNTEER_SCENES[city?.id]||VOLUNTEER_SCENES.tokyo;
+  }
+  function volunteerHandPoint(cityIndex){
+    const scene=volunteerScene(cityIndex);
+    // Exact neutral held supply position inside drawVolunteer: (38,-26) × VOLUNTEER_SCALE.
+    return {x:scene.x+38*VOLUNTEER_SCALE,y:scene.y-26*VOLUNTEER_SCALE};
+  }
+
+  const reducedMotion=()=>typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cityPoly(points,fill,stroke,width=2){
+    ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));
+    ctx.closePath();ctx.fillStyle=fill;ctx.fill();
+    if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.lineJoin='round';ctx.stroke();}
+  }
+  function cityRect(x,y,w,h,fill,stroke,width=1.5){
+    ctx.fillStyle=fill;ctx.fillRect(x,y,w,h);
+    if(stroke){ctx.lineWidth=width;ctx.strokeStyle=stroke;ctx.strokeRect(x,y,w,h);}
+  }
+  function cityArc(x,y,r,start,end,col,width=2){
+    ctx.beginPath();ctx.arc(x,y,r,start,end);ctx.strokeStyle=col;ctx.lineWidth=width;ctx.stroke();
+  }
+  function cityEllipse(x,y,rx,ry,fill,stroke,angle=0){
+    ctx.beginPath();ctx.ellipse(x,y,rx,ry,angle,0,TAU);ctx.fillStyle=fill;ctx.fill();
+    if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1.5;ctx.stroke();}
+  }
+  function drawCityPavement(theme){
+    const pattern=theme[0],stone=theme[6],ink=theme[7];
+    const left=y=>roadCenter(y)-roadHalfWidth(y)-6;
+    const right=y=>roadCenter(y)+roadHalfWidth(y)+6;
+    for(const side of ['left','right']){
+      ctx.save();ctx.beginPath();
+      if(side==='left'){
+        ctx.moveTo(0,0);ctx.lineTo(Math.max(0,left(0)),0);
+        for(let y=5;y<=H;y+=5)ctx.lineTo(Math.max(0,left(y)),y);
+        ctx.lineTo(0,H);
+      }else{
+        ctx.moveTo(W,0);ctx.lineTo(Math.min(W,right(0)),0);
+        for(let y=5;y<=H;y+=5)ctx.lineTo(Math.min(W,right(y)),y);
+        ctx.lineTo(W,H);
+      }
+      ctx.closePath();ctx.clip();
+      ctx.fillStyle=stone;ctx.fillRect(0,0,W,H);
+      ctx.strokeStyle=ink;ctx.globalAlpha=.25;ctx.lineWidth=1.1;
+      if(pattern==='herring'||pattern==='brick'){
+        for(let y=145,row=0;y<490;y+=15,row++){
+          const off=row%2?12:0;
+          for(let x=-20+off;x<220;x+=26){
+            ctx.strokeRect(x,y,25,14);
+            if(pattern==='herring')line(x+4,y+2,x+20,y+12,ink,1);
+          }
+        }
+      }else if(pattern==='cobble'||pattern==='setts'){
+        for(let y=146,row=0;y<490;y+=16,row++){
+          for(let x=-10+row%2*10;x<220;x+=23){
+            ctx.beginPath();ctx.ellipse(x+10,y+8,11,6,0,0,TAU);ctx.stroke();
+          }
+        }
+      }else if(pattern==='sand'){
+        for(let y=156;y<490;y+=26){
+          for(let x=0;x<220;x+=38){
+            ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+29,y);ctx.stroke();
+          }
+        }
+      }else{
+        const dx=pattern==='slate'?41:pattern==='stone'?36:pattern==='slab'?31:27;
+        const dy=pattern==='stone'?27:pattern==='slate'?36:30;
+        for(let y=147;y<490;y+=dy){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(220,y);ctx.stroke();}
+        for(let x=0;x<220;x+=dx){ctx.beginPath();ctx.moveTo(x,145);ctx.lineTo(x,490);ctx.stroke();}
+      }
+      ctx.restore();
+    }
+  }
+  function drawCityLandmark(theme){
+    // Prominent postcard silhouette entirely on the visible UPPER-LEFT verge.
+    // The table and volunteer are drawn later and remain in the foreground.
+    const id=theme[3],c=theme[4],ink=theme[7],sky=theme[5];
+    ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    if(id==='tokyo'){
+      // Red/white lattice of Tokyo Tower plus a little tiled roof.
+      cityPoly([[79,240],[104,177],[109,155],[115,155],[120,177],[145,240],[132,240],[112,188],[91,240]],'#e86464',ink,2.4);
+      for(let y of [182,198,216,235])line(85+(y-180)*.18,y,139-(y-180)*.18,y,'#fff2e4',3);
+      line(100,193,124,220,'#fff2e4',2);line(125,194,103,223,'#fff2e4',2);
+      cityRect(99,183,26,7,'#fdf4e4',ink);cityRect(109,139,5,20,'#d95568');
+      cityPoly([[12,233],[19,220],[53,220],[62,233]],'#715d74',ink);
+      cityRect(15,232,45,11,'#bd8587',ink);
+    }else if(id==='seoul'){
+      cityPoly([[3,238],[38,209],[66,217],[92,200],[136,221],[154,238]],'#a1b6a9',ink);
+      cityRect(99,160,10,75,'#e8e5da',ink);
+      cityEllipse(104,174,16,8,'#9b8bb6',ink);cityRect(93,177,22,8,'#ede0ec',ink);
+      cityRect(102,143,4,18,'#765f8c');cityEllipse(104,139,4,4,c,ink);
+      cityRect(22,205,17,29,'#bed2da',ink);cityRect(43,197,15,37,'#acc8d9',ink);
+    }else if(id==='westminster'){
+      // Elizabeth Tower clock face and the repeated Palace of Westminster bays.
+      cityRect(9,214,138,26,'#bb9b85',ink,2);
+      for(let x=15;x<145;x+=16){cityPoly([[x,215],[x+7,204],[x+14,215]],'#b9a9a3',ink,1.2);cityRect(x+4,222,7,13,'#6c7688');}
+      cityRect(91,164,26,75,'#d4b9a1',ink,2.5);
+      cityPoly([[88,164],[104,146],[120,164]],'#7b7288',ink,2);
+      cityRect(103,133,3,18,ink);cityEllipse(104,188,9,9,'#fff0cf',ink);
+      line(104,188,104,182,ink,1.8);line(104,188,109,190,ink,1.8);
+      for(let x of [92,101,110])cityRect(x,216,3,16,'#8c7774');
+    }else if(id==='gate'){
+      cityRect(19,194,124,10,'#aab9ab',ink,2);cityRect(24,183,113,10,'#c2cfc4',ink);
+      cityPoly([[17,184],[81,171],[144,184]],'#9cb2a5',ink,2);
+      for(let x=27;x<137;x+=22){cityRect(x,204,13,36,'#bdcabe',ink,1.8);cityRect(x+3,208,7,29,'#e3e7db');}
+      cityRect(15,237,132,7,'#7e9b93',ink);
+      // Quadriga on top: small but recognizably above the columned gate.
+      cityEllipse(85,167,16,5,ink);circle(71,162,4,ink);circle(94,162,4,ink);
+    }else if(id==='canal'){
+      const hs=[43,56,49,61];
+      for(let i=0;i<4;i++){
+        const x=11+i*32,w=29,h=hs[i],top=237-h;
+        cityRect(x,top,w,h,['#c38276','#e5ad8a','#9c9abb','#c77984'][i],ink,2);
+        cityPoly([[x,top],[x+7,top-11],[x+15,top-14],[x+22,top-11],[x+w,top]],['#ba736e','#d79778','#8f8aad','#b96d7c'][i],ink,2);
+        for(let j=0;j<2;j++)cityRect(x+7,top+13+j*16,12,9,'#ffe6c0',ink,1);
+      }
+      cityArc(77,247,62,Math.PI,TAU,ink,5);
+      line(14,244,143,244,'#699fa8',5);
+    }else if(id==='eiffel'){
+      // Open lattice and crossbars read much better at 390 logical pixels.
+      cityPoly([[88,150],[79,187],[43,240],[59,240],[90,194],[121,240],[137,240],[101,187],[94,150]],'#b296a8',ink,2.5);
+      for(let y of [175,197,216,230])line(60+(y-175)*.30,y,120-(y-175)*.30,y,'#f6e4d1',2.6);
+      line(66,220,108,182,ink,1.4);line(115,220,74,182,ink,1.4);
+      cityRect(84,162,16,7,'#927596',ink);cityRect(90,137,4,14,ink);
+      cityPoly([[7,227],[13,211],[42,211],[47,227]],'#d79bae',ink);
+      cityRect(6,227,42,9,'#d8b69f',ink);
+    }else if(id==='townhouses'){
+      const cols=['#b96f60','#d69a74','#a86f72','#cd896b'];
+      for(let i=0;i<4;i++){
+        const x=9+i*34,y=179+i%2*6;
+        cityRect(x,y,31,61,cols[i],ink,1.7);
+        cityPoly([[x-2,y],[x+15,y-17],[x+33,y]],'#835b5b',ink,2);
+        cityRect(x+9,y+13,12,13,'#ffe2c6',ink,1.4);
+        cityRect(x+9,y+36,12,14,'#ffe2c6',ink,1.4);
+        cityRect(x+22,y-19,5,10,'#795151');
+      }
+    }else if(id==='chicago'){
+      const hs=[42,58,76,52,88,64];
+      for(let i=0;i<hs.length;i++){
+        const x=9+i*23,y=239-hs[i];
+        cityRect(x,y,21,hs[i],i%2?'#9db6b8':'#7195a5',ink,1.6);
+        for(let yy=y+8;yy<235;yy+=12){line(x+5,yy,x+17,yy,'#daede4',1.6);}
+      }
+      cityRect(72,139,15,100,'#6d8597',ink,2);cityRect(76,122,2,18,ink);cityRect(82,125,2,15,ink);
+      line(7,241,147,241,'#557b8a',5);
+    }else if(id==='manhattan'){
+      const hs=[41,59,78,47,69,45];
+      for(let i=0;i<6;i++){
+        const x=7+i*23,y=240-hs[i];
+        cityRect(x,y,21,hs[i],i%2?'#a2a6b5':'#788ba2',ink,1.5);
+        for(let yy=y+9;yy<234;yy+=13)for(let xx=x+5;xx<x+21;xx+=8)cityRect(xx,yy,3,5,'#ffe4ac');
+      }
+      cityRect(76,154,20,86,'#96a5b8',ink,2);
+      cityPoly([[73,155],[86,143],[99,155]],'#8496aa',ink);
+      cityRect(84,123,4,22,ink);cityRect(86,114,1.6,10,ink);
+    }else if(id==='opera'){
+      cityPoly([[6,242],[6,229],[137,229],[151,243]],'#8bbfc5',ink,2);
+      cityPoly([[20,227],[23,220],[42,177],[58,222],[59,227]],'#fff7e9',ink,2.5);
+      cityPoly([[44,228],[62,189],[80,227]],'#fff5e7',ink,2.5);
+      cityPoly([[76,228],[100,185],[117,227]],'#fcf0e6',ink,2.5);
+      ctx.beginPath();ctx.ellipse(88,236,59,29,0,Math.PI,TAU);ctx.strokeStyle='#5f929f';ctx.lineWidth=5;ctx.stroke();
+      for(let x=47;x<139;x+=20)line(x,230,x,242,'#5f929f',2);
+      line(6,242,150,242,'#6caaba',3);
+    }
+    ctx.restore();
+  }
+  function drawCityPlants(theme,time){
+    // A large middle-distance plant and recognisable textures on the near verge.
+    const plant=theme[1],ink=theme[7],accent=theme[4];
+    const sway=reducedMotion()?0:Math.sin(time*1.1)*1.4;
+    ctx.save();ctx.lineCap='round';
+    if(plant==='cherry'||plant==='ginkgo'||plant==='linden'||plant==='maple'||plant==='tree'||plant==='eucalyptus'){
+      const trunk=plant==='eucalyptus'?'#d4c6b2':'#927967';
+      line(36,355,40+sway,298,trunk,7);
+      line(40,309,62+sway,283,trunk,4);
+      line(40,318,20+sway,288,trunk,3);
+      for(let i=0;i<9;i++){
+        const x=40+Math.cos(i*TAU/9)*30+sway,y=281+Math.sin(i*TAU/9)*22;
+        if(plant==='ginkgo'){
+          cityPoly([[x,y+7],[x-10,y-7],[x,y-13],[x+10,y-7]],i%2?'#f3d978':'#dbb64d',ink,1.2);
+        }else if(plant==='eucalyptus'){
+          cityEllipse(x,y,14,5,i%2?'#7fbbb1':'#b2d5b9',ink,-.75);
+        }else if(plant==='maple'){
+          cityPoly([[x,y-13],[x-5,y-5],[x-13,y-6],[x-7,y+3],[x-9,y+12],[x,y+7],[x+9,y+12],[x+7,y+3],[x+13,y-6],[x+5,y-5]],i%2?'#efaf77':'#c77b59',ink,1);
+        }else{
+          circle(x,y,plant==='cherry'?13:15,plant==='cherry'?(i%2?'#f9c3d8':'#f0a7c1'):(plant==='linden'?'#a9d0a0':'#9cbe99'),ink,1);
+        }
+      }
+      if(plant==='cherry'){
+        for(let i=0;i<12;i++){const x=9+(i*19)%92,y=267+(i*23)%57;circle(x,y,2.8,i%2?'#fff3e9':'#e883b1');}
+      }
+    }else if(plant==='hedge'||plant==='shrubs'){
+      for(let i=0;i<3;i++){
+        const x=13+i*24,y=349-i*10;
+        roundedRect(x-12,y-15,25,24,4,plant==='hedge'?'#87a985':'#72ac9a',ink,2);
+        circle(x+4,y-18,8,plant==='hedge'?'#b4cf94':'#9bcea7',ink,1);
+      }
+      if(plant==='hedge')for(let i=0;i<8;i++)circle(8+i*9,359-i%3*4,2.9,i%2?'#f1d37a':'#f9aeb9');
+    }else if(plant==='flowers'||plant==='tulip'){
+      roundedRect(1,363,82,14,4,plant==='tulip'?'#ab806e':'#8c7695',ink,2);
+      for(let i=0;i<8;i++){
+        const x=6+i*10,y=358-(i%3)*6;
+        line(x,y+5,x+1,y-14,'#528f74',2.4);
+        cityPoly([[x-6,y-12],[x-4,y-20],[x,y-16],[x+5,y-21],[x+7,y-12],[x,y-6]],i%3===0?'#e9b359':i%2?'#f4a5ba':'#d7b1ef',ink,1);
+      }
+    }else if(plant==='grass'){
+      for(let i=0;i<10;i++)line(7+i*8,373,7+i*8+(i%2?7:-5),347-(i%3)*7,i%2?'#7db6ad':'#acd4a4',2.6);
+    }
+    ctx.restore();
+  }
+  function drawCityFurniture(theme){
+    const kind=theme[2],ink=theme[7],a=theme[4];
+    ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    if(kind==='japanese'){
+      // Sloped-roof stone lantern and vermilion festival ribbon.
+      cityRect(12,327,19,37,'#e6cbac',ink,2);
+      cityPoly([[7,329],[22,316],[36,329]],'#d96e73',ink,2);
+      cityRect(16,332,12,16,'#fff0bd',ink,2);
+      cityRect(19,363,7,14,'#b49492',ink);line(48,339,75,333,'#d87896',3);
+      for(let i=0;i<4;i++)circle(51+i*7,332-i*.7,4,'#ffc0d1');
+    }else if(kind==='korean'){
+      // Tall modern sign + golden ginkgo planter, markedly unlike Tokyo.
+      cityRect(13,322,29,46,'#4a567d',ink,2);
+      cityRect(17,327,21,15,'#f8d77b',ink);cityRect(19,347,17,17,'#aaacd8',ink);
+      line(22,333,33,333,'#665079',2);line(24,354,33,354,'#f5eef8',2);
+      roundedRect(50,360,33,16,4,'#758a88',ink,2);
+    }else if(kind==='postbox'){
+      // London: a red pillar box and cast-iron rail, not generic foliage.
+      roundedRect(9,325,25,50,6,'#db4e51',ink,2.6);
+      cityEllipse(21,325,13,7,'#e7615f',ink);
+      cityRect(13,337,18,4,'#fff4de',ink);
+      cityRect(16,352,12,8,'#b83d46');circle(21,365,2,'#edd4a2');
+      for(let i=0;i<4;i++){const x=43+i*10;line(x,349,x,376,'#373d4b',3);}
+      line(41,352,82,352,'#343b46',3);
+    }else if(kind==='bear'){
+      // Berlin bear sculpture on geometric plinth, with bright linden planting.
+      cityRect(8,366,48,10,'#abbcb6',ink,2);
+      cityEllipse(33,344,15,20,'#866d67',ink);
+      circle(28,322,6,'#866d67',ink,1);circle(40,322,6,'#866d67',ink,1);
+      circle(34,327,12,'#967d72',ink,2);circle(30,326,2,'#332f35');circle(38,326,2,'#332f35');
+      for(let i=0;i<4;i++)cityEllipse(63+i*5,363-i%2*5,5,8,'#95c5a0',ink);
+    }else if(kind==='bike'){
+      // Amsterdam: full bicycle silhouette + canal railing / tulip boxes.
+      for(let x of [17,62])circle(x,352,14,'#f8eee4',ink,2.4);
+      line(17,352,37,326,'#d77b66',3.5);line(37,326,62,352,'#d77b66',3.5);
+      line(62,352,17,352,'#d77b66',3);line(37,326,44,352,'#d77b66',3);
+      line(32,322,42,322,ink,2);line(57,323,67,323,ink,2.2);
+      line(57,323,62,352,ink,2);
+    }else if(kind==='cafe'){
+      // Paris: double globe streetlamp and café parasol/counter.
+      line(19,378,19,315,ink,4);cityArc(19,318,13,Math.PI,TAU,ink,3);
+      circle(7,316,7,'#fff0c6',ink,1.8);circle(31,316,7,'#fff0c6',ink,1.8);
+      cityPoly([[43,348],[65,329],[86,348]],'#dca3c7',ink,2);
+      line(65,348,65,371,ink,2);line(50,358,78,358,ink,2.5);
+      line(53,358,49,375,ink,2);line(75,358,79,375,ink,2);
+    }else if(kind==='marathon'){
+      // Boston: blue/gold race marker and an old-fashioned streetlamp.
+      line(13,317,13,377,ink,3);cityEllipse(13,317,7,9,'#fff1c7',ink);
+      roundedRect(24,330,54,31,6,'#377eae',ink,2.5);
+      label('26.2',51,343,18,'#ffe170');label('BOSTON',51,353,7,'#ffffff');
+      line(24,363,78,363,'#f6ce64',4);
+    }else if(kind==='elevated'){
+      // Chicago: underside of the "L" viaduct, truss and riveted support.
+      cityRect(7,311,86,10,'#637a8b',ink,2);
+      for(let x=12;x<94;x+=16){line(x,310,x+12,321,'#a2d3c3',2);circle(x,316,1.8,'#e8d9a9');}
+      cityRect(26,321,12,55,'#647d88',ink,2);
+      for(let y=334;y<375;y+=13)line(27,y,37,y+6,'#c1d8cb',1.8);
+      roundedRect(48,359,31,15,4,'#6bb49d',ink,2);
+    }else if(kind==='subway'){
+      // NYC: unmistakable subway roundel beside a red hydrant.
+      line(19,333,19,373,ink,4);circle(19,321,14,'#397aa2',ink,2.4);
+      label('M',19,321,16,'#fff3df');
+      roundedRect(44,347,21,27,5,'#d55854',ink,2);
+      roundedRect(50,339,9,10,3,'#e77663',ink,1.5);
+      line(42,361,68,361,ink,4);circle(44,361,5,'#d55854',ink);circle(66,361,5,'#d55854',ink);
+    }else if(kind==='harbour'){
+      // Sydney: bright harbour rail and eucalyptus beside coastal grasses.
+      for(let i=0;i<4;i++){const x=8+i*22;line(x,342,x,377,'#fbfbf0',5);line(x,342,x,377,ink,1);}
+      line(5,347,83,347,'#f8faf4',6);line(5,348,83,348,ink,1.3);
+      for(let i=0;i<6;i++)cityEllipse(9+i*12,373-i%3*4,9,3,i%2?'#b4d8bd':'#7dbbb6',null,-.5);
+    }
+    ctx.restore();
+  }
+  function drawCityDetails(time){
+    const index=game?.config?.cityIndex||0;
+    const city=CITIES[index],theme=SCENE_THEMES[city.id]||SCENE_THEMES.tokyo;
+    const person=volunteerScene(index);
+    drawCityPavement(theme);
+
+    // Reserve negative space around head, torso, arms and held supply.
+    // All painted feature shapes are excluded, not the pavement material.
+    ctx.save();ctx.beginPath();ctx.rect(0,139,W,H-139);
+    ctx.rect(person.x-34,person.y-60,98,119);
+    ctx.clip('evenodd');
+
+    // A single compact skyline at the far LEFT. It stays above the plant
+    // and behind the volunteer; the previous 150px-wide skyline hid the head.
+    ctx.save();ctx.translate(-21,54);ctx.scale(.62,.75);
+    drawCityLandmark(theme);ctx.restore();
+
+    // Split planting and furniture into separate depth bands, not overlapping
+    // full-size illustrations. Negative space matters more than object count.
+    ctx.save();ctx.beginPath();ctx.moveTo(0,237);
+    for(let y=242;y<=480;y+=5){
+      ctx.lineTo(Math.max(0,roadCenter(y)-roadHalfWidth(y)-7),y);
+    }
+    ctx.lineTo(0,480);ctx.closePath();ctx.clip();
+
+    ctx.save();ctx.translate(-9,67);ctx.scale(.68,.7);
+    drawCityPlants(theme,time);ctx.restore();
+
+    ctx.save();ctx.translate(17,119);ctx.scale(.64,.68);
+    drawCityFurniture(theme);ctx.restore();
+    ctx.restore();
+    ctx.restore();
+  }
+
   const W=390,H=700,GOAL=10,TAU=Math.PI*2;
   const $=id=>document.getElementById(id);
   const canvas=$('scene'), ctx=canvas.getContext('2d',{alpha:false});
@@ -155,14 +505,14 @@
     swapConfirm(){this.tone(660,.065,.028,'triangle');this.tone(988,.09,.025,'sine',.05);}
     victory(){[523,659,784,1047,784,1047,1319].forEach((f,i)=>this.tone(f,.18,.065,'triangle',i*.16));}
     fail(){[460,390,310].forEach((f,i)=>this.tone(f,.22,.045,'triangle',i*.18));}
-    feverStart(){[587,740,880,1175,1480].forEach((f,i)=>this.tone(f,.23,.07,'triangle',i*.095));}
-    infernoStart(){[440,587,740,880,1175,1480].forEach((f,i)=>this.tone(f,.21,.075,i%2?'triangle':'sawtooth',i*.075));}
+    feverStart(){[587,740,880].forEach((f,i)=>this.tone(f,.12,.045,'triangle',i*.07));}
+    infernoStart(){[330,660,990].forEach((f,i)=>this.tone(f,.19,.05,i===0?'sine':'triangle',i*.095));}
     feverHit(streak){this.tone(920+(streak%8)*45,.12,.065,'triangle');this.tone(1420,.1,.045,'sine',.09);this.tone(520,.1,.025,'square',.14);}
     megaHit(points){
       this.tone(160,.16,.085,'sawtooth');this.tone(86,.28,.083,'triangle',.035);
       [830,1108,1480].forEach((f,i)=>this.tone(f,.18,.057,'triangle',i*.045));
     }
-    feverEnd(){[720,540,360].forEach((f,i)=>this.tone(f,.17,.037,'sawtooth',i*.12));}
+    feverEnd(){[660,440].forEach((f,i)=>this.tone(f,.12,.028,'triangle',i*.10));}
     // Quiet, original little two-bar backing groove (not a pre-existing tune).
     music(sceneTime){
       if(!this.enabled||!this.context)return;
@@ -874,58 +1224,47 @@
             this.feverImpact=.68;this.feverHits++;
             if(outcome.delta>BIG_REWARD_JUMP){
               runner.joyJumpTimer=.84;
-              runner.joyJumpHeight=Math.min(54,25+(outcome.delta-20)*.75);
-              this.popEffect({kind:'jumpShout',text:outcome.delta>HEAVY_REWARD_IMPACT?'INCREDIBLE!':'SUPER CATCH!',
-                x:fxX,y:fxY-124,life:.88});
+              runner.joyJumpHeight=Math.min(this.inferno?52:34,24+(outcome.delta-20)*.66);
             }
-            if(outcome.delta>HEAVY_REWARD_IMPACT){
-              this.hitstopRemaining=.085; // ~5 frames at 60 FPS
-              this.shakeRemaining=.34;
-              this.shakePower=Math.min(13,7+(outcome.delta-30)*.12);
-              this.impactFlash=.22;
-              this.popEffect({kind:'heavyImpact',text:`+${outcome.delta}  MEGA!`,x:W/2,y:H*.43,life:.7});
+            if(outcome.delta>HEAVY_REWARD_IMPACT && this.inferno && !outcome.infernoActivated){
+              this.hitstopRemaining=reducedMotion()?0:.04;
+              this.shakeRemaining=reducedMotion()?0:.12;
+              this.shakePower=2.7;this.impactFlash=0;
               audio.megaHit(outcome.delta);
             }
           }
           if(outcome.infernoActivated){
-            this.popEffect({kind:'feverEntry',text:'INFERNO!',x:W/2,y:H*.44,life:1.7});
+            this.popEffect({kind:'feverEntry',text:'INFERNO!',x:W/2,y:H*.44,life:.68});
             showMessage('🪩 INFERNO! DISCO TIME!',1450);
             audio.infernoStart();
           }
           if(outcome.activated){
-            this.popEffect({kind:'feverEntry',text:'FEVER!',x:W/2,y:H*.44,life:1.55});
+            this.popEffect({kind:'feverEntry',text:'FEVER!',x:W/2,y:H*.44,life:.55});
             showMessage('🔥 FEVER! THE WHOLE CITY CHEERS!',1450);
             audio.feverStart();
           } else if(this.score>=GOAL && this.score-outcome.delta<GOAL) showMessage('GOAL REACHED! KEEP IT UP!',1200);
-          this.popEffect({kind:'score',text:`+${outcome.delta}`,x:fxX,y:fxY-50,color:this.inferno?'#ffcf22':this.fever?'#ed5490':'#0f9870',life:this.fever?1.5:1.35});
-          this.popEffect({kind:'spark',x:fxX,y:fxY,life:this.fever?1.55:1.15});
-          this.popEffect({kind:'rays',x:fxX,y:fxY,life:this.fever?1.2:.78});
-          if(this.fever){
-            this.popEffect({kind:'feverConfetti',x:fxX,y:fxY-15,life:1.2});
-            this.popEffect({kind:'combo',text:this.inferno?`${this.combo}² COMBO ×${outcome.runnerMultiplier}!`:`${this.combo} COMBO ×${outcome.runnerMultiplier}!`,x:fxX,y:fxY-98,life:1.25});
-          }else if(runner.successes>1){
-            this.popEffect({kind:'combo',text:`${runner.successes}× RUNNER!`,x:fxX,y:fxY-91,life:1.18});
-          }
-          const theme=FEVER_THEMES[CITIES[this.config.cityIndex].id];
-          const bubbleChance=this.inferno ? .5 : .3;
-          if(this.random()<bubbleChance){
-            this.popEffect({kind:'bubble',text:this.fever?pick(this.rng,theme.cheers):pick(this.rng,runner.successes>1?['AGAIN?! YES!','LEGEND!','SO GOOD!']:['THANK YOU!!','YIPPEE!!','PERFECT!']),x:fxX,y:fxY-75,life:this.fever?1.45:1.1,fever:this.fever});
-          }
+          const tier=outcome.delta<=20?1:outcome.delta<=30?2:3;
+          this.popEffect({kind:'score',text:`+${outcome.delta}`,x:fxX,y:fxY-48,
+            size:tier===1?25:tier===2?29:34,color:this.inferno?'#ffdc65':this.fever?'#e8a048':'#0f9870',life:.52});
+          if(!(outcome.activated||outcome.infernoActivated))
+            this.popEffect({kind:'hitBurst',x:fxX,y:fxY-10,tier,
+              mode:this.inferno?'inferno':this.fever?'fever':'normal',
+              life:tier===3?.55:.43});
           const transformText=oldRunnerNumber>t.supply.number ? `${oldRunnerNumber} ÷ ${t.supply.number} = ${runner.number}` : `${oldRunnerNumber} × ${t.supply.number} = ${runner.number}`;
-          this.popEffect({kind:'combo',text:transformText,x:fxX,y:fxY-95,life:1.2});
           updateMatchHint(`${transformText} ✓ · Combo ${this.combo} · +${outcome.delta}`);
-          if(this.fever)audio.feverHit(this.combo);else audio.combo(runner.successes);
+          if(this.inferno&&tier===3&&!outcome.infernoActivated){/* mega cue already played above */}
+          else if(this.fever)audio.feverHit(this.combo);else audio.combo(runner.successes);
         }else{
           this.wrong++;runner.mood='angry';runner.moodTimer=1.25;
           if(outcome.ended){
             showMessage('FEVER OVER! COMBO RESET',1300);
-            this.popEffect({kind:'feverEnd',text:'FEVER OVER',x:W/2,y:H*.38,life:1.15});
+            this.popEffect({kind:'feverEnd',text:'FEVER OVER',x:W/2,y:H*.38,life:.34});
             audio.feverEnd();
           }else audio.wrong();
           if(outcome.delta<0)this.popEffect({kind:'score',text:`−${Math.abs(outcome.delta)}`,x:fxX,y:fxY-42,color:'#db5344',life:1.05});
-          else this.popEffect({kind:'combo',text:'0 PENALTY!',x:fxX,y:fxY-65,life:1.25});
+          else this.popEffect({kind:'combo',text:'0 PENALTY!',x:fxX,y:fxY-65,life:.42});
           this.popEffect({kind:'bonk',x:fxX,y:fxY-22,life:.7});
-          this.popEffect({kind:'bubble',text:outcome.ended?'NO MORE FEVER!':pick(this.rng,['HEY!','OUCH!','RUDE!']),x:fxX,y:fxY-68,life:.88});
+          if(!outcome.ended)this.popEffect({kind:'bubble',text:pick(this.rng,['HEY!','OUCH!','RUDE!']),x:fxX,y:fxY-68,life:.48});
           updateMatchHint(`${t.supply.number} and ${runner.number}: no match · ${outcome.delta} points · combo reset`);
         }
         // The runner might have left the screen during the throwing pose.
@@ -1071,7 +1410,7 @@
     draw(){
       // Small real screen shake for 30+ point Fever hits. Pointer mapping uses
       // the live bounding rectangle so the moving canvas remains tappable.
-      const strength=this.shakeRemaining>0?this.shakePower*Math.pow(this.shakeRemaining/.34,1.25):0;
+      const strength=!reducedMotion()&&this.shakeRemaining>0?this.shakePower*Math.pow(this.shakeRemaining/.13,1.25):0;
       if(strength>0){
         const sx=Math.sin(this.impactClock*157)*strength;
         const sy=Math.cos(this.impactClock*119)*strength*.72;
@@ -1082,11 +1421,15 @@
       drawGround(this.sceneTime);
       drawRoad(this.sceneTime);
       drawScenery(this.sceneTime,this.config.cityIndex);
+      if(this.fever&&!this.inferno)drawFeverLights(this);
       if(this.inferno)drawInfernoLights(this);
       // Distant runners are drawn first. A departing runner remains visible at
       // the bottom without participating in number matching.
       const sorted=[...this.runners,...this.departing].sort((a,b)=>
         a.y-b.y);
+      for(const fx of this.effects){
+        if(['hitBurst','feverEntry','hitRing','heavyImpact'].includes(fx.kind))drawEffect(fx);
+      }
       for(const r of sorted)drawRunner(r,this.sceneTime,this.runnerX(r));
       drawTable(this.supplies.queue,this.sceneTime);
       drawSwapCelebration(this.swapCue,this.sceneTime); // Large effects sit behind the hand and its readable digits.
@@ -1096,21 +1439,19 @@
         const time=this.celebrationTime;
         if(time>.72 && time<2.42){
           const p=(time-.72)/1.70;
-          const x=120+Math.sin(p*Math.PI)*33;
-          const y=170-Math.sin(p*Math.PI)*100;
+          const hand=volunteerHandPoint(this.config.cityIndex);
+          const x=hand.x+Math.sin(p*Math.PI)*33;
+          const y=hand.y-16-Math.sin(p*Math.PI)*100;
           drawSupply({type:'water',number:this.supplies.held.number},x,y,27,p*Math.PI*5,true);
-          if(p>.87)label('WHAT A CATCH!',121,304,12,'#1b7c78');
+          if(p>.87)label('WHAT A CATCH!',hand.x,304,12,'#1b7c78');
         }
       }
       if(this.throwing)drawThrownSupply(this.throwing,this.runners,this);
-      if(this.cheerFlash>0){ctx.save();ctx.globalAlpha=.09*this.cheerFlash/.4;ctx.fillStyle=this.fever?'#fbe1ff':'#ffe77e';ctx.fillRect(0,0,W,H);ctx.restore();}
-      if(this.impactFlash>0){
-        // Freeze-frame flare belongs BEHIND impact lettering so the reward
-        // remains crisp and high contrast while the world briefly brightens.
-        ctx.save();ctx.globalAlpha=Math.min(.23,this.impactFlash/.22*.23);
-        ctx.fillStyle='#fff8cc';ctx.fillRect(0,0,W,H);ctx.restore();
+      // Do not flash over numbers.
+      // No opaque hit flash over runners and supplies.
+      for(const fx of this.effects){
+        if(!['hitBurst','feverEntry','hitRing','heavyImpact'].includes(fx.kind))drawEffect(fx);
       }
-      for(const fx of this.effects)drawEffect(fx);
       if(this.fever&&['playing','paused'].includes(this.phase)){
         drawFeverFrame(this);
         if(this.inferno)drawInfernoOverlay(this);
@@ -1140,19 +1481,11 @@
 
   /* ---------- Draw the world ---------- */
   function drawGround(t){
-    ctx.fillStyle='#d5eec4';ctx.fillRect(0,0,W,H);
-    ctx.fillStyle='#c8e4b4';
-    for(let i=0;i<22;i++){
-      const x=(i*103+23)%W,y=(i*157+44)%H;
-      ctx.save();ctx.translate(x,y);ctx.rotate(Math.sin(i)*.4);
-      ctx.beginPath();ctx.ellipse(0,0,15+(i%3)*7,8,0,0,TAU);ctx.fill();ctx.restore();
-    }
-    for(let i=0;i<45;i++){
-      const x=(i*61+11)%W,y=(i*79+23)%H;
-      circle(x,y,1.6,i%3===0?'#f3dd86':'#a9d5a7');
-    }
+    const theme=SCENE_THEMES[CITIES[game?.config?.cityIndex||0].id]||SCENE_THEMES.tokyo;
+    ctx.fillStyle=theme[5];ctx.fillRect(0,0,W,H);
+    drawCityDetails(t);
   }
-  function drawRoad(_t){
+    function drawRoad(_t){
     const city=CITIES[game?.config?.cityIndex||0],style=CITY_VISUALS[city.id]||CITY_VISUALS.tokyo;
     const left=y=>roadCenter(y)-roadHalfWidth(y);
     const right=y=>roadCenter(y)+roadHalfWidth(y);
@@ -1190,55 +1523,9 @@
     }
   }
   function drawScenery(t,cityIndex=0){
-    const city=CITIES[cityIndex],style=CITY_VISUALS[city.id]||CITY_VISUALS.tokyo;
-    const bushes=[[17,339,16],[13,417,13],[31,287,15]];
-    for(const [x,y,size] of bushes){
-      circle(x,y,size,'#a4d6a4','#668b73',2);
-      circle(x+size*.5,y-size*.6,size*.7,'#b5dda8','#668b73',2);
-      circle(x-size*.4,y-size*.4,size*.65,'#9bc99a','#668b73',2);
-    }
-    line(18,256,18,332,'#8a9570',4);
-    ctx.beginPath();ctx.moveTo(18,256);ctx.lineTo(84,269);ctx.lineTo(18,284);ctx.closePath();ctx.fillStyle='#f6b764';ctx.fill();
-    label(CITIES[cityIndex].name.slice(0,8),51,269,10,'#6d463b');
-    for(let i=0;i<3;i++){
-      const x=16+i*36,y=312+(i%2)*23+Math.sin(t*1.2+i)*3;
-      line(x,y+9,x+4,y+34,'#81939b',1.4);ctx.beginPath();ctx.ellipse(x,y,8,11,0,0,TAU);
-      ctx.fillStyle=['#f7ac6d','#a1b8ee','#ed8f9d'][i];ctx.fill();ctx.strokeStyle='#596a6b';ctx.lineWidth=1.2;ctx.stroke();
-    }
-    ctx.save();
-    const decoY=[363,452,548];
-    for(let i=0;i<decoY.length;i++){
-      const x=38+Math.sin(t*0.8+i)*3,y=decoY[i];
-      if(style.decor==='blossom'){
-        for(let k=0;k<5;k++)circle(x+Math.cos(k*TAU/5)*6,y+Math.sin(k*TAU/5)*6,4.2,'#f6b1c8','#cc7899',1);
-        circle(x,y,3,'#ffd86f');
-      }else if(style.decor==='lantern'){
-        roundedRect(x-7,y-10,14,20,5,'#f5c15e','#845c34',1.5);line(x,y-15,x,y-10,'#845c34',1.4);
-      }else if(style.decor==='crown'){
-        ctx.beginPath();ctx.moveTo(x-10,y+8);ctx.lineTo(x-8,y-5);ctx.lineTo(x-2,y+1);ctx.lineTo(x+2,y-7);ctx.lineTo(x+7,y+1);ctx.lineTo(x+10,y-4);ctx.lineTo(x+12,y+8);ctx.closePath();ctx.fillStyle='#e6cf74';ctx.fill();ctx.strokeStyle='#9c8540';ctx.lineWidth=1.3;ctx.stroke();
-      }else if(style.decor==='bear'){
-        circle(x,y,8,'#8d6a53','#5c4435',1.2);circle(x-5,y-6,3.2,'#8d6a53');circle(x+5,y-6,3.2,'#8d6a53');
-      }else if(style.decor==='canal'){
-        ctx.beginPath();ctx.arc(x,y,10,Math.PI,0);ctx.strokeStyle='#8b6046';ctx.lineWidth=2;ctx.stroke();
-        line(x-10,y,x-10,y+7,'#8b6046',1.6);line(x+10,y,x+10,y+7,'#8b6046',1.6);
-      }else if(style.decor==='paris'){
-        line(x,y+11,x,y-9,'#76518d',1.7);line(x,y-9,x-5,y+3,'#76518d',1.2);line(x,y-9,x+5,y+3,'#76518d',1.2);line(x-3,y-2,x+3,y-2,'#76518d',1.2);
-      }else if(style.decor==='star'){
-        label('★',x,y,14,'#f3c85a');
-      }else if(style.decor==='shamrock'){
-        circle(x-4,y-1,4.5,'#59b16e');circle(x+4,y-1,4.5,'#59b16e');circle(x,y-6,4.5,'#59b16e');line(x,y,x+1,y+9,'#397a4f',1.4);
-      }else if(style.decor==='apple'){
-        circle(x,y,7.5,'#eb6e62','#9e4a46',1.2);ctx.beginPath();ctx.ellipse(x+3,y-9,4,2,-.5,0,TAU);ctx.fillStyle='#6cba74';ctx.fill();
-      }else if(style.decor==='wave'){
-        ctx.beginPath();ctx.arc(x-4,y+2,7,0,Math.PI*.95);ctx.strokeStyle='#4e9ed0';ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(x+4,y+6,5,0,Math.PI*.95);ctx.stroke();
-      }else if(style.decor==='laurel'){
-        label('🏺',x,y,14,'#b69545');
-      }
-    }
-    ctx.restore();
+    // City-specific verge is painted below the existing road, never over runners.
   }
-
-  function drawRunner(r,t,x){
+    function drawRunner(r,t,x){
     const mood=r.mood, look=r.look;
     ctx.save();
     if(r.entryFade>0)ctx.globalAlpha=.64+.36*(1-r.entryFade/.24);
@@ -1387,10 +1674,9 @@
     const pop=Math.sin(Math.PI*p);
     const fade=Math.pow(1-p,.75);
     const mode=cue.mode||'normal';
-    // The hand is at (102,202) + the volunteer's 0.57x transform.
-    // Effects radiate up to ~100 canvas units around that fixed location;
-    // the drawing itself remains fixed and the new supply is rendered above.
-    const cx=124,cy=187-5*pop;
+    // The swap cue follows the same city-specific held supply as the volunteer.
+    const hand=volunteerHandPoint(game?.config?.cityIndex||0);
+    const cx=hand.x,cy=hand.y-5*pop;
     const cold=mode==='inferno',hot=mode==='fever';
     const starColors=cold?['#fff7a0','#ff7bbd','#76ebff','#dba0ff']:
       hot?['#fff1a5','#ffd355','#ff9d46','#ff7069']:
@@ -1398,7 +1684,7 @@
     ctx.save();
     // Keep big bursts outside the finger-covered tray numbers and away
     // from most runners. No layout, character, or hitbox coordinates move.
-    ctx.beginPath();ctx.rect(5,137,264,176);ctx.clip();
+    ctx.beginPath();ctx.rect(3,139,263,189);ctx.clip();
     // Expand a subtle aura away from the hand, without covering its digits.
     ctx.globalAlpha=(cold?.38:hot?.30:.24)*fade;
     circle(cx,cy,44+34*p,cold?'#f4a2ff':hot?'#ffb24d':'#ffe9a0');
@@ -1473,7 +1759,8 @@
   }
 
   function drawVolunteer(t,throwing,phase,celebrationTime,held,level,fever,swapCue){
-    const x=102,y=202;
+    const scene=volunteerScene(game?.config?.cityIndex||0);
+    const {x,y}=scene;
     ctx.save();ctx.translate(x,y);
     let jump=0,lean=0,arm=0;
     const swapP=swapCue&&!throwing?clamp(swapCue.age/swapCue.duration,0,1):1;
@@ -1488,7 +1775,14 @@
     }
     // The volunteer gives a tiny approving nod and looks towards the new snack.
     if(swapPulse>0)lean+=.065*swapPulse;
-    ctx.translate(0,jump+(fever&&!throwing?-Math.abs(Math.sin(t*11))*4:0));ctx.rotate(lean);ctx.scale(.57,.57);
+    ctx.translate(0,jump+(fever&&!throwing?-Math.abs(Math.sin(t*11))*4:0));ctx.rotate(lean);ctx.scale(VOLUNTEER_SCALE,VOLUNTEER_SCALE);
+    // Thin cream separation contour behind the dark head/torso silhouette.
+    // It is attached to the character, not a spotlight over runner numbers.
+    ctx.save();
+    ctx.beginPath();ctx.ellipse(0,-37,28,29,0,0,TAU);
+    ctx.strokeStyle='#fff9eb';ctx.lineWidth=7;ctx.stroke();
+    roundedRect(-28,-19,57,56,15,null,'#fff8ed',6);
+    ctx.restore();
     // Ground shadow and floppy shoes.
     ctx.fillStyle='rgba(57,78,72,.19)';ctx.beginPath();ctx.ellipse(0,56-jump*.2,30,7,0,0,TAU);ctx.fill();
     const step=isDancing?Math.sin(celebrationTime*11)*8:Math.sin(t*2)*1.3;
@@ -1498,8 +1792,8 @@
     const reaching=throwing&&throwing.elapsed>.41 && throwing.elapsed<.74;
     if(reaching){line(-21,-3,-43,14,'#e8b68d',10);line(-43,14,-41,29,'#e8b68d',9);}
     else line(-20,-3,-29,19,'#e8b68d',10);
-    roundedRect(-25,-16,51,48,13,'#f9a563','#654b4c',3);
-    roundedRect(-14,8,28,20,4,'#f7e3b3','#6c5552',2);
+    roundedRect(-25,-16,51,48,13,scene.shirt,'#333d4e',4.1);
+    roundedRect(-14,8,28,20,4,'#fff6d9','#344254',2.8);
     label('Volunteer',0,19,6.7,'#a05d44');
     // An extremely enthusiastic volunteer throwing arm.
     if(isDancing){
@@ -1520,10 +1814,10 @@
       line(21,-4,36,-11,'#e8b68d',9);
       line(36,-11,34,-22,'#e8b68d',8);
     }
-    ctx.beginPath();ctx.ellipse(0,-37,24,25,0,0,TAU);ctx.fillStyle='#edbd91';ctx.fill();ctx.strokeStyle='#544b4d';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.beginPath();ctx.ellipse(0,-37,24,25,0,0,TAU);ctx.fillStyle='#edbd91';ctx.fill();ctx.strokeStyle='#343b47';ctx.lineWidth=4.2;ctx.stroke();
     // Cartoon orange cap, outsized compared with the face.
-    ctx.beginPath();ctx.arc(0,-43,24,Math.PI,TAU);ctx.lineTo(24,-40);ctx.lineTo(-24,-40);ctx.closePath();ctx.fillStyle='#eb6a57';ctx.fill();ctx.strokeStyle='#805250';ctx.lineWidth=2;ctx.stroke();
-    roundedRect(-24,-45,47,7,4,'#f89464','#805250',1.7);
+    ctx.beginPath();ctx.arc(0,-43,24,Math.PI,TAU);ctx.lineTo(24,-40);ctx.lineTo(-24,-40);ctx.closePath();ctx.fillStyle='#eb6a57';ctx.fill();ctx.strokeStyle='#343b47';ctx.lineWidth=3.5;ctx.stroke();
+    roundedRect(-24,-45,47,7,4,'#f89464','#343b47',2.8);
     const closed=isDancing;
     if(closed){
       ctx.beginPath();ctx.arc(-8,-33,4,Math.PI*1.13,Math.PI*1.87);ctx.arc(8,-33,4,Math.PI*1.13,Math.PI*1.87);ctx.strokeStyle='#514149';ctx.lineWidth=2.4;ctx.stroke();
@@ -1569,24 +1863,75 @@
   function drawThrownSupply(t,runners,game){
     if(t.elapsed>.41)return;
     const runner=runners.find(r=>r.id===t.runnerId);if(!runner)return;
-    const f=clamp(t.elapsed/.41,0,1);
-    // A good delivery lands in the runner's hands; a bad one bonks the head.
-    const endX=game.runnerX(runner);
+    const f=clamp(t.elapsed/.41,0,1),endX=game.runnerX(runner);
     const endY=runner.y+runnerVisualOffset(runner)+(matches(t.supply.number,runner.number)?-12:-38)*runnerScale(runner);
-    const x=mix(117,endX,f),y=mix(188,endY,f)-Math.sin(f*Math.PI)*(t.feverAtRelease?108:68);
-    ctx.save();ctx.globalAlpha=.45;
-    for(let i=0;i<3;i++)circle(mix(117,x,Math.max(0,f-i*.075)),mix(188,y,Math.max(0,f-i*.075))+i*3,2.6,'#fffbe5');
+    const inferno=t.feverAtRelease&&game.inferno,fever=t.feverAtRelease&&!inferno;
+    const arc=t.feverAtRelease?108:68;
+    const hand=volunteerHandPoint(game.config.cityIndex);
+    const point=q=>[mix(hand.x,endX,q),mix(hand.y,endY,q)-Math.sin(q*Math.PI)*arc];
+    const [x,y]=point(f);
+    ctx.save();ctx.globalCompositeOperation='screen';ctx.lineCap='round';
+    if(t.feverAtRelease){
+      ctx.beginPath();
+      for(let j=0;j<=9;j++){
+        const q=Math.max(0,f-.23+j*.23/9),[px,py]=point(q);
+        if(j===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+      }
+      ctx.shadowColor=inferno?'#bc77ff':'#ffc85b';ctx.shadowBlur=inferno?17:11;
+      ctx.lineWidth=inferno?7:5;
+      ctx.strokeStyle=inferno?'rgba(128,228,255,.65)':'rgba(255,205,99,.68)';ctx.stroke();
+      ctx.shadowBlur=0;ctx.lineWidth=inferno?2.8:2;
+      ctx.strokeStyle=inferno?'#ffe6b4':'#fff6db';ctx.stroke();
+    }
+    for(let i=t.feverAtRelease?9:3;i>=1;i--){
+      const q=Math.max(0,f-i*.03),[px,py]=point(q);
+      ctx.globalAlpha=(1-i/11)*(inferno?.93:fever?.76:.45);
+      circle(px,py,inferno?4:fever?3:2.4,
+        inferno?(i%3===0?'#ff87d9':i%2?'#ffe484':'#87dffa'):
+          fever?(i%2?'#ffd763':'#fff5c9'):'#fff9d9');
+    }
     ctx.restore();
-    if(t.feverAtRelease){ctx.save();ctx.globalAlpha=.8;for(let j=1;j<=4;j++){const q=Math.max(0,f-j*.055);label('✦',mix(117,endX,q),mix(188,endY,q)-Math.sin(q*Math.PI)*108,13+j%2*3,j%2?'#ffe56c':'#fff');}ctx.restore();}
-    drawSupply(t.supply,x,y,t.feverAtRelease?25:20,f*TAU*(t.feverAtRelease?3:1.5),true);
+    drawSupply(t.supply,x,y,t.feverAtRelease?27:20,f*TAU*(t.feverAtRelease?3:1.5),true);
   }
-  function drawEffect(f){
+    function drawEffect(f){
     const p=f.age/f.life,alpha=clamp(1-p*1.2,0,1);
     ctx.save();ctx.globalAlpha=alpha;
     if(f.kind==='score'){
       const y=f.y-p*40;
       ctx.shadowColor='rgba(255,255,255,.75)';ctx.shadowBlur=5;
-      label(f.text,f.x,y,38,f.color);ctx.shadowBlur=0;
+      const size=f.size||28,x=clamp(f.x,44,W-44),yy=Math.max(143,y);
+      ctx.font="1000 "+size+"px 'Trebuchet MS',system-ui,sans-serif";
+      ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';
+      ctx.strokeStyle=(game&&game.inferno)?'#302348':'#603b4d';ctx.lineWidth=5;
+      ctx.strokeText(f.text,x,yy);
+      label(f.text,x,yy,size,f.color);ctx.shadowBlur=0;
+    }else if(f.kind==='hitRing'){
+      const r=10+p*(f.tier===3?34:f.tier===2?26:19);
+      ctx.beginPath();ctx.arc(f.x,f.y,r,0,TAU);ctx.lineWidth=3*(1-p)+1;
+      ctx.strokeStyle=game.inferno?'#93d9ec':'#ffd97d';ctx.stroke();
+    }else if(f.kind==='hitBurst'){
+      // Colourful shock ring + radial rays, drawn BEFORE the runner and bib.
+      const inferno=f.mode==='inferno',tier=f.tier||1;
+      const r=12+p*(inferno?(tier===3?69:43):(tier===3?50:35));
+      ctx.globalAlpha=alpha*(inferno?.99:.9);
+      ctx.beginPath();ctx.arc(f.x,f.y,r,0,TAU);ctx.lineWidth=(inferno?6:4.5)*(1-p)+1;
+      ctx.strokeStyle=inferno?'#e8d4ff':'#ffe6a0';ctx.stroke();
+      const count=tier===3?16:tier===2?10:6;
+      for(let i=0;i<count;i++){
+        const a=i*TAU/count+i*.04;
+        const d=15+r*.45,extra=(tier===3?29:tier===2?18:9)*(1-p);
+        line(f.x+Math.cos(a)*d,f.y+Math.sin(a)*d,
+          f.x+Math.cos(a)*(d+extra),f.y+Math.sin(a)*(d+extra),
+          inferno?(i%3===0?'#ff99da':i%2?'#ffe383':'#80e5f9'):
+            (i%2?'#ffc364':'#fff4b2'),tier===3?3.9:2.7);
+      }
+      if(tier===3 && !reducedMotion()){
+        for(let i=0;i<12;i++){
+          const a=i*TAU/12+p*.4,d=33+(i%3)*11+33*p;
+          circle(f.x+Math.cos(a)*d,f.y+Math.sin(a)*d,4.6*(1-p)+1,
+            inferno?(i%2?'#f5a2e4':'#80dced'):'#ffd87c');
+        }
+      }
     }else if(f.kind==='spark'){
       for(let i=0;i<7;i++){
         const angle=TAU*i/7+p*.7;
@@ -1595,29 +1940,31 @@
     }else if(f.kind==='rays'){
       for(let i=0;i<12;i++){const angle=TAU*i/12+p*.4;line(f.x+Math.cos(angle)*18,f.y+Math.sin(angle)*18,f.x+Math.cos(angle)*(36+32*p),f.y+Math.sin(angle)*(34+31*p),i%2?'#fff7a0':'#ffcd69',4.4);}
     }else if(f.kind==='feverEntry'||f.kind==='feverEnd'){
-      const size=45+20*Math.sin(Math.PI*Math.min(1,p));
+      const size=(f.text==='INFERNO!'?34:31)+4*Math.sin(Math.PI*Math.min(1,p));
       ctx.save();ctx.translate(f.x,f.y);ctx.rotate(Math.sin(p*22)*.08);
-      roundedRect(-155,-37,310,74,20,f.kind==='feverEntry'?'#ffe271':'#ece2f5','#482b70',5);
-      label(f.text,0,3,size,f.kind==='feverEntry'?'#ac2973':'#5f4775');ctx.restore();
+      const bw=f.text==='INFERNO!'?216:188;
+      roundedRect(-bw/2,-32,bw,64,17,f.text==='INFERNO!'?'#6332a2':f.kind==='feverEntry'?'#ffe479':'#d3cee9',
+        f.text==='INFERNO!'?'#ffdb70':'#aa3d78',4);
+      if(f.kind==='feverEntry'){
+        for(let i=0;i<8;i++){
+          const a=i*TAU/8;
+          line(Math.cos(a)*(bw/2+6),Math.sin(a)*39,
+            Math.cos(a)*(bw/2+21),Math.sin(a)*52,
+            f.text==='INFERNO!'?'#e8a0ff':'#ffd17c',3);
+        }
+      }
+      label(f.text,0,2,size,f.text==='INFERNO!'?'#fff1ba':f.kind==='feverEntry'?'#ad4470':'#5f4775');
+      ctx.restore();
     }else if(f.kind==='jumpShout'){
       ctx.translate(f.x,f.y-p*26);
       ctx.rotate(Math.sin(p*20)*.08);
       roundedRect(-92,-23,184,43,12,'#ffe364','#d84386',4);
       label('✦ '+f.text+' ✦',0,-1,18,'#a92874');
     }else if(f.kind==='heavyImpact'){
-      // Punched-in comic burst: briefly covers the centre on big rewards only.
-      const bloom=1+.14*Math.sin(Math.PI*p);
-      ctx.translate(f.x,f.y);ctx.scale(bloom,bloom);ctx.rotate(Math.sin(p*35)*.035);
-      const theme=FEVER_THEMES[CITIES[game?.config.cityIndex||0].id];
-      ctx.beginPath();
-      for(let i=0;i<24;i++){
-        const a=-Math.PI/2+i*TAU/24,r=i%2?100:127;
-        if(i===0)ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r);
-        else ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);
-      }
-      ctx.closePath();ctx.fillStyle='#ffe361';ctx.fill();ctx.strokeStyle='#cc3a8b';ctx.lineWidth=7;ctx.stroke();
-      label(f.text,0,-13,30,'#9a2670');label('PERFECT IMPACT!',0,24,14,'#7e3b6b');
-    }else if(f.kind==='feverConfetti'){
+      ctx.beginPath();ctx.arc(f.x,f.y,12+38*p,0,TAU);
+      ctx.strokeStyle='#ffe38b';ctx.lineWidth=4*(1-p);ctx.stroke();
+
+      }else if(f.kind==='feverConfetti'){
       for(let i=0;i<23;i++){
         const a=TAU*(i/23),d=16+p*(48+(i%4)*15);
         ctx.save();ctx.translate(f.x+Math.cos(a)*d,f.y+Math.sin(a)*d);ctx.rotate(p*9+i);
@@ -1637,106 +1984,104 @@
     }
     ctx.restore();
   }
-  function drawInfernoLights(game){
-    const t=game.sceneTime;
+  function drawFeverLights(game){
+    const t=game.sceneTime,theme=SCENE_THEMES[CITIES[game.config.cityIndex].id],rm=reducedMotion();
     ctx.save();
-    ctx.fillStyle='rgba(10,8,25,.22)';
-    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='rgba(255,218,132,.09)';ctx.fillRect(0,138,W,H-138);
     ctx.globalCompositeOperation='screen';
-    const hues=[18,195,285,52,327];
-    for(let i=0;i<5;i++){
-      const angle=Math.sin(t*1.9+i*1.8)*.45;
-      const originX=28+i*86,originY=82;
-      const endX=originX+Math.sin(angle)*214;
-      const beam=ctx.createLinearGradient(originX,originY,endX,620);
-      beam.addColorStop(0,`hsla(${hues[i]},100%,80%,.68)`);
-      beam.addColorStop(.28,`hsla(${hues[i]},100%,72%,.28)`);
-      beam.addColorStop(1,`hsla(${hues[i]},100%,69%,.03)`);
-      ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(originX,originY);
-      ctx.lineTo(endX-92,700);ctx.lineTo(endX+92,700);ctx.closePath();ctx.fill();
-      circle(originX,originY,8,'rgba(255,255,240,.9)');
+    for(const side of [-1,1]){
+      ctx.beginPath();
+      for(let y=153;y<=650;y+=8){
+        const x=roadCenter(y)+side*(roadHalfWidth(y)+4);
+        if(y===153)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.globalAlpha=.4+(rm?0:.14*Math.sin(t*5));
+      ctx.strokeStyle=side<0?'#ffe6a0':theme[4];ctx.lineWidth=5;
+      ctx.shadowBlur=15;ctx.shadowColor='#f6b65e';ctx.stroke();ctx.shadowBlur=0;
+    }
+    if(!rm)for(let i=0;i<11;i++){
+      const y=148+(i*49+t*43)%410,x=i%2?W-14:12;
+      ctx.globalAlpha=.35+.27*Math.sin(t*3+i);
+      cityPoly([[x,y-6],[x+5,y],[x,y+6],[x-5,y]],i%3===0?theme[4]:i%2?'#ffd77d':'#fff6d9');
     }
     ctx.restore();
   }
-  function drawInfernoOverlay(game){
-    const t=game.sceneTime,theme=CITIES[game.config.cityIndex],flash=.4+.6*Math.abs(Math.sin(t*6));
+  function drawInfernoLights(game){
+    const t=game.sceneTime,theme=SCENE_THEMES[CITIES[game.config.cityIndex].id],rm=reducedMotion();
     ctx.save();
-    for(let i=0;i<24;i++){
-      const x=(i*97+21+(i%2?Math.sin(t*2+i)*20:0))%W;
-      const y=(i*73+Math.sin(t*3+i)*10)%H;
-      ctx.save();ctx.translate(x,y);ctx.rotate(t*2.6+i);
-      ctx.fillStyle=`hsla(${(i*47+t*70)%360},100%,70%,${.35+flash*.35})`;
-      ctx.fillRect(-4,-4,8,8);ctx.restore();
+    ctx.fillStyle='rgba(17,8,42,.145)';ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='screen';
+    const colors=[theme[4],'#ffe88b','#80d9f6','#ef7fc1'];
+    for(let i=0;i<4;i++){
+      const x=37+i*103,ex=x+(rm?0:Math.sin(t*TAU/2.4+i*1.5)*130);
+      const g=ctx.createLinearGradient(x,83,ex,580);
+      g.addColorStop(0,colors[i]);g.addColorStop(.26,colors[i]);g.addColorStop(1,'rgba(40,20,92,0)');
+      ctx.globalAlpha=rm?.13:.18+.07*Math.sin(t*2.2+i);
+      ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(x,82);
+      ctx.lineTo(ex-70,620);ctx.lineTo(ex+70,620);ctx.closePath();ctx.fill();
     }
-    ctx.translate(W/2,H-32+Math.sin(t*14)*3);
-    roundedRect(-165,-26,330,53,12,'#241c55','#fce873',5);
-    label(`🪩 INFERNO × ${game.combo}²! 🔥`,0,0,21,'#ffe87e');
+    for(const side of [-1,1]){
+      ctx.beginPath();
+      for(let y=155;y<=660;y+=8){
+        const x=roadCenter(y)+side*(roadHalfWidth(y)+5);
+        if(y===155)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.globalAlpha=.63;ctx.strokeStyle=side<0?'#f8c96b':'#b17af3';
+      ctx.lineWidth=4;ctx.shadowBlur=15;ctx.shadowColor='#c369f2';ctx.stroke();ctx.shadowBlur=0;
+    }
+    for(let i=0;i<12;i++){
+      const x=i%2?W-12:12,y=160+i*33;
+      ctx.globalAlpha=rm?.5:.55+.4*Math.sin(t*5+i);
+      circle(x,y,3.3,colors[i%4]);
+    }
+    ctx.restore();
+  }
+    function drawInfernoOverlay(game){
+    const t=game.sceneTime,rm=reducedMotion();
+    ctx.save();ctx.globalCompositeOperation='screen';
+    for(let i=0;i<4;i++){
+      const x=i%2?W-13:13,y=i<2?169:602;
+      ctx.globalAlpha=rm?.6:.57+.2*Math.sin(t*4.2+i);
+      for(let j=0;j<6;j++){
+        const a=j*TAU/6+(rm?0:t*.35);
+        line(x+Math.cos(a)*5,y+Math.sin(a)*5,
+          x+Math.cos(a)*17,y+Math.sin(a)*17,j%2?'#ffe38a':'#d685fa',3);
+      }
+    }
     ctx.restore();
   }
   function drawFeverFrame(game){
-    const city=CITIES[game.config.cityIndex],theme=FEVER_THEMES[city.id];
-    const t=game.sceneTime,impact=clamp(game.feverImpact/.68,0,1),pulse=.5+.5*Math.sin(t*13);
-    const shakeX=Math.sin(game.impactClock*152)*impact*8;
-    const shakeY=Math.cos(game.impactClock*117)*impact*6;
-    ctx.save();ctx.translate(shakeX,shakeY);
-    // Neon outer border and large manga speed streaks, leaving the centre clear.
-    ctx.shadowColor=city.color;ctx.shadowBlur=20+impact*23;
-    roundedRect(5,7,W-10,H-14,21,null,'#fefcda',12+impact*6);
-    roundedRect(11,13,W-22,H-26,17,null,city.color,6+impact*3);
-    ctx.shadowBlur=0;
-    ctx.save();ctx.globalAlpha=.84;
+    const t=game.sceneTime,inferno=game.inferno,rm=reducedMotion();
+    const theme=SCENE_THEMES[CITIES[game.config.cityIndex].id];
+    const pulse=rm?1:.88+.12*Math.sin(t*TAU/(inferno?1.7:.85));
+    const primary=inferno?'#ffe884':'#ffe9a3',secondary=inferno?'#b569f7':theme[4];
+    ctx.save();ctx.globalAlpha=.94;ctx.shadowColor=secondary;ctx.shadowBlur=inferno?21:14;
+    roundedRect(6,7,W-12,H-14,20,null,primary,(inferno?6:5)*pulse);
+    ctx.shadowBlur=0;roundedRect(14,15,W-28,H-30,16,null,secondary,inferno?3.6:2.7);
     for(let side=0;side<2;side++){
-      const edge=side?W-1:1,dir=side?-1:1;
-      for(let i=0;i<11;i++){
-        const y=(i*72+(t*58)%72)-31,spread=18+(i%3)*7+impact*12;
-        ctx.beginPath();ctx.moveTo(edge,y-15);ctx.lineTo(edge+dir*spread,y-5);
-        ctx.lineTo(edge+dir*5,y+9);ctx.closePath();
-        ctx.fillStyle=i%3===0?'#ffe45f':i%3===1?city.color:'#fc74b7';ctx.fill();
+      const edge=side?W-2:2,dir=side?-1:1;
+      for(let i=0;i<10;i++){
+        const y=155+(i*61+(rm?0:t*(inferno?78:62))%61);
+        ctx.globalAlpha=.38+.19*pulse;
+        cityPoly([[edge,y-15],[edge+dir*(inferno?26:22),y-4],[edge+dir*5,y+12]],
+          i%3===0?primary:i%3===1?secondary:inferno?'#81e4fb':'#f8b86b');
       }
-    }
-    ctx.restore();
-    for(let i=0;i<6;i++){
-      const y=113+i*88,side=i%2,xx=side?W-24:24;
-      ctx.save();ctx.translate(xx,y);ctx.rotate((side?1:-1)*(.1+Math.sin(t*12+i)*.10));
-      roundedRect(-18,-21,36,42,10,i%2?'#fff2a4':'#fff8e3','#8e3977',3.2);
-      label(theme.motifs[i%theme.motifs.length],0,0,20,city.color);
-      ctx.restore();
-    }
-    // Flame-like burst corners and moving city emblems.
-    for(const corner of [[33,91],[W-33,92],[31,H-92],[W-32,H-96]]){
-      const [x,y]=corner;const twirl=Math.sin(t*11+x)*.16;
-      ctx.save();ctx.translate(x,y);ctx.rotate(twirl);
-      for(let j=0;j<8;j++){
-        const a=j*TAU/8,r=22+9*pulse+impact*15;
-        line(Math.cos(a)*11,Math.sin(a)*11,Math.cos(a)*r,Math.sin(a)*r,
-          j%2?'#fff38a':'#f15ba6',3.4+impact*2);
+      for(let i=0;i<5;i++){
+        const y=185+i*94,x=side?W-17:17;
+        ctx.globalAlpha=.72;ctx.save();ctx.translate(x,y);
+        if(!rm)ctx.rotate(Math.sin(t*3+i)*.11);
+        ctx.fillStyle=i%2?primary:secondary;ctx.beginPath();
+        for(let j=0;j<8;j++){
+          const a=j*TAU/8,r=j%2?4:inferno?13:11;
+          if(j===0)ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r);
+          else ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);
+        }
+        ctx.closePath();ctx.fill();ctx.restore();
       }
-      label('✦',0,0,23+impact*5,'#ffcf50');ctx.restore();
-    }
-    // Fever announcement now lives above the scene, replacing the HUD meter.
-    // Keep the city-specific border, fireworks and lower cheer plaque.
-    ctx.save();ctx.translate(W/2,H-31+Math.sin(t*10)*2);
-    roundedRect(-163,-27,326,55,12,'#ffda56','#9b3179',5);
-    label(`${theme.motifs[0]}  ${game.combo} COMBO!  ${theme.motifs[2]}`,0,-7,19,'#8b2673');
-    label(`${city.landmark}  ·  MORE POWER!`,0,14,10,'#874e6c');ctx.restore();
-    // Diagonal shout panels and occasional flash, but no persistent central mask.
-    for(const [x,y,rot,msg] of [[57,205,-.19,'WOW!'],[W-58,475,.18,'BAM!']]){
-      ctx.save();ctx.translate(x,y);ctx.rotate(rot+Math.sin(t*13)*.05);
-      roundedRect(-34,-14,68,28,9,'#ffea64','#9e2b81',3);
-      label(msg,0,0,16,'#9a286d');ctx.restore();
-    }
-    if(impact>.25){
-      ctx.save();ctx.globalAlpha=impact*.45;
-      for(let i=0;i<9;i++){
-        const x=i%2?W-12:12,y=100+i*57;
-        line(x,y,x+(i%2?-1:1)*(35+impact*32),y-28,'#fff6b0',2.5);
-      }
-      ctx.restore();
     }
     ctx.restore();
   }
-
-  function drawCountdown(text,isGo){
+    function drawCountdown(text,isGo){
     ctx.fillStyle=isGo?'rgba(255,236,158,.16)':'rgba(26,55,66,.24)';ctx.fillRect(0,0,W,H);
     ctx.save();ctx.translate(W/2,H/2-17);
     if(!isGo){circle(0,0,83,'#fff5c9','#304f54',5);label(text,0,6,100,'#eb7f58');}
@@ -2081,6 +2426,7 @@
 
   // Debug mode is hidden in the race-tile sequence and never persists progress.
   window.SnackDashDebug={getGame:()=>game,getPrefs:()=>({...prefs}),getUnlockedCities:()=>unlockedCities,
+    getVolunteerScene:cityIndex=>({...volunteerScene(cityIndex),hand:volunteerHandPoint(cityIndex)}),
     getSelectedCity:()=>selectedCity,isDebug:()=>debugMode,setDebug:setDebugMode,
     getPendingInvitation:()=>invitationOpenIndex,
     getFullscreenState:fullscreenIsActive,
