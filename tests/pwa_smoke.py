@@ -1,6 +1,7 @@
 """Verify the published app over HTTP, including an offline cold reload."""
 import asyncio
 import json
+import struct
 import threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -13,8 +14,13 @@ async def check(url):
     manifest = json.loads((SITE / 'manifest.webmanifest').read_text())
     assert manifest['display'] == 'standalone'
     assert manifest['scope'] == manifest['start_url'] == './'
-    for icon in manifest['icons']:
-        assert (SITE / icon['src']).read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
+    assert {i['purpose'] for i in manifest['icons']} == {'any', 'maskable'}
+    for item in manifest['icons'] + [{'src':'apple-touch-icon.png','sizes':'180x180'}]:
+        data = (SITE / item['src']).read_bytes()
+        assert data.startswith(b'\x89PNG\r\n\x1a\n')
+        assert struct.unpack('>II', data[16:24]) == tuple(map(int,item['sizes'].split('x')))
+    assert 'apple-touch-icon.png' in (SITE / 'index.html').read_text()
+    assert './icon-maskable-512.png' in (SITE / 'sw.js').read_text()
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True, args=['--no-sandbox'])
         context = await browser.new_context(viewport={'width':390,'height':844})
