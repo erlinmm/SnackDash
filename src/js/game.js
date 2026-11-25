@@ -52,6 +52,31 @@
     newyork:['grid','tree','subway','manhattan','#f9c965','#e6e9ed','#c6c7c3','#566277'],
     sydney:['sand','eucalyptus','harbour','opera','#8bdce9','#d9f0f1','#e8dcc1','#527f91']
   });
+
+  // City-by-city volunteer composition, in existing 390 × 700 canvas units.
+  // All dependent hand/flight/feedback positions derive from this one source.
+  const VOLUNTEER_SCENES=Object.freeze({
+    tokyo:     {x:90,y:214,shirt:'#167d98'},
+    seoul:     {x:92,y:214,shirt:'#ba406d'},
+    london:    {x:92,y:216,shirt:'#246fa7'},
+    berlin:    {x:102,y:202,shirt:'#ce6451'},
+    amsterdam: {x:90,y:216,shirt:'#2475b9'},
+    paris:     {x:92,y:214,shirt:'#168889'},
+    boston:    {x:102,y:202,shirt:'#2785b8'},
+    chicago:   {x:98,y:208,shirt:'#e29a38'},
+    newyork:   {x:90,y:214,shirt:'#df6655'},
+    sydney:    {x:92,y:216,shirt:'#c85d43'}
+  });
+  function volunteerScene(cityIndex){
+    const city=CITIES[cityIndex??game?.config?.cityIndex??0];
+    return VOLUNTEER_SCENES[city?.id]||VOLUNTEER_SCENES.tokyo;
+  }
+  function volunteerHandPoint(cityIndex){
+    const scene=volunteerScene(cityIndex);
+    // Exact neutral held supply position inside drawVolunteer: (38,-26) × .57.
+    return {x:scene.x+38*.57,y:scene.y-26*.57};
+  }
+
   const reducedMotion=()=>typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function cityPoly(points,fill,stroke,width=2){
     ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));
@@ -327,18 +352,36 @@
     ctx.restore();
   }
   function drawCityDetails(time){
-    const city=CITIES[game?.config?.cityIndex||0];
-    const theme=SCENE_THEMES[city.id]||SCENE_THEMES.tokyo;
+    const index=game?.config?.cityIndex||0;
+    const city=CITIES[index],theme=SCENE_THEMES[city.id]||SCENE_THEMES.tokyo;
+    const person=volunteerScene(index);
     drawCityPavement(theme);
-    drawCityLandmark(theme);
-    // The foreground features have a strict visible-verge clipping mask.
-    ctx.save();ctx.beginPath();ctx.moveTo(0,255);
-    for(let y=255;y<=480;y+=5){
-      const edge=Math.max(0,roadCenter(y)-roadHalfWidth(y)-7);
-      ctx.lineTo(edge,y);
+
+    // Reserve negative space around head, torso, arms and held supply.
+    // All painted feature shapes are excluded, not the pavement material.
+    ctx.save();ctx.beginPath();ctx.rect(0,139,W,H-139);
+    ctx.rect(person.x-34,person.y-60,98,119);
+    ctx.clip('evenodd');
+
+    // A single compact skyline at the far LEFT. It stays above the plant
+    // and behind the volunteer; the previous 150px-wide skyline hid the head.
+    ctx.save();ctx.translate(-8,92);ctx.scale(.5,.6);
+    drawCityLandmark(theme);ctx.restore();
+
+    // Split planting and furniture into separate depth bands, not overlapping
+    // full-size illustrations. Negative space matters more than object count.
+    ctx.save();ctx.beginPath();ctx.moveTo(0,237);
+    for(let y=242;y<=480;y+=5){
+      ctx.lineTo(Math.max(0,roadCenter(y)-roadHalfWidth(y)-7),y);
     }
     ctx.lineTo(0,480);ctx.closePath();ctx.clip();
-    drawCityPlants(theme,time);drawCityFurniture(theme);
+
+    ctx.save();ctx.translate(-9,67);ctx.scale(.68,.7);
+    drawCityPlants(theme,time);ctx.restore();
+
+    ctx.save();ctx.translate(17,119);ctx.scale(.64,.68);
+    drawCityFurniture(theme);ctx.restore();
+    ctx.restore();
     ctx.restore();
   }
 
@@ -1395,10 +1438,11 @@
         const time=this.celebrationTime;
         if(time>.72 && time<2.42){
           const p=(time-.72)/1.70;
-          const x=120+Math.sin(p*Math.PI)*33;
-          const y=170-Math.sin(p*Math.PI)*100;
+          const hand=volunteerHandPoint(this.config.cityIndex);
+          const x=hand.x+Math.sin(p*Math.PI)*33;
+          const y=hand.y-16-Math.sin(p*Math.PI)*100;
           drawSupply({type:'water',number:this.supplies.held.number},x,y,27,p*Math.PI*5,true);
-          if(p>.87)label('WHAT A CATCH!',121,304,12,'#1b7c78');
+          if(p>.87)label('WHAT A CATCH!',hand.x,304,12,'#1b7c78');
         }
       }
       if(this.throwing)drawThrownSupply(this.throwing,this.runners,this);
@@ -1629,10 +1673,9 @@
     const pop=Math.sin(Math.PI*p);
     const fade=Math.pow(1-p,.75);
     const mode=cue.mode||'normal';
-    // The hand is at (102,202) + the volunteer's 0.57x transform.
-    // Effects radiate up to ~100 canvas units around that fixed location;
-    // the drawing itself remains fixed and the new supply is rendered above.
-    const cx=124,cy=187-5*pop;
+    // The swap cue follows the same city-specific held supply as the volunteer.
+    const hand=volunteerHandPoint(game?.config?.cityIndex||0);
+    const cx=hand.x,cy=hand.y-5*pop;
     const cold=mode==='inferno',hot=mode==='fever';
     const starColors=cold?['#fff7a0','#ff7bbd','#76ebff','#dba0ff']:
       hot?['#fff1a5','#ffd355','#ff9d46','#ff7069']:
@@ -1640,7 +1683,7 @@
     ctx.save();
     // Keep big bursts outside the finger-covered tray numbers and away
     // from most runners. No layout, character, or hitbox coordinates move.
-    ctx.beginPath();ctx.rect(5,137,264,176);ctx.clip();
+    ctx.beginPath();ctx.rect(3,139,263,189);ctx.clip();
     // Expand a subtle aura away from the hand, without covering its digits.
     ctx.globalAlpha=(cold?.38:hot?.30:.24)*fade;
     circle(cx,cy,44+34*p,cold?'#f4a2ff':hot?'#ffb24d':'#ffe9a0');
@@ -1715,7 +1758,8 @@
   }
 
   function drawVolunteer(t,throwing,phase,celebrationTime,held,level,fever,swapCue){
-    const x=102,y=202;
+    const scene=volunteerScene(game?.config?.cityIndex||0);
+    const {x,y}=scene;
     ctx.save();ctx.translate(x,y);
     let jump=0,lean=0,arm=0;
     const swapP=swapCue&&!throwing?clamp(swapCue.age/swapCue.duration,0,1):1;
@@ -1731,6 +1775,13 @@
     // The volunteer gives a tiny approving nod and looks towards the new snack.
     if(swapPulse>0)lean+=.065*swapPulse;
     ctx.translate(0,jump+(fever&&!throwing?-Math.abs(Math.sin(t*11))*4:0));ctx.rotate(lean);ctx.scale(.57,.57);
+    // Thin cream separation contour behind the dark head/torso silhouette.
+    // It is attached to the character, not a spotlight over runner numbers.
+    ctx.save();
+    ctx.beginPath();ctx.ellipse(0,-37,28,29,0,0,TAU);
+    ctx.strokeStyle='#fff9eb';ctx.lineWidth=7;ctx.stroke();
+    roundedRect(-28,-19,57,56,15,null,'#fff8ed',6);
+    ctx.restore();
     // Ground shadow and floppy shoes.
     ctx.fillStyle='rgba(57,78,72,.19)';ctx.beginPath();ctx.ellipse(0,56-jump*.2,30,7,0,0,TAU);ctx.fill();
     const step=isDancing?Math.sin(celebrationTime*11)*8:Math.sin(t*2)*1.3;
@@ -1740,8 +1791,8 @@
     const reaching=throwing&&throwing.elapsed>.41 && throwing.elapsed<.74;
     if(reaching){line(-21,-3,-43,14,'#e8b68d',10);line(-43,14,-41,29,'#e8b68d',9);}
     else line(-20,-3,-29,19,'#e8b68d',10);
-    roundedRect(-25,-16,51,48,13,'#f9a563','#654b4c',3);
-    roundedRect(-14,8,28,20,4,'#f7e3b3','#6c5552',2);
+    roundedRect(-25,-16,51,48,13,scene.shirt,'#333d4e',4.1);
+    roundedRect(-14,8,28,20,4,'#fff6d9','#344254',2.8);
     label('Volunteer',0,19,6.7,'#a05d44');
     // An extremely enthusiastic volunteer throwing arm.
     if(isDancing){
@@ -1762,10 +1813,10 @@
       line(21,-4,36,-11,'#e8b68d',9);
       line(36,-11,34,-22,'#e8b68d',8);
     }
-    ctx.beginPath();ctx.ellipse(0,-37,24,25,0,0,TAU);ctx.fillStyle='#edbd91';ctx.fill();ctx.strokeStyle='#544b4d';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.beginPath();ctx.ellipse(0,-37,24,25,0,0,TAU);ctx.fillStyle='#edbd91';ctx.fill();ctx.strokeStyle='#343b47';ctx.lineWidth=4.2;ctx.stroke();
     // Cartoon orange cap, outsized compared with the face.
-    ctx.beginPath();ctx.arc(0,-43,24,Math.PI,TAU);ctx.lineTo(24,-40);ctx.lineTo(-24,-40);ctx.closePath();ctx.fillStyle='#eb6a57';ctx.fill();ctx.strokeStyle='#805250';ctx.lineWidth=2;ctx.stroke();
-    roundedRect(-24,-45,47,7,4,'#f89464','#805250',1.7);
+    ctx.beginPath();ctx.arc(0,-43,24,Math.PI,TAU);ctx.lineTo(24,-40);ctx.lineTo(-24,-40);ctx.closePath();ctx.fillStyle='#eb6a57';ctx.fill();ctx.strokeStyle='#343b47';ctx.lineWidth=3.5;ctx.stroke();
+    roundedRect(-24,-45,47,7,4,'#f89464','#343b47',2.8);
     const closed=isDancing;
     if(closed){
       ctx.beginPath();ctx.arc(-8,-33,4,Math.PI*1.13,Math.PI*1.87);ctx.arc(8,-33,4,Math.PI*1.13,Math.PI*1.87);ctx.strokeStyle='#514149';ctx.lineWidth=2.4;ctx.stroke();
@@ -1815,7 +1866,8 @@
     const endY=runner.y+runnerVisualOffset(runner)+(matches(t.supply.number,runner.number)?-12:-38)*runnerScale(runner);
     const inferno=t.feverAtRelease&&game.inferno,fever=t.feverAtRelease&&!inferno;
     const arc=t.feverAtRelease?108:68;
-    const point=q=>[mix(117,endX,q),mix(188,endY,q)-Math.sin(q*Math.PI)*arc];
+    const hand=volunteerHandPoint(game.config.cityIndex);
+    const point=q=>[mix(hand.x,endX,q),mix(hand.y,endY,q)-Math.sin(q*Math.PI)*arc];
     const [x,y]=point(f);
     ctx.save();ctx.globalCompositeOperation='screen';ctx.lineCap='round';
     if(t.feverAtRelease){
@@ -2373,6 +2425,7 @@
 
   // Debug mode is hidden in the race-tile sequence and never persists progress.
   window.SnackDashDebug={getGame:()=>game,getPrefs:()=>({...prefs}),getUnlockedCities:()=>unlockedCities,
+    getVolunteerScene:cityIndex=>({...volunteerScene(cityIndex),hand:volunteerHandPoint(cityIndex)}),
     getSelectedCity:()=>selectedCity,isDebug:()=>debugMode,setDebug:setDebugMode,
     getPendingInvitation:()=>invitationOpenIndex,
     getFullscreenState:fullscreenIsActive,
