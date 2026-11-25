@@ -106,7 +106,7 @@ async def check_fullscreen_flow(browser):
     assert restarted==initial, restarted
 
     # The top-left game back control returns to the normal level selector.
-    await page.locator('#backBtn').click()
+    await page.locator('#levelsBtn').click()
     menu=await page.evaluate("({...window.__fullscreenTest})")
     assert menu=={'requests':1,'exits':1,'active':False}, menu
     assert await page.locator('#menuScreen').is_visible()
