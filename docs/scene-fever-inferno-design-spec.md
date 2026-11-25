@@ -232,6 +232,7 @@ Additional user-approved visual requirements supersede the earlier fixed-volunte
 - Per city, allow a small left/down offset of the volunteer; keep all touch targets and the queue table unchanged.
 - Use one `VOLUNTEER_SCENES` location and colour record per city. Derive the supply-hand position and airborne throw start, swap celebration origin and celebration throw path from this same anchor.
 - Increase the volunteer head, cap, clothing and number-panel contrast without hiding the face or the digits.
+- The volunteer uses a 0.64 scene scale (increased from 0.57) and an explicit bright silhouette separation stroke. Keep throw, hand and swap positions in sync if scaling changes.
 - Do not stack city silhouettes, foliage, street furniture and the volunteer in the same space. Separate landmark, plant and street-furniture bands; deliberately leave negative space around the volunteer; where a layout remains crowded, omit a minor feature rather than layering it.
 - Avoid weakening the Fever and Inferno presentation to solve occlusion; energy effects remain visually distinct and render behind readable number-bearing sprites.
 
