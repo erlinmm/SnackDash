@@ -282,6 +282,60 @@ async def check_city_invitation(browser):
     await context.close()
 
 
+
+async def check_city_mode_rendering(browser):
+    """Exercise every city with normal / Fever / Inferno Canvas paths."""
+    page=await browser.new_page(viewport={'width':414,'height':896},device_scale_factor=1)
+    errors=[]
+    page.on('pageerror',lambda e: errors.append(str(e)))
+    await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
+    # The built-in debug code opens all city choices without changing saves.
+    for race in [1,9,8,6]:
+        await page.locator('.level-tile').nth(race-1).click()
+    assert await page.locator('.city-stop.open').count()==10
+    paints=[]
+    for city in range(10):
+        await page.locator('.city-stop').nth(city).click()
+        await page.locator('#startBtn').click()
+        result=await page.evaluate("""(city) => {
+          const g=window.SnackDashDebug.getGame();
+          if(g.config.cityIndex!==city)throw Error('Wrong city scene');
+          g.phase='playing';g.goFlash=0;g.sceneTime=5;
+          const colors=[];
+          for(const mode of ['normal','fever','inferno']){
+            g.fever=mode!=='normal';g.inferno=mode==='inferno';
+            g.combo=mode==='normal'?0:mode==='fever'?7:12;
+            g.effects=[];
+            if(mode!=='normal'){
+              g.popEffect({kind:'hitBurst',x:275,y:430,tier:3,mode,life:.5});
+              g.popEffect({kind:'score',x:275,y:385,text:'+49',size:34,color:'#ffdd74',life:.5});
+            }
+            g.syncHUD();g.draw();
+            const pix=document.querySelector('#scene').getContext('2d').getImageData(20,340,1,1).data;
+            colors.push([...pix]);
+          }
+          return colors;
+        }""",city)
+        assert len(result)==3,(city,result)
+        paints.append(tuple(result[0]))
+        await page.locator('#levelsBtn').click()
+    assert not errors,errors
+    # A wide sample of pavements should not all look identical.
+    assert len(set(paints))>=5,paints
+    # Reduced motion must not move the stage during a mega hit.
+    await page.locator('.city-stop').nth(0).click()
+    await page.locator('#startBtn').click()
+    await page.emulate_media(reduced_motion='reduce')
+    calm=await page.evaluate("""() => {
+      const g=window.SnackDashDebug.getGame();
+      g.phase='playing';g.fever=true;g.inferno=true;
+      g.shakeRemaining=.12;g.shakePower=2.7;g.draw();
+      return document.getElementById('sceneShell').style.transform;
+    }""")
+    assert calm=='',calm
+    assert not errors,errors
+    await page.close()
+
 async def main():
     async with async_playwright() as p:
         browser=await p.chromium.launch(headless=True, executable_path=os.environ.get('PLAYWRIGHT_CHROMIUM_EXECUTABLE') or None, args=['--no-sandbox'])
@@ -292,6 +346,8 @@ async def main():
         print('Fullscreen flow passed: menu/game toggles, Serve, levels, restart')
         await check_city_invitation(browser)
         print('City invitations passed: 8/10, 9/10, restart, and acknowledgment')
+        await check_city_mode_rendering(browser)
+        print('Ten city / three-mode rendering and reduced motion passed')
         await browser.close()
 
 
