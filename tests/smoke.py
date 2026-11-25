@@ -184,7 +184,7 @@ async def check_city_invitation(browser):
     }""")
     assert 'CITY UNLOCKED' not in await page.locator('#resultHeading').inner_text()
     assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==1
-    await page.locator('#levelsBtn').click()
+    await page.locator('#backBtn').click()
     assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==2
     assert await page.locator('#cityInvitationOverlay').is_visible()
     assert await page.locator('#cityInvitationName').inner_text()=='SEOUL'
@@ -206,7 +206,9 @@ async def check_city_invitation(browser):
     # A player who wins the ninth race and quits without returning to levels
     # receives the invitation on the next launch.
     page=await context.new_page()
-    await page.add_init_script("""() => {
+    await page.add_init_script("""(() => {
+      if(sessionStorage.getItem('invitationTestSeeded'))return;
+      sessionStorage.setItem('invitationTestSeeded','1');
       const best={};
       for(let i=11;i<=19;i++)best[i]=10;
       localStorage.setItem('snackDashSaveV2',JSON.stringify({
@@ -214,7 +216,7 @@ async def check_city_invitation(browser):
         selectedCity:1,sound:true,unlockedCities:2,
         invitationsAcknowledged:[1]
       }));
-    }""")
+    })()""")
     await page.goto('https://snackdash.example/')
     assert await page.evaluate('window.SnackDashDebug.getUnlockedCities()')==3
     assert await page.locator('#cityInvitationOverlay').is_visible()
