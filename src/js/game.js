@@ -1379,6 +1379,7 @@
       drawGround(this.sceneTime);
       drawRoad(this.sceneTime);
       drawScenery(this.sceneTime,this.config.cityIndex);
+      if(this.fever&&!this.inferno)drawFeverLights(this);
       if(this.inferno)drawInfernoLights(this);
       // Distant runners are drawn first. A departing runner remains visible at
       // the bottom without participating in number matching.
@@ -1878,29 +1879,101 @@
     }
     ctx.restore();
   }
-  function drawInfernoLights(game){
-    const t=game.sceneTime,theme=SCENE_THEMES[CITIES[game.config.cityIndex].id];
-    ctx.save();ctx.fillStyle='rgba(17,11,40,.14)';ctx.fillRect(0,0,W,H);
+  function drawFeverLights(game){
+    const t=game.sceneTime,theme=SCENE_THEMES[CITIES[game.config.cityIndex].id],rm=reducedMotion();
+    ctx.save();
+    ctx.fillStyle='rgba(255,218,132,.09)';ctx.fillRect(0,138,W,H-138);
     ctx.globalCompositeOperation='screen';
+    for(const side of [-1,1]){
+      ctx.beginPath();
+      for(let y=153;y<=650;y+=8){
+        const x=roadCenter(y)+side*(roadHalfWidth(y)+4);
+        if(y===153)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.globalAlpha=.4+(rm?0:.14*Math.sin(t*5));
+      ctx.strokeStyle=side<0?'#ffe6a0':theme[4];ctx.lineWidth=5;
+      ctx.shadowBlur=15;ctx.shadowColor='#f6b65e';ctx.stroke();ctx.shadowBlur=0;
+    }
+    if(!rm)for(let i=0;i<11;i++){
+      const y=148+(i*49+t*43)%410,x=i%2?W-14:12;
+      ctx.globalAlpha=.35+.27*Math.sin(t*3+i);
+      cityPoly([[x,y-6],[x+5,y],[x,y+6],[x-5,y]],i%3===0?theme[4]:i%2?'#ffd77d':'#fff6d9');
+    }
+    ctx.restore();
+  }
+  function drawInfernoLights(game){
+    const t=game.sceneTime,theme=SCENE_THEMES[CITIES[game.config.cityIndex].id],rm=reducedMotion();
+    ctx.save();
+    ctx.fillStyle='rgba(17,8,42,.145)';ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='screen';
+    const colors=[theme[4],'#ffe88b','#80d9f6','#ef7fc1'];
     for(let i=0;i<4;i++){
-      const x=28+i*105,ex=x+Math.sin(t*2.3+i)*90;
-      const g=ctx.createLinearGradient(x,70,ex,470);
-      g.addColorStop(0,theme[4]);g.addColorStop(1,'rgba(110,120,207,0)');
-      ctx.globalAlpha=.13;ctx.fillStyle=g;ctx.beginPath();
-      ctx.moveTo(x,72);ctx.lineTo(ex-45,490);ctx.lineTo(ex+45,490);ctx.closePath();ctx.fill();
+      const x=37+i*103,ex=x+(rm?0:Math.sin(t*TAU/2.4+i*1.5)*130);
+      const g=ctx.createLinearGradient(x,83,ex,580);
+      g.addColorStop(0,colors[i]);g.addColorStop(.26,colors[i]);g.addColorStop(1,'rgba(40,20,92,0)');
+      ctx.globalAlpha=rm?.13:.18+.07*Math.sin(t*2.2+i);
+      ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(x,82);
+      ctx.lineTo(ex-70,620);ctx.lineTo(ex+70,620);ctx.closePath();ctx.fill();
+    }
+    for(const side of [-1,1]){
+      ctx.beginPath();
+      for(let y=155;y<=660;y+=8){
+        const x=roadCenter(y)+side*(roadHalfWidth(y)+5);
+        if(y===155)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.globalAlpha=.63;ctx.strokeStyle=side<0?'#f8c96b':'#b17af3';
+      ctx.lineWidth=4;ctx.shadowBlur=15;ctx.shadowColor='#c369f2';ctx.stroke();ctx.shadowBlur=0;
+    }
+    for(let i=0;i<12;i++){
+      const x=i%2?W-12:12,y=160+i*33;
+      ctx.globalAlpha=rm?.5:.55+.4*Math.sin(t*5+i);
+      circle(x,y,3.3,colors[i%4]);
     }
     ctx.restore();
   }
     function drawInfernoOverlay(game){
-    ctx.save();roundedRect(112,H-58,166,34,12,'#281f4f','#dfba63',2);
-    label('INFERNO  '+game.combo+'²',195,H-40,19,'#ffe4a0');ctx.restore();
+    const t=game.sceneTime,rm=reducedMotion();
+    ctx.save();ctx.globalCompositeOperation='screen';
+    for(let i=0;i<4;i++){
+      const x=i%2?W-13:13,y=i<2?169:602;
+      ctx.globalAlpha=rm?.6:.57+.2*Math.sin(t*4.2+i);
+      for(let j=0;j<6;j++){
+        const a=j*TAU/6+(rm?0:t*.35);
+        line(x+Math.cos(a)*5,y+Math.sin(a)*5,
+          x+Math.cos(a)*17,y+Math.sin(a)*17,j%2?'#ffe38a':'#d685fa',3);
+      }
+    }
+    ctx.restore();
   }
-    function drawFeverFrame(game){
+  function drawFeverFrame(game){
+    const t=game.sceneTime,inferno=game.inferno,rm=reducedMotion();
     const theme=SCENE_THEMES[CITIES[game.config.cityIndex].id];
-    ctx.save();ctx.globalAlpha=.54;roundedRect(7,9,W-14,H-18,18,null,theme[4],3);
-    ctx.globalAlpha=1;
-    if(!game.inferno){roundedRect(128,H-57,134,33,12,'#ffe8ad','#c99551',2);
-      label('FEVER  '+game.combo+'×',195,H-40,19,'#995c46');}
+    const pulse=rm?1:.88+.12*Math.sin(t*TAU/(inferno?1.7:.85));
+    const primary=inferno?'#ffe884':'#ffe9a3',secondary=inferno?'#b569f7':theme[4];
+    ctx.save();ctx.globalAlpha=.94;ctx.shadowColor=secondary;ctx.shadowBlur=inferno?21:14;
+    roundedRect(6,7,W-12,H-14,20,null,primary,(inferno?6:5)*pulse);
+    ctx.shadowBlur=0;roundedRect(14,15,W-28,H-30,16,null,secondary,inferno?3.6:2.7);
+    for(let side=0;side<2;side++){
+      const edge=side?W-2:2,dir=side?-1:1;
+      for(let i=0;i<10;i++){
+        const y=155+(i*61+(rm?0:t*(inferno?78:62))%61);
+        ctx.globalAlpha=.38+.19*pulse;
+        cityPoly([[edge,y-15],[edge+dir*(inferno?26:22),y-4],[edge+dir*5,y+12]],
+          i%3===0?primary:i%3===1?secondary:inferno?'#81e4fb':'#f8b86b');
+      }
+      for(let i=0;i<5;i++){
+        const y=185+i*94,x=side?W-17:17;
+        ctx.globalAlpha=.72;ctx.save();ctx.translate(x,y);
+        if(!rm)ctx.rotate(Math.sin(t*3+i)*.11);
+        ctx.fillStyle=i%2?primary:secondary;ctx.beginPath();
+        for(let j=0;j<8;j++){
+          const a=j*TAU/8,r=j%2?4:inferno?13:11;
+          if(j===0)ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r);
+          else ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);
+        }
+        ctx.closePath();ctx.fill();ctx.restore();
+      }
+    }
     ctx.restore();
   }
     function drawCountdown(text,isGo){
