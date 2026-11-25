@@ -1834,7 +1834,7 @@
       b.innerHTML=`<span class="city-route-dot" aria-hidden="true">●</span>
         <span class="city-postcard"><span class="city-postmark">${num} / 10</span><span class="city-emblem">${open?city.icon:'🔒'}</span>
         <span class="city-skyline">${city.landmark}</span></span>
-        <span class="city-name">${city.name}</span><span class="city-country">${open?city.subtitle:'Finish the previous city'}</span>
+        <span class="city-name">${city.name}</span><span class="city-country">${open?city.subtitle:'Earn 9 stamps in the previous city'}</span>
         <span class="city-status">${debugMode?'🛠 DEBUG':!open?'🔒 LOCKED':done===10?'★ STAMPED':`${done} / 10 STAMPS`}</span>`;
       if(open)b.addEventListener('click',()=>{
         selectedCity=idx;
