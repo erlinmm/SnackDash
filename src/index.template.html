@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff8ec">
+  <meta name="description" content="Snack Dash! A silly marathon supply-station maths game. Find a runner whose number divides your supply, or vice versa.">
+  <title>Snack Dash! V26 — Natural Arrivals & Learning Loops</title>
+  <!-- BUILD:CSS -->
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">🍌</span>
+        <div>
+          <div class="brand-title">SNACK <span>DASH!</span></div>
+          <div class="brand-tag">THE MARATHON MATHS GAME</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="debug-exit-btn hidden" id="exitDebugBtn" type="button" aria-label="Exit debug mode">EXIT DEBUG ✕</button>
+        <button class="icon-btn" id="soundBtn" type="button" title="Turn sound off" aria-label="Turn sound off">🔊</button>
+      </div>
+    </header>
+
+    <section class="menu" id="menuScreen" aria-label="Choose a level">
+      <div class="debug-indicator hidden" id="debugIndicator">🛠 DEBUG MODE · ALL 100 RACES OPEN · RESULTS NOT SAVED</div>
+      <div class="intro-card">
+        <div class="intro-copy">
+          <span class="eyebrow">THE BIGGEST LITTLE SNACK TOUR</span>
+          <h1>100 races.<br><em>One snack hero!</em></h1>
+          <p>Ten cities. A hundred races. Five catches light FEVER; ten ignite INFERNO!</p>
+          <div class="rules-chips">
+            <span>🔥 <b>5</b> → FEVER · <b>10</b> → INFERNO!</span>
+            <span>🪩 <b>INFERNO</b> Combo² bonus!</span>
+            <span>🏆 Goal <b>10 points</b></span>
+          </div>
+        </div>
+        <div class="intro-illustration" aria-hidden="true">
+          <div class="road-streak a"></div><div class="road-streak b"></div>
+          <span class="intro-runner r1">🏃🏾‍♀️</span>
+          <span class="intro-runner r2">🏃🏻</span>
+          <span class="intro-snack">🍌<small>8</small></span>
+          <span class="intro-spark">✦</span>
+          <span class="intro-numbers">24 ÷ 8 = 3!</span>
+        </div>
+      </div>
+
+      <section class="instructions" aria-label="How to play">
+        <div class="instruction"><span class="instruction-emoji">1️⃣</span><span>Your volunteer picks up supplies. <b>Tap a table item to swap it</b> with the one in hand.</span></div>
+        <div class="instruction"><span class="instruction-emoji">2️⃣</span><span><b>Tap a runner</b> if either number divides the other exactly.</span></div>
+        <div class="instruction"><span class="instruction-emoji">3️⃣</span><span><b>5 good catches → FEVER; 10 → INFERNO!</b> FEVER multiplies by Combo; INFERNO multiplies by Combo squared. Wrong throws end the bonus mode without a penalty.</span></div>
+      </section>
+
+      <section class="tour-section" aria-label="World tour city map">
+        <div class="section-header world-header">
+          <div><span class="eyebrow">✦ THE GREAT SNACK TOUR ✦</span><h2>100 races · 10 cities</h2></div>
+          <div class="progress-badge" id="progressBadge">0 / 100 won</div>
+        </div>
+        <p class="world-subtitle">Every city starts easy and builds to a tricky tenth race. Win all 10 to unlock the next city!</p>
+        <div class="tour-map" id="cityMap" aria-label="Choose a marathon city"></div>
+        <div class="passport-card" id="cityDetail" aria-label="Select a race">
+          <div class="passport-header">
+            <div class="passport-symbol" id="citySymbol">🌸</div>
+            <div class="passport-title"><span class="eyebrow" id="cityCaption">CITY 01 / 10</span><h3 id="cityTitle">TOKYO</h3><p id="citySubtitle">Cherry Blossom Sprint</p></div>
+            <div class="passport-stamp" id="cityStamp">0 / 10<br>STAMPS</div>
+          </div>
+          <div class="event-label"><span>CHOOSE YOUR RACE</span><span id="cityEventRange">01 — 10</span></div>
+          <div class="level-grid" id="levelGrid"></div>
+          <div class="selection-bar">
+            <div class="selection-copy"><span id="selectedTitle">RACE 01</span><small id="selectedMeta">QUARTER MARATHON · 6 runners · 40 sec</small></div>
+            <button class="btn btn-primary" id="startBtn" type="button">LET'S SERVE! <span aria-hidden="true">➜</span></button>
+          </div>
+        </div>
+      </section>
+      <p class="save-hint">🔒 Your city stamps and best scores are saved on this device.</p>
+    </section>
+
+    <section class="game-screen hidden" id="gameScreen" aria-label="Snack Dash gameplay">
+      <div class="scoreboard">
+        <button class="small-btn" id="levelsBtn" type="button" aria-label="Return to level selection">‹ <span>Levels</span></button>
+        <div class="score-pill level-pill"><span class="score-label">RACE</span><strong id="hudLevel">1</strong></div>
+        <div class="score-pill time-pill" id="timePill"><span class="score-label">TIME</span><strong id="hudTime">01:00</strong></div>
+        <div class="score-pill total-pill"><span class="score-label">POINTS</span><strong><span id="hudScore">0</span><small> / 10</small></strong></div>
+        <button class="small-btn restart-btn" id="restartBtn" type="button" title="Restart level" aria-label="Restart level">↻</button>
+        <button class="small-btn pause-btn" id="pauseBtn" type="button" aria-label="Pause game">Ⅱ</button>
+      </div>
+      <div class="combo-panel" id="comboPanel" aria-live="off">
+        <div class="combo-indicator"><span id="comboIcon">⚡</span> <strong id="comboValue">COMBO 0</strong><small id="comboDetail">5 IN A ROW → FEVER</small></div>
+        <div class="combo-meter" aria-hidden="true"><div id="comboFill"></div></div>
+        <div class="fever-plaque" id="feverPlaque" aria-hidden="true">🔥 FEVER!! 🔥</div>
+        <span class="fever-status" id="feverStatus">READY?</span>
+      </div>
+      <div class="scene-shell" id="sceneShell">
+        <canvas id="scene" width="390" height="700" aria-label="Marathon road with moving runners. Tap a runner to throw the held supply." role="img"></canvas>
+        <div class="result-overlay hidden" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultHeading">
+          <div class="result-card">
+            <div class="result-mascot" id="resultMascot">🏆</div>
+            <div class="eyebrow" id="resultKicker">RACE COMPLETE!</div>
+            <h2 id="resultHeading">SUPER SERVER!</h2>
+            <div class="result-score" id="resultScore"><strong class="score-main">12</strong><span class="score-unit">points</span></div>
+            <p id="resultText">Your volunteer has earned a victory dance!</p>
+            <div class="result-stats" id="resultStats"></div>
+            <button class="btn btn-primary full" id="resultPrimary" type="button">NEXT LEVEL ➜</button>
+            <div class="result-actions">
+              <button class="btn btn-outline" id="retryBtn" type="button">↻ Retry</button>
+              <button class="btn btn-outline" id="backBtn" type="button">Levels</button>
+            </div>
+          </div>
+        </div>
+        <div class="game-message" id="gameMessage" aria-live="polite"></div>
+      </div>
+      <div class="game-control-strip">
+        <div class="held-status"><span class="held-icon" id="heldIcon">💧</span><div><small>IN YOUR HAND</small><strong id="heldNumber">6</strong></div></div>
+        <div class="hand-rule"><strong>Find a whole-number match!</strong><span id="matchHint">Tap a runner to throw.</span></div>
+      </div>
+      <p class="game-footnote"><b>5 Combo → Fever · 10 Combo → Inferno.</b> Tap table items to swap. FEVER: Combo × runner; INFERNO: Combo² × runner; misses end bonus mode without a penalty.</p>
+    </section>
+  </main>
+  <!-- BUILD:MATH -->
+  <!-- BUILD:GAME -->
+</body>
+</html>

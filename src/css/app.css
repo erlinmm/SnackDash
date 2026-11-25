@@ -1,0 +1,271 @@
+:root{--ink:#27354a;--muted:#687687;--paper:#fff9ed;--card:#fffef9;--orange:#ff9859;--apricot:#ffe1be;--mint:#cdeed9;--teal:#167c7d;--coral:#ff756e;--line:#eadfcc;--shadow:0 12px 30px rgba(57,64,78,.1)}
+*{box-sizing:border-box}html{min-height:100%;background:var(--paper)}body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 8% 12%,#fcecc6 0,transparent 32%),radial-gradient(ellipse at 90% 60%,#e3f1df 0,transparent 31%),#fff9ed;font-family:'Trebuchet MS',ui-rounded,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #0d929c;outline-offset:3px}.hidden{display:none!important}.app{width:min(100%,520px);margin:0 auto;padding:15px 18px 25px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 20px}.brand{display:flex;align-items:center;gap:11px}.brand-icon{display:grid;place-items:center;font-size:31px;transform:rotate(-15deg);height:47px;width:47px;background:#fff1cd;border:2px solid #e6bd73;border-radius:15px;box-shadow:3px 4px 0 #e4ca8f}.brand-title{font-size:26px;letter-spacing:-1.2px;font-weight:1000;line-height:1}.brand-title span{color:#e76c44}.brand-tag{letter-spacing:2px;font-size:9px;color:#687687;font-weight:900;margin-top:5px}.icon-btn{border:2px solid var(--line);border-radius:15px;background:#fff;color:#30394a;min-height:44px;min-width:48px;font-size:21px;box-shadow:3px 4px 0 #f0e5d4}.icon-btn:hover,.small-btn:hover,.btn:hover{filter:brightness(.98)}
+.intro-card{position:relative;display:flex;overflow:hidden;min-height:220px;background:#ffdaac;border:2px solid #e8b47f;border-radius:26px;box-shadow:5px 6px 0 #f3d5ae;padding:23px 20px}.intro-copy{position:relative;z-index:1;width:77%}.eyebrow{letter-spacing:1.25px;font-weight:1000;font-size:10px;color:#a3573e}.intro-card h1{font-size:35px;line-height:1.05;letter-spacing:-1.6px;margin:12px 0 8px}.intro-card h1 em{font-style:normal;color:#ef6247}.intro-card p{font-size:12px;font-weight:600;line-height:1.55;max-width:260px;margin:6px 0 10px}.rules-chips{display:flex;flex-wrap:wrap;gap:6px}.rules-chips span{background:#fff9e7;border:1px solid #f5b781;border-radius:20px;font-size:10px;padding:6px 8px;white-space:nowrap}.intro-illustration{position:absolute;right:-12px;top:0;width:175px;height:100%;transform:rotate(7deg);background:#b4d9d3;clip-path:polygon(48% 0,100% 0,100% 100%,20% 100%,39% 62%,25% 40%);border-left:6px solid #fff6d8}.road-streak{position:absolute;left:63%;height:50px;width:5px;background:#fff9df;border-radius:5px}.road-streak.a{top:22px}.road-streak.b{top:132px}.intro-runner{position:absolute;filter:drop-shadow(1px 3px 0 #6a837f);font-size:62px}.intro-runner.r1{top:55px;right:3px}.intro-runner.r2{top:135px;right:72px;font-size:48px}.intro-snack{position:absolute;left:8px;top:105px;font-size:37px;transform:rotate(-20deg)}.intro-snack small{display:block;position:absolute;bottom:1px;right:-8px;background:white;border-radius:7px;border:2px solid #503b34;font-size:16px;font-weight:1000;padding:0 4px}.intro-spark{position:absolute;left:16px;top:52px;font-size:38px;color:#ffee60}.intro-numbers{position:absolute;top:11px;right:2px;font-size:11px;font-weight:900;background:#fff3d5;padding:5px;border-radius:8px;transform:rotate(-7deg)}
+.instructions{display:grid;grid-template-columns:1fr;gap:8px;margin:24px 0}.instruction{display:flex;align-items:center;gap:12px;background:#fffef9;border:1.5px solid var(--line);border-radius:15px;padding:10px 13px;font-size:12px;line-height:1.35}.instruction-emoji{font-size:19px;min-width:25px}.section-header{display:flex;align-items:end;justify-content:space-between;margin:8px 0 12px}.section-header h2{font-size:21px;line-height:1.15;margin:4px 0 0;letter-spacing:-.6px}.progress-badge{font-size:10px;font-weight:900;background:#dff3e3;color:#286954;border:1px solid #a6d5b9;padding:7px 9px;border-radius:13px}.level-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.level-tile{position:relative;min-height:86px;border:2px solid #e5ddcf;border-radius:15px;background:#fffef9;padding:7px 3px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1px;color:var(--ink);box-shadow:2px 3px 0 #eae0d2;transition:transform .12s ease,border-color .12s ease}.level-tile:not(:disabled):active{transform:translateY(2px)}.level-tile.selected{background:#f9d99b;border-color:#de935b;box-shadow:3px 4px 0 #e8aa71}.level-tile:disabled{opacity:.65;cursor:not-allowed;background:#f1eee7}.tile-number{font-size:25px;font-weight:1000;line-height:1}.tile-name{font-size:9px;letter-spacing:.7px;font-weight:900;color:#687687}.tile-detail{font-size:10px;color:#7e8190;font-weight:800;margin-top:4px}.tile-lock{font-size:19px}.tile-star{position:absolute;right:4px;top:3px;font-size:10px}.selection-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fffdf8;border:2px solid var(--line);border-radius:19px;margin-top:17px;padding:11px}.selection-copy{display:flex;flex-direction:column;gap:4px;min-width:0}.selection-copy>span{font-size:16px;font-weight:1000}.selection-copy small{font-size:11px;color:var(--muted);font-weight:800}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:14px;padding:12px 15px;font-size:13px;font-weight:1000;border:2px solid transparent;white-space:nowrap}.btn-primary{background:#ff8c59;color:#fff;border-color:#d76842;box-shadow:2px 4px 0 #c96444;text-shadow:0 1px #b65c40}.btn-primary:active{box-shadow:1px 1px 0 #c96444;transform:translateY(3px)}.btn-outline{background:#fffdf8;border-color:#e8dbc8;color:#405167}.save-hint{text-align:center;font-size:10px;color:var(--muted);margin-top:15px}
+.game-screen{display:flex;flex-direction:column;gap:9px;align-items:center;width:100%;min-height:0}.scoreboard{display:flex;align-items:center;justify-content:space-between;gap:5px;width:100%;max-width:460px;min-width:0}.small-btn{border:2px solid #e5dac8;background:#fffef9;border-radius:12px;min-width:38px;min-height:49px;box-shadow:2px 3px 0 #eee3d3;color:#526479;font-size:18px;font-weight:1000}.small-btn span{font-size:11px}.score-pill{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:49px;min-width:51px;border:2px solid #e8decf;border-radius:13px;background:#fffdf9;padding:5px 7px}.score-label{font-size:8px;font-weight:1000;color:#6c7d8e;letter-spacing:1.1px}.score-pill strong{font-size:21px;font-weight:1000;line-height:1}.score-pill small{font-size:11px;color:#8b8790}.time-pill{background:#e4f3df;border-color:#baddbc;min-width:76px}.time-pill.warning{background:#fff0d2;border-color:#ffa868}.time-pill.urgent{background:#ffe1dd;border-color:#ed8b7e;animation:pulse .65s infinite alternate}@keyframes pulse{to{filter:brightness(.93)}}.total-pill{background:#ffebcf;border-color:#efc796;min-width:83px}
+.scene-shell{position:relative;overflow:hidden;border:3px solid #384555;border-radius:22px;background:#ccecc5;box-shadow:4px 6px 0 #d8cfc0;width:390px;max-width:100%;aspect-ratio:390/700;touch-action:manipulation}.scene-shell canvas{display:block;width:100%;height:100%;cursor:crosshair;touch-action:manipulation}.game-control-strip{width:100%;max-width:460px;display:flex;align-items:center;gap:12px;background:#fffdf7;border:2px solid #e8dfd0;border-radius:17px;padding:9px 13px;min-width:0}.held-status{min-width:125px;display:flex;align-items:center;gap:9px;border-right:2px dashed #e2d8cb;padding-right:13px}.held-icon{font-size:34px;line-height:1.1}.held-status div{display:flex;flex-direction:column;line-height:1.1}.held-status small{font-size:8px;font-weight:1000;color:#9b7260;letter-spacing:.8px;white-space:nowrap}.held-status strong{font-size:38px;font-weight:1000}.hand-rule{display:flex;flex-direction:column;gap:6px;min-width:0}.hand-rule strong{font-size:12px}.hand-rule span{color:var(--muted);font-size:11px;line-height:1.25}.game-footnote{font-size:10px;text-align:center;color:#798797;margin:2px 0}.game-message{position:absolute;top:15px;left:50%;transform:translateX(-50%) translateY(-10px);background:#fffef8;border:3px solid #3c4a50;padding:9px 15px;border-radius:15px;box-shadow:3px 4px 0 #81968a;font-size:14px;font-weight:1000;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:4}.game-message.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.result-overlay{position:absolute;inset:0;z-index:6;background:rgba(25,55,66,.45);display:flex;align-items:center;justify-content:center;padding:14px;animation:fadeIn .3s ease}.result-card{max-width:340px;width:100%;background:#fff9e8;border:3px solid #384654;border-radius:24px;text-align:center;padding:24px 19px;box-shadow:7px 9px 0 rgba(39,51,65,.22)}.result-mascot{font-size:53px;line-height:1.1;animation:bob .8s ease-in-out infinite alternate}.result-card h2{font-size:29px;font-weight:1000;line-height:1.1;margin:7px 0;color:#eb764d;letter-spacing:-1px}.result-score{font-size:49px;font-weight:1000;letter-spacing:-2px;width:100%;min-width:0;max-width:100%;line-height:1.16;font-variant-numeric:tabular-nums}.result-score .score-main{display:block;max-width:100%;font-size:clamp(29px,8vw,49px);white-space:nowrap;letter-spacing:-1.5px}.result-score .score-unit{display:block;font-size:14px;letter-spacing:0;color:#576778}.result-score .score-exact{display:block;font-size:clamp(10px,2.8vw,13px);font-weight:800;letter-spacing:0;color:#576778;overflow-wrap:anywhere;word-break:normal;line-height:1.35;margin:4px auto 0;max-width:100%}.scoreboard .total-pill{min-width:0;flex:1 1 auto}.scoreboard .total-pill strong{display:flex;align-items:baseline;justify-content:center;gap:2px;max-width:100%;min-width:0;white-space:nowrap;font-variant-numeric:tabular-nums}.scoreboard .total-pill #hudScore{min-width:0;white-space:nowrap}.result-card p{font-size:13px;line-height:1.5;color:#526373;margin:7px 0 14px}.result-stats{font-size:12px;font-weight:900;color:#698177;background:#e5f2e2;border-radius:11px;margin:10px 0 15px;padding:10px}.btn.full{width:100%}.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes bob{to{transform:translateY(-8px) rotate(8deg)}}
+@media(max-width:530px){.app{padding:12px 10px 18px}.topbar{margin-bottom:15px}.intro-card{padding:18px 15px}.intro-card h1{font-size:30px}.intro-copy{width:78%}.intro-card p{max-width:210px}.intro-illustration{right:-23px}.level-grid{gap:6px}.level-tile{min-height:76px;border-radius:12px}.tile-number{font-size:23px}.btn{padding:11px 9px;font-size:11px}.game-screen{gap:6px}.game-screen .scoreboard{gap:4px}.small-btn{min-width:34px}.score-pill{padding:4px 5px}.game-control-strip{padding:7px 9px}.game-footnote{font-size:9px}}
+@media (max-width:530px) and (max-height:900px){.app.in-game .topbar{display:none}.app.in-game{padding-top:5px}.game-footnote{display:none}}
+@media(max-width:360px){.score-pill strong{font-size:17px}.score-label{font-size:7px}.small-btn span{display:none}.level-pill{min-width:42px}.time-pill{min-width:67px}.total-pill{min-width:76px}.held-status{min-width:105px;gap:5px}.held-icon{font-size:27px}.held-status strong{font-size:31px}}
+@media(prefers-reduced-motion:reduce){.result-mascot,.time-pill.urgent{animation:none}.btn,.game-message,.level-tile{transition:none}}
+.total-pill.goal-met{background:#d8f1d8;border-color:#8ebfa0}
+
+/* Updated HUD: give Restart its own in-game control without losing phone space. */
+.scoreboard .restart-btn{color:#b45e40;background:#fff1e1;border-color:#eab991;font-size:25px}
+@media(max-width:530px){.scoreboard .small-btn{min-width:33px;min-height:45px}.scoreboard .small-btn span{display:none}.scoreboard .score-pill{height:45px;padding:4px 5px}.scoreboard .level-pill{min-width:40px}.scoreboard .time-pill{min-width:67px}.scoreboard .total-pill{min-width:73px}.scoreboard .score-pill strong{font-size:19px}}
+
+/* World tour chapter-selection board: original playful passport/map theme. */
+.tour-section{margin-top:19px}
+.world-header{margin-bottom:9px}
+.world-header h2{font-size:26px;letter-spacing:-1px}
+.world-header .eyebrow{color:#d47b57}
+.world-subtitle{margin:0 0 20px;color:#65798a;font-size:12px;line-height:1.5;font-weight:700;max-width:405px}
+.tour-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;position:relative;padding:16px 7px 20px;background:
+  radial-gradient(circle at 8% 20%,rgba(254,226,151,.55),transparent 27%),
+  radial-gradient(circle at 87% 75%,rgba(172,219,206,.48),transparent 33%),#fffaf0;
+ border:2px dashed #ead6b5;border-radius:25px;isolation:isolate}
+.tour-map:before{content:"";position:absolute;top:28px;bottom:28px;left:50%;border-left:5px dotted #e1b990;transform:translateX(-50%);opacity:.84;z-index:-1}
+.tour-map:after{content:"WORLD TOUR  ·  100 RACES";position:absolute;bottom:1px;left:50%;transform:translateX(-50%);white-space:nowrap;letter-spacing:3px;font-weight:1000;font-size:8px;color:#aa9f90;background:#fff8e8;padding:2px 7px}
+.city-stop{--city-color:#e8a061;--city-sky:#ffe5be;display:flex;position:relative;min-width:0;flex-direction:column;align-items:stretch;text-align:left;gap:3px;min-height:190px;border:2.5px solid #e6d9c5;border-radius:19px;padding:8px 8px 10px;background:#fffdf6;color:#344357;box-shadow:4px 5px 0 #eadfcf;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;cursor:pointer}
+.city-stop:nth-child(even){transform:translateY(13px) rotate(1deg)}
+.city-stop:nth-child(odd){transform:rotate(-1deg)}
+.city-stop.open:hover{box-shadow:5px 6px 0 #d9cabc;border-color:var(--city-color)}
+.city-stop.open:active{transform:translateY(3px) rotate(0)}
+.city-stop.chosen{border-color:#cf7049;box-shadow:0 0 0 3px #ffe6a5,4px 5px 0 #daaa78;background:#fffaf0}
+.city-stop.chosen:nth-child(even){transform:translateY(13px) rotate(1deg)}
+.city-stop.chosen:nth-child(odd){transform:rotate(-1deg)}
+.city-stop:focus-visible{outline:3px solid #3c8c98;outline-offset:4px}
+.city-stop.locked{opacity:.63;filter:saturate(.45);cursor:not-allowed;box-shadow:2px 3px 0 #e5ded4;background:#f3f0e9}
+.city-stop.complete{border-color:#8aaa78}
+.city-route-dot{position:absolute;z-index:2;top:48%;font-size:22px;color:var(--city-color);left:-21px;text-shadow:2px 2px #fff}
+.city-stop:nth-child(odd) .city-route-dot{left:auto;right:-22px}
+.city-postcard{position:relative;min-height:95px;border-radius:11px;overflow:hidden;background:linear-gradient(160deg,var(--city-sky) 0%,#fff8f0 75%);border:1px solid color-mix(in srgb,var(--city-color) 65%,white);display:flex;align-items:center;justify-content:center}
+.city-postcard:after{content:"";position:absolute;left:-5%;bottom:-27px;width:110%;height:42px;border-radius:50%;background:var(--city-color);opacity:.37}
+.city-postmark{position:absolute;z-index:1;top:7px;left:8px;font-size:9px;font-weight:1000;letter-spacing:1px;color:#7b6570}
+.city-emblem{font-size:48px;line-height:1;filter:drop-shadow(2px 4px 0 rgba(55,55,60,.11));transform:rotate(-8deg);transition:transform .18s}
+.city-stop.chosen .city-emblem{transform:rotate(9deg) scale(1.08)}
+.city-skyline{position:absolute;z-index:1;right:7px;bottom:5px;color:#685967;background:rgba(255,252,239,.88);border-radius:5px;padding:2px 4px;letter-spacing:.7px;font-size:7px;font-weight:1000;text-align:right}
+.city-name{font-size:17px;font-weight:1000;line-height:1.1;letter-spacing:-.5px;margin-top:7px}
+.city-country{font-size:9px;font-weight:800;line-height:1.25;color:#7c8090;min-height:23px}
+.city-status{align-self:flex-start;font-size:9px;letter-spacing:.6px;font-weight:1000;color:#735745;background:#ffebcd;border-radius:9px;padding:5px 7px;margin-top:auto}
+.city-stop.complete .city-status{background:#dff0d3;color:#4a7558}
+.city-stop.locked .city-status{background:#e8e5e0;color:#77757c}
+.passport-card{--city-color:#f68f97;--city-sky:#ffe1e2;overflow:hidden;background:#fffdf7;border:2.5px solid #e0c8ad;border-radius:21px;box-shadow:5px 6px 0 #eedac7;margin-top:19px;padding:0 13px 13px;scroll-margin-top:10px}
+.passport-header{display:flex;gap:11px;align-items:center;margin:0 -13px 14px;padding:14px;background:linear-gradient(130deg,var(--city-sky),#fffcf3);border-bottom:2px dashed color-mix(in srgb,var(--city-color) 70%,#d1bd9a)}
+.passport-symbol{display:grid;place-items:center;background:#fff9ed;border:2px solid var(--city-color);width:66px;height:66px;border-radius:16px;flex:none;font-size:38px;box-shadow:3px 3px 0 var(--city-color);transform:rotate(-4deg)}
+.passport-title{flex:1;min-width:0}
+.passport-title .eyebrow{font-size:9px;color:#a2766e}
+.passport-title h3{font-size:25px;line-height:1;letter-spacing:-1px;margin:5px 0 3px}
+.passport-title p{font-size:10px;color:#697686;font-weight:800;margin:0}
+.passport-stamp{font-size:10px;font-weight:1000;line-height:1.4;text-align:center;color:#aa704f;border:3px double #cb8a68;border-radius:50%;padding:11px 6px;transform:rotate(10deg);min-width:64px;flex:none}
+.event-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:10px;font-weight:1000;letter-spacing:1px;color:#8a7870}
+.passport-card .level-grid{gap:7px}
+.passport-card .level-tile{min-height:77px;background:#fffaf0;box-shadow:2px 3px 0 #ebe0cf;border-color:#e5d8c9}
+.passport-card .level-tile.selected{background:#ffe1b4;border-color:#e99f62;box-shadow:2px 4px 0 #d9a774}
+.passport-card .level-tile.won{background:#dcf1dc;border-color:#8ebe9a}
+.passport-card .level-tile.selected.won{background:#d4efc6;border-color:#63a77e}
+.passport-card .level-tile .tile-name{font-size:8px;color:#a38c7b}
+.passport-card .level-tile .tile-number{font-size:21px}
+.passport-card .level-tile .tile-star{color:#d6b7a3}
+.passport-card .level-tile.won .tile-star{color:#4b9b72;font-size:16px}
+.passport-card .selection-bar{margin-top:13px;background:#fff7e9;border:1.5px solid #e9cfad}
+.passport-card .selection-copy>span{font-size:14px}
+@media(max-width:530px){.world-header h2{font-size:23px}.tour-map{gap:17px 13px;padding:13px 7px 22px}.city-stop{min-height:177px;padding:7px}.city-postcard{min-height:88px}.city-name{font-size:15px}.city-status{font-size:8px}.city-skyline{font-size:6px}.passport-card{padding:0 9px 10px}.passport-header{margin:0 -9px 13px;padding:11px}.passport-symbol{width:57px;height:57px;font-size:33px}.passport-title h3{font-size:21px}.passport-stamp{min-width:55px;font-size:9px;padding:8px 5px}.passport-card .level-tile{min-height:71px}.passport-card .level-tile .tile-number{font-size:19px}.passport-card .selection-bar{gap:5px;padding:8px}.passport-card .selection-copy>span{font-size:12px}.passport-card .selection-copy small{font-size:10px}.passport-card #startBtn{font-size:11px}}
+@media(max-width:350px){.city-name{font-size:13px}.passport-stamp{font-size:8px;min-width:48px}.passport-symbol{width:48px;height:48px;font-size:28px}.passport-card .level-grid{gap:4px}.passport-card .level-tile{padding:4px 2px}.passport-card .level-tile .tile-number{font-size:17px}}
+
+/* Keep the playable passport close to the top. The city map is a sideways
+   sticker-route rather than a long wall of locked cards on small screens. */
+.tour-map{display:flex;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-color:#d6ae83 #fff6e6;scrollbar-width:thin;padding:16px 13px 23px;min-height:208px}
+.tour-map:before{top:104px;bottom:auto;left:0;right:0;width:100%;border-left:0;border-top:5px dotted #e1b990;transform:none}
+.tour-map:after{display:none}
+.tour-map .city-stop{flex:0 0 180px;max-width:75vw;scroll-snap-align:start;min-height:170px;z-index:1}
+.tour-map .city-stop:nth-child(even){transform:translateY(7px) rotate(1deg)}
+.tour-map .city-stop.chosen:nth-child(even){transform:translateY(7px) rotate(1deg)}
+.tour-map .city-route-dot{top:44%;left:-13px;right:auto}
+.tour-map .city-stop:nth-child(odd) .city-route-dot{left:-13px;right:auto}
+.tour-map .city-stop:first-child .city-route-dot{display:none}
+.tour-map .city-postcard{min-height:79px}
+.tour-map .city-emblem{font-size:43px}
+.tour-map .city-name{font-size:17px}
+@media(max-width:530px){
+  .intro-card{min-height:177px;padding:15px 14px}
+  .intro-card h1{font-size:29px;margin:7px 0 5px}
+  .intro-card p{font-size:11px;line-height:1.4;max-width:210px}
+  .brand-title{font-size:24px}
+  .instructions{display:none}
+  .tour-section{margin-top:17px}
+  .tour-map{min-height:202px;padding:13px 10px 17px;gap:12px}
+  .tour-map .city-stop{flex-basis:158px;min-height:170px;max-width:calc(50vw - 17px)}
+  .tour-map .city-name{font-size:15px}
+  .world-subtitle{margin-bottom:11px}
+  .passport-card{margin-top:14px}
+}
+
+
+/* Combo / Fever feedback. The frame itself lives in Canvas for per-city art. */
+.combo-panel{width:100%;max-width:460px;display:flex;align-items:center;gap:8px;border:2px solid #e8d8be;background:#fffbf0;border-radius:13px;padding:8px 10px;min-height:46px;transition:background .16s,border-color .16s,box-shadow .16s}
+.combo-indicator{display:flex;flex-direction:column;gap:2px;min-width:115px;font-size:11px;line-height:1.1}
+.combo-indicator strong{font-size:12px;letter-spacing:.3px;white-space:nowrap}
+.combo-indicator small{font-size:8px;letter-spacing:.3px;font-weight:900;color:#8b7d75}
+.combo-meter{height:13px;border:2px solid #d8c9bd;background:#eee3d6;border-radius:15px;overflow:hidden;flex:1;min-width:35px}
+.combo-meter>div{height:100%;width:0%;background:repeating-linear-gradient(45deg,#ffcd63 0 11px,#ff9b6c 11px 22px);border-radius:10px;transition:width .16s ease}
+.fever-status{font-weight:1000;font-size:10px;white-space:nowrap;color:#8a746d;min-width:49px;text-align:right}
+.combo-panel.fever{background:#ffe4f3;border-color:#d65bb3;box-shadow:0 0 13px #f3a2da66}
+.combo-panel.fever .combo-indicator strong,.combo-panel.fever .fever-status{color:#a42c79}
+.combo-panel.fever .combo-meter{border-color:#e26c9e}
+.combo-panel.fever .combo-meter>div{background:repeating-linear-gradient(45deg,#ec5499 0 10px,#ffc85e 10px 20px);box-shadow:0 0 8px #e848a7}
+.scene-shell.fever-active{border-color:#e867b0;box-shadow:0 0 0 3px #ffde72,0 0 20px 6px #ec69b35e,4px 6px 0 #d8cfc0}
+@media(max-width:400px){.combo-indicator{min-width:100px}.combo-indicator strong{font-size:11px}.combo-indicator small{font-size:7px}.fever-status{font-size:9px;min-width:43px}.combo-panel{gap:6px;padding:7px 8px}}
+
+/* V11: a more spacious passport (roughly 150% of V10's compact heights).
+   The hero now always fits its two complete title lines. */
+.top-actions{display:flex;gap:7px;align-items:center}
+.debug-exit-btn{border:2px solid #b45363;border-radius:10px;background:#ffe3dc;color:#913746;font-size:10px;font-weight:1000;padding:9px 10px;white-space:nowrap}
+.debug-indicator{background:#293c5d;color:#ffe59b;text-align:center;border-radius:9px;font-size:9px;font-weight:900;letter-spacing:.2px;padding:7px 3px;margin:0 0 5px}
+.app{position:relative}
+.app.in-game .debug-exit-btn{display:none!important}
+.scene-shell{will-change:transform}
+/* Fever replaces (rather than overlays) the combo progress meter. */
+.fever-plaque{display:none;align-items:center;justify-content:center;flex:1;min-width:0;min-height:36px;padding:5px 9px;border-radius:11px;border:2px solid #ffd35f;color:#fffdf0;background:linear-gradient(135deg,#b82250,#ef583b 46%,#ffac27 100%);box-shadow:0 2px 0 #942547,0 0 14px #ff7c4280,inset 0 1px 0 #fff5a990;text-shadow:0 2px 0 #8d2b3e,0 0 6px #ffba31;font-size:clamp(15px,4.2vw,22px);font-weight:1000;white-space:nowrap;letter-spacing:.3px;transform-origin:center;animation:feverPlaquePulse .55s ease-in-out infinite alternate}
+.combo-panel.fever{background:linear-gradient(90deg,#fff1b8,#ffdde0 50%,#ffe6ad);border-color:var(--fever-city,#ec5499);box-shadow:0 0 16px #f69b5280,inset 0 0 8px #fff4aa}
+.combo-panel.fever .combo-meter{display:none}
+.combo-panel.fever .fever-plaque{display:flex}
+.combo-panel.fever .fever-status{display:none}
+.combo-panel.fever .combo-indicator{min-width:0;flex:none;gap:0}
+.combo-panel.fever .combo-indicator strong{font-size:clamp(17px,5vw,24px);font-weight:1000;letter-spacing:-.8px;line-height:1.12;color:#cb2c34;text-shadow:0 2px #ffe17a,1px -1px #fff8b4,0 0 7px #ff6b43,0 0 16px #ff9c22;animation:feverTextFlame .34s ease-in-out infinite alternate}
+.combo-panel.fever #comboIcon{font-size:18px;filter:drop-shadow(0 0 5px #ff761c);animation:feverTextFlame .4s ease-in-out infinite alternate}
+.combo-panel.fever .combo-indicator small{display:none}
+@keyframes feverTextFlame{from{transform:translateY(0) scale(1);filter:brightness(1)}to{transform:translateY(-1px) scale(1.045);filter:brightness(1.18)}}
+@keyframes feverPlaquePulse{from{transform:scale(.985);filter:saturate(1)}to{transform:scale(1.02);filter:saturate(1.25)}}
+@media(prefers-reduced-motion:reduce){.combo-panel.fever .fever-plaque,.combo-panel.fever .combo-indicator strong,.combo-panel.fever #comboIcon{animation:none}}
+@media(max-width:530px){
+  .app:not(.in-game){padding:9px 10px 14px}
+  .app:not(.in-game) .topbar{margin-bottom:10px;min-height:41px}
+  .app:not(.in-game) .brand-icon{font-size:23px;width:39px;height:39px;border-radius:11px}
+  .app:not(.in-game) .brand{gap:8px}
+  .app:not(.in-game) .brand-title{font-size:21px;white-space:nowrap}
+  .app:not(.in-game) .brand-tag{font-size:7px;letter-spacing:.85px;margin-top:3px}
+  .app:not(.in-game) .icon-btn{min-height:39px;min-width:39px;height:39px;font-size:19px;border-radius:11px}
+  .app:not(.in-game) .top-actions{gap:5px}
+  .app:not(.in-game) .intro-card{height:123px;min-height:123px;padding:12px 13px;border-radius:19px;box-shadow:3px 4px 0 #f3d5ae}
+  .app:not(.in-game) .intro-copy{width:84%}
+  .app:not(.in-game) .intro-card .eyebrow{font-size:9px;letter-spacing:.5px;line-height:1.2}
+  .app:not(.in-game) .intro-card h1{font-size:clamp(22px,6.7vw,29px);line-height:1.15;letter-spacing:-1px;margin:9px 0 0;max-width:260px}
+  .app:not(.in-game) .intro-card p,.app:not(.in-game) .rules-chips{display:none}
+  .app:not(.in-game) .intro-illustration{width:120px}
+  .app:not(.in-game) .intro-runner.r1{font-size:49px;top:22px;right:5px}
+  .app:not(.in-game) .intro-runner.r2{font-size:34px;top:70px;right:45px}
+  .app:not(.in-game) .intro-snack{top:65px;left:3px;font-size:23px}
+  .app:not(.in-game) .intro-snack small{font-size:9px}
+  .app:not(.in-game) .intro-spark,.app:not(.in-game) .intro-numbers{display:none}
+  .app:not(.in-game) .instructions{display:none}
+  .app:not(.in-game) .tour-section{margin-top:13px}
+  .app:not(.in-game) .world-header{margin:0 0 7px;align-items:center}
+  .app:not(.in-game) .world-header .eyebrow{display:none}
+  .app:not(.in-game) .world-header h2{font-size:18px;letter-spacing:-.4px;margin:0}
+  .app:not(.in-game) .progress-badge{font-size:9px;padding:5px 8px;border-radius:9px}
+  .app:not(.in-game) .world-subtitle{display:none}
+  .app:not(.in-game) .tour-map{height:151px;min-height:151px;gap:12px;padding:10px 9px;border-radius:17px;border-width:1.5px}
+  .app:not(.in-game) .tour-map:before{top:71px;border-top-width:4px}
+  .app:not(.in-game) .tour-map .city-stop{flex:0 0 149px;max-width:149px;min-height:126px;height:126px;padding:7px 7px 6px;border-width:1.5px;border-radius:13px;box-shadow:2px 3px 0 #eadfcf;gap:3px}
+  .app:not(.in-game) .tour-map .city-postcard{min-height:68px;height:68px;border-radius:8px}
+  .app:not(.in-game) .city-postmark{font-size:8px;top:3px;left:5px}
+  .app:not(.in-game) .tour-map .city-emblem{font-size:36px}
+  .app:not(.in-game) .city-skyline{font-size:6px;bottom:3px;right:2px}
+  .app:not(.in-game) .tour-map .city-name{font-size:14px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .app:not(.in-game) .city-country{display:none}
+  .app:not(.in-game) .city-status{font-size:8px;letter-spacing:0;padding:3px 4px;border-radius:5px}
+  .app:not(.in-game) .tour-map .city-route-dot{top:44%;left:-12px;font-size:14px}
+  .app:not(.in-game) .passport-card{margin-top:12px;padding:0 9px 9px;border-width:2px;border-radius:16px;box-shadow:3px 4px 0 #eedac7}
+  .app:not(.in-game) .passport-header{margin:0 -9px 8px;padding:10px;gap:10px}
+  .app:not(.in-game) .passport-symbol{width:49px;height:49px;font-size:28px;border-radius:11px;box-shadow:2px 2px 0 var(--city-color)}
+  .app:not(.in-game) .passport-title .eyebrow{font-size:8px}
+  .app:not(.in-game) .passport-title h3{font-size:23px;margin:3px 0 1px;letter-spacing:-.7px}
+  .app:not(.in-game) .passport-title p{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .app:not(.in-game) .passport-stamp{font-size:8px;min-width:48px;padding:7px 4px;border-width:2px}
+  .app:not(.in-game) .event-label{margin:0 0 7px;font-size:9px}
+  .app:not(.in-game) .passport-card .level-grid{gap:6px}
+  .app:not(.in-game) .passport-card .level-tile{min-height:61px;height:61px;padding:4px 2px;border-radius:11px;border-width:1.5px;box-shadow:1px 2px 0 #ebe0cf}
+  .app:not(.in-game) .passport-card .level-tile .tile-name,.app:not(.in-game) .passport-card .level-tile .tile-detail{display:none}
+  .app:not(.in-game) .passport-card .level-tile .tile-number{font-size:23px}
+  .app:not(.in-game) .passport-card .level-tile .tile-star{font-size:9px;top:2px;right:3px}
+  .app:not(.in-game) .passport-card .selection-bar{margin-top:10px;padding:8px 9px;border-radius:12px;min-height:61px}
+  .app:not(.in-game) .passport-card .selection-copy>span{font-size:12px}
+  .app:not(.in-game) .passport-card .selection-copy small{font-size:9px;line-height:1.25}
+  .app:not(.in-game) .passport-card #startBtn{padding:10px;font-size:11px;border-radius:10px}
+  .app:not(.in-game) .save-hint{font-size:9px;margin:10px 0 0}
+  .app:not(.in-game) .debug-exit-btn{padding:8px 6px;font-size:9px}
+}
+@media(max-width:350px){
+  .app:not(.in-game) .intro-card h1{font-size:22px;letter-spacing:-1.2px}
+  .app:not(.in-game) .intro-copy{width:86%}
+  .app:not(.in-game) .brand-title{font-size:18px}
+  .app:not(.in-game) .passport-card .selection-copy small{font-size:8px}
+  .combo-panel.fever{gap:4px;padding:6px}
+  .combo-panel.fever .combo-indicator strong{font-size:17px}
+  .fever-plaque{font-size:15px;padding:5px}
+}
+  /* More dramatic Inferno HUD, while keeping bib numbers visible. */
+  .combo-panel.inferno{background:linear-gradient(110deg,#211956,#ad238b,#f26b25,#201952);background-size:250% 250%;border-color:#ffe178;box-shadow:0 0 17px #a440edaa, inset 0 0 10px #ffec76;animation:discoHud 1.4s linear infinite}
+  .combo-panel.inferno .combo-indicator strong{color:#ffe97c;font-size:clamp(20px,5.8vw,26px);text-shadow:0 1px #7f189e,0 0 8px #ffa22d,0 0 17px #ee53e7}
+  .combo-panel.inferno .fever-plaque{background:linear-gradient(110deg,#401cba,#f83da8,#e66224,#401cba);background-size:260% 100%;border-color:#fff290;box-shadow:0 0 17px #ee74ff,0 0 14px #fff198;animation:discoHud .9s linear infinite;font-size:clamp(15px,4.2vw,21px)}
+  .scene-shell.inferno-active{border-color:#ffe178;box-shadow:0 0 0 3px #e24df0,0 0 24px 8px #d25dffaa,4px 6px 0 #d8cfc0}
+  @keyframes discoHud{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+  @media(prefers-reduced-motion:reduce){.combo-panel.inferno,.combo-panel.inferno .fever-plaque{animation:none}}
+
+/* V25: viewport-aware layout keeps HUD, road, and supplies inside the visible screen. */
+@media (max-width:530px) {
+  html:has(.app.in-game), body:has(.app.in-game) { height:100%; overflow:hidden; overscroll-behavior:none; }
+  .app.in-game {
+    width:100%; height:100vh; height:100dvh;
+    padding:2px 6px calc(2px + env(safe-area-inset-bottom, 0px));
+    margin:0 auto; overflow:hidden;
+  }
+  .app.in-game .topbar, .app.in-game .game-footnote { display:none!important; }
+  .app.in-game .game-screen { height:100%; min-height:0; gap:4px; justify-content:flex-start; width:100%; }
+  .app.in-game .scoreboard { flex:0 0 auto; }
+  .app.in-game .score-pill { min-width:48px; height:46px; padding:4px 6px; }
+  .app.in-game .score-pill strong { font-size:19px; }
+  .app.in-game .score-label { font-size:7px; }
+  .app.in-game .small-btn { min-width:36px; min-height:46px; }
+  .app.in-game .combo-panel { flex:0 0 auto; min-height:43px; padding:7px 9px; }
+  .app.in-game .scene-shell { flex:0 0 auto; margin:0; max-width:100%; }
+  .app.in-game .game-control-strip {
+    flex:0 0 auto; min-height:0; padding:4px 7px;
+    gap:7px; border-radius:12px;
+  }
+  .app.in-game .held-status { min-width:98px; gap:5px; padding-right:7px; }
+  .app.in-game .held-icon { font-size:26px; }
+  .app.in-game .held-status strong { font-size:29px; }
+  .app.in-game .held-status small { font-size:7px; }
+  .app.in-game .hand-rule { gap:1px; }
+  .app.in-game .hand-rule strong { font-size:11px; }
+  .app.in-game .hand-rule span { font-size:9px; line-height:1.1; }
+  /* Results are a viewport dialog, not a clipped child of the scaled road. */
+  .result-overlay.mobile-fullscreen {
+    position:fixed; inset:0; z-index:30;
+    padding:calc(9px + env(safe-area-inset-top, 0px)) 10px calc(9px + env(safe-area-inset-bottom, 0px));
+    overflow-y:auto; overscroll-behavior:contain;
+  }
+  .result-overlay.mobile-fullscreen .result-card {
+    max-height:calc(100dvh - 20px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    overflow-y:auto; max-width:360px;
+  }
+}
+@media (max-width:530px) and (max-height:650px) {
+  .app.in-game { padding-top:2px; padding-bottom:calc(2px + env(safe-area-inset-bottom, 0px)); }
+  .app.in-game .game-screen { gap:3px; }
+  .app.in-game .score-pill { height:40px; gap:1px; padding:2px 4px; }
+  .app.in-game .small-btn { min-height:40px; }
+  .app.in-game .score-pill strong { font-size:18px; }
+  .app.in-game .combo-panel { min-height:39px; padding:4px 7px; }
+  .app.in-game .combo-indicator small { font-size:7px; }
+  .app.in-game .game-control-strip { padding:3px 7px; }
+  .app.in-game .held-icon { font-size:24px; }
+  .app.in-game .held-status strong { font-size:27px; }
+  .app.in-game .hand-rule strong { font-size:10px; }
+  .app.in-game .hand-rule span { font-size:9px; }
+}
+  

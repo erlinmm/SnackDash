@@ -1,0 +1,42 @@
+name: Publish release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Test and build
+        run: |
+          node --check src/js/math.js
+          node --check src/js/game.js
+          node --test tests/test_math.cjs
+          python -m unittest discover -s tests -p 'test_*.py'
+          python scripts/build.py --zip
+      - name: Browser smoke tests
+        run: |
+          python -m pip install playwright==1.58.0
+          python -m playwright install --with-deps chromium
+          python tests/smoke.py
+      - name: Publish versioned downloadable assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            dist/Snack_Dash.html dist/Snack_Dash_HTML.zip \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "Snack Dash ${GITHUB_REF_NAME}" \
+            --generate-notes \
+            --verify-tag
