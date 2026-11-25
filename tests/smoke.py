@@ -70,12 +70,64 @@ async def check(browser, width, height):
     await page.close()
 
 
+async def check_fullscreen_flow(browser):
+    # Use deterministic browser API stubs: native fullscreen support varies
+    # between headless Chromium, Brave local files, and mobile WebKit.
+    page = await browser.new_page(viewport={'width':390,'height':844})
+    errors=[]
+    page.on('pageerror',lambda error: errors.append(str(error)))
+    await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
+    await page.evaluate("""() => {
+      const test={requests:0,exits:0,active:false};
+      Object.defineProperty(document,'fullscreenElement',{
+        configurable:true,get:()=>test.active?document.documentElement:null
+      });
+      document.documentElement.requestFullscreen=()=>{
+        test.requests++;
+        test.active=true;
+        document.dispatchEvent(new Event('fullscreenchange'));
+        return Promise.resolve();
+      };
+      document.exitFullscreen=()=>{
+        test.exits++;
+        test.active=false;
+        document.dispatchEvent(new Event('fullscreenchange'));
+        return Promise.resolve();
+      };
+      window.__fullscreenTest=test;
+    }""")
+    await page.locator('#startBtn').click()
+    initial=await page.evaluate("({...window.__fullscreenTest})")
+    assert initial=={'requests':1,'exits':0,'active':True}, initial
+
+    # Restart/next-race style transitions must not request fullscreen again.
+    await page.locator('#restartBtn').click()
+    restarted=await page.evaluate("({...window.__fullscreenTest})")
+    assert restarted==initial, restarted
+
+    # The top-left game back control returns to the normal level selector.
+    await page.locator('#backBtn').click()
+    menu=await page.evaluate("({...window.__fullscreenTest})")
+    assert menu=={'requests':1,'exits':1,'active':False}, menu
+    assert await page.locator('#menuScreen').is_visible()
+
+    # Starting another race is a new user gesture: re-enter fullscreen with
+    # no extra confirmation UI or additional clicks within our application.
+    await page.locator('#startBtn').click()
+    again=await page.evaluate("({...window.__fullscreenTest})")
+    assert again=={'requests':2,'exits':1,'active':True}, again
+    assert not errors, errors
+    await page.close()
+
+
 async def main():
     async with async_playwright() as p:
         browser=await p.chromium.launch(headless=True, executable_path=os.environ.get('PLAYWRIGHT_CHROMIUM_EXECUTABLE') or None, args=['--no-sandbox'])
         for dims in [(320,568),(360,740),(390,844),(414,896)]:
             await check(browser,*dims)
             print('Smoke passed:',dims)
+        await check_fullscreen_flow(browser)
+        print('Fullscreen flow passed: serve → level select → serve')
         await browser.close()
 
 
