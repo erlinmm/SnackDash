@@ -22,6 +22,7 @@ jobs:
         run: |
           node --check src/js/math.js
           node --check src/js/game.js
+          bash -n scripts/publish_release.sh
       - name: Run mathematical and build unit tests
         run: |
           node --test tests/test_math.cjs
