@@ -12,6 +12,22 @@ async def check(browser, width, height):
     errors = []
     page.on('pageerror', lambda error: errors.append(str(error)))
     await page.set_content(HTML.read_text(encoding='utf-8'), wait_until='load')
+    # The selection screen fills the viewport without clipping short phones.
+    menu_dims=await page.evaluate("""() => {
+      const app=document.querySelector('#app');
+      const first=app.querySelector('.topbar').getBoundingClientRect();
+      const last=document.querySelector('#menuScreen').getBoundingClientRect();
+      const rect=app.getBoundingClientRect();
+      const style=getComputedStyle(app);
+      return {top:first.top-rect.top-parseFloat(style.paddingTop),
+        bottom:rect.bottom-last.bottom-parseFloat(style.paddingBottom),
+        height:app.getBoundingClientRect().height,
+        viewport:window.visualViewport.height};
+    }""")
+    assert menu_dims['top']>=-2,(width,height,menu_dims)
+    if menu_dims['height']<=menu_dims['viewport']+2:
+        assert abs(menu_dims['top']-menu_dims['bottom'])<=4,(width,height,menu_dims)
+    assert await page.locator('#menuFullscreenBtn').is_visible()
     await page.locator('#startBtn').click()
     await page.wait_for_timeout(1900)
     dims=await page.evaluate('''() => ({
@@ -24,6 +40,17 @@ async def check(browser, width, height):
     assert not errors, (width,height,errors)
     assert dims['width']>0
     assert dims['tray']<=dims['viewport']+3,(width,height,dims)
+    hud=await page.evaluate("""() => {
+      const b=document.querySelector('.scoreboard');
+      const full=document.querySelector('#gameFullscreenBtn');
+      const pause=document.querySelector('#pauseBtn');
+      const bb=b.getBoundingClientRect(),f=full.getBoundingClientRect(),p=pause.getBoundingClientRect();
+      return {scroll:b.scrollWidth,client:b.clientWidth,
+        right:f.right,edge:bb.right,pauseRight:p.right,fullLeft:f.left};
+    }""")
+    assert hud['scroll']<=hud['client']+2,(width,height,hud)
+    assert hud['right']<=hud['edge']+2,(width,height,hud)
+    assert hud['fullLeft']>=hud['pauseRight']-2,(width,height,hud)
 
     # Without changing the canvas size, the complete in-game stack should
     # share any leftover height between its top and bottom margins.
@@ -128,26 +155,48 @@ async def check_fullscreen_flow(browser):
       };
       window.__fullscreenTest=test;
     }""")
+    # Menu fullscreen control is independently usable before a race starts.
+    await page.locator('#menuFullscreenBtn').click()
+    first=await page.evaluate("({...window.__fullscreenTest})")
+    assert first=={'requests':1,'exits':0,'active':True},first
+    assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='true'
+    assert await page.locator('#gameFullscreenBtn').get_attribute('aria-pressed')=='true'
+    await page.locator('#menuFullscreenBtn').click()
+    assert await page.evaluate('window.__fullscreenTest.exits')==1
+    assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='false'
+
+    # Let's Serve still enters fullscreen when it was off.
     await page.locator('#startBtn').click()
-    initial=await page.evaluate("({...window.__fullscreenTest})")
-    assert initial=={'requests':1,'exits':0,'active':True}, initial
-
-    # Restart/next-race style transitions must not request fullscreen again.
+    start=await page.evaluate("({...window.__fullscreenTest})")
+    assert start=={'requests':2,'exits':1,'active':True}, start
+    assert await page.locator('#gameFullscreenBtn').get_attribute('aria-pressed')=='true'
     await page.locator('#restartBtn').click()
-    restarted=await page.evaluate("({...window.__fullscreenTest})")
-    assert restarted==initial, restarted
+    assert await page.evaluate("({...window.__fullscreenTest})")==start
 
-    # The top-left game back control returns to the normal level selector.
+    # Returning to level selection MUST keep fullscreen active.
     await page.locator('#levelsBtn').click()
     menu=await page.evaluate("({...window.__fullscreenTest})")
-    assert menu=={'requests':1,'exits':1,'active':False}, menu
+    assert menu==start, menu
     assert await page.locator('#menuScreen').is_visible()
-
-    # Starting another race is a new user gesture: re-enter fullscreen with
-    # no extra confirmation UI or additional clicks within our application.
+    assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='true'
     await page.locator('#startBtn').click()
-    again=await page.evaluate("({...window.__fullscreenTest})")
-    assert again=={'requests':2,'exits':1,'active':True}, again
+    assert await page.evaluate("({...window.__fullscreenTest})")==start, 'No duplicate request while already fullscreen'
+
+    # On the game screen, the button sits directly to the right of Pause.
+    await page.locator('#gameFullscreenBtn').click()
+    off=await page.evaluate("({...window.__fullscreenTest})")
+    assert off=={'requests':2,'exits':2,'active':False},off
+    assert await page.locator('#gameFullscreenBtn').get_attribute('aria-pressed')=='false'
+    await page.locator('#gameFullscreenBtn').click()
+    on=await page.evaluate("({...window.__fullscreenTest})")
+    assert on=={'requests':3,'exits':2,'active':True},on
+    await page.locator('#levelsBtn').click()
+    assert await page.evaluate("({...window.__fullscreenTest})")==on
+    assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='true'
+    # Leaving fullscreen from the menu does not navigate away.
+    await page.locator('#menuFullscreenBtn').click()
+    assert await page.evaluate('window.__fullscreenTest.exits')==3
+    assert await page.locator('#menuScreen').is_visible()
     assert not errors, errors
     await page.close()
 
@@ -240,7 +289,7 @@ async def main():
             await check(browser,*dims)
             print('Smoke passed:',dims)
         await check_fullscreen_flow(browser)
-        print('Fullscreen flow passed: serve → level select → serve')
+        print('Fullscreen flow passed: menu/game toggles, Serve, levels, restart')
         await check_city_invitation(browser)
         print('City invitations passed: 8/10, 9/10, restart, and acknowledgment')
         await browser.close()
