@@ -1763,7 +1763,36 @@
     pixelRatio=ratio;
   }
   let pixelRatio=1;
+  // Fullscreen must be requested from a direct user gesture. The browser
+  // normally does not ask for permission each time, but a fresh API call is
+  // needed after returning to the non-fullscreen level selector.
+  function enterRaceFullscreen(){
+    const root=document.documentElement;
+    if(document.fullscreenElement||document.webkitFullscreenElement)return;
+    const request=root.requestFullscreen||root.webkitRequestFullscreen;
+    if(!request)return; // Local file browsers and iOS Safari may not support it.
+    try{
+      const pending=request.call(root,{navigationUI:'hide'});
+      if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
+    }catch(_){
+      // Unsupported fullscreen options should not prevent starting a race.
+      try{
+        const pending=request.call(root);
+        if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
+      }catch(__){}
+    }
+  }
+  function leaveRaceFullscreen(){
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement)return;
+    const exit=document.exitFullscreen||document.webkitExitFullscreen;
+    if(!exit)return;
+    try{
+      const pending=exit.call(document);
+      if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
+    }catch(_){}
+  }
   function showMenu(){
+    leaveRaceFullscreen();
     resetPasswordQueue();
     game=null;stage.style.transform='';stage.classList.remove('fever-active','inferno-active');$('app').classList.remove('in-game');$('gameScreen').classList.add('hidden');$('menuScreen').classList.remove('hidden');
     $('resultOverlay').classList.add('hidden');
@@ -1804,7 +1833,10 @@
     renderLevelGrid();
   }
   $('exitDebugBtn').addEventListener('click',()=>setDebugMode(false));
-  $('startBtn').addEventListener('click',()=>startLevel(selected));
+  $('startBtn').addEventListener('click',()=>{
+    enterRaceFullscreen(); // Still within the LET'S SERVE button's gesture.
+    startLevel(selected);
+  });
   $('levelsBtn').addEventListener('click',showMenu);
   $('backBtn').addEventListener('click',showMenu);
   $('retryBtn').addEventListener('click',()=>game&&startLevel(game.config.level));
@@ -1831,6 +1863,12 @@
   });
   window.addEventListener('resize',sizeScene);
   if(window.visualViewport)window.visualViewport.addEventListener('resize',sizeScene);
+  // Fullscreen changes the visible phone height even without a normal resize.
+  for(const eventName of ['fullscreenchange','webkitfullscreenchange']){
+    document.addEventListener(eventName,()=>{
+      sizeScene();requestAnimationFrame(sizeScene);
+    });
+  }
   if(window.ResizeObserver){
     const hudObserver=new ResizeObserver(()=>{if($('app').classList.contains('in-game'))sizeScene();});
     for(const el of [document.querySelector('.scoreboard'),$('comboPanel'),document.querySelector('.game-control-strip')]){
