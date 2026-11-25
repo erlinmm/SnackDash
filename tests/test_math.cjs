@@ -31,3 +31,19 @@ test('arithmetic and learning rules match known examples', () => {
   assert.equal(math.pairDifficultyScore(7,196).level,4);
   assert.ok(math.pairDifficultyScore(5,250).level<=2);
 });
+
+test('each next city becomes eligible after 9 wins, not 8 or all 10', () => {
+  const best={};
+  for(let i=1;i<=8;i++)best[i]=10;
+  assert.equal(math.cityCleared(best,0),8);
+  assert.equal(math.cityUnlockedCount(best),1);
+  best[9]=10;
+  assert.equal(math.cityCleared(best,0),9);
+  assert.equal(math.cityUnlockedCount(best),2);
+  assert.equal(best[10],undefined,'10th race is still not won');
+  for(let i=11;i<=19;i++)best[i]=10;
+  assert.equal(math.cityUnlockedCount(best),3);
+  // The final chapter cannot unlock beyond the tenth city.
+  for(let i=21;i<=100;i++)best[i]=10;
+  assert.equal(math.cityUnlockedCount(best),10);
+});
