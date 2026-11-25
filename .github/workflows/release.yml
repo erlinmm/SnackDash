@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version (for example v26.0.0)'
+        description: 'Release version (for example 1.0, 1.0.1, or v26.0.0)'
         required: true
         type: string
 permissions:
@@ -20,13 +20,26 @@ jobs:
     env:
       RELEASE_TAG: ${{ inputs.version || github.ref_name }}
     steps:
-      - name: Validate release version
+      - name: Normalize and validate release version
         shell: bash
         run: |
-          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
-            echo "Version must look like v26.0.0 or v26.0.0-rc.1"
+          input="${RELEASE_TAG#v}"
+          if [[ "$input" =~ ^([0-9]+)\.([0-9]+)(\.([0-9]+))?(-([0-9A-Za-z][0-9A-Za-z.-]*))?$ ]]; then
+            major="${BASH_REMATCH[1]}"
+            minor="${BASH_REMATCH[2]}"
+            patch="${BASH_REMATCH[4]:-0}"
+            suffix="${BASH_REMATCH[5]}"
+            normalized="v${major}.${minor}.${patch}${suffix}"
+          else
+            echo "::error::Invalid release version '$RELEASE_TAG'. Use 1.0, 1.0.1, v1.0.0 or v1.0.0-rc.1"
             exit 1
           fi
+          if [[ "$GITHUB_EVENT_NAME" == "push" && "$RELEASE_TAG" != "$normalized" ]]; then
+            echo "::error::Git tags must use the full format '$normalized'"
+            exit 1
+          fi
+          echo "RELEASE_TAG=$normalized" >> "$GITHUB_ENV"
+          echo "Release version: $normalized"
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
