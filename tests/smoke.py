@@ -324,8 +324,8 @@ async def check_city_mode_rendering(browser):
     actor_scenes=await page.evaluate("() => [...Array(10)].map((_,i)=>window.SnackDashDebug.getVolunteerScene(i))")
     assert len({c['shirt'] for c in actor_scenes})==10,actor_scenes
     assert len({(c['x'],c['y']) for c in actor_scenes})>=5,actor_scenes
-    assert all(abs(c['hand']['x']-(c['x']+38*.57))<.01 for c in actor_scenes)
-    assert all(abs(c['hand']['y']-(c['y']-26*.57))<.01 for c in actor_scenes)
+    assert all(abs(c['hand']['x']-(c['x']+38*.64))<.01 for c in actor_scenes)
+    assert all(abs(c['hand']['y']-(c['y']-26*.64))<.01 for c in actor_scenes)
     # A wide sample of pavements should not all look identical.
     assert len(set(paints))>=5,paints
     # Reduced motion must not move the stage during a mega hit.
