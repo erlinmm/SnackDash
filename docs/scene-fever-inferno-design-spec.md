@@ -12,7 +12,7 @@ Turn the current small roadside city icons into recognizable city-specific sidew
 **Must preserve:**
 - 390 × 700 logical Canvas and current responsive fit-to-screen/fullscreen behaviour;
 - road perspective and three-lane geometry; existing athlete number readability and tap coordinates;
-- existing volunteer, table, hand positions; swap and throw are immediately usable;
+- existing table and input layout; per-city volunteer position may shift slightly. All drawn hand positions, swap cues and throw origins must follow the same per-city anchor; swap and throw stay immediately usable.
 - score, combo, runner speeds, number transformations, number generation, 100 races, city invitations, 40/60/90/120-second race lengths;
 - all code and assets bundled in the self-contained offline HTML; no remote images, fonts, libraries or runtime services.
 
@@ -56,7 +56,7 @@ At y=700, the current road extends beyond the visible canvas edge on both sides.
 **Placement:**
 - Landmark silhouette: far upper scene, broadly y≈70–230, low contrast. One major landmark per city.
 - Pavement/trees/rails: place where x lies outside leftEdge(y) or rightEdge(y), with a visible gap from the road stripe.
-- Medium-depth streetscape: broadly y≈230–390. Use perspective scaling; do not block table (upper left) or volunteer (x≈102,y≈202).
+- Medium-depth streetscape: broadly y≈230–390. Use perspective scaling; protect the table and per-city volunteer placement (x≈90–102, y≈202–216) including the raised supply number.
 - Near section: only where real verge remains visible, generally y≤470 on the left. Do not force decorations at y≈550 where the road covers the canvas.
 - Modules: one landmark silhouette plus about two small repeated street-object types per scene, rather than crowded detailed architecture.
 - No scenery element changes touch targets, geometry, runner velocity, collision or lane choice.
@@ -212,7 +212,7 @@ Drive action effects from the same resolved hit, not by recalculating anything i
 ## 13. Acceptance tests
 
 - All ten real cities have distinctly recognizable silhouettes, planting and sidewalk material; not only a small flag or emblem.
-- Road edges/width, runner spawn/traffic, bib numbers, volunteer positions and hit-test math remain unchanged.
+- Road edges/width, runner spawn/traffic, bib numbers and hit-test math remain unchanged; volunteer layouts are adjustable per city, but all associated supply/throw/swap origins must follow them.
 - Fever enters at combo 5, Inferno at combo 10 and wrong throws reset exactly as before.
 - Score tier edge tests: 20→T1, 21→T2, 30→T2, 31→T3.
 - One-hit feedback never leaves an opaque effect across a runner bib; labels and +scores remain legible.
@@ -223,3 +223,31 @@ Drive action effects from the same resolved hit, not by recalculating anything i
 - Each tested main-branch build is still downloadable as HTML/ZIP from GitHub Releases; stable versioned releases remain separate.
 
 **Implementation status:** specification delivered. No claim that the new scenery or redesigned Fever/Inferno is already programmed.
+
+## 14. Volunteer composition revision (25 November 2026)
+
+Additional user-approved visual requirements supersede the earlier fixed-volunteer-position constraint.
+
+- Prioritise the volunteer's head, torso and held supply number over scenery.
+- Per city, allow a small left/down offset of the volunteer; keep all touch targets and the queue table unchanged.
+- Use one `VOLUNTEER_SCENES` location and colour record per city. Derive the supply-hand position and airborne throw start, swap celebration origin and celebration throw path from this same anchor.
+- Increase the volunteer head, cap, clothing and number-panel contrast without hiding the face or the digits.
+- Do not stack city silhouettes, foliage, street furniture and the volunteer in the same space. Separate landmark, plant and street-furniture bands; deliberately leave negative space around the volunteer; where a layout remains crowded, omit a minor feature rather than layering it.
+- Avoid weakening the Fever and Inferno presentation to solve occlusion; energy effects remain visually distinct and render behind readable number-bearing sprites.
+
+### City composition anchors (logical 390×700 coordinates)
+
+| City | Volunteer x,y | Shirt | Signature nearby furniture |
+|---|---|---|---|
+| Tokyo | 90, 214 | #167d98 | Japanese stone lantern |
+| Seoul | 92, 214 | #ba406d | Contemporary poster stand |
+| London | 92, 216 | #246fa7 | Red pillar postbox |
+| Berlin | 102, 202 | #ce6451 | Bear statue |
+| Amsterdam | 90, 216 | #2475b9 | Bicycle |
+| Paris | 92, 214 | #168889 | Café lamp |
+| Boston | 102, 202 | #2785b8 | Marathon sign |
+| Chicago | 98, 208 | #e29a38 | Elevated-track support |
+| New York | 90, 214 | #df6655 | Subway marker and fire hydrant |
+| Sydney | 92, 216 | #c85d43 | Harbour railing |
+
+Acceptance: all ten layouts render without overlapping the volunteer's head, shirt, held number or each other's primary silhouettes; the hand supply, throw trail and swap confirmation originate from the per-city actor anchor. Review normal, Fever and Inferno at the supported phone sizes.
