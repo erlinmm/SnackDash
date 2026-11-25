@@ -1926,9 +1926,9 @@
     pixelRatio=ratio;
   }
   let pixelRatio=1;
-  // Fullscreen must be requested from a direct user gesture. The browser
-  // normally does not ask for permission each time, but a fresh API call is
-  // needed after returning to the non-fullscreen level selector.
+  // Fullscreen is shared between level selection and gameplay. Browser
+  // policy requires a user gesture to enter, but switching screens does not
+  // change this mode; use the two dedicated buttons to toggle it.
   function enterRaceFullscreen(){
     const root=document.documentElement;
     if(document.fullscreenElement||document.webkitFullscreenElement)return;
@@ -1954,8 +1954,25 @@
       if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
     }catch(_){}
   }
+  function fullscreenIsActive(){
+    return !!(document.fullscreenElement||document.webkitFullscreenElement);
+  }
+  function updateFullscreenButtons(){
+    const active=fullscreenIsActive();
+    for(const id of ['menuFullscreenBtn','gameFullscreenBtn']){
+      const button=$(id);
+      button.textContent=active?'⛶':'⛶';
+      button.setAttribute('aria-pressed',String(active));
+      button.setAttribute('aria-label',active?'Exit fullscreen':'Enter fullscreen');
+      button.title=active?'Exit fullscreen':'Enter fullscreen';
+    }
+  }
+  function toggleFullscreen(){
+    if(fullscreenIsActive())leaveRaceFullscreen();
+    else enterRaceFullscreen();
+  }
   function showMenu(){
-    leaveRaceFullscreen();
+    // Keep fullscreen active when returning to level selection.
     resetPasswordQueue();
     game=null;stage.style.transform='';stage.classList.remove('fever-active','inferno-active');$('app').classList.remove('in-game');$('gameScreen').classList.add('hidden');$('menuScreen').classList.remove('hidden');
     $('resultOverlay').classList.add('hidden');
@@ -2000,9 +2017,13 @@
   $('cityInvitationLater').addEventListener('click',()=>acknowledgeCityInvitation(false));
   $('exitDebugBtn').addEventListener('click',()=>setDebugMode(false));
   $('startBtn').addEventListener('click',()=>{
-    enterRaceFullscreen(); // Still within the LET'S SERVE button's gesture.
+    // Already fullscreen? No redundant request. Otherwise this user click
+    // supplies the transient activation required by Fullscreen API.
+    enterRaceFullscreen();
     startLevel(selected);
   });
+  $('menuFullscreenBtn').addEventListener('click',toggleFullscreen);
+  $('gameFullscreenBtn').addEventListener('click',toggleFullscreen);
   $('levelsBtn').addEventListener('click',showMenu);
   $('backBtn').addEventListener('click',showMenu);
   $('retryBtn').addEventListener('click',()=>game&&startLevel(game.config.level));
@@ -2032,6 +2053,7 @@
   // Fullscreen changes the visible phone height even without a normal resize.
   for(const eventName of ['fullscreenchange','webkitfullscreenchange']){
     document.addEventListener(eventName,()=>{
+      updateFullscreenButtons();
       sizeScene();requestAnimationFrame(sizeScene);
     });
   }
@@ -2054,13 +2076,14 @@
     requestAnimationFrame(frame);
   }
   reconcileCityUnlocks();
-  renderLevelGrid();updateSoundIcon();sizeScene();requestAnimationFrame(frame);
+  renderLevelGrid();updateSoundIcon();updateFullscreenButtons();sizeScene();requestAnimationFrame(frame);
   showPendingCityInvitation();
 
   // Debug mode is hidden in the race-tile sequence and never persists progress.
   window.SnackDashDebug={getGame:()=>game,getPrefs:()=>({...prefs}),getUnlockedCities:()=>unlockedCities,
     getSelectedCity:()=>selectedCity,isDebug:()=>debugMode,setDebug:setDebugMode,
     getPendingInvitation:()=>invitationOpenIndex,
+    getFullscreenState:fullscreenIsActive,
     reconcileCityUnlocks,showPendingCityInvitation,
     getTraffic:()=>game?{laneChanges:game.traffic.laneChanges,yields:game.traffic.yields,
       replans:game.traffic.replans,overlaps:game.traffic.overlaps(),
