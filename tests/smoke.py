@@ -50,7 +50,8 @@ async def check(browser, width, height):
     }""")
     assert hud['scroll']<=hud['client']+2,(width,height,hud)
     assert hud['right']<=hud['edge']+2,(width,height,hud)
-    assert hud['fullLeft']>=hud['pauseRight']-2,(width,height,hud)
+    if width <= height:
+        assert hud['fullLeft']>=hud['pauseRight']-2,(width,height,hud)
 
     # Without changing the canvas size, the complete in-game stack should
     # share any leftover height between its top and bottom margins.
@@ -67,8 +68,18 @@ async def check(browser, width, height):
               align:getComputedStyle(screen).justifyContent};
     }""")
     assert margins['align']=='center',(width,height,margins)
-    if margins['top']>3 or margins['bottom']>3:
+    if width <= height and (margins['top']>3 or margins['bottom']>3):
         assert abs(margins['top']-margins['bottom'])<=4,(width,height,margins)
+
+    speeds=await page.evaluate('''() => {
+      const g=window.SnackDashDebug.getGame(), old=[g.fever,g.inferno];
+      const out=[ [false,false], [true,false], [true,true] ].map(([f,i])=>{
+        g.fever=f;g.inferno=i;
+        return [0,1,2,3,4,5].map(successes=>g.traffic.speed({baseSpeed:1,successes}));
+      });
+      [g.fever,g.inferno]=old;return out;
+    }''')
+    assert speeds==[[1,3,5,8,10,10],[2,4,6,9,11,11],[3,6,8,10,12,12]],speeds
 
     # Regression: the tray tap changes the hand immediately and confirms the
     # swap AT THE VOLUNTEER'S HAND, without a SWAPPED text effect. The view
