@@ -35,7 +35,7 @@ For full mobile smoke tests, install Python's `playwright` package and its Chrom
 
 ## CI/CD
 
-**Build** (`.github/workflows/ci.yml`) runs on pushes to `main` and on pull requests. It checks syntax, mathematical rules, builds one offline HTML and ZIP, opens the game in mobile-sized Chromium views, and uploads both artifacts to the workflow run. It does not automatically publish a release.
+**Build** (`.github/workflows/ci.yml`) runs on pushes to `main` and on pull requests. It checks syntax, mathematical rules, builds one offline HTML and ZIP, opens the game in mobile-sized Chromium views, and uploads both artifacts to the workflow run. After successful tests on `main`, it publishes the HTML and ZIP as a separate `build-N` prerelease for easy GitHub Mobile downloads.
 
 **Release** (`.github/workflows/release.yml`) runs on version tags, repeats the validation, and creates a GitHub Release with `Snack_Dash.html` and `Snack_Dash_HTML.zip` as downloadable assets.
 
@@ -51,6 +51,7 @@ Tags must be pushed on a tested commit. Release publication requires GitHub Acti
 - All hand and table supplies have a valid visible target.
 - Fresh runner arrivals occur only from the top of the scene; lane changes and same-lane passing do not slow runners down.
 - One recent multiplication relationship can be offered naturally and reviewed later; swaps are free.
-- Basic/Medium/Upper bib distributions, supply probabilities, prime-factor restrictions, city unlocks, and 40/60/90/120-second race lengths remain configurable.
+- Winning any **9 of 10 races** in a city qualifies the next city for unlocking. On every entry to the level-selection screen (including startup), the game reconciles saved race stamps, unlocks the eligible city, and displays a postcard invitation from the new city's marathon organising committee. An invitation remains pending across restarts until acknowledged, and only appears once after acknowledgment.
+- Basic/Medium/Upper bib distributions, supply probabilities, prime-factor restrictions, and 40/60/90/120-second race lengths remain configurable.
 
 Data and progress are stored in browser local storage. Opening different `file://` locations may use separate browser storage namespaces, so an offline release file may not inherit earlier saved progress.
