@@ -1,7 +1,7 @@
 """Dependency-free, antialiased SnackDash launcher artwork.
 
-The full-bleed background works with platform masks. The banana, motion
-streaks and spark are kept inside the central 80% safe circle for Android.
+The full-bleed background works with platform masks. The runner, water cup,
+and motion streaks are kept inside the central 80% safe circle for Android.
 """
 import math
 import struct
@@ -41,19 +41,6 @@ def icon(size, maskable=False):
                 r=min(n,math.ceil(right-.5))
                 if r>l: rows[y][l*3:r*3]=rgb*(r-l)
 
-    def curve(start, segments):
-        pts=[start]
-        for a,b,c in segments:
-            x,y=pts[-1]
-            for j in range(1,25):
-                t=j/24; u=1-t
-                pts.append((u**3*x+3*u*u*t*a[0]+3*u*t*t*b[0]+t**3*c[0],
-                            u**3*y+3*u*u*t*a[1]+3*u*t*t*b[1]+t**3*c[1]))
-        return pts
-
-    def offset(pts, dx,dy):
-        return [(x+dx,y+dy) for x,y in pts]
-
     def circle(cx,cy,r,color):
         polygon([(cx+r*math.cos(i*math.tau/64),cy+r*math.sin(i*math.tau/64)) for i in range(64)],color)
 
@@ -63,40 +50,61 @@ def icon(size, maskable=False):
     for x in (.18,.27,.36):
         polygon([(x,.82),(x+.025,.82),(x+.37,.18),(x+.345,.18)],(51,174,156))
 
-    # Fast-moving supply: cream speed stripes, angled like the runner's stride.
-    for x,y,w in ((.17,.40,.17),(.15,.49,.19),(.21,.58,.11)):
-        polygon([(x,y),(x+w,y-.035),(x+w-.025,y+.005),(x-.025,y+.04)],(255,245,210))
+    cream=(255,248,222)
+    ink=(14,66,78)
+    orange=(255,153,76)
+    blue=(102,212,245)
 
-    # Hand-drawn crescent banana with a dark outline and warm shadow.
-    banana=curve((.31,.34),[
-        ((.39,.49),(.51,.60),(.64,.53)),
-        ((.73,.48),(.77,.36),(.75,.26)),
-        ((.78,.25),(.82,.26),(.83,.30)),
-        ((.90,.49),(.76,.72),(.57,.77)),
-        ((.38,.81),(.23,.63),(.23,.44)),
-        ((.22,.40),(.26,.35),(.31,.34)),
-    ])
-    polygon(offset(banana,.014,.025),(12,58,65))
-    polygon(banana,(92,55,28))
-    inside=[(.54+(x-.54)*.943,.53+(y-.53)*.943) for x,y in banana]
-    polygon(inside,(255,190,48))
-    highlight=curve((.29,.41),[
-        ((.35,.57),(.49,.68),(.63,.62)),
-        ((.72,.58),(.77,.49),(.80,.39)),
-        ((.79,.53),(.73,.65),(.61,.71)),
-        ((.46,.77),(.33,.63),(.29,.41)),
-    ])
-    polygon(highlight,(255,226,91))
-    shine=curve((.35,.54),[
-        ((.41,.62),(.50,.66),(.56,.66)),
-        ((.52,.69),(.41,.67),(.35,.54)),
-    ])
-    polygon(shine,(255,250,188))
-    polygon([(.25,.41),(.28,.36),(.31,.35),(.34,.40),(.30,.44)],(124,82,42))
-    polygon([(.75,.27),(.76,.22),(.79,.21),(.82,.26),(.82,.30),(.78,.31)],(110,76,36))
-    # Bright four-point spark; readable even at a small launcher size.
-    polygon([(.57,.23),(.60,.30),(.67,.33),(.60,.36),(.57,.43),(.54,.36),(.47,.33),(.54,.30)],(255,249,213))
-    circle(.43,.27,.019,(255,249,213))
+    def stroke(points, width, color):
+        for (x1,y1),(x2,y2) in zip(points,points[1:]):
+            length=math.hypot(x2-x1,y2-y1)
+            if not length:
+                continue
+            dx,dy=-(y2-y1)*width/(2*length),(x2-x1)*width/(2*length)
+            polygon([(x1+dx,y1+dy),(x2+dx,y2+dy),
+                     (x2-dx,y2-dy),(x1-dx,y1-dy)],color)
+        for x,y in points:
+            circle(x,y,width/2,color)
+
+    # Motion lines and the running athlete, reaching for a water cup.
+    for x,y,w in ((.19,.39,.10),(.16,.46,.12),(.18,.53,.09)):
+        stroke([(x,y),(x+w,y)],.025,cream)
+
+    # Legs: a long forward stride and a bent trailing leg.
+    stroke([(.43,.53),(.54,.63),(.46,.76),(.53,.77)],.082,ink)
+    stroke([(.42,.53),(.32,.65),(.24,.68)],.082,ink)
+    stroke([(.43,.53),(.54,.63),(.46,.76)],.055,cream)
+    stroke([(.42,.53),(.32,.65),(.24,.68)],.055,cream)
+    stroke([(.45,.76),(.53,.77)],.052,orange)
+    stroke([(.24,.68),(.20,.66)],.052,orange)
+
+    # Arms, forward arm reaching toward the hydration station.
+    stroke([(.40,.39),(.30,.44),(.28,.36)],.073,ink)
+    stroke([(.49,.39),(.56,.47),(.65,.43)],.073,ink)
+    stroke([(.40,.39),(.30,.44),(.28,.36)],.045,cream)
+    stroke([(.49,.39),(.56,.47),(.65,.43)],.045,cream)
+    polygon([(.39,.35),(.48,.35),(.53,.40),(.46,.57),
+             (.36,.55),(.35,.49)],ink)
+    polygon([(.40,.37),(.47,.37),(.50,.41),(.44,.54),
+             (.38,.53),(.38,.48)],orange)
+    polygon([(.40,.43),(.465,.44),(.45,.50),(.39,.49)],cream)
+    # Head and a bright running headband.
+    circle(.49,.275,.085,ink)
+    circle(.49,.275,.066,cream)
+    polygon([(.427,.258),(.552,.244),(.554,.274),(.43,.287)],orange)
+
+    # Water cup with a blue waterline and a simple hydration droplet.
+    polygon([(.63,.37),(.80,.37),(.775,.59),(.66,.59)],ink)
+    polygon([(.649,.39),(.781,.39),(.759,.566),(.677,.566)],cream)
+    polygon([(.659,.445),(.771,.445),(.759,.566),(.677,.566)],blue)
+    stroke([(.63,.375),(.80,.375)],.026,cream)
+    polygon([(.715,.454),(.686,.496),(.692,.518),(.715,.527),
+             (.738,.518),(.744,.496)],(27,122,180))
+    circle(.715,.504,.027,(27,122,180))
+    # Water splash above the cup.
+    stroke([(.68,.325),(.665,.30)],.025,blue)
+    stroke([(.72,.315),(.726,.275)],.025,blue)
+    stroke([(.755,.33),(.777,.31)],.025,blue)
 
     # Box-filter supersampling produces crisp edges without Pillow.
     raw=[]
