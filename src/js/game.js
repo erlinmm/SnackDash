@@ -66,7 +66,8 @@
   const easeOut=t=>1-Math.pow(1-t,3);
   const rr=(r,a,b)=>a+r()*(b-a);
   const randSeed=()=>((Date.now() ^ (Math.random()*0xFFFFFFFF))>>>0);
-  let prefs=loadPrefs(), unlockedCities=cityUnlockedCount(prefs.best), selectedCity=0, selected=1;
+  let prefs=loadPrefs(), unlockedCities=prefs.unlockedCities, selectedCity=0, selected=1;
+  let invitationOpenIndex=null;
   let debugMode=false;
   const DEBUG_TAP_SEQUENCE=[1,9,8,6];
   const passwordQueue=[];
@@ -102,12 +103,19 @@
       const saved=JSON.parse(localStorage.getItem('snackDashSaveV2')||'null');
       // Preserve the prior ten level records as first-city records if needed.
       const d=saved||{best:old.best||{},sound:old.sound!==false,selectedCity:0};
-      return {best:d.best||{},sound:d.sound!==false,selectedCity:d.selectedCity||0};
-    }catch(e){return {best:{},sound:true,selectedCity:0};}
+      return {best:d.best||{},sound:d.sound!==false,selectedCity:d.selectedCity||0,
+        // Old saves have no unlock-notification fields. The menu reconciles
+        // their achievements and delivers any invitation not yet acknowledged.
+        unlockedCities:Number.isInteger(d.unlockedCities)?clamp(d.unlockedCities,1,10):1,
+        invitationsAcknowledged:Array.isArray(d.invitationsAcknowledged)
+          ?d.invitationsAcknowledged.filter(n=>Number.isInteger(n)&&n>=1&&n<=9):[]};
+    }catch(e){return {best:{},sound:true,selectedCity:0,
+      unlockedCities:1,invitationsAcknowledged:[]};}
   }
   function savePrefs(){
     if(debugMode)return;
-    try{prefs.selectedCity=selectedCity;localStorage.setItem('snackDashSaveV2',JSON.stringify(prefs));}
+    try{prefs.selectedCity=selectedCity;prefs.unlockedCities=unlockedCities;
+      localStorage.setItem('snackDashSaveV2',JSON.stringify(prefs));}
     catch(e){/* Offline/private browsing remains playable */}
   }
 
@@ -985,7 +993,8 @@
       if(won){
         if(!debugMode){
           prefs.best[this.config.level]=Math.max(prefs.best[this.config.level]??-999,this.score);
-          unlockedCities=cityUnlockedCount(prefs.best);
+          // Winning a race only records its stamp. Invitation + next-city
+          // access are reconciled on the level-selection page, never here.
           savePrefs();
         }
         this.phase='celebrate';this.celebrationTime=0;this.throwing=null;
@@ -999,10 +1008,8 @@
       this.resultsShown=true;
       $('resultMascot').textContent=won?'🏆':'💦';
       const city=CITIES[this.config.cityIndex];
-      const cityFinished=cityCleared(prefs.best,this.config.cityIndex)===10;
-      const newCity=!debugMode&&cityFinished&&this.config.cityIndex<9&&unlockedCities>this.config.cityIndex+1;
       $('resultKicker').textContent=won?'RACE COMPLETE!':'TIME IS UP!';
-      $('resultHeading').textContent=won?(this.config.level===100?'WORLD TOUR LEGEND!':newCity?'CITY UNLOCKED!':'SUPER SERVER!'):'TRY ANOTHER LAP!';
+      $('resultHeading').textContent=won?(this.config.level===100?'WORLD TOUR LEGEND!':'SUPER SERVER!'):'TRY ANOTHER LAP!';
       const finalScore=shortScoreText(this.score,2);
       const exactScore=fullScoreText(this.score);
       $('resultScore').replaceChildren();
@@ -1018,7 +1025,6 @@
       $('resultText').textContent=debugMode?'Debug run: progress and records are not saved.':
         !won?'The runners are still hungry. Have another go!':
         this.config.level===100?'100 races completed! Your volunteer is a world-tour superstar!':
-        newCity?`All 10 ${city.name} races finished! ${CITIES[this.config.cityIndex+1].name} is open — all 10 races unlocked!`:
         `${city.name} race ${this.config.event} stamped! ${cityCleared(prefs.best,this.config.cityIndex)} of 10 races complete.`;
       const accuracy=this.correct+this.wrong?Math.round(this.correct/(this.correct+this.wrong)*100):0;
       $('resultStats').textContent=`${this.correct} good catches · ${this.wrong} bonks · ${accuracy}% accuracy · best combo ${this.maxCombo}`;
@@ -1744,8 +1750,71 @@
   }
 
   /* ---------- User interface ---------- */
+  // Unlock and notification are separate states. A race win changes best[]
+  // only. On EVERY entry into the level selector (including a fresh launch)
+  // we check the saved stamps, then persist city access before showing
+  // invitations. If the app closes before acknowledgement, the dialog returns.
+  function reconcileCityUnlocks(){
+    if(debugMode)return;
+    const eligible=cityUnlockedCount(prefs.best);
+    if(eligible>unlockedCities){
+      unlockedCities=eligible;
+      savePrefs();
+    }
+  }
+  function nextPendingCityInvitation(){
+    if(debugMode)return null;
+    for(let index=1;index<unlockedCities;index++){
+      if(!prefs.invitationsAcknowledged.includes(index))return index;
+    }
+    return null;
+  }
+  function showPendingCityInvitation(){
+    if(debugMode || !$('gameScreen').classList.contains('hidden'))return;
+    const index=nextPendingCityInvitation();
+    const overlay=$('cityInvitationOverlay');
+    if(index===null){
+      invitationOpenIndex=null;
+      overlay.classList.add('hidden');
+      return;
+    }
+    const city=CITIES[index];
+    invitationOpenIndex=index;
+    const art=$('cityInvitationPostcard');
+    art.style.setProperty('--city-color',city.color);
+    art.style.setProperty('--city-sky',city.sky);
+    $('cityInvitationNumber').textContent=`${String(index+1).padStart(2,'0')} / 10`;
+    $('cityInvitationIcon').textContent=city.icon;
+    $('cityInvitationLandmark').textContent=city.landmark;
+    $('cityInvitationName').textContent=city.name;
+    $('cityInvitationSubtitle').textContent=city.subtitle;
+    $('cityInvitationText').textContent=
+      `You've received a special invitation from the ${city.name} Marathon Organising Committee! They'd love you to serve at their races.`;
+    $('cityInvitationVisit').textContent=`VISIT ${city.name} ➜`;
+    overlay.classList.remove('hidden');
+    $('cityInvitationVisit').focus({preventScroll:true});
+  }
+  function acknowledgeCityInvitation(visit){
+    if(invitationOpenIndex===null)return;
+    const index=invitationOpenIndex;
+    if(!prefs.invitationsAcknowledged.includes(index)){
+      prefs.invitationsAcknowledged.push(index);
+      savePrefs(); // Ack is durable; no repeat after a restart.
+    }
+    invitationOpenIndex=null;
+    $('cityInvitationOverlay').classList.add('hidden');
+    if(visit){
+      selectedCity=index;
+      selected=index*10+1;
+      savePrefs();
+      renderLevelGrid();
+    }
+    // If a previously played save has more than one pending city, deliver
+    // all postcards one at a time, always on the selection screen.
+    showPendingCityInvitation();
+  }
+
   function renderLevelGrid(){
-    unlockedCities=cityUnlockedCount(prefs.best);
     selectedCity=clamp(selectedCity,0,debugMode?9:unlockedCities-1);
     if(!isOpen(selected))selected=selectedCity*10+1;
     const complete=LEVELS.filter(cfg=>isWon(cfg.level)).length;
@@ -1889,7 +1958,9 @@
     resetPasswordQueue();
     game=null;stage.style.transform='';stage.classList.remove('fever-active','inferno-active');$('app').classList.remove('in-game');$('gameScreen').classList.add('hidden');$('menuScreen').classList.remove('hidden');
     $('resultOverlay').classList.add('hidden');
+    reconcileCityUnlocks();
     renderLevelGrid();window.scrollTo({top:0,behavior:'instant'});
+    showPendingCityInvitation();
   }
   function startLevel(level){
     if(!isOpen(level))return;
@@ -1918,13 +1989,14 @@
     debugMode=Boolean(enabled);
     resetPasswordQueue();
     if(!debugMode){
-      unlockedCities=cityUnlockedCount(prefs.best);
       selectedCity=clamp(selectedCity,0,unlockedCities-1);
       selected=selectedCity*10+1;
       savePrefs();
     }
     renderLevelGrid();
   }
+  $('cityInvitationVisit').addEventListener('click',()=>acknowledgeCityInvitation(true));
+  $('cityInvitationLater').addEventListener('click',()=>acknowledgeCityInvitation(false));
   $('exitDebugBtn').addEventListener('click',()=>setDebugMode(false));
   $('startBtn').addEventListener('click',()=>{
     enterRaceFullscreen(); // Still within the LET'S SERVE button's gesture.
@@ -1980,11 +2052,15 @@
     if(game){try{game.update(dt);game.draw();}catch(e){console.error('Game error:',e);showMessage('Oops! Please restart this level.',3500);game.phase='paused';}}
     requestAnimationFrame(frame);
   }
+  reconcileCityUnlocks();
   renderLevelGrid();updateSoundIcon();sizeScene();requestAnimationFrame(frame);
+  showPendingCityInvitation();
 
   // Debug mode is hidden in the race-tile sequence and never persists progress.
   window.SnackDashDebug={getGame:()=>game,getPrefs:()=>({...prefs}),getUnlockedCities:()=>unlockedCities,
     getSelectedCity:()=>selectedCity,isDebug:()=>debugMode,setDebug:setDebugMode,
+    getPendingInvitation:()=>invitationOpenIndex,
+    reconcileCityUnlocks,showPendingCityInvitation,
     getTraffic:()=>game?{laneChanges:game.traffic.laneChanges,yields:game.traffic.yields,
       replans:game.traffic.replans,overlaps:game.traffic.overlaps(),
       runners:game.runners.map(r=>({id:r.id,y:r.y,lane:r.lane,laneIndex:r.laneIndex,
