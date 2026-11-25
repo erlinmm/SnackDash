@@ -370,3 +370,36 @@ button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #0d929
   .app.in-game .scoreboard .time-pill {flex-basis:63px}
   .app.in-game .scoreboard .total-pill strong {font-size:15px}
 }
+
+/* City streetscape refresh: warm flow in Fever, focused stage in Inferno. */
+.combo-panel.fever:not(.inferno){
+  background:linear-gradient(105deg,#fff1c5,#ffe5cb);
+  border-color:#e6b764;box-shadow:0 0 10px #e7ad6870;
+}
+.combo-panel.fever:not(.inferno) .fever-plaque{
+  background:linear-gradient(120deg,#d48a37,#f5cb71);
+  border-color:#f8df92;color:#51371f;text-shadow:none;
+  box-shadow:0 1px 0 #b78346;
+  animation:feverPlaquePulse 1.1s ease-in-out infinite alternate;
+}
+.combo-panel.fever:not(.inferno) .combo-indicator strong{
+  color:#88552b;text-shadow:none;animation:none;
+}
+.combo-panel.inferno{
+  background:linear-gradient(100deg,#261b55,#48316e);
+  border-color:#e3c572;box-shadow:0 0 12px #7860b077;
+  animation:none;
+}
+.combo-panel.inferno .fever-plaque{
+  background:linear-gradient(110deg,#382568,#59428c);
+  border-color:#ecd37b;box-shadow:0 0 9px #9a85cf77;
+  animation:none;
+}
+.combo-panel.inferno .combo-indicator strong{
+  color:#ffe6a1;text-shadow:none;
+}
+@media(prefers-reduced-motion:reduce){
+  .combo-panel.fever .fever-plaque,
+  .combo-panel.fever .combo-indicator strong,
+  .combo-panel.inferno{animation:none!important}
+}
