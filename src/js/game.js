@@ -1180,21 +1180,17 @@
             this.feverImpact=.68;this.feverHits++;
             if(outcome.delta>BIG_REWARD_JUMP){
               runner.joyJumpTimer=.84;
-              runner.joyJumpHeight=Math.min(54,25+(outcome.delta-20)*.75);
-              this.popEffect({kind:'jumpShout',text:outcome.delta>HEAVY_REWARD_IMPACT?'INCREDIBLE!':'SUPER CATCH!',
-                x:fxX,y:fxY-124,life:.88});
+              runner.joyJumpHeight=Math.min(this.inferno?52:34,24+(outcome.delta-20)*.66);
             }
-            if(outcome.delta>HEAVY_REWARD_IMPACT){
+            if(outcome.delta>HEAVY_REWARD_IMPACT && this.inferno && !outcome.infernoActivated){
               this.hitstopRemaining=reducedMotion()?0:.04;
               this.shakeRemaining=reducedMotion()?0:.12;
-              this.shakePower=2.7;
-              this.impactFlash=0;
-              if(!outcome.infernoActivated)this.popEffect({kind:'heavyImpact',text:'MEGA!',x:fxX,y:fxY,life:.35});
+              this.shakePower=2.7;this.impactFlash=0;
               audio.megaHit(outcome.delta);
             }
           }
           if(outcome.infernoActivated){
-            this.popEffect({kind:'feverEntry',text:'INFERNO!',x:W/2,y:H*.44,life:.65});
+            this.popEffect({kind:'feverEntry',text:'INFERNO!',x:W/2,y:H*.44,life:.68});
             showMessage('🪩 INFERNO! DISCO TIME!',1450);
             audio.infernoStart();
           }
@@ -1207,10 +1203,12 @@
           this.popEffect({kind:'score',text:`+${outcome.delta}`,x:fxX,y:fxY-48,
             size:tier===1?25:tier===2?29:34,color:this.inferno?'#ffdc65':this.fever?'#e8a048':'#0f9870',life:.52});
           if(!(outcome.activated||outcome.infernoActivated))
-            this.popEffect({kind:'hitRing',x:fxX,y:fxY-12,tier,life:.38});
+            this.popEffect({kind:'hitBurst',x:fxX,y:fxY-10,tier,
+              mode:this.inferno?'inferno':this.fever?'fever':'normal',
+              life:tier===3?.55:.43});
           const transformText=oldRunnerNumber>t.supply.number ? `${oldRunnerNumber} ÷ ${t.supply.number} = ${runner.number}` : `${oldRunnerNumber} × ${t.supply.number} = ${runner.number}`;
           updateMatchHint(`${transformText} ✓ · Combo ${this.combo} · +${outcome.delta}`);
-          if(this.inferno&&tier===3){/* mega cue already played above */}
+          if(this.inferno&&tier===3&&!outcome.infernoActivated){/* mega cue already played above */}
           else if(this.fever)audio.feverHit(this.combo);else audio.combo(runner.successes);
         }else{
           this.wrong++;runner.mood='angry';runner.moodTimer=1.25;
@@ -1385,6 +1383,9 @@
       // the bottom without participating in number matching.
       const sorted=[...this.runners,...this.departing].sort((a,b)=>
         a.y-b.y);
+      for(const fx of this.effects){
+        if(['hitBurst','feverEntry','hitRing','heavyImpact'].includes(fx.kind))drawEffect(fx);
+      }
       for(const r of sorted)drawRunner(r,this.sceneTime,this.runnerX(r));
       drawTable(this.supplies.queue,this.sceneTime);
       drawSwapCelebration(this.swapCue,this.sceneTime); // Large effects sit behind the hand and its readable digits.
@@ -1403,7 +1404,9 @@
       if(this.throwing)drawThrownSupply(this.throwing,this.runners,this);
       // Do not flash over numbers.
       // No opaque hit flash over runners and supplies.
-      for(const fx of this.effects)drawEffect(fx);
+      for(const fx of this.effects){
+        if(!['hitBurst','feverEntry','hitRing','heavyImpact'].includes(fx.kind))drawEffect(fx);
+      }
       if(this.fever&&['playing','paused'].includes(this.phase)){
         drawFeverFrame(this);
         if(this.inferno)drawInfernoOverlay(this);
@@ -1808,24 +1811,34 @@
   function drawThrownSupply(t,runners,game){
     if(t.elapsed>.41)return;
     const runner=runners.find(r=>r.id===t.runnerId);if(!runner)return;
-    const f=clamp(t.elapsed/.41,0,1);
-    const endX=game.runnerX(runner);
+    const f=clamp(t.elapsed/.41,0,1),endX=game.runnerX(runner);
     const endY=runner.y+runnerVisualOffset(runner)+(matches(t.supply.number,runner.number)?-12:-38)*runnerScale(runner);
-    const inferno=t.feverAtRelease&&game.inferno;
+    const inferno=t.feverAtRelease&&game.inferno,fever=t.feverAtRelease&&!inferno;
     const arc=t.feverAtRelease?108:68;
     const point=q=>[mix(117,endX,q),mix(188,endY,q)-Math.sin(q*Math.PI)*arc];
     const [x,y]=point(f);
-    ctx.save();
-    // Trail follows the actual moving target. Keep it behind the flying supply.
-    const count=t.feverAtRelease?(inferno?6:4):3;
-    for(let i=count;i>=1;i--){
-      const q=Math.max(0,f-i*.045),[px,py]=point(q);
-      ctx.globalAlpha=(1-i/(count+1))*(inferno?.47:t.feverAtRelease?.4:.2);
-      const col=inferno?(i%3===0?'#ed9dd5':i%2?'#ffe4a5':'#8ed9ed'):t.feverAtRelease?'#ffd779':'#fffbe5';
-      circle(px,py,inferno?3.7:t.feverAtRelease?2.8:2.2,col);
+    ctx.save();ctx.globalCompositeOperation='screen';ctx.lineCap='round';
+    if(t.feverAtRelease){
+      ctx.beginPath();
+      for(let j=0;j<=9;j++){
+        const q=Math.max(0,f-.23+j*.23/9),[px,py]=point(q);
+        if(j===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+      }
+      ctx.shadowColor=inferno?'#bc77ff':'#ffc85b';ctx.shadowBlur=inferno?17:11;
+      ctx.lineWidth=inferno?7:5;
+      ctx.strokeStyle=inferno?'rgba(128,228,255,.65)':'rgba(255,205,99,.68)';ctx.stroke();
+      ctx.shadowBlur=0;ctx.lineWidth=inferno?2.8:2;
+      ctx.strokeStyle=inferno?'#ffe6b4':'#fff6db';ctx.stroke();
+    }
+    for(let i=t.feverAtRelease?9:3;i>=1;i--){
+      const q=Math.max(0,f-i*.03),[px,py]=point(q);
+      ctx.globalAlpha=(1-i/11)*(inferno?.93:fever?.76:.45);
+      circle(px,py,inferno?4:fever?3:2.4,
+        inferno?(i%3===0?'#ff87d9':i%2?'#ffe484':'#87dffa'):
+          fever?(i%2?'#ffd763':'#fff5c9'):'#fff9d9');
     }
     ctx.restore();
-    drawSupply(t.supply,x,y,t.feverAtRelease?25:20,f*TAU*(t.feverAtRelease?3:1.5),true);
+    drawSupply(t.supply,x,y,t.feverAtRelease?27:20,f*TAU*(t.feverAtRelease?3:1.5),true);
   }
     function drawEffect(f){
     const p=f.age/f.life,alpha=clamp(1-p*1.2,0,1);
@@ -1833,11 +1846,39 @@
     if(f.kind==='score'){
       const y=f.y-p*40;
       ctx.shadowColor='rgba(255,255,255,.75)';ctx.shadowBlur=5;
-      label(f.text,clamp(f.x,39,W-39),Math.max(143,y),f.size||28,f.color);ctx.shadowBlur=0;
+      const size=f.size||28,x=clamp(f.x,44,W-44),yy=Math.max(143,y);
+      ctx.font="1000 "+size+"px 'Trebuchet MS',system-ui,sans-serif";
+      ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';
+      ctx.strokeStyle=(game&&game.inferno)?'#302348':'#603b4d';ctx.lineWidth=5;
+      ctx.strokeText(f.text,x,yy);
+      label(f.text,x,yy,size,f.color);ctx.shadowBlur=0;
     }else if(f.kind==='hitRing'){
       const r=10+p*(f.tier===3?34:f.tier===2?26:19);
       ctx.beginPath();ctx.arc(f.x,f.y,r,0,TAU);ctx.lineWidth=3*(1-p)+1;
       ctx.strokeStyle=game.inferno?'#93d9ec':'#ffd97d';ctx.stroke();
+    }else if(f.kind==='hitBurst'){
+      // Colourful shock ring + radial rays, drawn BEFORE the runner and bib.
+      const inferno=f.mode==='inferno',tier=f.tier||1;
+      const r=12+p*(inferno?(tier===3?69:43):(tier===3?50:35));
+      ctx.globalAlpha=alpha*(inferno?.99:.9);
+      ctx.beginPath();ctx.arc(f.x,f.y,r,0,TAU);ctx.lineWidth=(inferno?6:4.5)*(1-p)+1;
+      ctx.strokeStyle=inferno?'#e8d4ff':'#ffe6a0';ctx.stroke();
+      const count=tier===3?16:tier===2?10:6;
+      for(let i=0;i<count;i++){
+        const a=i*TAU/count+i*.04;
+        const d=15+r*.45,extra=(tier===3?29:tier===2?18:9)*(1-p);
+        line(f.x+Math.cos(a)*d,f.y+Math.sin(a)*d,
+          f.x+Math.cos(a)*(d+extra),f.y+Math.sin(a)*(d+extra),
+          inferno?(i%3===0?'#ff99da':i%2?'#ffe383':'#80e5f9'):
+            (i%2?'#ffc364':'#fff4b2'),tier===3?3.9:2.7);
+      }
+      if(tier===3 && !reducedMotion()){
+        for(let i=0;i<12;i++){
+          const a=i*TAU/12+p*.4,d=33+(i%3)*11+33*p;
+          circle(f.x+Math.cos(a)*d,f.y+Math.sin(a)*d,4.6*(1-p)+1,
+            inferno?(i%2?'#f5a2e4':'#80dced'):'#ffd87c');
+        }
+      }
     }else if(f.kind==='spark'){
       for(let i=0;i<7;i++){
         const angle=TAU*i/7+p*.7;
@@ -1846,10 +1887,21 @@
     }else if(f.kind==='rays'){
       for(let i=0;i<12;i++){const angle=TAU*i/12+p*.4;line(f.x+Math.cos(angle)*18,f.y+Math.sin(angle)*18,f.x+Math.cos(angle)*(36+32*p),f.y+Math.sin(angle)*(34+31*p),i%2?'#fff7a0':'#ffcd69',4.4);}
     }else if(f.kind==='feverEntry'||f.kind==='feverEnd'){
-      const size=25+4*Math.sin(Math.PI*Math.min(1,p));
+      const size=(f.text==='INFERNO!'?34:31)+4*Math.sin(Math.PI*Math.min(1,p));
       ctx.save();ctx.translate(f.x,f.y);ctx.rotate(Math.sin(p*22)*.08);
-      roundedRect(-83,-25,166,50,13,f.kind==='feverEntry'?'#ffe8a6':'#ece2f5','#482b70',2);
-      label(f.text,0,3,size,f.kind==='feverEntry'?'#ac2973':'#5f4775');ctx.restore();
+      const bw=f.text==='INFERNO!'?216:188;
+      roundedRect(-bw/2,-32,bw,64,17,f.text==='INFERNO!'?'#6332a2':f.kind==='feverEntry'?'#ffe479':'#d3cee9',
+        f.text==='INFERNO!'?'#ffdb70':'#aa3d78',4);
+      if(f.kind==='feverEntry'){
+        for(let i=0;i<8;i++){
+          const a=i*TAU/8;
+          line(Math.cos(a)*(bw/2+6),Math.sin(a)*39,
+            Math.cos(a)*(bw/2+21),Math.sin(a)*52,
+            f.text==='INFERNO!'?'#e8a0ff':'#ffd17c',3);
+        }
+      }
+      label(f.text,0,2,size,f.text==='INFERNO!'?'#fff1ba':f.kind==='feverEntry'?'#ad4470':'#5f4775');
+      ctx.restore();
     }else if(f.kind==='jumpShout'){
       ctx.translate(f.x,f.y-p*26);
       ctx.rotate(Math.sin(p*20)*.08);
