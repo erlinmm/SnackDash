@@ -16,7 +16,7 @@ done
 
 # Manual runs create a lightweight tag explicitly. A previous failed attempt
 # may have created this tag; reuse it only when it targets this exact commit.
-if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "${AUTO_BUILD_RELEASE:-false}" == "true" ]]; then
   previous="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq .object.sha 2>/dev/null)" || previous=""
   if [[ -n "$previous" && "$previous" != "$GITHUB_SHA" ]]; then
     echo "::error::Tag $RELEASE_TAG already targets another commit: $previous"
@@ -49,6 +49,16 @@ fi
 
 # Creating a release can return HTTP 500 even if it committed remotely.
 # Check whether it exists before each retry; do not create duplicate releases.
+release_title="Snack Dash ${RELEASE_TAG}"
+release_notes="Snack Dash offline HTML build ${RELEASE_TAG}"
+release_opts=()
+if [[ "${AUTO_BUILD_RELEASE:-false}" == "true" ]]; then
+  # Automatic builds are visible under Releases, but do not replace the
+  # manually versioned stable app release (v1.0.x, etc.).
+  release_title="Snack Dash CI Build #${GITHUB_RUN_NUMBER:-unknown}"
+  release_notes="Automated, tested build from main at commit ${GITHUB_SHA}. Download Snack_Dash_HTML.zip on mobile, unzip and open the HTML."
+  release_opts+=(--prerelease)
+fi
 created=false
 for attempt in 1 2 3 4; do
   if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
@@ -57,8 +67,9 @@ for attempt in 1 2 3 4; do
   fi
   if gh release create "$RELEASE_TAG" \
     --repo "$GITHUB_REPOSITORY" \
-    --title "Snack Dash $RELEASE_TAG" \
-    --notes "Snack Dash offline HTML build $RELEASE_TAG" \
+    --title "$release_title" \
+    --notes "$release_notes" \
+    "${release_opts[@]}" \
     --verify-tag; then
     created=true
     break
