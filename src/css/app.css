@@ -307,3 +307,66 @@ button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #0d929
  .city-invitation-postcard .city-emblem{font-size:48px}
  .city-invitation-card p{margin:8px 0 5px}
 }
+
+/* Selection screen: equal visual whitespace above the header and below the
+   passport whenever it fits; content remains scrollable on short phones.
+   Auto-growing, zero-minimum spacer flex items avoid unsafe centering. */
+.app:not(.in-game) {
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+}
+.app:not(.in-game)::before,
+.app:not(.in-game)::after {
+  content:"";
+  display:block;
+  flex:1 0 0px;
+  min-height:0;
+}
+.app:not(.in-game) .topbar,
+.app:not(.in-game) .menu { flex-shrink:0; }
+.fullscreen-toggle {
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  font-weight:900;
+  line-height:1;
+  flex-shrink:0;
+}
+.fullscreen-toggle[aria-pressed="true"] {
+  background:#e3f3e9;
+  border-color:#8abca2;
+  color:#217a65;
+}
+@media(max-width:530px){
+  .app:not(.in-game) .top-actions{gap:5px}
+  .app:not(.in-game) .topbar{flex-wrap:nowrap}
+  .app:not(.in-game) .brand{min-width:0}
+  .app:not(.in-game) .brand-title{font-size:clamp(17px,5.8vw,21px)}
+  .app:not(.in-game) .fullscreen-toggle{font-size:21px}
+  /* Four icon buttons (back, restart, pause, fullscreen) and three pills
+     must remain within 320px without horizontal scrolling. */
+  .app.in-game .scoreboard { gap:3px; }
+  .app.in-game .scoreboard .small-btn {
+    width:clamp(29px,8vw,34px);
+    min-width:0;
+    flex:0 0 clamp(29px,8vw,34px);
+    padding:0;
+    font-size:20px;
+  }
+  .app.in-game .scoreboard .fullscreen-toggle{font-size:21px}
+  .app.in-game .scoreboard .level-pill {flex:0 0 35px;min-width:0;padding:3px 2px}
+  .app.in-game .scoreboard .time-pill {flex:0 0 65px;min-width:0;padding:3px 2px}
+  .app.in-game .scoreboard .total-pill {flex:1 1 0;min-width:0;padding:3px 2px}
+  .app.in-game .scoreboard .score-pill strong {font-size:18px}
+  .app.in-game .scoreboard .total-pill strong {font-size:16px;white-space:nowrap}
+  .app.in-game .scoreboard .total-pill small {font-size:10px}
+}
+@media(max-width:350px){
+  .app:not(.in-game) .brand-title{font-size:17px}
+  .app:not(.in-game) .brand-tag{font-size:6px}
+  .app.in-game .scoreboard .small-btn {flex-basis:29px;width:29px;font-size:18px}
+  .app.in-game .scoreboard .time-pill {flex-basis:63px}
+  .app.in-game .scoreboard .total-pill strong {font-size:15px}
+}
