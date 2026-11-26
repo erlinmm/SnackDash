@@ -150,6 +150,10 @@ async def check_fullscreen_flow(browser):
     await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
     await page.evaluate("""() => {
       const test={requests:0,exits:0,active:false};
+      window.__portraitCalls=[];
+      Object.defineProperty(screen.orientation,'lock',{configurable:true,
+        value:mode=>{window.__portraitCalls.push(mode);return Promise.resolve();}
+      });
       Object.defineProperty(document,'fullscreenElement',{
         configurable:true,get:()=>test.active?document.documentElement:null
       });
@@ -173,6 +177,7 @@ async def check_fullscreen_flow(browser):
     assert first=={'requests':1,'exits':0,'active':True},first
     assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='true'
     assert await page.locator('#gameFullscreenBtn').get_attribute('aria-pressed')=='true'
+    assert 'portrait' in await page.evaluate("window.__portraitCalls")
     await page.locator('#menuFullscreenBtn').click()
     assert await page.evaluate('window.__fullscreenTest.exits')==1
     assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='false'
@@ -404,6 +409,15 @@ async def check_installed_controls(browser):
         page.on('pageerror',lambda e: errors.append(str(e)))
         await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
         await page.evaluate("""() => {
+          window.__portraitCalls=[];
+          Object.defineProperty(screen.orientation,'lock',{configurable:true,
+            value:mode=>{
+              window.__portraitCalls.push(mode);
+              // Some browsers expose the API but disallow orientation locking.
+              // The rejected promise must not break the game.
+              return Promise.reject(new Error('orientation lock unavailable'));
+            }
+          });
           const realMatchMedia=window.matchMedia.bind(window);
           window.matchMedia=query=>
             /display-mode:\\s*(standalone|fullscreen)/.test(query)
@@ -411,6 +425,7 @@ async def check_installed_controls(browser):
           document.dispatchEvent(new Event('fullscreenchange'));
         }""")
         assert not await page.locator('#menuFullscreenBtn').is_visible(),(width,height)
+        assert 'portrait' in await page.evaluate("window.__portraitCalls"),(width,height)
         await page.locator('#startBtn').click()
         assert not await page.locator('#gameFullscreenBtn').is_visible(),(width,height)
         widths=await page.evaluate("""() => {
