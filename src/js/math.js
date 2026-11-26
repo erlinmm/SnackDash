@@ -153,17 +153,17 @@
       (n <= 144 || upperSetEligible(n));
   }
   function countMatches(s, numbers) { return numbers.reduce((n,r) => n + (matches(s,r) ? 1 : 0), 0); }
-  // Global Combo: five successes unlock Fever, ten unlock Inferno.
-  // Fever: Combo × runner multiplier. Inferno: Combo² × runner multiplier.
-  // The successful hit that reaches Combo 10 already uses the Inferno formula.
+  // Global Combo unlocks Fever at 5 and Inferno at 10; it does not multiply points.
+  // A runner's prior successes give a 2^n base multiplier. Fever squares it;
+  // Inferno cubes it. The hit reaching either threshold uses the new mode.
   // A miss while powered-up ends the streak without subtracting points.
   function resolveHit(combo,fever,successes,correct){
     const runnerMultiplier=Math.pow(2,successes);
     if(correct){
       const nextCombo=combo+1, nextFever=nextCombo>=5;
       const nextInferno=nextCombo>=10;
-      const comboMultiplier=nextInferno?nextCombo*nextCombo:(nextFever?nextCombo:1);
-      return {delta:comboMultiplier*runnerMultiplier,combo:nextCombo,
+      const scoreMultiplier=Math.pow(runnerMultiplier,nextInferno?3:nextFever?2:1);
+      return {delta:scoreMultiplier,combo:nextCombo,
         fever:nextFever,inferno:nextInferno,activated:!fever&&nextFever,
         infernoActivated:nextInferno&&combo<10,ended:false,runnerMultiplier};
     }
