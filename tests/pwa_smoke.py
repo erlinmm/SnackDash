@@ -13,6 +13,7 @@ SITE = Path(__file__).resolve().parents[1] / 'site'
 async def check(url):
     manifest = json.loads((SITE / 'manifest.webmanifest').read_text())
     assert manifest['display'] == 'standalone'
+    assert manifest['orientation'] == 'portrait'
     assert manifest['scope'] == manifest['start_url'] == './'
     assert {i['purpose'] for i in manifest['icons']} == {'any', 'maskable'}
     for item in manifest['icons'] + [{'src':'apple-touch-icon.png','sizes':'180x180'}]:
