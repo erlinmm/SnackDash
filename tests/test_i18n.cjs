@@ -97,6 +97,19 @@ test('all ten cities and gameplay instructions resolve in both UI languages',()=
   i18n.setLocale('en-GB');
 });
 
+test('help dialog explains matching and controls without disclosing reward formulas',()=>{
+  const keys=["help.welcome","help.duty","help.match","help.controls","help.change","help.divide","help.multiply","help.score","help.repeat","help.combo","help.ready"];
+  for(const locale of ['en-GB','zh-Hans']){
+    for(const key of keys) assert.equal(i18n.hasTranslation(key,locale),true,locale+': '+key);
+    const text=keys.map(key=>i18n.lookup(key,locale)).join(' ');
+    assert.match(text,/12 ÷ 3 = 4/);
+    assert.match(text,/3 × 12 = 36/);
+    assert.doesNotMatch(text,/FEVER|INFERNO|prior hits|\^|²|倍率|连击归零/i);
+  }
+  assert.match(i18n.lookup('help.combo','en-GB'),/Keep your combo growing!/);
+  assert.match(i18n.lookup('help.combo','zh-Hans'),/保持 Combo！/);
+});
+
 test('every English system key has a real Simplified Chinese value with matching parameters',()=>{
   const paramNames=s=>[...s.matchAll(/\{\{(\w+)\}\}/g)].map(m=>m[1]).sort();
   const required=i18n.keys('en-GB');

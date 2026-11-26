@@ -57,13 +57,21 @@ async def check(browser, width, height):
     await page.locator('#howToPlayBtn').click()
     assert await page.locator('#howToPlayDialog').is_visible()
     help_text=await page.locator('#howToPlayDialog').inner_text()
-    assert '整除' in help_text and 'FEVER' in help_text and 'INFERNO' in help_text
+    assert '整除' in help_text and '保持 Combo！' in help_text
+    assert '12 ÷ 3 = 4' in help_text and '3 × 12 = 36' in help_text
+    assert 'FEVER' not in help_text and 'INFERNO' not in help_text
     await page.locator('#howToPlayClose').click()
     assert not await page.locator('#howToPlayDialog').is_visible()
     await page.locator('#languageSelect').select_option('en-GB')
     assert await page.locator('[data-i18n="intro.pickRace"]').text_content() == 'CHOOSE YOUR RACE'
     assert await page.locator('.city-stop').first.locator('.city-name').text_content() == 'TOKYO'
     assert await page.locator('#howToPlayBtn').text_content()=='How to play'
+    await page.locator('#howToPlayBtn').click()
+    help_text=await page.locator('#howToPlayDialog').inner_text()
+    assert 'World Marathon Tour team!' in help_text and 'Keep your combo growing!' in help_text
+    assert '12 ÷ 3 = 4' in help_text and '3 × 12 = 36' in help_text
+    assert 'FEVER' not in help_text and 'INFERNO' not in help_text
+    await page.locator('#howToPlayClose').click()
     await page.locator('#startBtn').click()
     await page.wait_for_timeout(1900)
     dims=await page.evaluate('''() => ({
