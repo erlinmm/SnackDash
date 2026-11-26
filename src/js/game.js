@@ -1408,7 +1408,7 @@
       stage.classList.toggle('inferno-active',this.inferno);
       $('comboValue').textContent=this.fever?`${this.combo} COMBO`:`COMBO ${this.combo}`;
       $('comboIcon').textContent=this.inferno?'🪩':this.fever?'🔥':'⚡';
-      $('comboDetail').textContent=this.inferno?'COMBO³ × RUNNER⁴':this.fever?'COMBO² × RUNNER² · INFERNO AT 10':`COMBO × RUNNER · ${Math.max(0,5-this.combo)} TO FEVER`;
+      $('comboDetail').textContent=this.inferno?'C² × (C−9) · RUNNER 1/4/16':this.fever?'C² · RUNNER 1/3/9':`COMBO × RUNNER 1/2/4 · ${Math.max(0,5-this.combo)} TO FEVER`;
       $('comboFill').style.width=`${Math.min(100,this.combo/5*100)}%`;
       $('feverStatus').textContent=this.inferno?'DISCO!':this.fever?'ON FIRE!':this.combo===0?'READY?':`${this.combo}/5`;
     }
