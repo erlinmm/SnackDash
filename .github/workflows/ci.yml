@@ -39,7 +39,9 @@ jobs:
         run: |
           python scripts/build_pwa.py dist/Snack_Dash.html site
           node --check site/sw.js
+          node --check src/pwa/update.js
           python tests/pwa_smoke.py
+          python tests/pwa_update.py
       - uses: actions/upload-artifact@v4
         with:
           name: SnackDash-HTML
