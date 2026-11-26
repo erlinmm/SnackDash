@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#fff8ec">
-  <meta name="description" content="Snack Dash! A silly marathon supply-station maths game. Find a runner whose number divides your supply, or vice versa.">
+  <meta name="description" content="Snack Dash! A marathon aid-station maths game. Match runners with supplies and complete each support mission." data-i18n-content="app.description">
   <title>Snack Dash! V26 — Natural Arrivals & Learning Loops</title>
   <!-- BUILD:CSS -->
 </head>
@@ -15,27 +15,34 @@
         <span class="brand-icon" aria-hidden="true">🍌</span>
         <div>
           <div class="brand-title">SNACK <span>DASH!</span></div>
-          <div class="brand-tag">THE MARATHON MATHS GAME</div>
+          <div class="brand-tag" data-i18n="app.tagline">THE MARATHON MATHS GAME</div>
         </div>
       </div>
       <div class="top-actions">
-        <button class="debug-exit-btn hidden" id="exitDebugBtn" type="button" aria-label="Exit debug mode">EXIT DEBUG ✕</button>
+        <button class="debug-exit-btn hidden" id="exitDebugBtn" type="button" aria-label="Exit debug mode" data-i18n-aria-label="debug.exit" data-i18n="debug.exit">EXIT DEBUG ✕</button>
         <button class="icon-btn" id="soundBtn" type="button" title="Turn sound off" aria-label="Turn sound off">🔊</button>
-        <button class="icon-btn fullscreen-toggle" id="menuFullscreenBtn" type="button" title="Enter fullscreen" aria-label="Enter fullscreen" aria-pressed="false">⛶</button>
       </div>
     </header>
 
-    <section class="menu" id="menuScreen" aria-label="Choose a level">
-      <div class="debug-indicator hidden" id="debugIndicator">🛠 DEBUG MODE · ALL 100 RACES OPEN · RESULTS NOT SAVED</div>
+    <section class="menu" id="menuScreen" aria-label="Choose a level" data-i18n-aria-label="intro.chooseLevel">
+      <div class="language-setting">
+        <button class="help-toggle" id="howToPlayBtn" type="button" data-i18n="intro.howToPlay">How to play</button>
+        <label for="languageSelect" class="visually-hidden" data-i18n="ui.language">Language</label>
+        <select id="languageSelect" aria-label="Language" data-i18n-aria-label="ui.language">
+          <option value="en-GB">English</option>
+          <option value="zh-Hans">简体中文</option>
+        </select>
+      </div>
+      <div class="debug-indicator hidden" id="debugIndicator" data-i18n="debug.indicator">🛠 DEBUG MODE · ALL 100 RACES OPEN · RESULTS NOT SAVED</div>
       <div class="intro-card">
         <div class="intro-copy">
-          <span class="eyebrow">THE BIGGEST LITTLE SNACK TOUR</span>
-          <h1>100 races.<br><em>One snack hero!</em></h1>
-          <p>Ten cities. A hundred races. Five catches light FEVER; ten ignite INFERNO!</p>
+          <span class="eyebrow" data-i18n="intro.kicker">THE BIGGEST LITTLE SNACK TOUR</span>
+          <h1><span data-i18n="intro.line1">100 races.</span><br><em data-i18n="intro.line2">One snack hero!</em></h1>
+          <p data-i18n="intro.description">Ten cities. A hundred races. Five catches light FEVER; ten ignite INFERNO!</p>
           <div class="rules-chips">
-            <span>🔥 <b>5</b> → FEVER · <b>10</b> → INFERNO!</span>
-            <span>🪩 <b>INFERNO</b> Combo² × (Combo−9)!</span>
-            <span>🏆 Goal <b>10 points</b></span>
+            <span data-i18n="intro.ruleModes">🔥 5 → FEVER · 10 → INFERNO!</span>
+            <span data-i18n="intro.ruleInferno">🪩 INFERNO Combo² × (Combo−9)!</span>
+            <span data-i18n="intro.ruleGoal">🏆 Goal 10 points</span>
           </div>
         </div>
         <div class="intro-illustration" aria-hidden="true">
@@ -48,42 +55,52 @@
         </div>
       </div>
 
-      <section class="instructions" aria-label="How to play">
-        <div class="instruction"><span class="instruction-emoji">1️⃣</span><span>Your volunteer picks up supplies. <b>Tap a table item to swap it</b> with the one in hand.</span></div>
-        <div class="instruction"><span class="instruction-emoji">2️⃣</span><span><b>Tap a runner</b> if either number divides the other exactly.</span></div>
-        <div class="instruction"><span class="instruction-emoji">3️⃣</span><span><b>5 good catches → FEVER; 10 → INFERNO!</b> Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</span></div>
+      <section class="instructions" aria-label="How to play" data-i18n-aria-label="intro.howToPlay">
+        <div class="instruction"><span class="instruction-emoji">1️⃣</span><span data-i18n="instructions.step1">The staff member picks up supplies. Tap a table item to swap it with the one in hand.</span></div>
+        <div class="instruction"><span class="instruction-emoji">2️⃣</span><span data-i18n="instructions.step2">Tap a runner if either number divides the other exactly.</span></div>
+        <div class="instruction"><span class="instruction-emoji">3️⃣</span><span data-i18n="instructions.step3">5 good catches → FEVER; 10 → INFERNO! Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</span></div>
       </section>
 
       <section class="tour-section" aria-label="World tour city map">
         <div class="section-header world-header">
-          <div><span class="eyebrow">✦ THE GREAT SNACK TOUR ✦</span><h2>100 races · 10 cities</h2></div>
-          <div class="progress-badge" id="progressBadge">0 / 100 won</div>
+          <div><span class="eyebrow" data-i18n="intro.tourKicker">✦ THE GREAT SNACK TOUR ✦</span><h2 data-i18n="intro.world">100 races · 10 cities</h2></div>
+          <div class="progress-badge" id="progressBadge">0 / 100 completed</div>
         </div>
-        <p class="world-subtitle">Every city starts easy and builds to a tricky tenth race. Win 9 races in each city to receive an invitation to the next!</p>
-        <div class="tour-map" id="cityMap" aria-label="Choose a marathon city"></div>
-        <div class="passport-card" id="cityDetail" aria-label="Select a race">
+        <p class="world-subtitle" data-i18n="intro.worldSubtitle">Every city starts easy and builds to a tricky tenth race. Successfully serve 9 races in each city to receive an invitation to the next!</p>
+        <div class="tour-map" id="cityMap" aria-label="Choose a marathon city" data-i18n-aria-label="intro.chooseCity"></div>
+        <div class="passport-card" id="cityDetail" aria-label="Select a race" data-i18n-aria-label="intro.pickRace">
           <div class="passport-header">
             <div class="passport-symbol" id="citySymbol">🌸</div>
             <div class="passport-title"><span class="eyebrow" id="cityCaption">CITY 01 / 10</span><h3 id="cityTitle">TOKYO</h3><p id="citySubtitle">Cherry Blossom Sprint</p></div>
             <div class="passport-stamp" id="cityStamp">0 / 10<br>STAMPS</div>
           </div>
-          <div class="event-label"><span>CHOOSE YOUR RACE</span><span id="cityEventRange">01 — 10</span></div>
+          <div class="event-label"><span data-i18n="intro.pickRace">CHOOSE YOUR RACE</span><span id="cityEventRange">01 — 10</span></div>
           <div class="level-grid" id="levelGrid"></div>
           <div class="selection-bar">
             <div class="selection-copy"><span id="selectedTitle">RACE 01</span><small id="selectedMeta">QUARTER MARATHON · 6 runners · 40 sec</small></div>
-            <button class="btn btn-primary" id="startBtn" type="button">LET'S SERVE! <span aria-hidden="true">➜</span></button>
+            <button class="btn btn-primary" id="startBtn" type="button"><span data-i18n="intro.start">LET'S SERVE!</span> <span aria-hidden="true">➜</span></button>
           </div>
         </div>
       </section>
-      <p class="save-hint">🔒 Your city stamps and best scores are saved on this device.</p>
+      <p class="save-hint" data-i18n="intro.saveHint">🔒 Your city stamps and best scores are saved on this device.</p>
     </section>
+
+    <dialog id="howToPlayDialog" class="how-to-play-dialog" aria-labelledby="howToPlayTitle">
+      <h2 id="howToPlayTitle" data-i18n="intro.howToPlay">How to play</h2>
+      <ol>
+        <li data-i18n="instructions.step1">The staff member picks up supplies. Tap a table item to swap it with the one in hand.</li>
+        <li data-i18n="instructions.step2">Tap a runner if either number divides the other exactly.</li>
+        <li data-i18n="instructions.step3">5 good catches → FEVER; 10 → INFERNO! Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</li>
+      </ol>
+      <button class="btn btn-primary" id="howToPlayClose" type="button" data-i18n="intro.close">Close</button>
+    </dialog>
 
     <!-- The invitation uses exactly the same postcard artwork as the city map. -->
     <div class="city-invitation-overlay hidden" id="cityInvitationOverlay" role="dialog" aria-modal="true"
       aria-labelledby="cityInvitationTitle" aria-describedby="cityInvitationText">
       <div class="city-invitation-card">
-        <div class="city-invitation-eyebrow">✉️ SPECIAL DELIVERY!</div>
-        <h2 id="cityInvitationTitle">A NEW CITY AWAITS!</h2>
+        <div class="city-invitation-eyebrow" data-i18n="invitation.special">✉️ SPECIAL DELIVERY!</div>
+        <h2 id="cityInvitationTitle" data-i18n="invitation.heading">A NEW CITY AWAITS!</h2>
         <div class="city-invitation-postcard" id="cityInvitationPostcard">
           <span class="city-postcard">
             <span class="city-postmark" id="cityInvitationNumber">02 / 10</span>
@@ -94,21 +111,20 @@
           <span class="city-country" id="cityInvitationSubtitle">City Lights Dash</span>
         </div>
         <p id="cityInvitationText">You've received an invitation from the marathon organising committee!</p>
-        <div class="city-invitation-stamp">✦ YOU'RE INVITED ✦</div>
+        <div class="city-invitation-stamp" data-i18n="invitation.stamp">✦ YOU'RE INVITED ✦</div>
         <button class="btn btn-primary city-invitation-action" id="cityInvitationVisit" type="button">VISIT NEW CITY ➜</button>
-        <button class="btn btn-outline city-invitation-action" id="cityInvitationLater" type="button">KEEP EXPLORING</button>
+        <button class="btn btn-outline city-invitation-action" id="cityInvitationLater" type="button" data-i18n="invitation.later">KEEP EXPLORING</button>
       </div>
     </div>
 
-    <section class="game-screen hidden" id="gameScreen" aria-label="Snack Dash gameplay">
+    <section class="game-screen hidden" id="gameScreen" aria-label="Snack Dash gameplay" data-i18n-aria-label="game.gameplayAria">
       <div class="scoreboard">
-        <button class="small-btn" id="levelsBtn" type="button" aria-label="Return to level selection">‹ <span>Levels</span></button>
-        <div class="score-pill level-pill"><span class="score-label">RACE</span><strong id="hudLevel">1</strong></div>
-        <div class="score-pill time-pill" id="timePill"><span class="score-label">TIME</span><strong id="hudTime">01:00</strong></div>
-        <div class="score-pill total-pill"><span class="score-label">POINTS</span><strong><span id="hudScore">0</span><small> / 10</small></strong></div>
-        <button class="small-btn restart-btn" id="restartBtn" type="button" title="Restart level" aria-label="Restart level">↻</button>
-        <button class="small-btn pause-btn" id="pauseBtn" type="button" aria-label="Pause game">Ⅱ</button>
-        <button class="small-btn fullscreen-toggle" id="gameFullscreenBtn" type="button" title="Enter fullscreen" aria-label="Enter fullscreen" aria-pressed="false">⛶</button>
+        <button class="small-btn" id="levelsBtn" type="button" aria-label="Return to level selection" data-i18n-aria-label="hud.backToLevels">‹ <span data-i18n="hud.levels">Levels</span></button>
+        <div class="score-pill level-pill"><span class="score-label" data-i18n="hud.race">RACE</span><strong id="hudLevel">1</strong></div>
+        <div class="score-pill time-pill" id="timePill"><span class="score-label" data-i18n="hud.time">TIME</span><strong id="hudTime">01:00</strong></div>
+        <div class="score-pill total-pill"><span class="score-label" data-i18n="hud.points">POINTS</span><strong><span id="hudScore">0</span><small> / 10</small></strong></div>
+        <button class="small-btn restart-btn" id="restartBtn" type="button" title="Restart level" aria-label="Restart level" data-i18n-title="game.restartLevel" data-i18n-aria-label="game.restartLevel">↻</button>
+        <button class="small-btn pause-btn" id="pauseBtn" type="button" aria-label="Pause game" data-i18n-aria-label="game.pause">Ⅱ</button>
       </div>
       <div class="combo-panel" id="comboPanel" aria-live="off">
         <div class="combo-indicator"><span id="comboIcon">⚡</span> <strong id="comboValue">COMBO 0</strong><small id="comboDetail">5 IN A ROW → FEVER</small></div>
@@ -117,32 +133,36 @@
         <span class="fever-status" id="feverStatus">READY?</span>
       </div>
       <div class="scene-shell" id="sceneShell">
-        <canvas id="scene" width="390" height="700" aria-label="Marathon road with moving runners. Tap a runner to throw the held supply." role="img"></canvas>
+        <canvas id="scene" width="390" height="700" aria-label="Marathon road with moving runners. Tap a runner to throw the held supply." data-i18n-aria-label="game.sceneAria" role="img"></canvas>
         <div class="result-overlay hidden" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultHeading">
           <div class="result-card">
             <div class="result-mascot" id="resultMascot">🏆</div>
-            <div class="eyebrow" id="resultKicker">RACE COMPLETE!</div>
-            <h2 id="resultHeading">SUPER SERVER!</h2>
+            <div class="eyebrow" id="resultKicker">SUPPLY SERVICE COMPLETE!</div>
+            <h2 id="resultHeading">AID STATION STAR!</h2>
             <div class="result-score" id="resultScore"><strong class="score-main">12</strong><span class="score-unit">points</span></div>
-            <p id="resultText">Your volunteer has earned a victory dance!</p>
+            <p id="resultText">The staff member completed the support mission!</p>
             <div class="result-stats" id="resultStats"></div>
-            <button class="btn btn-primary full" id="resultPrimary" type="button">NEXT LEVEL ➜</button>
+            <button class="btn btn-primary full" id="resultPrimary" type="button">NEXT RACE ➜</button>
             <div class="result-actions">
-              <button class="btn btn-outline" id="retryBtn" type="button">↻ Retry</button>
-              <button class="btn btn-outline" id="backBtn" type="button">Levels</button>
+              <button class="btn btn-outline" id="retryBtn" type="button" data-i18n="game.retry">↻ Retry</button>
+              <button class="btn btn-outline" id="backBtn" type="button" data-i18n="game.levels">Levels</button>
             </div>
           </div>
         </div>
         <div class="game-message" id="gameMessage" aria-live="polite"></div>
+        <span class="visually-hidden" id="runnerReactionText" role="status" aria-live="polite" aria-atomic="true"></span>
       </div>
       <div class="game-control-strip">
-        <div class="held-status"><span class="held-icon" id="heldIcon">💧</span><div><small>IN YOUR HAND</small><strong id="heldNumber">6</strong></div></div>
-        <div class="hand-rule"><strong>Find a whole-number match!</strong><span id="matchHint">Tap a runner to throw.</span></div>
+        <div class="held-status"><span class="held-icon" id="heldIcon">💧</span><div><small data-i18n="hud.inHand">IN YOUR HAND</small><strong id="heldNumber">6</strong></div></div>
+        <div class="hand-rule"><strong data-i18n="hud.findMatch">Find a whole-number match!</strong><span id="matchHint" data-i18n="hud.tapRunner">Tap a runner to throw.</span></div>
       </div>
-      <p class="game-footnote"><b>5 Combo → Fever · 10 Combo → Inferno.</b> Tap table items to swap. FEVER: Combo² × 3^(prior hits); INFERNO: Combo² × (Combo−9) × 4^(prior hits); misses end bonus mode without a penalty.</p>
+      <p class="game-footnote" data-i18n="instructions.footnote">5 Combo → Fever · 10 Combo → Inferno. Tap table items to swap. FEVER: Combo² × 3^(prior hits); INFERNO: Combo² × (Combo−9) × 4^(prior hits); misses end bonus mode without a penalty.</p>
     </section>
   </main>
+  <!-- BUILD:I18N -->
+  <!-- BUILD:LOCALES -->
   <!-- BUILD:MATH -->
+  <!-- BUILD:REACTIONS -->
   <!-- BUILD:GAME -->
 </body>
 </html>

@@ -1,11 +1,13 @@
 (() => {
   'use strict';
   const version = document.querySelector('meta[name="snackdash-version"]').content;
+  const i18n = window.GameI18n;
+  const t = (key,params) => i18n ? i18n.t(key,params) : key;
   const menu = document.getElementById('menuScreen');
   const app = document.getElementById('app');
   const footer = document.createElement('p');
   footer.className = 'save-hint';
-  footer.textContent = 'Version ' + version.slice(0, 8);
+  footer.textContent = t('pwa.version',{version:version.slice(0,8)});
   menu.appendChild(footer);
 
   if (!('serviceWorker' in navigator)) return;
@@ -18,18 +20,31 @@
   const panel = document.createElement('aside');
   panel.id = 'pwaUpdatePanel';
   panel.hidden = true;
-  panel.setAttribute('aria-label','Game update');
-  panel.innerHTML = '<strong>A new update is ready!</strong><p>Your race progress will be kept.</p><div><button type="button" id="pwaApply" class="btn btn-primary">UPDATE &amp; PLAY</button><button type="button" id="pwaLater" class="btn btn-outline">Later</button></div><p id="pwaUpdateStatus" role="status"></p>';
+  panel.setAttribute('aria-label',t('pwa.updateAria'));
+  panel.setAttribute('data-i18n-aria-label','pwa.updateAria');
+  panel.innerHTML = '<strong data-i18n="pwa.ready">A new update is ready!</strong><p data-i18n="pwa.progress">Your race progress will be kept.</p><div><button type="button" id="pwaApply" class="btn btn-primary" data-i18n="pwa.apply">UPDATE &amp; PLAY</button><button type="button" id="pwaLater" class="btn btn-outline" data-i18n="pwa.later">Later</button></div><p id="pwaUpdateStatus" role="status"></p>';
   document.body.appendChild(panel);
   const apply = panel.querySelector('#pwaApply');
   const later = panel.querySelector('#pwaLater');
   const status = panel.querySelector('#pwaUpdateStatus');
+  let statusKey = null;
+  function setStatus(key){
+    statusKey=key;
+    status.textContent=key?t(key):'';
+  }
+  function refreshLanguage(){
+    i18n?.apply(panel);
+    footer.textContent=t('pwa.version',{version:version.slice(0,8)});
+    if(statusKey)status.textContent=t(statusKey);
+  }
+  refreshLanguage();
+  i18n?.subscribe(refreshLanguage);
 
   function render() {
     panel.hidden = !safe() || !ready || dismissed;
     apply.disabled = applying;
     later.disabled = applying;
-    if (!applying && !activated) status.textContent = '';
+    if (!applying && !activated) setStatus(null);
   }
   function showUpdate(worker) {
     if (worker && worker !== waiting) {
@@ -85,7 +100,7 @@
     if (!old && !applying) return; // Initial installation, not an upgrade.
     if (applying) {
       activated = true;
-      status.textContent = 'Update ready. Opening the new version…';
+      setStatus('pwa.status.ready');
       reloadIfSafe();
     } else {
       waiting = null;
@@ -96,7 +111,7 @@
   apply.addEventListener('click', () => {
     if (!safe() || applying) return;
     applying = true;
-    status.textContent = 'Opening the new version…';
+    setStatus('pwa.status.opening');
     render();
     if (activated) {
       reloadIfSafe();
@@ -114,7 +129,7 @@
       if (!activated && applying) {
         applying = false;
         render();
-        status.textContent = 'Could not switch versions yet. Please try again.';
+        setStatus('pwa.status.failed');
       }
     }, 10000);
   });

@@ -7,7 +7,10 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = {
     '<!-- BUILD:CSS -->': ('src/css/app.css', '<style>\n', '</style>'),
+    '<!-- BUILD:I18N -->': ('src/js/i18n.js', '<script>\n', '</script>'),
+    '<!-- BUILD:LOCALES -->': ('src/js/locales.js', '<script>\n', '</script>'),
     '<!-- BUILD:MATH -->': ('src/js/math.js', '<script>\n', '</script>'),
+    '<!-- BUILD:REACTIONS -->': ('src/js/reactions.js', '<script>\n', '</script>'),
     '<!-- BUILD:GAME -->': ('src/js/game.js', '<script>\n', '</script>'),
 }
 

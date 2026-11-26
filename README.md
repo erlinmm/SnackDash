@@ -15,6 +15,8 @@ Open **`dist/Snack_Dash.html`** in a browser. No server, dependencies, bundler, 
 - `src/index.template.html` — HTML menus and game shell; contains build placeholders.
 - `src/css/app.css` — responsive mobile styling.
 - `src/js/math.js` — number distributions, divisibility, D1–D5 difficulty model.
+- `src/js/i18n.js` — offline locale registry, English fallback, number and native activity labels.
+- `src/js/locales.js` — language catalogs (English default and Simplified Chinese interface preview).
 - `src/js/game.js` — gameplay, renderer, learning opportunities, UI and sounds.
 - `scripts/build.py` — deterministic assembly of the standalone HTML and optional ZIP.
 - `tests/test_math.cjs` — rules and level tests; no dependencies beyond Node.js.
@@ -24,9 +26,11 @@ Open **`dist/Snack_Dash.html`** in a browser. No server, dependencies, bundler, 
 ## Test locally
 
 ```bash
+node --check src/js/i18n.js
+node --check src/js/locales.js
 node --check src/js/math.js
 node --check src/js/game.js
-node --test tests/test_math.cjs
+node --test tests/test_math.cjs tests/test_i18n.cjs
 python3 -m unittest discover -s tests -p 'test_*.py'
 python3 scripts/build.py --zip
 ```
@@ -55,3 +59,67 @@ Tags must be pushed on a tested commit. Release publication requires GitHub Acti
 - Basic/Medium/Upper bib distributions, supply probabilities, prime-factor restrictions, and 40/60/90/120-second race lengths remain configurable.
 
 Data and progress are stored in browser local storage. Opening different `file://` locations may use separate browser storage namespaces, so an offline release file may not inherit earlier saved progress.
+## Localization foundation (feature branch)
+
+The built offline HTML embeds both i18n scripts before the game code. The initial
+interface is **English**. The menu contains a language selector with a **partial
+Simplified Chinese preview** to exercise switching; this is **not** a complete
+Chinese translation. Any missing messages fall back to the original English text.
+The selected locale is saved separately as `snackDashLocaleV1` (game progress
+remains in `snackDashSaveV2`). No remote translation service is used.
+
+To translate an additional string, add a stable key to the `en-GB` catalog in
+`src/js/locales.js`, add localized values where available, then use
+`window.GameI18n.t(key, {value})` for dynamic text or `data-i18n="key"` for
+static text. `data-i18n-aria-label`, `data-i18n-title` and
+`data-i18n-placeholder` cover accessible labels and attributes. For translated
+scores use `window.GameI18n.formatNumber(value)`. Register a new language with
+`GameI18n.registerLocale(code, strings, {label, dir})`, then expose it in the
+language selector once the catalog is ready.
+
+For real local festivals, store the official **native** name separately from the
+player-facing explanation key. `GameI18n.activityLabel({nativeName,
+nativeLocale, labelKey})` returns both without overwriting the native script.
+The 20 festival names, graphics, broader UI, and further locale catalogs are
+**not included** in this foundation task. See `docs/localization.md` for scope
+and migration notes.
+
+## Localized city selector and mobile instructions
+
+City postcards, race tiles, the selected-city passport and city invitations
+now resolve names, landmarks, country labels and descriptive text through the
+current language catalog. The menu's **How to play** control opens a scrollable
+dialog containing the translated three-step rules, including the exact existing
+scoring formulas. English and Simplified Chinese are included in the offline
+HTML; Chinese remains a partial preview for other game areas.
+
+There are no visible manual fullscreen controls. Starting a race still requests
+fullscreen when supported, and returning to the city selector keeps that mode.
+Installed PWA portrait orientation and browser fullscreen portrait requests
+are preserved. Browsers that cannot lock orientation remain playable.
+
+## Runner multilingual reactions
+
+Athletes now have individual nationality and native-language profiles that are
+independent of their appearance and of the host city. Correct supplies trigger
+native-language thanks or cheers; an incorrect **impact** triggers a native
+pain reaction (for example, Japanese `痛い！`, Korean `아야!`, Swahili
+`Aa!`). The Canvas bubble includes a small explanation in the selected player
+language when needed. No runner claims pain if the player taps empty road.
+
+The offline, dependency-free `src/js/reactions.js` module handles event packs,
+athlete profiles, safe unsupported-language behavior and variation. Reaction
+strings are kept outside scoring and scene physics. See
+`docs/localization.md` for extension and source review requirements.
+
+## Localization of system feedback
+
+All visible system feedback (including Fever/Inferno changes, correct/incorrect
+supplies, no-penalty cues, Canvas celebrations and PWA updates) is translated
+through `src/js/locales.js`. English and Simplified Chinese catalogs have
+matching keys and parameter names, with fallback for later partial locales.
+
+The playable aid-station character is called **Staff** / **补给员**. Their
+support task may succeed or be completed, but they do not win the marathon.
+Athlete thanks/pain/cheers remain strictly in their own native-language words,
+with no translated subtitles. The same applies to screen-reader announcements.

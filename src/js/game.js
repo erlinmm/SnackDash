@@ -3,21 +3,25 @@
 (function(){
   'use strict';
   const {LEVELS,CITIES,cityUnlockedCount,cityCleared,seededRandom,randInt,pick,matches,transformRunnerNumber,resolveHit,NumberDirector,legalBib}=window.GameMath;
+  const I18n=window.GameI18n;
+  const Reactions=window.GameReactions;
+  const tr=(key,params)=>I18n.t(key,params);
+  // The game data stays language-neutral; UI names are resolved by stable city IDs.
+  const cityText=(city,field)=>I18n.lookup('city.'+city.id+'.'+field)||city[field];
+  const raceBandKey=event=>event<=3?'quarter':event<=6?'half':event<=9?'full':'ultra';
+  const raceBandLabel=event=>tr('race.band.'+raceBandKey(event));
   // Keep very large Inferno scores legible in the HUD and final result.
   // The headline uses a compact value; the exact whole-number value is
   // preserved in the result details (and as the HUD's accessible label).
   function fullScoreText(value){
     if(!Number.isFinite(value))return value<0?'−∞':'∞';
-    return Math.trunc(value).toLocaleString('en-GB');
+    return I18n.formatNumber(Math.trunc(value));
   }
   function shortScoreText(value,decimals=1){
     if(!Number.isFinite(value))return fullScoreText(value);
     const magnitude=Math.abs(value);
     if(magnitude<1e6)return fullScoreText(value);
-    const tiers=[[1e12,'T'],[1e9,'B'],[1e6,'M']];
-    if(magnitude>=1e15)return value.toExponential(decimals).replace('e+','e');
-    const [unit,suffix]=tiers.find(([unit])=>magnitude>=unit);
-    return Number((value/unit).toFixed(decimals)).toLocaleString('en-GB')+suffix;
+    return I18n.formatNumber(value,{notation:'compact',maximumFractionDigits:decimals});
   }
   function raceBandForEvent(event){
     return event<=3?'QUARTER MARATHON':event<=6?'HALF MARATHON':event<=9?'FULL MARATHON':'ULTRA MARATHON';
@@ -399,20 +403,6 @@
   const FEVER_SPEED_MULTIPLIERS=[2,4,6,9,11];
   const INFERNO_SPEED_MULTIPLIERS=[3,6,8,10,12];
   const BIG_REWARD_JUMP=20, HEAVY_REWARD_IMPACT=30;
-  const MESSAGES=['YOU GOT THIS!','LOOK AT THOSE LEGS!','KEEP THE SNACKS COMING!'];
-  // Original city-themed comic bubbles and festival edging for Fever mode.
-  const FEVER_THEMES={
-    tokyo:{motifs:['🌸','✿','🌸'],cheers:['SAKURA POWER!','ARIGATŌ!','YATTA!']},
-    seoul:{motifs:['✦','💮','✦'],cheers:['DAEBAK!','GREAT CATCH!','THANK YOU!']},
-    london:{motifs:['👑','✦','☂️'],cheers:['BRILLIANT!','CHEERS!','JOLLY GOOD!']},
-    berlin:{motifs:['🐻','✦','★'],cheers:['DANKE!','WUNDERBAR!','SUPER!']},
-    amsterdam:{motifs:['🌷','✦','🌷'],cheers:['DANK JE!','HOORAY!','LOVELY!']},
-    paris:{motifs:['✦','🥐','✦'],cheers:['MERCI!','MAGNIFIQUE!','BRAVO!']},
-    boston:{motifs:['★','🏅','★'],cheers:['YOU DID IT!','THANK YOU!','GO BOSTON!']},
-    chicago:{motifs:['🌬️','✦','★'],cheers:['WINDY CITY!','NICE ONE!','THANK YOU!']},
-    newyork:{motifs:['🗽','★','✦'],cheers:['YOU ROCK!','BIG APPLE!','AMAZING!']},
-    sydney:{motifs:['🌊','✦','🐚'],cheers:['BEAUTY!','CHEERS, MATE!','LEGEND!']}
-  };
   const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
   const mix=(a,b,t)=>a+(b-a)*t;
   const easeOut=t=>1-Math.pow(1-t,3);
@@ -478,7 +468,24 @@
   function circle(x,y,r,fill,stroke,sw=1){ctx.beginPath();ctx.arc(x,y,r,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=sw;ctx.stroke();}}
   function line(x1,y1,x2,y2,col,sw=2){ctx.strokeStyle=col;ctx.lineWidth=sw;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
   function label(txt,x,y,size,col='#24374a',align='center',font='1000'){
-    ctx.fillStyle=col;ctx.font=`${font} ${size}px 'Trebuchet MS',system-ui,sans-serif`;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(String(txt),x,y);
+    ctx.fillStyle=col;ctx.font=`${font} ${size}px system-ui,-apple-system,sans-serif`;
+    ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(String(txt),x,y);
+  }
+  // Canvas glyph fitting for CJK, accents and longer future translations.
+  function fitLabel(txt,x,y,maxSize,maxWidth,col='#24374a',minSize=10){
+    const value=String(txt);
+    let size=maxSize;
+    ctx.save();
+    for(;size>minSize;size--){
+      ctx.font=`1000 ${size}px system-ui,-apple-system,sans-serif`;
+      if(ctx.measureText(value).width<=maxWidth)break;
+    }
+    ctx.font=`1000 ${size}px system-ui,-apple-system,sans-serif`;
+    const measured=ctx.measureText(value).width;
+    const scale=measured>maxWidth?maxWidth/measured:1;
+    ctx.translate(x,y);ctx.scale(scale,1);
+    label(value,0,0,size,col);
+    ctx.restore();
   }
 
   class Sfx {
@@ -809,6 +816,8 @@
   class Marathon {
     constructor(config,seed){
       this.config=config;this.rng=seededRandom(seed);this.director=new NumberDirector(config,this.rng);
+      // Independent RNG: reaction diversity must not affect bibs or scoring.
+      this.reactionRng=seededRandom((seed^0x9e3779b9)>>>0);
       const {numbers,held}=this.director.createLineup();
       this.supplies=this.director.createSupplies(numbers,held);
       this.runners=[];this.departing=[];this.nextId=1;this.score=0;this.correct=0;this.wrong=0;
@@ -824,7 +833,8 @@
       this.learning=new LearningOpportunityDirector(this);
       this.assertReady();this.syncHUD();
       $('resultOverlay').classList.add('hidden');$('gameMessage').classList.remove('show');
-      $('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label','Pause game');
+      $('runnerReactionText').textContent='';
+      $('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label',tr('game.pause'));
       audio.nextBeat=0;audio.beatNumber=0;
     }
     random(){return this.rng();}
@@ -857,6 +867,7 @@
         laneJitter:jitter,laneIndex,targetLaneIndex:laneIndex,laneChangeCooldown:0,
         lateralVelocity:0,speed,baseSpeed:speed,sizeBoost:0,
         seed:this.rand(0,TAU),sway:this.rand(1.1,3.2),look:createLook(this.rng),
+        identity:Reactions.chooseProfile(this.reactionRng),reactionHistory:{},
         mood:'normal',moodTimer:0,successes:0,cheerTimer:0,feverCheerTimer:0,joyJumpTimer:0,joyJumpHeight:0,
         yBounce:this.rand(0,TAU)};
     }
@@ -952,7 +963,7 @@
           if(digit>0)audio.countdown(digit);
           this.lastCountdownDigit=digit;
         }
-        if(this.countdown<=0){this.phase='playing';this.goFlash=.8;audio.go();showMessage('READY, SET, SNACK!',1100);}
+        if(this.countdown<=0){this.phase='playing';this.goFlash=.8;audio.go();showMessage(tr('game.ready'),1100);}
         this.tickRunners(dt);
       }else if(this.phase==='playing'){
         this.remaining=Math.max(0,this.remaining-dt);
@@ -1197,6 +1208,15 @@
       this.pendingSupply=false;
       this.refillPendingSlots();
     }
+    emitRunnerReaction(runner,event,x,y){
+      const history=runner.reactionHistory||(runner.reactionHistory={});
+      const reaction=Reactions.select(runner.identity,event,this.reactionRng,history[event]??-1);
+      if(!reaction)return; // Unsupported languages never impersonate other languages.
+      history[event]=reaction.index;
+      this.effects=this.effects.filter(f=>f.kind!=='athleteReaction'||f.runnerId!==runner.id);
+      this.popEffect({kind:'athleteReaction',runnerId:runner.id,reaction,x,y,life:1.12});
+      $('runnerReactionText').textContent=reaction.text;
+    }
     tickThrow(dt){
       if(!this.throwing)return;
       const t=this.throwing;
@@ -1207,7 +1227,8 @@
         if(!runner)throw Error('Throw target disappeared during flight');
         const yes=matches(t.supply.number,runner.number);
         const fxX=this.runnerX(runner),fxY=runner.y+runnerVisualOffset(runner)-18*runnerScale(runner);
-        const outcome=resolveHit(this.combo,this.fever,runner.successes,yes);
+        const previousMode=this.inferno?'inferno':this.fever?'fever':'normal';
+      const outcome=resolveHit(this.combo,this.fever,runner.successes,yes);
         this.score+=outcome.delta;
         this.combo=outcome.combo;this.fever=outcome.fever;this.inferno=outcome.inferno;
         this.maxCombo=Math.max(this.maxCombo,this.combo);
@@ -1223,6 +1244,7 @@
           // replan every fast runner before the next movement frame.
           this.traffic.plan(true);
           runner.mood='happy';runner.moodTimer=0;runner.cheerTimer=this.fever?1.85:1.3;
+          this.emitRunnerReaction(runner,this.fever?'cheer':'thanks',fxX,fxY-71);
           this.cheerFlash=this.fever?.9:.4;
           if(this.fever){
             runner.feverCheerTimer=1.45;
@@ -1239,38 +1261,39 @@
             }
           }
           if(outcome.infernoActivated){
-            this.popEffect({kind:'feverEntry',text:'INFERNO!',x:W/2,y:H*.44,life:.68});
-            showMessage('🪩 INFERNO! DISCO TIME!',1450);
+            this.popEffect({kind:'feverEntry',mode:'inferno',textKey:'mode.inferno.short',x:W/2,y:H*.44,life:.68});
+            showMessage(tr('mode.inferno.enter'),1450);
             audio.infernoStart();
           }
           if(outcome.activated){
-            this.popEffect({kind:'feverEntry',text:'FEVER!',x:W/2,y:H*.44,life:.55});
-            showMessage('🔥 FEVER! THE WHOLE CITY CHEERS!',1450);
+            this.popEffect({kind:'feverEntry',mode:'fever',textKey:'mode.fever.short',x:W/2,y:H*.44,life:.55});
+            showMessage(tr('mode.fever.enter'),1450);
             audio.feverStart();
-          } else if(this.score>=GOAL && this.score-outcome.delta<GOAL) showMessage('GOAL REACHED! KEEP IT UP!',1200);
+          } else if(this.score>=GOAL && this.score-outcome.delta<GOAL) showMessage(tr('game.goal'),1200);
           const tier=outcome.delta<=20?1:outcome.delta<=30?2:3;
-          this.popEffect({kind:'score',text:`+${outcome.delta}`,x:fxX,y:fxY-48,
+          this.popEffect({kind:'score',text:'+'+I18n.formatNumber(outcome.delta),x:fxX,y:fxY-48,
             size:tier===1?25:tier===2?29:34,color:this.inferno?'#ffdc65':this.fever?'#e8a048':'#0f9870',life:.52});
           if(!(outcome.activated||outcome.infernoActivated))
             this.popEffect({kind:'hitBurst',x:fxX,y:fxY-10,tier,
               mode:this.inferno?'inferno':this.fever?'fever':'normal',
               life:tier===3?.55:.43});
           const transformText=oldRunnerNumber>t.supply.number ? `${oldRunnerNumber} ÷ ${t.supply.number} = ${runner.number}` : `${oldRunnerNumber} × ${t.supply.number} = ${runner.number}`;
-          updateMatchHint(`${transformText} ✓ · Combo ${this.combo} · +${outcome.delta}`);
+          updateMatchHint(tr('feedback.correct',{equation:transformText,combo:this.combo,points:I18n.formatNumber(outcome.delta)}));
           if(this.inferno&&tier===3&&!outcome.infernoActivated){/* mega cue already played above */}
           else if(this.fever)audio.feverHit(this.combo);else audio.combo(runner.successes);
         }else{
           this.wrong++;runner.mood='angry';runner.moodTimer=1.25;
           if(outcome.ended){
-            showMessage('FEVER OVER! COMBO RESET',1300);
-            this.popEffect({kind:'feverEnd',text:'FEVER OVER',x:W/2,y:H*.38,life:.34});
+            showMessage(tr('mode.'+previousMode+'.end'),1300);
+            this.popEffect({kind:'feverEnd',mode:previousMode,textKey:'mode.'+previousMode+'.endShort',x:W/2,y:H*.38,life:.34});
             audio.feverEnd();
           }else audio.wrong();
-          if(outcome.delta<0)this.popEffect({kind:'score',text:`−${Math.abs(outcome.delta)}`,x:fxX,y:fxY-42,color:'#db5344',life:1.05});
-          else this.popEffect({kind:'combo',text:'0 PENALTY!',x:fxX,y:fxY-65,life:.42});
+          if(outcome.delta<0)this.popEffect({kind:'score',text:'−'+I18n.formatNumber(Math.abs(outcome.delta)),x:fxX,y:fxY-42,color:'#db5344',life:1.05});
+          else this.popEffect({kind:'combo',textKey:'feedback.noPenalty',x:fxX,y:fxY-65,life:.42});
           this.popEffect({kind:'bonk',x:fxX,y:fxY-22,life:.7});
-          if(!outcome.ended)this.popEffect({kind:'bubble',text:pick(this.rng,['HEY!','OUCH!','RUDE!']),x:fxX,y:fxY-68,life:.48});
-          updateMatchHint(`${t.supply.number} and ${runner.number}: no match · ${outcome.delta} points · combo reset`);
+          // An incorrect supply actually hit this athlete, so use a pain reaction.
+          this.emitRunnerReaction(runner,'pain',fxX,fxY-71);
+          updateMatchHint(tr('feedback.incorrect',{supply:t.supply.number,runner:runner.number,points:I18n.formatNumber(outcome.delta)}));
         }
         // The runner might have left the screen during the throwing pose.
         // Replace them while the *previous* supply roster is still in force.
@@ -1324,7 +1347,7 @@
         const rank=hairOnly?Math.min(ellipse,.38+Math.abs(dx)/Math.max(40,50*scale)):ellipse;
         if((ellipse<1.38||hairOnly)&&rank<score){nearest=r;score=rank;}
       }
-      if(!nearest){showMessage('TAP A RUNNER!',650);return;}
+      if(!nearest){showMessage(tr('game.tapRunner'),650);return;}
       this.swapCue=null; // A throw cancels the cue; the new supply is already active.
       this.throwing={runnerId:nearest.id,supply:this.supplies.held,elapsed:0,hit:false,reloaded:false,feverAtRelease:this.fever};
       audio.throw();
@@ -1352,45 +1375,45 @@
       this.resultsShown=true;
       $('resultMascot').textContent=won?'🏆':'💦';
       const city=CITIES[this.config.cityIndex];
-      $('resultKicker').textContent=won?'RACE COMPLETE!':'TIME IS UP!';
-      $('resultHeading').textContent=won?(this.config.level===100?'WORLD TOUR LEGEND!':'SUPER SERVER!'):'TRY ANOTHER LAP!';
+      $('resultKicker').textContent=tr(won?'result.complete':'result.timeUp');
+      $('resultHeading').textContent=tr(won?(this.config.level===100?'result.world':'result.super'):'result.retry');
       const finalScore=shortScoreText(this.score,2);
       const exactScore=fullScoreText(this.score);
       $('resultScore').replaceChildren();
       const scoreMain=document.createElement('strong');scoreMain.className='score-main';scoreMain.textContent=finalScore;
-      const scoreUnit=document.createElement('span');scoreUnit.className='score-unit';scoreUnit.textContent='points';
+      const scoreUnit=document.createElement('span');scoreUnit.className='score-unit';scoreUnit.textContent=tr('result.points');
       $('resultScore').append(scoreMain,scoreUnit);
       if(finalScore!==exactScore){
         const details=document.createElement('span');details.className='score-exact';
-        details.textContent=`Full score: ${exactScore}`;
+        details.textContent=tr('hud.fullScore',{score:exactScore});
         $('resultScore').append(details);
       }
-      $('resultScore').setAttribute('aria-label',`${exactScore} points`);
-      $('resultText').textContent=debugMode?'Debug run: progress and records are not saved.':
-        !won?'The runners are still hungry. Have another go!':
-        this.config.level===100?'100 races completed! Your volunteer is a world-tour superstar!':
-        `${city.name} race ${this.config.event} stamped! ${cityCleared(prefs.best,this.config.cityIndex)} of 10 races complete.`;
+      $('resultScore').setAttribute('aria-label',tr('hud.scorePoints',{score:exactScore}));
+      $('resultText').textContent=debugMode?tr('result.debug'):
+        !won?tr('result.failure'):
+        this.config.level===100?tr('result.allComplete'):
+        tr('result.stamped',{city:cityText(city,'name'),race:this.config.event,completed:cityCleared(prefs.best,this.config.cityIndex)});
       const accuracy=this.correct+this.wrong?Math.round(this.correct/(this.correct+this.wrong)*100):0;
-      $('resultStats').textContent=`${this.correct} good catches · ${this.wrong} bonks · ${accuracy}% accuracy · best combo ${this.maxCombo}`;
+      $('resultStats').textContent=tr('result.stats',{correct:this.correct,wrong:this.wrong,accuracy,combo:this.maxCombo});
       const next=won?nextPlayable(this.config.level):null;
-      $('resultPrimary').textContent=next?'NEXT RACE ➜':'PLAY AGAIN ↻';
+      $('resultPrimary').textContent=tr(next?'result.next':'result.playAgain');
       $('resultPrimary').dataset.next=String(next||'');
       $('resultPrimary').dataset.action=next?'next':'retry';
       $('resultOverlay').classList.remove('hidden');
       renderLevelGrid();
     }
     pause(){
-      if(this.phase==='paused'){this.phase=this.wasPhase||'playing';$('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label','Pause game');}
+      if(this.phase==='paused'){this.phase=this.wasPhase||'playing';$('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label',tr('game.pause'));}
       else if(this.phase==='playing'||this.phase==='countdown'){
-        this.wasPhase=this.phase;this.phase='paused';$('pauseBtn').textContent='▶';$('pauseBtn').setAttribute('aria-label','Resume game');
+        this.wasPhase=this.phase;this.phase='paused';$('pauseBtn').textContent='▶';$('pauseBtn').setAttribute('aria-label',tr('game.resumeAria'));
       }
     }
     syncHUD(){
       $('hudLevel').textContent=this.config.event;
       const hudDisplay=shortScoreText(this.score,1);
       $('hudScore').textContent=hudDisplay;
-      $('hudScore').title=`${fullScoreText(this.score)} points`;
-      $('hudScore').setAttribute('aria-label',`${fullScoreText(this.score)} points`);
+      $('hudScore').title=tr('hud.scorePoints',{score:fullScoreText(this.score)});
+      $('hudScore').setAttribute('aria-label',tr('hud.scorePoints',{score:fullScoreText(this.score)}));
       $('hudScore').style.fontSize=hudDisplay.length>8?'12px':hudDisplay.length>6?'14px':hudDisplay.length>4?'17px':'';
       $('hudScore').parentElement.parentElement.classList.toggle('goal-met',this.score>=GOAL);
       const sec=Math.max(0,Math.ceil(this.remaining));
@@ -1403,14 +1426,14 @@
       $('comboPanel').classList.toggle('fever',this.fever);
       $('comboPanel').classList.toggle('inferno',this.inferno);
       $('comboPanel').style.setProperty('--fever-city',CITIES[this.config.cityIndex].color);
-      $('feverPlaque').textContent=this.inferno?'🪩 INFERNO! 🔥':'🔥 FEVER!! 🔥';
+      $('feverPlaque').textContent=tr(this.inferno?'hud.modeInferno':'hud.modeFever');
       stage.classList.toggle('fever-active',this.fever);
       stage.classList.toggle('inferno-active',this.inferno);
-      $('comboValue').textContent=this.fever?`${this.combo} COMBO`:`COMBO ${this.combo}`;
+      $('comboValue').textContent=tr(this.fever?'hud.comboPower':'hud.comboNormal',{combo:this.combo});
       $('comboIcon').textContent=this.inferno?'🪩':this.fever?'🔥':'⚡';
-      $('comboDetail').textContent=this.inferno?'C² × (C−9) · RUNNER ×4/REPEAT':this.fever?'C² · RUNNER ×3/REPEAT':`COMBO · RUNNER ×2/REPEAT · ${Math.max(0,5-this.combo)} TO FEVER`;
+      $('comboDetail').textContent=this.inferno?tr('hud.comboDetail.inferno'):this.fever?tr('hud.comboDetail.fever'):tr('hud.comboDetail.normal',{remaining:Math.max(0,5-this.combo)});
       $('comboFill').style.width=`${Math.min(100,this.combo/5*100)}%`;
-      $('feverStatus').textContent=this.inferno?'DISCO!':this.fever?'ON FIRE!':this.combo===0?'READY?':`${this.combo}/5`;
+      $('feverStatus').textContent=this.inferno?tr('hud.disco'):this.fever?tr('hud.onFire'):this.combo===0?tr('hud.ready'):`${this.combo}/5`;
     }
     draw(){
       // Small real screen shake for 30+ point Fever hits. Pointer mapping uses
@@ -1448,7 +1471,7 @@
           const x=hand.x+Math.sin(p*Math.PI)*33;
           const y=hand.y-16-Math.sin(p*Math.PI)*100;
           drawSupply({type:'water',number:this.supplies.held.number},x,y,27,p*Math.PI*5,true);
-          if(p>.87)label('WHAT A CATCH!',hand.x,304,12,'#1b7c78');
+          if(p>.87)fitLabel(tr('celebration.specialCatch'),hand.x,304,12,180,'#1b7c78');
         }
       }
       if(this.throwing)drawThrownSupply(this.throwing,this.runners,this);
@@ -1474,12 +1497,12 @@
         if(this.celebrationTime<2.2){
           ctx.save();ctx.translate(W/2,89);ctx.rotate(Math.sin(this.sceneTime*8)*.035);
           roundedRect(-158,-36,316,70,20,'#fff8da','#2b4a4f',3);
-          label(this.config.level===100?'ALL 100 RACES!':'SNACK STATION HERO!',0,-8,19,'#1a7775');
-          label('THE VOLUNTEER WINS!',0,16,13,'#db7849');ctx.restore();
+          fitLabel(tr(this.config.level===100?'celebration.allRaces':'celebration.stationHero'),0,-8,19,292,'#1a7775');
+          fitLabel(tr('celebration.staffSuccess'),0,16,16,292,'#db7849');ctx.restore();
         }
       }
       if(this.phase==='countdown')drawCountdown(Math.max(1,Math.ceil(this.countdown/0.5)),false);
-      if(this.phase==='playing' && this.goFlash>0)drawCountdown('GO!',true);
+      if(this.phase==='playing' && this.goFlash>0)drawCountdown('',true);
       if(this.phase==='paused')drawPause();
     }
   }
@@ -1663,7 +1686,7 @@
       roundedRect(x-33,45,66,78,9,i===0?'#ffe6a9':'#fff6e5',i===0?'#e2a256':'#d7bb99',2);
       if(!s){
         label('↻',x,73,24,'#9b8071');
-        label('REFILL',x,99,9,'#947a67');
+        fitLabel(tr('role.refill'),x,99,9,68,'#947a67');
         return;
       }
       // The number is a high-positioned label; the pictogram stays unobscured.
@@ -1799,7 +1822,7 @@
     else line(-20,-3,-29,19,'#e8b68d',10);
     roundedRect(-25,-16,51,48,13,scene.shirt,'#333d4e',4.1);
     roundedRect(-14,8,28,20,4,'#fff6d9','#344254',2.8);
-    label('Volunteer',0,19,6.7,'#a05d44');
+    fitLabel(tr('role.staff'),0,19,6.7,47,'#a05d44',6);
     // An extremely enthusiastic volunteer throwing arm.
     if(isDancing){
       line(20,-3,35,-25+Math.sin(celebrationTime*10)*4,'#e8b68d',9);
@@ -1945,26 +1968,28 @@
     }else if(f.kind==='rays'){
       for(let i=0;i<12;i++){const angle=TAU*i/12+p*.4;line(f.x+Math.cos(angle)*18,f.y+Math.sin(angle)*18,f.x+Math.cos(angle)*(36+32*p),f.y+Math.sin(angle)*(34+31*p),i%2?'#fff7a0':'#ffcd69',4.4);}
     }else if(f.kind==='feverEntry'||f.kind==='feverEnd'){
-      const size=(f.text==='INFERNO!'?34:31)+4*Math.sin(Math.PI*Math.min(1,p));
+      const inferno=f.mode==='inferno';
+      const size=(inferno?34:31)+4*Math.sin(Math.PI*Math.min(1,p));
+      const caption=f.textKey?tr(f.textKey):f.text;
       ctx.save();ctx.translate(f.x,f.y);ctx.rotate(Math.sin(p*22)*.08);
-      const bw=f.text==='INFERNO!'?216:188;
-      roundedRect(-bw/2,-32,bw,64,17,f.text==='INFERNO!'?'#6332a2':f.kind==='feverEntry'?'#ffe479':'#d3cee9',
-        f.text==='INFERNO!'?'#ffdb70':'#aa3d78',4);
+      const bw=inferno?216:188;
+      roundedRect(-bw/2,-32,bw,64,17,inferno?'#6332a2':f.kind==='feverEntry'?'#ffe479':'#d3cee9',
+        inferno?'#ffdb70':'#aa3d78',4);
       if(f.kind==='feverEntry'){
         for(let i=0;i<8;i++){
           const a=i*TAU/8;
           line(Math.cos(a)*(bw/2+6),Math.sin(a)*39,
             Math.cos(a)*(bw/2+21),Math.sin(a)*52,
-            f.text==='INFERNO!'?'#e8a0ff':'#ffd17c',3);
+            inferno?'#e8a0ff':'#ffd17c',3);
         }
       }
-      label(f.text,0,2,size,f.text==='INFERNO!'?'#fff1ba':f.kind==='feverEntry'?'#ad4470':'#5f4775');
+      fitLabel(caption,0,2,size,bw-18,inferno?'#fff1ba':f.kind==='feverEntry'?'#ad4470':'#5f4775');
       ctx.restore();
     }else if(f.kind==='jumpShout'){
       ctx.translate(f.x,f.y-p*26);
       ctx.rotate(Math.sin(p*20)*.08);
       roundedRect(-92,-23,184,43,12,'#ffe364','#d84386',4);
-      label('✦ '+f.text+' ✦',0,-1,18,'#a92874');
+      fitLabel('✦ '+(f.textKey?tr(f.textKey):f.text)+' ✦',0,-1,18,163,'#a92874');
     }else if(f.kind==='heavyImpact'){
       ctx.beginPath();ctx.arc(f.x,f.y,12+38*p,0,TAU);
       ctx.strokeStyle='#ffe38b';ctx.lineWidth=4*(1-p);ctx.stroke();
@@ -1976,16 +2001,30 @@
         ctx.fillStyle=['#fcd45d','#eb83b9','#86cae7','#aee29e'][i%4];ctx.fillRect(-4,-7,8,14);ctx.restore();
       }
     }else if(f.kind==='combo'){
-      const bw=Math.max(130,f.text.length*10+22),x=clamp(f.x,bw/2+7,W-bw/2-7),y=Math.max(159,f.y-p*31);
-      roundedRect(x-bw/2,y-17,bw,33,13,'#ffe271','#d4814c',2.6);label(f.text,x,y-1,17,'#b65043');
+      const msg=f.textKey?tr(f.textKey):f.text;
+      ctx.font="1000 17px system-ui,-apple-system,sans-serif";
+      const bw=Math.min(W-20,Math.max(130,Math.ceil(ctx.measureText(msg).width+22)));
+      const x=clamp(f.x,bw/2+7,W-bw/2-7),y=Math.max(159,f.y-p*31);
+      roundedRect(x-bw/2,y-17,bw,33,13,'#ffe271','#d4814c',2.6);
+      fitLabel(msg,x,y-1,17,bw-20,'#b65043');
     }else if(f.kind==='bonk'){
       for(let i=0;i<5;i++){
         const a=TAU*i/5;label(i%2?'★':'✴',f.x+Math.cos(a)*(13+p*25),f.y+Math.sin(a)*(12+p*25),20,'#f9de75');
       }
-    }else if(f.kind==='bubble'){
-      const bw=Math.max(77,f.text.length*9.4+17),x=clamp(f.x,55,W-55),y=Math.max(155,f.y-p*25);
-      roundedRect(x-bw/2,y-19,bw,32,12,f.fever?'#ffe2f6':'#fffce8',f.fever?'#a22d8f':'#4e6470',f.fever?3.5:2);
-      label(f.text,x,y-2,12,f.fever?'#912273':'#46616b');
+    }else if(f.kind==='athleteReaction'){
+      // Athlete speech remains strictly in their native language, no gloss.
+      const speech=f.reaction;
+      ctx.font="900 19px system-ui,-apple-system,sans-serif";
+      const bw=Math.min(W-24,Math.max(84,Math.ceil(ctx.measureText(speech.text).width+26)));
+      const height=38,x=clamp(f.x,bw/2+9,W-bw/2-9);
+      const y=clamp(f.y-p*20,158,H-height-8);
+      roundedRect(x-bw/2,y-height/2,bw,height,12,
+        speech.event==='pain'?'#fff1df':'#fffbe7',
+        speech.event==='pain'?'#bf6b51':'#4b7877',2.5);
+      ctx.save();
+      ctx.direction=/^(ar|he|fa|ur)\b/.test(speech.nativeLanguage)?'rtl':'ltr';
+      fitLabel(speech.text,x,y,19,bw-24,'#355569');
+      ctx.restore();
     }
     ctx.restore();
   }
@@ -2090,13 +2129,13 @@
     ctx.fillStyle=isGo?'rgba(255,236,158,.16)':'rgba(26,55,66,.24)';ctx.fillRect(0,0,W,H);
     ctx.save();ctx.translate(W/2,H/2-17);
     if(!isGo){circle(0,0,83,'#fff5c9','#304f54',5);label(text,0,6,100,'#eb7f58');}
-    else {roundedRect(-125,-64,250,119,23,'#fff6ce','#4f686b',5);label('GO!',0,0,85,'#ec7453');}
+    else {roundedRect(-125,-64,250,119,23,'#fff6ce','#4f686b',5);fitLabel(tr('game.go'),0,0,85,168,'#ec7453');}
     ctx.restore();
   }
   function drawPause(){
     ctx.fillStyle='rgba(29,49,64,.63)';ctx.fillRect(0,0,W,H);
     roundedRect(48,255,W-96,164,22,'#fff8e3','#364d57',4);
-    label('PAUSED!',W/2,303,42,'#e87f55');label('TAP THIS PANEL TO RESUME',W/2,360,14,'#546c76');
+    fitLabel(tr('game.paused'),W/2,303,42,W-122,'#e87f55');fitLabel(tr('game.resume'),W/2,360,14,W-123,'#546c76');
   }
 
   /* ---------- User interface ---------- */
@@ -2135,13 +2174,14 @@
     art.style.setProperty('--city-sky',city.sky);
     $('cityInvitationNumber').textContent=`${String(index+1).padStart(2,'0')} / 10`;
     $('cityInvitationIcon').textContent=city.icon;
-    $('cityInvitationLandmark').textContent=city.landmark;
-    $('cityInvitationName').textContent=city.name;
-    $('cityInvitationSubtitle').textContent=city.subtitle;
-    const invitationCityName=city.name.toLowerCase().replace(/\b\w/g,ch=>ch.toUpperCase());
-    $('cityInvitationText').textContent=
-      `You've received a special invitation from the ${invitationCityName} Marathon Organising Committee! They'd love you to serve at their races.`;
-    $('cityInvitationVisit').textContent=`VISIT ${city.name} ➜`;
+    $('cityInvitationLandmark').textContent=cityText(city,'landmark');
+    $('cityInvitationName').textContent=cityText(city,'name');
+    $('cityInvitationSubtitle').textContent=cityText(city,'subtitle');
+    const displayName=cityText(city,'name');
+    const invitationCityName=I18n.locale()==='en-GB'
+      ?displayName.toLowerCase().replace(/\b\w/g,ch=>ch.toUpperCase()):displayName;
+    $('cityInvitationText').textContent=tr('invitation.body',{city:invitationCityName});
+    $('cityInvitationVisit').textContent=tr('invitation.visit',{city:displayName});
     overlay.classList.remove('hidden');
     $('cityInvitationVisit').focus({preventScroll:true});
   }
@@ -2169,8 +2209,10 @@
     selectedCity=clamp(selectedCity,0,debugMode?9:unlockedCities-1);
     if(!isOpen(selected))selected=selectedCity*10+1;
     const complete=LEVELS.filter(cfg=>isWon(cfg.level)).length;
-    $('progressBadge').textContent=`${complete} / 100 won`;
+    $('progressBadge').textContent=tr('city.progress',{completed:complete});
+    $('progressBadge').setAttribute('aria-label',tr('city.progressAria',{completed:complete}));
     const map=$('cityMap'),previousScroll=map.scrollLeft;map.innerHTML='';
+    map.setAttribute('data-tour-caption',tr('intro.tourFooter'));
     $('exitDebugBtn').classList.toggle('hidden',!debugMode);
     $('debugIndicator').classList.toggle('hidden',!debugMode);
     CITIES.forEach((city,idx)=>{
@@ -2179,14 +2221,22 @@
       b.className=`city-stop ${active?'chosen':''} ${open?'open':'locked'} ${done===10?'complete':''}`;
       b.style.setProperty('--city-color',city.color);
       b.style.setProperty('--city-sky',city.sky);
-      b.setAttribute('aria-label',`${city.name}, city ${idx+1}, ${done} of 10 races won${open?', available':', locked'}`);
+      b.setAttribute('aria-label',tr('city.cardAria',{city:cityText(city,'name'),index:idx+1,done,state:tr(open?'city.state.available':'city.state.locked')}));
       b.setAttribute('aria-pressed',String(active));
       const num=String(idx+1).padStart(2,'0');
+      // Build the card structure once and assign localized text safely.
       b.innerHTML=`<span class="city-route-dot" aria-hidden="true">●</span>
-        <span class="city-postcard"><span class="city-postmark">${num} / 10</span><span class="city-emblem">${open?city.icon:'🔒'}</span>
-        <span class="city-skyline">${city.landmark}</span></span>
-        <span class="city-name">${city.name}</span><span class="city-country">${open?city.subtitle:'Earn 9 stamps in the previous city'}</span>
-        <span class="city-status">${debugMode?'🛠 DEBUG':!open?'🔒 LOCKED':done===10?'★ STAMPED':`${done} / 10 STAMPS`}</span>`;
+        <span class="city-postcard"><span class="city-postmark">${num} / 10</span><span class="city-emblem"></span>
+        <span class="city-skyline"></span></span>
+        <span class="city-name"></span><span class="city-country"></span>
+        <span class="city-status"></span>`;
+      b.querySelector('.city-emblem').textContent=open?city.icon:'🔒';
+      b.querySelector('.city-skyline').textContent=cityText(city,'landmark');
+      b.querySelector('.city-name').textContent=cityText(city,'name');
+      b.querySelector('.city-country').textContent=open?cityText(city,'subtitle'):tr('city.hint.locked');
+      b.querySelector('.city-status').textContent=debugMode?tr('city.status.debug')
+        :!open?tr('city.status.locked')
+        :done===10?tr('city.status.complete'):tr('city.status.stamps',{done});
       if(open)b.addEventListener('click',()=>{
         selectedCity=idx;
         if(Math.floor((selected-1)/10)!==idx)selected=idx*10+1;
@@ -2200,19 +2250,21 @@
     $('cityDetail').style.setProperty('--city-color',city.color);
     $('cityDetail').style.setProperty('--city-sky',city.sky);
     $('citySymbol').textContent=city.icon;
-    $('cityCaption').textContent=`CITY ${String(selectedCity+1).padStart(2,'0')} / 10 · ${city.country}`;
-    $('cityTitle').textContent=city.name;
-    $('citySubtitle').textContent=city.subtitle;
-    $('cityStamp').innerHTML=`${stamps} / 10<br>STAMPS`;
+    $('cityCaption').textContent=tr('city.chapter',{index:String(selectedCity+1).padStart(2,'0'),country:cityText(city,'country')});
+    $('cityTitle').textContent=cityText(city,'name');
+    $('citySubtitle').textContent=cityText(city,'subtitle');
+    $('cityStamp').replaceChildren(document.createTextNode(`${stamps} / 10`),document.createElement('br'),document.createTextNode(tr('city.stamps')));
     $('cityEventRange').textContent='01 — 10';
     const g=$('levelGrid');g.innerHTML='';
     for(let i=0;i<10;i++){
       const cfg=LEVELS[selectedCity*10+i],won=isWon(cfg.level);
       const b=document.createElement('button');b.type='button';
       b.className=`level-tile ${selected===cfg.level?'selected':''} ${won?'won':''}`;
-      b.setAttribute('aria-label',`${CITIES[selectedCity].name} race ${i+1}, ${cfg.seconds} seconds, ${cfg.raceBand.toLowerCase()}, ${won?'won':'not yet won'}`);
+      b.setAttribute('aria-label',tr('city.raceAria',{city:cityText(CITIES[selectedCity],'name'),index:i+1,seconds:cfg.seconds,band:raceBandLabel(cfg.event),state:tr(won?'city.completed':'city.notCompleted')}));
       b.setAttribute('aria-pressed',String(selected===cfg.level));
-      b.innerHTML=`<span class="tile-star">${won?'★':'✦'}</span><span class="tile-name">${cfg.raceBand.split(' ')[0]}</span><span class="tile-number">${String(i+1).padStart(2,'0')}</span><span class="tile-detail">${cfg.seconds} SEC</span>`;
+      b.innerHTML=`<span class="tile-star">${won?'★':'✦'}</span><span class="tile-name"></span><span class="tile-number">${String(i+1).padStart(2,'0')}</span><span class="tile-detail"></span>`;
+      b.querySelector('.tile-name').textContent=tr('race.short.'+raceBandKey(cfg.event));
+      b.querySelector('.tile-detail').textContent=tr('race.tileTime',{seconds:cfg.seconds});
       b.addEventListener('click',()=>{
         selected=cfg.level;
         if(!recordRaceTap(i+1))renderLevelGrid();
@@ -2223,8 +2275,9 @@
   }
   function renderSelection(){
     const cfg=LEVELS[selected-1];
-    $('selectedTitle').textContent=`RACE ${String(cfg.event).padStart(2,'0')} · ${CITIES[cfg.cityIndex].name}`;
-    $('selectedMeta').textContent=`${cfg.raceBand} · ${cfg.runners} runners · ${cfg.seconds} sec · ${cfg.minMatches===cfg.maxMatches?cfg.minMatches:`${cfg.minMatches}–${cfg.maxMatches}`} matches · supply 2–${cfg.supplyMax}`;
+    $('selectedTitle').textContent=tr('race.eventTitle',{event:String(cfg.event).padStart(2,'0'),city:cityText(CITIES[cfg.cityIndex],'name')});
+    const matchesCount=cfg.minMatches===cfg.maxMatches?cfg.minMatches:`${cfg.minMatches}–${cfg.maxMatches}`;
+    $('selectedMeta').textContent=tr('race.meta',{band:raceBandLabel(cfg.event),runners:cfg.runners,seconds:cfg.seconds,matches:matchesCount,max:cfg.supplyMax});
   }
   function sizeScene(){
     const screen=$('gameScreen'), app=$('app');
@@ -2252,17 +2305,11 @@
     pixelRatio=ratio;
   }
   let pixelRatio=1;
-  // Fullscreen is shared between level selection and gameplay. Browser
-  // policy requires a user gesture to enter, but switching screens does not
-  // change this mode; use the two dedicated buttons to toggle it.
+  // Starting a race requests fullscreen. Returning to levels retains the
+  // fullscreen session; no dedicated fullscreen buttons appear in the UI.
   const standalone=()=>window.matchMedia('(display-mode: standalone)').matches
     ||navigator.standalone===true
-    // The browser Fullscreen API also matches display-mode:fullscreen.
-    // An API fullscreen session is not an installed PWA and must retain
-    // its working Exit Fullscreen button.
     ||(window.matchMedia('(display-mode: fullscreen)').matches&&!fullscreenIsActive());
-  let installPrompt=null;
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
   function enterRaceFullscreen(){
     if(standalone())return;
     const root=document.documentElement;
@@ -2280,37 +2327,8 @@
       }catch(__){}
     }
   }
-  function leaveRaceFullscreen(){
-    if(!document.fullscreenElement&&!document.webkitFullscreenElement)return;
-    const exit=document.exitFullscreen||document.webkitExitFullscreen;
-    if(!exit)return;
-    try{
-      const pending=exit.call(document);
-      if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
-    }catch(_){}
-  }
   function fullscreenIsActive(){
     return !!(document.fullscreenElement||document.webkitFullscreenElement);
-  }
-  function updateFullscreenButtons(){
-    const active=fullscreenIsActive(),installed=standalone();
-    // Installed apps already own the screen; the former check-mark
-    // fullscreen control was inert. Hide it on both screens.
-    $('app').classList.toggle('installed-mode',installed);
-    for(const id of ['menuFullscreenBtn','gameFullscreenBtn']){
-      const button=$(id);
-      button.classList.toggle('hidden',installed);
-      if(installed){
-        button.setAttribute('aria-pressed','true');
-        button.setAttribute('aria-label','Installed app');
-        button.title='Installed app';
-        continue;
-      }
-      button.textContent=active?'❐':'⛶';
-      button.setAttribute('aria-pressed',String(active));
-      button.setAttribute('aria-label',active?'Exit fullscreen':'Enter fullscreen');
-      button.title=active?'Exit fullscreen':'Enter fullscreen';
-    }
   }
   // Installed PWAs get a portrait preference from the manifest. For a
   // regular browser, Android can also lock portrait while fullscreen.
@@ -2323,13 +2341,6 @@
       const pending=orientation.lock('portrait');
       if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
     }catch(_){}
-  }
-  function toggleFullscreen(){
-    if(standalone())return;
-    if(fullscreenIsActive())leaveRaceFullscreen();
-    else if(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen)enterRaceFullscreen();
-    else if(installPrompt){installPrompt.prompt();installPrompt=null;}
-    else window.alert('For a larger screen, open the browser share or menu and choose Add to Home Screen or Install app.');
   }
   function showMenu(){
     // Keep fullscreen active when returning to level selection.
@@ -2347,7 +2358,7 @@
     $('menuScreen').classList.add('hidden');$('gameScreen').classList.remove('hidden');$('app').classList.add('in-game');
     sizeScene();game=new Marathon(LEVELS[level-1],randSeed());
     requestAnimationFrame(sizeScene);
-    $('matchHint').textContent='Tap a runner to throw.';
+    $('matchHint').textContent=tr('hud.tapRunner');
     window.scrollTo({top:0,behavior:'instant'});
     audio.audio; // Unlock audio in direct response to Start click (mobile browsers).
   }
@@ -2373,6 +2384,19 @@
     }
     renderLevelGrid();
   }
+  $('languageSelect').value=I18n.locale();
+  $('languageSelect').addEventListener('change',event=>{
+    if(!I18n.setLocale(event.target.value))event.target.value=I18n.locale();
+  });
+  I18n.subscribe(()=>{
+    $('languageSelect').value=I18n.locale();
+    renderLevelGrid();
+    if(invitationOpenIndex!==null)showPendingCityInvitation();
+    if(game){game.syncHUD();if(game.resultsShown)game.showResults(game.phase==='celebrate');}
+    updateSoundIcon();sizeScene();
+  });
+  $('howToPlayBtn').addEventListener('click',()=>$('howToPlayDialog').showModal());
+  $('howToPlayClose').addEventListener('click',()=>$('howToPlayDialog').close());
   $('cityInvitationVisit').addEventListener('click',()=>acknowledgeCityInvitation(true));
   $('cityInvitationLater').addEventListener('click',()=>acknowledgeCityInvitation(false));
   $('exitDebugBtn').addEventListener('click',()=>setDebugMode(false));
@@ -2382,8 +2406,6 @@
     enterRaceFullscreen();
     startLevel(selected);
   });
-  $('menuFullscreenBtn').addEventListener('click',toggleFullscreen);
-  $('gameFullscreenBtn').addEventListener('click',toggleFullscreen);
   $('levelsBtn').addEventListener('click',showMenu);
   $('backBtn').addEventListener('click',showMenu);
   $('retryBtn').addEventListener('click',()=>game&&startLevel(game.config.level));
@@ -2395,7 +2417,7 @@
   });
   function updateSoundIcon(){
     $('soundBtn').textContent=prefs.sound?'🔊':'🔇';
-    const action=prefs.sound?'off':'on';$('soundBtn').title=`Turn sound ${action}`;$('soundBtn').setAttribute('aria-label',`Turn sound ${action}`);
+    const label=tr(prefs.sound?'game.soundOff':'game.soundOn');$('soundBtn').title=label;$('soundBtn').setAttribute('aria-label',label);
   }
   canvas.addEventListener('pointerdown',ev=>{
     if(!game)return;
@@ -2413,7 +2435,6 @@
   // Fullscreen changes the visible phone height even without a normal resize.
   for(const eventName of ['fullscreenchange','webkitfullscreenchange']){
     document.addEventListener(eventName,()=>{
-      updateFullscreenButtons();
       requestPortraitOrientation();
       sizeScene();requestAnimationFrame(sizeScene);
     });
@@ -2436,11 +2457,11 @@
   });
   function frame(time){
     const dt=Math.min(.05,Math.max(0,(time-prevFrame)/1000));prevFrame=time;
-    if(game){try{game.update(dt);game.draw();}catch(e){console.error('Game error:',e);showMessage('Oops! Please restart this level.',3500);game.phase='paused';}}
+    if(game){try{game.update(dt);game.draw();}catch(e){console.error('Game error:',e);showMessage(tr('game.restart'),3500);game.phase='paused';}}
     requestAnimationFrame(frame);
   }
   reconcileCityUnlocks();
-  renderLevelGrid();updateSoundIcon();updateFullscreenButtons();requestPortraitOrientation();sizeScene();requestAnimationFrame(frame);
+  renderLevelGrid();updateSoundIcon();requestPortraitOrientation();sizeScene();requestAnimationFrame(frame);
   showPendingCityInvitation();
 
   // Debug mode is hidden in the race-tile sequence and never persists progress.

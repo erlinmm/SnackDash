@@ -56,6 +56,15 @@ async def check(url, live, next_site):
         assert await page.locator('meta[name="snackdash-version"]').get_attribute('content') == old
         await page.locator('#levelsBtn').click()
         await page.locator('#pwaUpdatePanel').wait_for(state='visible')
+        # PWA update UI is localized even though it is injected after the game boots.
+        await page.locator('#languageSelect').select_option('zh-Hans')
+        assert await page.locator('#pwaUpdatePanel strong').text_content()=='新版本已准备好！'
+        assert await page.locator('#pwaApply').text_content()=='更新并继续'
+        assert await page.locator('#pwaLater').text_content()=='稍后'
+        assert '版本 ' in await page.locator('#menuScreen .save-hint').last.text_content()
+        await page.locator('#languageSelect').select_option('en-GB')
+        assert await page.locator('#pwaUpdatePanel strong').text_content()=='A new update is ready!'
+        await page.locator('#languageSelect').select_option('zh-Hans')
         await page.locator('#pwaLater').click()
         assert await page.locator('#pwaUpdatePanel').is_hidden()
         await page.locator('#startBtn').click()
