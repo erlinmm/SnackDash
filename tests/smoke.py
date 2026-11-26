@@ -78,11 +78,14 @@ async def check(browser, width, height):
     hud=await page.evaluate("""() => {
       const b=document.querySelector('.scoreboard');
       const pause=document.querySelector('#pauseBtn');
-      const bb=b.getBoundingClientRect(),p=pause.getBoundingClientRect();
-      return {scroll:b.scrollWidth,client:b.clientWidth,right:p.right,edge:bb.right};
+      const restart=document.querySelector('#restartBtn');
+      const bb=b.getBoundingClientRect(),p=pause.getBoundingClientRect(),r=restart.getBoundingClientRect();
+      return {scroll:b.scrollWidth,client:b.clientWidth,right:p.right,edge:bb.right,
+        pauseWidth:p.width,restartWidth:r.width};
     }""")
     assert hud['scroll']<=hud['client']+2,(width,height,hud)
     assert hud['right']<=hud['edge']+2,(width,height,hud)
+    assert hud['pauseWidth']>=38 and hud['restartWidth']>=38,(width,height,hud)
 
     # Without changing the canvas size, the complete in-game stack should
     # share any leftover height between its top and bottom margins.
