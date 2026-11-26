@@ -3,12 +3,14 @@
 (function(){
   'use strict';
   const {LEVELS,CITIES,cityUnlockedCount,cityCleared,seededRandom,randInt,pick,matches,transformRunnerNumber,resolveHit,NumberDirector,legalBib}=window.GameMath;
+  const I18n=window.GameI18n;
+  const tr=(key,params)=>I18n.t(key,params);
   // Keep very large Inferno scores legible in the HUD and final result.
   // The headline uses a compact value; the exact whole-number value is
   // preserved in the result details (and as the HUD's accessible label).
   function fullScoreText(value){
     if(!Number.isFinite(value))return value<0?'−∞':'∞';
-    return Math.trunc(value).toLocaleString('en-GB');
+    return I18n.formatNumber(Math.trunc(value));
   }
   function shortScoreText(value,decimals=1){
     if(!Number.isFinite(value))return fullScoreText(value);
@@ -17,7 +19,7 @@
     const tiers=[[1e12,'T'],[1e9,'B'],[1e6,'M']];
     if(magnitude>=1e15)return value.toExponential(decimals).replace('e+','e');
     const [unit,suffix]=tiers.find(([unit])=>magnitude>=unit);
-    return Number((value/unit).toFixed(decimals)).toLocaleString('en-GB')+suffix;
+    return I18n.formatNumber(Number((value/unit).toFixed(decimals)))+suffix;
   }
   function raceBandForEvent(event){
     return event<=3?'QUARTER MARATHON':event<=6?'HALF MARATHON':event<=9?'FULL MARATHON':'ULTRA MARATHON';
@@ -824,7 +826,7 @@
       this.learning=new LearningOpportunityDirector(this);
       this.assertReady();this.syncHUD();
       $('resultOverlay').classList.add('hidden');$('gameMessage').classList.remove('show');
-      $('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label','Pause game');
+      $('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label',tr('game.pause'));
       audio.nextBeat=0;audio.beatNumber=0;
     }
     random(){return this.rng();}
@@ -952,7 +954,7 @@
           if(digit>0)audio.countdown(digit);
           this.lastCountdownDigit=digit;
         }
-        if(this.countdown<=0){this.phase='playing';this.goFlash=.8;audio.go();showMessage('READY, SET, SNACK!',1100);}
+        if(this.countdown<=0){this.phase='playing';this.goFlash=.8;audio.go();showMessage(tr('game.ready'),1100);}
         this.tickRunners(dt);
       }else if(this.phase==='playing'){
         this.remaining=Math.max(0,this.remaining-dt);
@@ -1247,7 +1249,7 @@
             this.popEffect({kind:'feverEntry',text:'FEVER!',x:W/2,y:H*.44,life:.55});
             showMessage('🔥 FEVER! THE WHOLE CITY CHEERS!',1450);
             audio.feverStart();
-          } else if(this.score>=GOAL && this.score-outcome.delta<GOAL) showMessage('GOAL REACHED! KEEP IT UP!',1200);
+          } else if(this.score>=GOAL && this.score-outcome.delta<GOAL) showMessage(tr('game.goal'),1200);
           const tier=outcome.delta<=20?1:outcome.delta<=30?2:3;
           this.popEffect({kind:'score',text:`+${outcome.delta}`,x:fxX,y:fxY-48,
             size:tier===1?25:tier===2?29:34,color:this.inferno?'#ffdc65':this.fever?'#e8a048':'#0f9870',life:.52});
@@ -1324,7 +1326,7 @@
         const rank=hairOnly?Math.min(ellipse,.38+Math.abs(dx)/Math.max(40,50*scale)):ellipse;
         if((ellipse<1.38||hairOnly)&&rank<score){nearest=r;score=rank;}
       }
-      if(!nearest){showMessage('TAP A RUNNER!',650);return;}
+      if(!nearest){showMessage(tr('game.tapRunner'),650);return;}
       this.swapCue=null; // A throw cancels the cue; the new supply is already active.
       this.throwing={runnerId:nearest.id,supply:this.supplies.held,elapsed:0,hit:false,reloaded:false,feverAtRelease:this.fever};
       audio.throw();
@@ -1352,45 +1354,45 @@
       this.resultsShown=true;
       $('resultMascot').textContent=won?'🏆':'💦';
       const city=CITIES[this.config.cityIndex];
-      $('resultKicker').textContent=won?'RACE COMPLETE!':'TIME IS UP!';
-      $('resultHeading').textContent=won?(this.config.level===100?'WORLD TOUR LEGEND!':'SUPER SERVER!'):'TRY ANOTHER LAP!';
+      $('resultKicker').textContent=tr(won?'result.complete':'result.timeUp');
+      $('resultHeading').textContent=tr(won?(this.config.level===100?'result.world':'result.super'):'result.retry');
       const finalScore=shortScoreText(this.score,2);
       const exactScore=fullScoreText(this.score);
       $('resultScore').replaceChildren();
       const scoreMain=document.createElement('strong');scoreMain.className='score-main';scoreMain.textContent=finalScore;
-      const scoreUnit=document.createElement('span');scoreUnit.className='score-unit';scoreUnit.textContent='points';
+      const scoreUnit=document.createElement('span');scoreUnit.className='score-unit';scoreUnit.textContent=tr('result.points');
       $('resultScore').append(scoreMain,scoreUnit);
       if(finalScore!==exactScore){
         const details=document.createElement('span');details.className='score-exact';
-        details.textContent=`Full score: ${exactScore}`;
+        details.textContent=tr('hud.fullScore',{score:exactScore});
         $('resultScore').append(details);
       }
-      $('resultScore').setAttribute('aria-label',`${exactScore} points`);
-      $('resultText').textContent=debugMode?'Debug run: progress and records are not saved.':
-        !won?'The runners are still hungry. Have another go!':
-        this.config.level===100?'100 races completed! Your volunteer is a world-tour superstar!':
-        `${city.name} race ${this.config.event} stamped! ${cityCleared(prefs.best,this.config.cityIndex)} of 10 races complete.`;
+      $('resultScore').setAttribute('aria-label',tr('hud.scorePoints',{score:exactScore}));
+      $('resultText').textContent=debugMode?tr('result.debug'):
+        !won?tr('result.failure'):
+        this.config.level===100?tr('result.allComplete'):
+        tr('result.stamped',{city:city.name,race:this.config.event,completed:cityCleared(prefs.best,this.config.cityIndex)});
       const accuracy=this.correct+this.wrong?Math.round(this.correct/(this.correct+this.wrong)*100):0;
-      $('resultStats').textContent=`${this.correct} good catches · ${this.wrong} bonks · ${accuracy}% accuracy · best combo ${this.maxCombo}`;
+      $('resultStats').textContent=tr('result.stats',{correct:this.correct,wrong:this.wrong,accuracy,combo:this.maxCombo});
       const next=won?nextPlayable(this.config.level):null;
-      $('resultPrimary').textContent=next?'NEXT RACE ➜':'PLAY AGAIN ↻';
+      $('resultPrimary').textContent=tr(next?'result.next':'result.playAgain');
       $('resultPrimary').dataset.next=String(next||'');
       $('resultPrimary').dataset.action=next?'next':'retry';
       $('resultOverlay').classList.remove('hidden');
       renderLevelGrid();
     }
     pause(){
-      if(this.phase==='paused'){this.phase=this.wasPhase||'playing';$('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label','Pause game');}
+      if(this.phase==='paused'){this.phase=this.wasPhase||'playing';$('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label',tr('game.pause'));}
       else if(this.phase==='playing'||this.phase==='countdown'){
-        this.wasPhase=this.phase;this.phase='paused';$('pauseBtn').textContent='▶';$('pauseBtn').setAttribute('aria-label','Resume game');
+        this.wasPhase=this.phase;this.phase='paused';$('pauseBtn').textContent='▶';$('pauseBtn').setAttribute('aria-label',tr('game.resumeAria'));
       }
     }
     syncHUD(){
       $('hudLevel').textContent=this.config.event;
       const hudDisplay=shortScoreText(this.score,1);
       $('hudScore').textContent=hudDisplay;
-      $('hudScore').title=`${fullScoreText(this.score)} points`;
-      $('hudScore').setAttribute('aria-label',`${fullScoreText(this.score)} points`);
+      $('hudScore').title=tr('hud.scorePoints',{score:fullScoreText(this.score)});
+      $('hudScore').setAttribute('aria-label',tr('hud.scorePoints',{score:fullScoreText(this.score)}));
       $('hudScore').style.fontSize=hudDisplay.length>8?'12px':hudDisplay.length>6?'14px':hudDisplay.length>4?'17px':'';
       $('hudScore').parentElement.parentElement.classList.toggle('goal-met',this.score>=GOAL);
       const sec=Math.max(0,Math.ceil(this.remaining));
@@ -2090,13 +2092,13 @@
     ctx.fillStyle=isGo?'rgba(255,236,158,.16)':'rgba(26,55,66,.24)';ctx.fillRect(0,0,W,H);
     ctx.save();ctx.translate(W/2,H/2-17);
     if(!isGo){circle(0,0,83,'#fff5c9','#304f54',5);label(text,0,6,100,'#eb7f58');}
-    else {roundedRect(-125,-64,250,119,23,'#fff6ce','#4f686b',5);label('GO!',0,0,85,'#ec7453');}
+    else {roundedRect(-125,-64,250,119,23,'#fff6ce','#4f686b',5);label(tr('game.go'),0,0,85,'#ec7453');}
     ctx.restore();
   }
   function drawPause(){
     ctx.fillStyle='rgba(29,49,64,.63)';ctx.fillRect(0,0,W,H);
     roundedRect(48,255,W-96,164,22,'#fff8e3','#364d57',4);
-    label('PAUSED!',W/2,303,42,'#e87f55');label('TAP THIS PANEL TO RESUME',W/2,360,14,'#546c76');
+    label(tr('game.paused'),W/2,303,42,'#e87f55');label(tr('game.resume'),W/2,360,14,'#546c76');
   }
 
   /* ---------- User interface ---------- */
@@ -2139,9 +2141,8 @@
     $('cityInvitationName').textContent=city.name;
     $('cityInvitationSubtitle').textContent=city.subtitle;
     const invitationCityName=city.name.toLowerCase().replace(/\b\w/g,ch=>ch.toUpperCase());
-    $('cityInvitationText').textContent=
-      `You've received a special invitation from the ${invitationCityName} Marathon Organising Committee! They'd love you to serve at their races.`;
-    $('cityInvitationVisit').textContent=`VISIT ${city.name} ➜`;
+    $('cityInvitationText').textContent=tr('invitation.body',{city:invitationCityName});
+    $('cityInvitationVisit').textContent=tr('invitation.visit',{city:city.name});
     overlay.classList.remove('hidden');
     $('cityInvitationVisit').focus({preventScroll:true});
   }
@@ -2302,14 +2303,14 @@
       button.classList.toggle('hidden',installed);
       if(installed){
         button.setAttribute('aria-pressed','true');
-        button.setAttribute('aria-label','Installed app');
-        button.title='Installed app';
+        button.setAttribute('aria-label',tr('game.fullscreenInstalled'));
+        button.title=tr('game.fullscreenInstalled');
         continue;
       }
       button.textContent=active?'❐':'⛶';
       button.setAttribute('aria-pressed',String(active));
-      button.setAttribute('aria-label',active?'Exit fullscreen':'Enter fullscreen');
-      button.title=active?'Exit fullscreen':'Enter fullscreen';
+      button.setAttribute('aria-label',tr(active?'game.fullscreenExit':'game.fullscreenEnter'));
+      button.title=tr(active?'game.fullscreenExit':'game.fullscreenEnter');
     }
   }
   // Installed PWAs get a portrait preference from the manifest. For a
@@ -2329,7 +2330,7 @@
     if(fullscreenIsActive())leaveRaceFullscreen();
     else if(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen)enterRaceFullscreen();
     else if(installPrompt){installPrompt.prompt();installPrompt=null;}
-    else window.alert('For a larger screen, open the browser share or menu and choose Add to Home Screen or Install app.');
+    else window.alert(tr('game.installTip'));
   }
   function showMenu(){
     // Keep fullscreen active when returning to level selection.
@@ -2347,7 +2348,7 @@
     $('menuScreen').classList.add('hidden');$('gameScreen').classList.remove('hidden');$('app').classList.add('in-game');
     sizeScene();game=new Marathon(LEVELS[level-1],randSeed());
     requestAnimationFrame(sizeScene);
-    $('matchHint').textContent='Tap a runner to throw.';
+    $('matchHint').textContent=tr('hud.tapRunner');
     window.scrollTo({top:0,behavior:'instant'});
     audio.audio; // Unlock audio in direct response to Start click (mobile browsers).
   }
@@ -2373,6 +2374,17 @@
     }
     renderLevelGrid();
   }
+  $('languageSelect').value=I18n.locale();
+  $('languageSelect').addEventListener('change',event=>{
+    if(!I18n.setLocale(event.target.value))event.target.value=I18n.locale();
+  });
+  I18n.subscribe(()=>{
+    $('languageSelect').value=I18n.locale();
+    renderLevelGrid();
+    if(invitationOpenIndex!==null)showPendingCityInvitation();
+    if(game){game.syncHUD();if(game.resultsShown)game.showResults(game.phase==='celebrate');}
+    updateSoundIcon();updateFullscreenButtons();sizeScene();
+  });
   $('cityInvitationVisit').addEventListener('click',()=>acknowledgeCityInvitation(true));
   $('cityInvitationLater').addEventListener('click',()=>acknowledgeCityInvitation(false));
   $('exitDebugBtn').addEventListener('click',()=>setDebugMode(false));
@@ -2395,7 +2407,7 @@
   });
   function updateSoundIcon(){
     $('soundBtn').textContent=prefs.sound?'🔊':'🔇';
-    const action=prefs.sound?'off':'on';$('soundBtn').title=`Turn sound ${action}`;$('soundBtn').setAttribute('aria-label',`Turn sound ${action}`);
+    const label=tr(prefs.sound?'game.soundOff':'game.soundOn');$('soundBtn').title=label;$('soundBtn').setAttribute('aria-label',label);
   }
   canvas.addEventListener('pointerdown',ev=>{
     if(!game)return;
@@ -2436,7 +2448,7 @@
   });
   function frame(time){
     const dt=Math.min(.05,Math.max(0,(time-prevFrame)/1000));prevFrame=time;
-    if(game){try{game.update(dt);game.draw();}catch(e){console.error('Game error:',e);showMessage('Oops! Please restart this level.',3500);game.phase='paused';}}
+    if(game){try{game.update(dt);game.draw();}catch(e){console.error('Game error:',e);showMessage(tr('game.restart'),3500);game.phase='paused';}}
     requestAnimationFrame(frame);
   }
   reconcileCityUnlocks();
