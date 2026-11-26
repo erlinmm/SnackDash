@@ -32,6 +32,7 @@ async def check(browser, width, height):
     await assert_selection_fits(page, width, height)
     # Exercise offline locale switching without altering scoring or save-state.
     assert await page.locator('#languageSelect').input_value() == 'en-GB'
+    assert await page.locator('#languageSelect option[value="zh-Hans"]').text_content() == '简体中文'
     await page.locator('#languageSelect').select_option('zh-Hans')
     assert await page.locator('[data-i18n="intro.pickRace"]').text_content() == '选择比赛'
     assert await page.evaluate("document.documentElement.lang") == 'zh-Hans'

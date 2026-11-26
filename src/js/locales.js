@@ -365,6 +365,6 @@
     "pwa.status.ready": "更新已就绪，正在打开新版本……",
     "pwa.status.opening": "正在打开新版本……",
     "pwa.status.failed": "暂时无法切换到新版本，请重试。",
-  },{label:'简体中文（预览）'});
+  },{label:'简体中文'});
   i18n.init();
 })(typeof window!=='undefined'?window:globalThis);

@@ -11,7 +11,7 @@ require('../src/js/locales.js');
 
 test('English remains the safe default and locale registration is explicit',()=>{
   assert.equal(i18n.locale(),'en-GB');
-  assert.ok(i18n.availableLocales().some(item=>item.code==='zh-Hans'));
+  assert.ok(i18n.availableLocales().some(item=>item.code==='zh-Hans'&&item.label==='简体中文'));
   assert.equal(i18n.t('intro.start'),"LET'S SERVE!");
   assert.equal(i18n.setLocale('unknown'),false);
   assert.equal(i18n.locale(),'en-GB');
