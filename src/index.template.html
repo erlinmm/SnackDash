@@ -51,7 +51,7 @@
       <section class="instructions" aria-label="How to play">
         <div class="instruction"><span class="instruction-emoji">1️⃣</span><span>Your volunteer picks up supplies. <b>Tap a table item to swap it</b> with the one in hand.</span></div>
         <div class="instruction"><span class="instruction-emoji">2️⃣</span><span><b>Tap a runner</b> if either number divides the other exactly.</span></div>
-        <div class="instruction"><span class="instruction-emoji">3️⃣</span><span><b>5 good catches → FEVER; 10 → INFERNO!</b> Normal scores Combo × runner (1/2/4); FEVER scores Combo² × runner (1/3/9); INFERNO scores Combo² × (Combo−9) × runner (1/4/16). Runner bonuses stop growing after the third successful match. Wrong throws end the bonus mode without a penalty.</span></div>
+        <div class="instruction"><span class="instruction-emoji">3️⃣</span><span><b>5 good catches → FEVER; 10 → INFERNO!</b> Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</span></div>
       </section>
 
       <section class="tour-section" aria-label="World tour city map">
@@ -139,7 +139,7 @@
         <div class="held-status"><span class="held-icon" id="heldIcon">💧</span><div><small>IN YOUR HAND</small><strong id="heldNumber">6</strong></div></div>
         <div class="hand-rule"><strong>Find a whole-number match!</strong><span id="matchHint">Tap a runner to throw.</span></div>
       </div>
-      <p class="game-footnote"><b>5 Combo → Fever · 10 Combo → Inferno.</b> Tap table items to swap. FEVER: Combo² × repeat (1/3/9); INFERNO: Combo² × (Combo−9) × repeat (1/4/16); misses end bonus mode without a penalty.</p>
+      <p class="game-footnote"><b>5 Combo → Fever · 10 Combo → Inferno.</b> Tap table items to swap. FEVER: Combo² × 3^(prior hits); INFERNO: Combo² × (Combo−9) × 4^(prior hits); misses end bonus mode without a penalty.</p>
     </section>
   </main>
   <!-- BUILD:MATH -->
