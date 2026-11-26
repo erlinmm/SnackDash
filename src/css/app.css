@@ -708,3 +708,15 @@ html:has(.app.in-game),body:has(.app.in-game){height:100%;overflow:hidden;oversc
   border:1.5px solid #d6c9b7;border-radius:9px;padding:5px 8px;
   background:#fffdf8;color:#27354a;max-width:170px;min-height:34px}
 .language-setting select:focus-visible{outline:3px solid #0d929c;outline-offset:2px}
+
+/* Compact the gaps (not the tap targets) on shorter portrait phones.
+   The language selector adds a row to the menu, so preserve room for the
+   passport and save notice without relying on hidden overflow. */
+@media (orientation:portrait) and (max-width:530px) and (min-height:691px) and (max-height:740px) {
+  .app:not(.in-game) .topbar{margin-bottom:5px}
+  .app:not(.in-game) .language-setting{margin-top:-7px;margin-bottom:5px}
+  .app:not(.in-game) .tour-section{margin-top:7px}
+  .app:not(.in-game) .world-header{margin-bottom:5px}
+  .app:not(.in-game) .passport-card{margin-top:7px}
+  .app:not(.in-game) .save-hint{margin-top:3px}
+}
