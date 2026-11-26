@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 1,
+  "project": "SnackDash V2",
+  "branch": "main2",
+  "catalogStatus": "planning_only",
+  "disclaimer": "This is an art-direction inventory. It is NOT a runtime manifest and contains NO finished asset references. All original local event names require cultural/official verification before approval.",
+  "stage": {
+    "targetCanvas": {
+      "width": 390,
+      "height": 700,
+      "orientation": "portrait"
+    },
+    "camera": "front-facing-runners-three-lanes",
+    "volunteerPosition": "left_stall",
+    "backupSupplySlots": 2
+  },
+  "families": [
+    {
+      "id": "street_backdrop",
+      "description": "City skyline, road surroundings and perspective layers",
+      "dimensions": [
+        "city",
+        "mode"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "volunteer_costume",
+      "description": "Distinct male/female city outfit silhouettes across 3 states",
+      "dimensions": [
+        "city",
+        "gender",
+        "mode"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "volunteer_motion",
+      "description": "Idle, pick-up, swap, climb, throw, celebrate and descend poses",
+      "dimensions": [
+        "gender",
+        "mode",
+        "action"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "runner",
+      "description": "Front-facing runner views, stride poses, bib mask and reaction",
+      "dimensions": [
+        "runnerVariant",
+        "action",
+        "depth"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "station",
+      "description": "Fixed-height stall, changeable front panel, top surface",
+      "dimensions": [
+        "city",
+        "mode"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "backup_supply",
+      "description": "Two lower-left replacement supply slots and food icons",
+      "dimensions": [
+        "slot",
+        "itemType"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "festival_ambient_fx",
+      "description": "Petals, lanterns, confetti, projections and fireworks",
+      "dimensions": [
+        "city",
+        "mode",
+        "effect"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "gameplay_fx",
+      "description": "Throw trails, hit response, mode entry/exit and glow",
+      "dimensions": [
+        "mode",
+        "event"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "hud_skin",
+      "description": "HUD plaques, readable labels and panels without baked copy",
+      "dimensions": [
+        "mode",
+        "localeSafe"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    },
+    {
+      "id": "audio_cue",
+      "description": "Original festival-flavoured short sound effects",
+      "dimensions": [
+        "mode",
+        "event"
+      ],
+      "status": "planned",
+      "masterPath": null,
+      "exportPath": null,
+      "previewPath": null
+    }
+  ],
+  "cities": [
+    {
+      "id": "tokyo",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "千代田のさくらまつり",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "隅田川花火大会",
+        "status": "proposed"
+      },
+      "costumeDirection": "Japanese yukata / kimono; fireworks motifs",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "seoul",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "서울빛초롱축제",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "서울세계불꽃축제",
+        "status": "proposed"
+      },
+      "costumeDirection": "Hanbok-inspired outfits",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "london",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "Notting Hill Carnival",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "London New Year's Eve Fireworks",
+        "status": "proposed"
+      },
+      "costumeDirection": "Victorian silhouette / morning dress historically inspired; distinguish from Carnival costume",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "berlin",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "Karneval der Kulturen",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "Festival of Lights",
+        "status": "proposed"
+      },
+      "costumeDirection": "Berlin festival styling; Bavarian Lederhosen/Dirndl optional pan-German historical styling, not Berlin-specific",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "amsterdam",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "Tulp Festival Amsterdam",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "Koningsdag",
+        "status": "proposed"
+      },
+      "costumeDirection": "Dutch regional dress and orange celebrations",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "paris",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "Nuit Blanche",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "Feu d'artifice de la Fête nationale",
+        "status": "proposed"
+      },
+      "costumeDirection": "Belle Époque / Parisian historical dress, not event-specific uniform",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "boston",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "Boston Marathon",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "Boston Pops Fireworks Spectacular",
+        "status": "proposed"
+      },
+      "costumeDirection": "New England history, marathon volunteer attire",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "chicago",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "Chicago River Dyeing",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "Chicago Air and Water Show",
+        "status": "proposed"
+      },
+      "costumeDirection": "urban, river-green and aviation accent",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "newyork",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "Macy's Thanksgiving Day Parade",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "Times Square New Year's Eve",
+        "status": "proposed"
+      },
+      "costumeDirection": "parade / Times Square festive dress",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    },
+    {
+      "id": "sydney",
+      "status": "proposed",
+      "eventNameVerification": "pending",
+      "fever": {
+        "nativeName": "Vivid Sydney",
+        "status": "proposed"
+      },
+      "inferno": {
+        "nativeName": "Sydney New Year's Eve",
+        "status": "proposed"
+      },
+      "costumeDirection": "harbour, coastal contemporary costume and light-art accent",
+      "variants": {
+        "volunteerGenders": [
+          "female",
+          "male"
+        ],
+        "modes": [
+          "normal",
+          "fever",
+          "inferno"
+        ]
+      },
+      "sourcePath": null,
+      "previewPath": null,
+      "exportPath": null
+    }
+  ]
+}
