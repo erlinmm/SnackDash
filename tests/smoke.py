@@ -28,6 +28,7 @@ async def check(browser, width, height):
     if menu_dims['height']<=menu_dims['viewport']+2:
         assert abs(menu_dims['top']-menu_dims['bottom'])<=4,(width,height,menu_dims)
     assert await page.locator('#menuFullscreenBtn').is_visible()
+    await assert_selection_fits(page, width, height)
     await page.locator('#startBtn').click()
     await page.wait_for_timeout(1900)
     dims=await page.evaluate('''() => ({
@@ -353,12 +354,92 @@ async def check_city_mode_rendering(browser):
     assert not errors,errors
     await page.close()
 
+
+async def assert_selection_fits(page, width, height):
+    """No document scrolling or clipped race controls on supported screens."""
+    bounds=await page.evaluate("""() => {
+      const viewport=window.visualViewport?.height||window.innerHeight;
+      const app=document.querySelector('#app'),passport=document.querySelector('#cityDetail');
+      const button=document.querySelector('#startBtn').getBoundingClientRect();
+      const grid=document.querySelector('#levelGrid').getBoundingClientRect();
+      const map=document.querySelector('#cityMap').getBoundingClientRect();
+      return {
+        viewport,documentHeight:document.documentElement.scrollHeight,
+        documentWidth:document.documentElement.scrollWidth,
+        width:document.documentElement.clientWidth,
+        appHeight:app.scrollHeight,appClientHeight:app.clientHeight,
+        top:document.querySelector('.topbar').getBoundingClientRect().top,
+        passportBottom:passport.getBoundingClientRect().bottom,
+        gridBottom:grid.bottom,startBottom:button.bottom,
+        mapBottom:map.bottom,
+        cityCount:document.querySelectorAll('#cityMap .city-stop').length
+      };
+    }""")
+    assert bounds['cityCount']==10,(width,height,bounds)
+    assert bounds['documentHeight']<=bounds['viewport']+3,(width,height,bounds)
+    assert bounds['documentWidth']<=bounds['width']+3,(width,height,bounds)
+    assert bounds['appHeight']<=bounds['appClientHeight']+3,(width,height,bounds)
+    assert bounds['top']>=-2,(width,height,bounds)
+    assert bounds['mapBottom']<=bounds['viewport']+2,(width,height,bounds)
+    assert bounds['passportBottom']<=bounds['viewport']+2,(width,height,bounds)
+    assert bounds['gridBottom']<=bounds['viewport']+2,(width,height,bounds)
+    assert bounds['startBottom']<=bounds['viewport']+2,(width,height,bounds)
+
+
+async def check_selection_only(browser, width, height):
+    page=await browser.new_page(viewport={'width':width,'height':height})
+    errors=[]
+    page.on('pageerror',lambda e: errors.append(str(e)))
+    await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
+    await assert_selection_fits(page,width,height)
+    assert not errors,(width,height,errors)
+    await page.close()
+
+
+async def check_installed_controls(browser):
+    """The check-mark button is inert in installed apps; its width is shared."""
+    for width,height in [(320,568),(390,844),(844,390)]:
+        page=await browser.new_page(viewport={'width':width,'height':height})
+        errors=[]
+        page.on('pageerror',lambda e: errors.append(str(e)))
+        await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
+        await page.evaluate("""() => {
+          const realMatchMedia=window.matchMedia.bind(window);
+          window.matchMedia=query=>
+            /display-mode:\\s*(standalone|fullscreen)/.test(query)
+              ? {matches:true} : realMatchMedia(query);
+          document.dispatchEvent(new Event('fullscreenchange'));
+        }""")
+        assert not await page.locator('#menuFullscreenBtn').is_visible(),(width,height)
+        await page.locator('#startBtn').click()
+        assert not await page.locator('#gameFullscreenBtn').is_visible(),(width,height)
+        widths=await page.evaluate("""() => {
+          const restart=document.getElementById('restartBtn').getBoundingClientRect();
+          const pause=document.getElementById('pauseBtn').getBoundingClientRect();
+          const hud=document.querySelector('.scoreboard');
+          return {restart:restart.width,pause:pause.width,
+                  scroll:hud.scrollWidth,client:hud.clientWidth};
+        }""")
+        assert abs(widths['restart']-widths['pause'])<=2,(width,height,widths)
+        assert widths['restart']>38,(width,height,widths)
+        assert widths['scroll']<=widths['client']+3,(width,height,widths)
+        await page.locator('#levelsBtn').click()
+        assert not await page.locator('#menuFullscreenBtn').is_visible(),(width,height)
+        assert not errors,(width,height,errors)
+        await page.close()
+
+
 async def main():
     async with async_playwright() as p:
         browser=await p.chromium.launch(headless=True, executable_path=os.environ.get('PLAYWRIGHT_CHROMIUM_EXECUTABLE') or None, args=['--no-sandbox'])
         for dims in [(320,568),(360,740),(390,844),(414,896),(430,932),(768,1024),(820,1180),(844,390)]:
             await check(browser,*dims)
             print('Smoke passed:',dims)
+        for dims in [(360,640),(390,700),(568,320),(914,411),(1024,768)]:
+            await check_selection_only(browser,*dims)
+            print('Selection fit passed:',dims)
+        await check_installed_controls(browser)
+        print('Installed app passed: no check-mark controls, equal Restart/Pause widths')
         await check_fullscreen_flow(browser)
         print('Fullscreen flow passed: menu/game toggles, Serve, levels, restart')
         await check_city_invitation(browser)

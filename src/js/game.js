@@ -2255,7 +2255,12 @@
   // Fullscreen is shared between level selection and gameplay. Browser
   // policy requires a user gesture to enter, but switching screens does not
   // change this mode; use the two dedicated buttons to toggle it.
-  const standalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;
+  const standalone=()=>window.matchMedia('(display-mode: standalone)').matches
+    ||navigator.standalone===true
+    // The browser Fullscreen API also matches display-mode:fullscreen.
+    // An API fullscreen session is not an installed PWA and must retain
+    // its working Exit Fullscreen button.
+    ||(window.matchMedia('(display-mode: fullscreen)').matches&&!fullscreenIsActive());
   let installPrompt=null;
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
   function enterRaceFullscreen(){
@@ -2288,11 +2293,20 @@
     return !!(document.fullscreenElement||document.webkitFullscreenElement);
   }
   function updateFullscreenButtons(){
-    const active=fullscreenIsActive();
+    const active=fullscreenIsActive(),installed=standalone();
+    // Installed apps already own the screen; the former check-mark
+    // fullscreen control was inert. Hide it on both screens.
+    $('app').classList.toggle('installed-mode',installed);
     for(const id of ['menuFullscreenBtn','gameFullscreenBtn']){
       const button=$(id);
-      button.textContent=standalone()?'✓':active?'❐':'⛶';
-      if(standalone()){button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Installed app');button.title='Installed app';continue;}
+      button.classList.toggle('hidden',installed);
+      if(installed){
+        button.setAttribute('aria-pressed','true');
+        button.setAttribute('aria-label','Installed app');
+        button.title='Installed app';
+        continue;
+      }
+      button.textContent=active?'❐':'⛶';
       button.setAttribute('aria-pressed',String(active));
       button.setAttribute('aria-label',active?'Exit fullscreen':'Enter fullscreen');
       button.title=active?'Exit fullscreen':'Enter fullscreen';
