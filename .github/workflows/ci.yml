@@ -84,6 +84,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
+      actions: read
       pages: write
       id-token: write
     concurrency:
@@ -101,9 +102,41 @@ jobs:
       - name: Prepare website
         run: python scripts/build_pwa.py dist/Snack_Dash.html site
       - uses: actions/configure-pages@v5
+      # GitHub retains artifacts across re-runs of the same workflow run.
+      # Include both the run ID and attempt so retries never share a name.
       - uses: actions/upload-pages-artifact@v3
         with:
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
           path: site
+      - name: Wait until Pages artifact is visible
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          # The deployment API can query the artifact before its metadata
+          # propagates. Poll this run rather than retrying a failed deploy.
+          for attempt in {1..12}; do
+            if response="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?per_page=100")"; then
+              count="$(printf '%s' "$response" | jq --arg name "$PAGES_ARTIFACT" '[.artifacts[] | select(.name == $name)] | length')"
+              if [[ "$count" == "1" ]]; then
+                echo "Pages artifact ready: $PAGES_ARTIFACT"
+                exit 0
+              fi
+              if [[ "$count" -gt 1 ]]; then
+                echo "::error::Multiple artifacts named $PAGES_ARTIFACT"
+                exit 1
+              fi
+            else
+              echo "::warning::Artifact metadata query failed (attempt $attempt)"
+            fi
+            echo "Waiting for Pages artifact metadata (attempt $attempt/12)"
+            sleep 5
+          done
+          echo "::error::Pages artifact $PAGES_ARTIFACT was not visible"
+          exit 1
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
