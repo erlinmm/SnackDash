@@ -34,18 +34,20 @@ test('arithmetic and learning rules match known examples', () => {
 
 test('Normal, Fever and Inferno apply the agreed Combo and repeat-hit multipliers', () => {
   const modes=[
-    {combo:2,fever:false,base:3,multipliers:[1,2,4]},
-    {combo:5,fever:true,base:6**2,multipliers:[1,3,9]},
-    {combo:10,fever:true,base:11**2*(11-9),multipliers:[1,4,16]}
+    {combo:2,fever:false,base:3,runnerBase:2},
+    {combo:5,fever:true,base:6**2,runnerBase:3},
+    {combo:10,fever:true,base:11**2*(11-9),runnerBase:4}
   ];
-  for(const {combo,fever,base,multipliers} of modes){
+  for(const {combo,fever,base,runnerBase} of modes){
     for(let successes=0;successes<6;successes++){
       const outcome=math.resolveHit(combo,fever,successes,true);
-      const expectedMultiplier=multipliers[Math.min(successes,2)];
+      const expectedMultiplier=runnerBase**successes;
       assert.equal(outcome.runnerMultiplier,expectedMultiplier);
       assert.equal(outcome.delta,base*expectedMultiplier);
     }
   }
+  // Fourth, fifth and sixth hits keep multiplying: no artificial cap.
+  assert.deepEqual([3,4,5].map(s=>math.resolveHit(10,true,s,true).runnerMultiplier),[64,256,1024]);
   // Threshold hits already use the newly activated mode.
   assert.equal(math.resolveHit(4,false,0,true).delta,25);
   assert.equal(math.resolveHit(4,false,2,true).delta,225);
