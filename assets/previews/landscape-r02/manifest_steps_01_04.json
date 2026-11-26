@@ -1,0 +1,100 @@
+{
+  "version": "r02",
+  "referenceBranch": "feature/main2-art-assets-r01",
+  "baseBranch": "main2",
+  "selection": "camera_A",
+  "reviewState": "review",
+  "sourceCanvas": [
+    1280,
+    720
+  ],
+  "allSourceFiles": [
+    "assets/source/supply/water/hand/water_hand_master.svg",
+    "assets/source/supply/water/flight/water_flight_master.svg",
+    "assets/source/supply/water/slot/water_slot_master.svg",
+    "assets/source/supply/gel/hand/gel_hand_master.svg",
+    "assets/source/supply/gel/flight/gel_flight_master.svg",
+    "assets/source/supply/gel/slot/gel_slot_master.svg",
+    "assets/source/supply/banana/hand/banana_hand_master.svg",
+    "assets/source/supply/banana/flight/banana_flight_master.svg",
+    "assets/source/supply/banana/slot/banana_slot_master.svg",
+    "assets/source/ui/supply_number_bubble_empty_master.svg",
+    "assets/source/ui/backup_slot_empty_master.svg",
+    "assets/source/ui/bib_empty_master.svg",
+    "assets/previews/landscape-r02/04_supplies_numeric_assembly.svg",
+    "assets/previews/landscape-r02/04_alpha_edge_check.svg",
+    "assets/source/supply/r02_manifest.json",
+    "assets/previews/landscape-r02/README_step_04.md",
+    "assets/previews/landscape-r02/01_safe_zones.svg",
+    "assets/previews/landscape-r02/01_camera_A_thumbnail_640x360.svg",
+    "assets/previews/landscape-r02/01_wide_19_5x9.svg",
+    "assets/previews/landscape-r02/01_narrow_4x3_letterboxed.svg"
+  ],
+  "pngExports": [
+    {
+      "path": "assets/exports/supply/water/hand/water_hand_r02.png",
+      "bytes": 110463,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/supply/water/flight/water_flight_r02.png",
+      "bytes": 110463,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/supply/water/slot/water_slot_r02.png",
+      "bytes": 37028,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/supply/gel/hand/gel_hand_r02.png",
+      "bytes": 110463,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/supply/gel/flight/gel_flight_r02.png",
+      "bytes": 110463,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/supply/gel/slot/gel_slot_r02.png",
+      "bytes": 37028,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/supply/banana/hand/banana_hand_r02.png",
+      "bytes": 110463,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/supply/banana/flight/banana_flight_r02.png",
+      "bytes": 110463,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/supply/banana/slot/banana_slot_r02.png",
+      "bytes": 37028,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/ui/supply_number_bubble_empty_r02.png",
+      "bytes": 97198,
+      "RGBA": true
+    },
+    {
+      "path": "assets/exports/ui/backup_slot_empty_r02.png",
+      "bytes": 55882,
+      "RGBA": true
+    }
+  ],
+  "checks": {
+    "alphaExport": "generated real RGBA PNG for nine independent props and two empty UI bases",
+    "numberOnlyBubble": "text-free component; test numerals applied in preview only",
+    "backupCount": 2,
+    "midBib1000": "in camera preview",
+    "threeModes": "same fixed Tokyo road and table geometry",
+    "liveDeviceTest": "pending",
+    "runTimeIntegration": "out of scope"
+  },
+  "reviewDate": "2026-11-26"
+}

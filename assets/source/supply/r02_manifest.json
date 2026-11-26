@@ -1,0 +1,47 @@
+{
+  "revision": "r02",
+  "status": "review",
+  "type": "vector sources and real-alpha PNG raster",
+  "items": [
+    "water",
+    "gel",
+    "banana"
+  ],
+  "variants": [
+    "hand",
+    "flight",
+    "slot"
+  ],
+  "sourceCanvasPx": {
+    "hand": [
+      166,
+      166
+    ],
+    "flight": [
+      166,
+      166
+    ],
+    "slot": [
+      96,
+      96
+    ]
+  },
+  "numericBubble": {
+    "source": "assets/source/ui/supply_number_bubble_empty_master.svg",
+    "textDynamic": true
+  },
+  "backupSlot": {
+    "source": "assets/source/ui/backup_slot_empty_master.svg",
+    "countOnScreen": 2
+  },
+  "bib": {
+    "source": "assets/source/ui/bib_empty_master.svg",
+    "textDynamic": true
+  },
+  "imageAlpha": "RGBA (alpha=0 outside silhouettes)",
+  "notes": [
+    "Gel is artistic V2 supply id only; runtime math uses water, banana, apple, orange, bar, juice and this package does not modify that mapping",
+    "Numbers, wording and packaging brands MUST NOT be flattened into physical supply images",
+    "Hand and flight drawings depict the same original article at different orientations; game later replaces hand visual with released flight image at release frame"
+  ]
+}
