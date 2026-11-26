@@ -1,0 +1,130 @@
+{
+  "project": "SnackDash V2",
+  "branch": "feature/main2-art-assets-r01",
+  "base": "main2 @ da52244d",
+  "date": "2026-11-26",
+  "purpose": "Curated visual reference archive for V2 art review, not game runtime art",
+  "rules": [
+    "Existing source code and i18n branch are untouched",
+    "No image is a final production sprite or editable layered master",
+    "Actor ethnicity and nationality are independent",
+    "Players control left-side supply volunteer, runners face camera"
+  ],
+  "files": [
+    {
+      "id": "runner_cast_KE_TZ_JP_KR_CN",
+      "label": "运动员初版：肯尼亚、坦桑尼亚、日本、韩国、中国",
+      "status": "partial_coverage",
+      "original": {
+        "path": "assets/previews/character-r01/originals/runner_cast_KE_TZ_JP_KR_CN.png",
+        "format": "png",
+        "bytes": 1740916,
+        "sha256": "c7a6769e7be314c0b8e72eed088f8ab5784428ddb0c5b678df09aff4acc447b3"
+      },
+      "optimized": {
+        "path": "assets/previews/character-r01/optimized/runner_cast_KE_TZ_JP_KR_CN.webp",
+        "format": "webp",
+        "quality": 90,
+        "bytes": 206720,
+        "sha256": "e955da796c285378b4fc1aaf2fb8c09a23572da679ac1d4965e25ce63be13f50"
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "notes": "仅覆盖11国里的5国；不能把国籍固定成种族或肤色。"
+    },
+    {
+      "id": "global_style_moodboard",
+      "label": "人物与环境统一卡通风格",
+      "status": "exploratory",
+      "original": {
+        "path": "assets/previews/character-r01/originals/global_style_moodboard.png",
+        "format": "png",
+        "bytes": 2694521,
+        "sha256": "4c485c5c50131f47a8fc5e0d45c57264434a3803726936efcda5015c4495b1df"
+      },
+      "optimized": {
+        "path": "assets/previews/character-r01/optimized/global_style_moodboard.webp",
+        "format": "webp",
+        "quality": 90,
+        "bytes": 509922,
+        "sha256": "e14c9157f345d6cce2b21760dd42a370d0d03434c7280c38e63d793269b56179"
+      },
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "notes": "概念气氛板；图片中的国别、城市与文字可能存在生成误差，不可作为权威设定。"
+    },
+    {
+      "id": "volunteer_costume_moodboard",
+      "label": "十城男女补给员三模式服装方向",
+      "status": "exploratory",
+      "original": {
+        "path": "assets/previews/character-r01/originals/volunteer_costume_moodboard.png",
+        "format": "png",
+        "bytes": 2787421,
+        "sha256": "cc91dd8799b200acb02512375adbe1f32568ec5e4139c0497342e70a58c1f4ef"
+      },
+      "optimized": {
+        "path": "assets/previews/character-r01/optimized/volunteer_costume_moodboard.webp",
+        "format": "webp",
+        "quality": 90,
+        "bytes": 547326,
+        "sha256": "65f2a8aac5dcc07e0a5fcbaa9c871574508271b872703883d3f47e9ce722d791"
+      },
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "notes": "服饰可审美参考，不是60套已经完成的原画；文化历史内容需要后续核查。"
+    },
+    {
+      "id": "city_crowd_modes",
+      "label": "十城观众三模式群像气氛",
+      "status": "exploratory",
+      "original": {
+        "path": "assets/previews/character-r01/originals/city_crowd_modes.png",
+        "format": "png",
+        "bytes": 2838627,
+        "sha256": "6130f5409c73b3335f74fe575800f2e3ba9d23394df6925bc0311f1109f1e535"
+      },
+      "optimized": {
+        "path": "assets/previews/character-r01/optimized/city_crowd_modes.webp",
+        "format": "webp",
+        "quality": 90,
+        "bytes": 555628,
+        "sha256": "d0cba71e87ab2b85a305bcd2aa1650ffad3a6b5dc556190858caec18b0d27659"
+      },
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "notes": "观众必须始终在护栏后，Normal/Fever/Inferno 的真实逐帧动作尚未制作。"
+    },
+    {
+      "id": "tokyo_inferno_supply_number_only",
+      "label": "东京 Inferno：实体补给＋只有数字的气泡",
+      "status": "preferred_visual_reference",
+      "original": {
+        "path": "assets/previews/character-r01/originals/tokyo_inferno_supply_number_only.png",
+        "format": "png",
+        "bytes": 2770967,
+        "sha256": "07702e03d8d1a59d8551aa97738acf8e0980d72f7916f9a07b912ec0bfeb4782"
+      },
+      "optimized": {
+        "path": "assets/previews/character-r01/optimized/tokyo_inferno_supply_number_only.webp",
+        "format": "webp",
+        "quality": 90,
+        "bytes": 476428,
+        "sha256": "c7017412dd20d96761aad391b01cd164062b6924ccb22507cb255ea6baad171a"
+      },
+      "dimensions": {
+        "width": 1671,
+        "height": 941
+      },
+      "notes": "选定的明快节庆卡通气氛与实体投掷补给，补给员手边数字气泡仅含数字；这是横向概念图，不是390×700实际手机游戏截图。"
+    }
+  ]
+}
