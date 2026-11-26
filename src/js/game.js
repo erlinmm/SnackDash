@@ -2255,7 +2255,12 @@
   // Fullscreen is shared between level selection and gameplay. Browser
   // policy requires a user gesture to enter, but switching screens does not
   // change this mode; use the two dedicated buttons to toggle it.
-  const standalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;
+  const standalone=()=>window.matchMedia('(display-mode: standalone)').matches
+    ||navigator.standalone===true
+    // The browser Fullscreen API also matches display-mode:fullscreen.
+    // An API fullscreen session is not an installed PWA and must retain
+    // its working Exit Fullscreen button.
+    ||(window.matchMedia('(display-mode: fullscreen)').matches&&!fullscreenIsActive());
   let installPrompt=null;
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
   function enterRaceFullscreen(){
