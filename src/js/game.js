@@ -1408,7 +1408,7 @@
       stage.classList.toggle('inferno-active',this.inferno);
       $('comboValue').textContent=this.fever?`${this.combo} COMBO`:`COMBO ${this.combo}`;
       $('comboIcon').textContent=this.inferno?'🪩':this.fever?'🔥':'⚡';
-      $('comboDetail').textContent=this.inferno?'RUNNER MULTIPLIER³!':this.fever?'RUNNER MULTIPLIER² · INFERNO AT 10':`${Math.max(0,5-this.combo)} MORE TO FEVER`;
+      $('comboDetail').textContent=this.inferno?'RUNNER MULTIPLIER⁴!':this.fever?'RUNNER MULTIPLIER² · INFERNO AT 10':`${Math.max(0,5-this.combo)} MORE TO FEVER`;
       $('comboFill').style.width=`${Math.min(100,this.combo/5*100)}%`;
       $('feverStatus').textContent=this.inferno?'DISCO!':this.fever?'ON FIRE!':this.combo===0?'READY?':`${this.combo}/5`;
     }
