@@ -32,6 +32,18 @@ test('arithmetic and learning rules match known examples', () => {
   assert.ok(math.pairDifficultyScore(5,250).level<=2);
 });
 
+test('runner repeat-match multipliers are 2, 4, and 16 per prior success', () => {
+  for (const successes of [0,1,2,3,4,5]) {
+    assert.equal(math.resolveHit(0,false,successes,true).delta,2**successes);
+    assert.equal(math.resolveHit(5,true,successes,true).delta,4**successes);
+    assert.equal(math.resolveHit(10,true,successes,true).delta,16**successes);
+  }
+  // The hit that reaches each mode threshold already uses its new multiplier.
+  assert.equal(math.resolveHit(4,false,2,true).delta,16);
+  assert.equal(math.resolveHit(9,true,2,true).delta,256);
+  assert.equal(math.resolveHit(9,true,2,true).infernoActivated,true);
+});
+
 test('each next city becomes eligible after 9 wins, not 8 or all 10', () => {
   const best={};
   for(let i=1;i<=8;i++)best[i]=10;
