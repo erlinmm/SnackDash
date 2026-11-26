@@ -32,16 +32,25 @@ test('arithmetic and learning rules match known examples', () => {
   assert.ok(math.pairDifficultyScore(5,250).level<=2);
 });
 
-test('runner repeat-match multipliers are 2, 4, and 16 per prior success', () => {
+test('runner repeat-match bonuses multiply with Fever Combo and Inferno Combo squared', () => {
   for (const successes of [0,1,2,3,4,5]) {
     assert.equal(math.resolveHit(0,false,successes,true).delta,2**successes);
-    assert.equal(math.resolveHit(5,true,successes,true).delta,4**successes);
-    assert.equal(math.resolveHit(10,true,successes,true).delta,16**successes);
+    assert.equal(math.resolveHit(5,true,successes,true).delta,6*4**successes);
+    assert.equal(math.resolveHit(10,true,successes,true).delta,11**2*16**successes);
   }
   // The hit that reaches each mode threshold already uses its new multiplier.
-  assert.equal(math.resolveHit(4,false,2,true).delta,16);
-  assert.equal(math.resolveHit(9,true,2,true).delta,256);
+  assert.equal(math.resolveHit(4,false,2,true).delta,5*16);
+  assert.equal(math.resolveHit(9,true,2,true).delta,10**2*256);
   assert.equal(math.resolveHit(9,true,2,true).infernoActivated,true);
+  // From Combo 10, three catches of the same previously untouched runner.
+  const scores=[math.resolveHit(10,true,0,true).delta,
+                math.resolveHit(11,true,1,true).delta,
+                math.resolveHit(12,true,2,true).delta];
+  assert.deepEqual(scores,[121,2304,43264]);
+  assert.equal(scores.reduce((a,b)=>a+b,0),45689);
+  // An incorrect hit still ends Combo; powered-up misses have no point penalty.
+  assert.equal(math.resolveHit(12,true,3,false).delta,0);
+  assert.equal(math.resolveHit(12,true,3,false).combo,0);
 });
 
 test('each next city becomes eligible after 9 wins, not 8 or all 10', () => {
