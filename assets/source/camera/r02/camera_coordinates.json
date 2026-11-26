@@ -1,0 +1,113 @@
+{
+  "revision": "r02",
+  "status": "review",
+  "selectedCandidate": "A",
+  "baseCanvas": [
+    1280,
+    720
+  ],
+  "origin": "upper-left",
+  "xAxis": "right",
+  "yAxis": "down",
+  "candidates": {
+    "A": {
+      "vanishingPoint": [
+        844,
+        239
+      ],
+      "tableBox": [
+        190,
+        380,
+        205,
+        172
+      ],
+      "wideRoadBottom": [
+        425,
+        1230
+      ]
+    },
+    "B": {
+      "vanishingPoint": [
+        790,
+        239
+      ],
+      "tableBox": [
+        190,
+        380,
+        205,
+        172
+      ],
+      "wideRoadBottom": [
+        425,
+        1230
+      ]
+    }
+  },
+  "anchors": {
+    "hud": [
+      25,
+      20,
+      1227,
+      93
+    ],
+    "supplySlot0": [
+      29,
+      534,
+      145,
+      72
+    ],
+    "supplySlot1": [
+      29,
+      626,
+      145,
+      72
+    ],
+    "numberBubble": [
+      338,
+      182,
+      120,
+      91
+    ],
+    "handSupply": [
+      386,
+      307
+    ],
+    "laneBibCorridor": [
+      500,
+      263,
+      674,
+      335
+    ],
+    "tableTopContact": [
+      235,
+      401
+    ],
+    "streetCropAllowance": "outer ~160px on landscape sides"
+  },
+  "views": {
+    "base": [
+      1280,
+      720
+    ],
+    "thumbnail": [
+      640,
+      360
+    ],
+    "wide": [
+      "19.5:9",
+      1560,
+      720
+    ],
+    "narrow": [
+      "4:3",
+      960,
+      720
+    ]
+  },
+  "responsiveRules": [
+    "Preserve all interactive elements on 16:9",
+    "At 19.5:9 extend side-scene, do not stretch gameplay scale",
+    "At 4:3 letterbox using scale .75 to 960x540 centered vertically, then reflow HUD and touch regions only after device testing"
+  ],
+  "deviceMeasurements": "NOT TESTED"
+}

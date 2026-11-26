@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Fixed table top and support independent of front panel"><defs>
+<linearGradient id="skyday" x2="0" y2="1"><stop stop-color="#6db9f6"/><stop offset=".72" stop-color="#d3effa"/><stop offset="1" stop-color="#fff1ce"/></linearGradient>
+<linearGradient id="skypink" x2="0" y2="1"><stop stop-color="#8fa9e0"/><stop offset=".7" stop-color="#e5aed1"/><stop offset="1" stop-color="#ffddb9"/></linearGradient>
+<linearGradient id="skynight" x2="0" y2="1"><stop stop-color="#171a4a"/><stop offset=".6" stop-color="#43336d"/><stop offset="1" stop-color="#bf7396"/></linearGradient>
+<linearGradient id="road" x2="0" y2="1"><stop stop-color="#a6b4bd"/><stop offset="1" stop-color="#657380"/></linearGradient>
+<linearGradient id="water" x2="1" y2="1"><stop stop-color="#eafdff" stop-opacity=".88"/><stop offset=".5" stop-color="#86cff6" stop-opacity=".72"/><stop offset="1" stop-color="#e8f8ff" stop-opacity=".83"/></linearGradient>
+<linearGradient id="glass" x2="1" y2="0"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#a8d7ff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity=".88"/></linearGradient>
+<linearGradient id="gold" x2=".1" y2="0" x1=".9" y1="1"><stop stop-color="#fff4b1"/><stop offset=".52" stop-color="#f6c453"/><stop offset="1" stop-color="#e88a46"/></linearGradient>
+</defs><g id="station-table-frame">
+<path d="M190 396L364 380L395 404L212 426Z" fill="#e6d2a9" stroke="#28344b" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M212 426L395 404L392 437L210 453Z" fill="#b38c66" stroke="#28344b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M211 432L239 432L240 548L215 552Z" fill="#956e50" stroke="#28344b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M361 420L386 409L385 535L361 543Z" fill="#956e50" stroke="#28344b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+</g></svg>

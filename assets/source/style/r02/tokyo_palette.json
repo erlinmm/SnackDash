@@ -1,0 +1,30 @@
+{
+  "revision": "r02",
+  "orientation": "landscape",
+  "canvas": [
+    1280,
+    720
+  ],
+  "reference": "assets/previews/character-r01/originals/tokyo_inferno_supply_number_only.png (on r01 branch)",
+  "style": "clean festive cel shading, thick dark outline, simple light-side highlights, 3.5–4.5 heads for gameplay characters",
+  "palette": {
+    "outline": "#28344b",
+    "skinHighlight": "#f0bc94",
+    "daySky": "#6db9f6",
+    "festivalPink": "#f49bb8",
+    "nightIndigo": "#171a4a",
+    "goldFireworks": "#f6c453",
+    "waterBlue": "#358fe3",
+    "gelTeal": "#57d3a6",
+    "bananaYellow": "#ffd357",
+    "bibWhite": "#fffdf8"
+  },
+  "priorities": [
+    "bib number",
+    "hand-side value",
+    "recognizable physical supply",
+    "face",
+    "festival atmosphere"
+  ],
+  "notes": "Style exploration for review. The original r01 image is not redistributed."
+}

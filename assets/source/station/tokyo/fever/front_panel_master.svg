@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Independent replaceable Tokyo table fascia"><defs>
+<linearGradient id="skyday" x2="0" y2="1"><stop stop-color="#6db9f6"/><stop offset=".72" stop-color="#d3effa"/><stop offset="1" stop-color="#fff1ce"/></linearGradient>
+<linearGradient id="skypink" x2="0" y2="1"><stop stop-color="#8fa9e0"/><stop offset=".7" stop-color="#e5aed1"/><stop offset="1" stop-color="#ffddb9"/></linearGradient>
+<linearGradient id="skynight" x2="0" y2="1"><stop stop-color="#171a4a"/><stop offset=".6" stop-color="#43336d"/><stop offset="1" stop-color="#bf7396"/></linearGradient>
+<linearGradient id="road" x2="0" y2="1"><stop stop-color="#a6b4bd"/><stop offset="1" stop-color="#657380"/></linearGradient>
+<linearGradient id="water" x2="1" y2="1"><stop stop-color="#eafdff" stop-opacity=".88"/><stop offset=".5" stop-color="#86cff6" stop-opacity=".72"/><stop offset="1" stop-color="#e8f8ff" stop-opacity=".83"/></linearGradient>
+<linearGradient id="glass" x2="1" y2="0"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#a8d7ff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity=".88"/></linearGradient>
+<linearGradient id="gold" x2=".1" y2="0" x1=".9" y1="1"><stop stop-color="#fff4b1"/><stop offset=".52" stop-color="#f6c453"/><stop offset="1" stop-color="#e88a46"/></linearGradient>
+</defs><g id="table-front-panel">
+<path d="M235 426L373 416L373 503L235 519Z" fill="#d47d9f" stroke="#28344b" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<ellipse cx="300" cy="471" rx="21" ry="21" fill="#ffe8ed" stroke="none" stroke-width="0"/><g transform="rotate(0 300 471)"><ellipse cx="300" cy="451" rx="9" ry="15" fill="#f6adc6" stroke="none" stroke-width="0"/></g><g transform="rotate(72 300 471)"><ellipse cx="300" cy="451" rx="9" ry="15" fill="#f6adc6" stroke="none" stroke-width="0"/></g><g transform="rotate(144 300 471)"><ellipse cx="300" cy="451" rx="9" ry="15" fill="#f6adc6" stroke="none" stroke-width="0"/></g><g transform="rotate(216 300 471)"><ellipse cx="300" cy="451" rx="9" ry="15" fill="#f6adc6" stroke="none" stroke-width="0"/></g><g transform="rotate(288 300 471)"><ellipse cx="300" cy="451" rx="9" ry="15" fill="#f6adc6" stroke="none" stroke-width="0"/></g>
+</g></svg>
