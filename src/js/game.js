@@ -2312,6 +2312,18 @@
       button.title=active?'Exit fullscreen':'Enter fullscreen';
     }
   }
+  // Installed PWAs get a portrait preference from the manifest. For a
+  // regular browser, Android can also lock portrait while fullscreen.
+  // Other browsers may reject or omit this API; gameplay still works.
+  function requestPortraitOrientation(){
+    if(!standalone()&&!fullscreenIsActive())return;
+    const orientation=window.screen&&window.screen.orientation;
+    if(!orientation||typeof orientation.lock!=='function')return;
+    try{
+      const pending=orientation.lock('portrait');
+      if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
+    }catch(_){}
+  }
   function toggleFullscreen(){
     if(standalone())return;
     if(fullscreenIsActive())leaveRaceFullscreen();
@@ -2402,6 +2414,7 @@
   for(const eventName of ['fullscreenchange','webkitfullscreenchange']){
     document.addEventListener(eventName,()=>{
       updateFullscreenButtons();
+      requestPortraitOrientation();
       sizeScene();requestAnimationFrame(sizeScene);
     });
   }
@@ -2411,7 +2424,10 @@
       if(el)hudObserver.observe(el);
     }
   }
-  document.addEventListener('visibilitychange',()=>{if(document.hidden&&game&&(game.phase==='playing'||game.phase==='countdown'))game.pause();});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden&&game&&(game.phase==='playing'||game.phase==='countdown'))game.pause();
+    else if(!document.hidden)requestPortraitOrientation();
+  });
   document.addEventListener('keydown',ev=>{
     if(ev.code==='Escape' &&game&&game.phase==='paused'){game.pause();}
     else if((ev.code==='Space'||ev.code==='KeyP')&&game&&['playing','paused','countdown'].includes(game.phase)){
@@ -2424,7 +2440,7 @@
     requestAnimationFrame(frame);
   }
   reconcileCityUnlocks();
-  renderLevelGrid();updateSoundIcon();updateFullscreenButtons();sizeScene();requestAnimationFrame(frame);
+  renderLevelGrid();updateSoundIcon();updateFullscreenButtons();requestPortraitOrientation();sizeScene();requestAnimationFrame(frame);
   showPendingCityInvitation();
 
   // Debug mode is hidden in the race-tile sequence and never persists progress.
