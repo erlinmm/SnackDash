@@ -29,6 +29,13 @@ async def check(browser, width, height):
         assert abs(menu_dims['top']-menu_dims['bottom'])<=4,(width,height,menu_dims)
     assert await page.locator('#menuFullscreenBtn').is_visible()
     await assert_selection_fits(page, width, height)
+    # Exercise offline locale switching without altering scoring or save-state.
+    assert await page.locator('#languageSelect').input_value() == 'en-GB'
+    await page.locator('#languageSelect').select_option('zh-Hans')
+    assert await page.locator('[data-i18n="intro.pickRace"]').text_content() == '选择比赛'
+    assert await page.evaluate("document.documentElement.lang") == 'zh-Hans'
+    await page.locator('#languageSelect').select_option('en-GB')
+    assert await page.locator('[data-i18n="intro.pickRace"]').text_content() == 'CHOOSE YOUR RACE'
     await page.locator('#startBtn').click()
     await page.wait_for_timeout(1900)
     dims=await page.evaluate('''() => ({
