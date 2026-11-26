@@ -31,7 +31,7 @@ test('untranslated strings fall back to English without fabricating translations
   i18n.registerLocale('test-partial',{'intro.start':'Start (test)'},{label:'Partial test'});
   i18n.setLocale('test-partial');
   assert.equal(i18n.t('intro.start'),'Start (test)');
-  assert.equal(i18n.t('result.complete'),'RACE COMPLETE!');
+  assert.equal(i18n.t('result.complete'),'SUPPLY SERVICE COMPLETE!');
   assert.equal(i18n.t('missing.unknown'),'missing.unknown');
   i18n.setLocale('en-GB');
 });
@@ -49,7 +49,8 @@ test('local festival names stay in native script while explanation uses player l
 });
 
 test('static text and accessible labels rerender on locale change',()=>{
-  const attrs={'data-i18n':'intro.start','data-i18n-aria-label':'game.pause'};
+  const attrs={'data-i18n':'intro.start','data-i18n-aria-label':'game.pause',
+    'data-i18n-content':'app.description'};
   const node={textContent:'',labels:{},getAttribute:key=>attrs[key]||null,
     setAttribute(key,value){this.labels[key]=value;}};
   const document={
@@ -63,6 +64,7 @@ test('static text and accessible labels rerender on locale change',()=>{
   assert.equal(document.documentElement.dir,'ltr');
   assert.equal(node.textContent,'开始送零食！');
   assert.equal(node.labels['aria-label'],'暂停游戏');
+  assert.match(node.labels.content,/补给站数学游戏/);
   i18n.setLocale('en-GB');
   assert.equal(node.textContent,"LET'S SERVE!");
   delete globalThis.document;
@@ -93,4 +95,49 @@ test('all ten cities and gameplay instructions resolve in both UI languages',()=
   assert.equal(i18n.t('city.tokyo.landmark'),'东京塔');
   assert.match(i18n.t('instructions.step2'),/整除/);
   i18n.setLocale('en-GB');
+});
+
+test('every English system key has a real Simplified Chinese value with matching parameters',()=>{
+  const paramNames=s=>[...s.matchAll(/\{\{(\w+)\}\}/g)].map(m=>m[1]).sort();
+  const required=i18n.keys('en-GB');
+  assert.ok(required.length>120,'unexpectedly small translation catalog');
+  for(const key of required){
+    assert.equal(i18n.hasTranslation(key,'zh-Hans'),true,'missing zh-Hans key '+key);
+    assert.deepEqual(paramNames(i18n.lookup(key,'en-GB')),
+      paramNames(i18n.lookup(key,'zh-Hans')),'placeholder mismatch for '+key);
+  }
+  for(const key of ['mode.fever.enter','mode.fever.end','mode.inferno.enter',
+    'mode.inferno.end','feedback.correct','feedback.incorrect',
+    'celebration.staffSuccess','role.staff','role.refill',
+    'pwa.ready','pwa.status.failed','app.description']){
+    assert.ok(required.includes(key),'missing system interface: '+key);
+  }
+});
+
+test('staff support is success/completion, not an athlete race win',()=>{
+  i18n.setLocale('en-GB');
+  assert.equal(i18n.t('role.staff'),'STAFF');
+  assert.equal(i18n.t('celebration.staffSuccess'),'STAFF SUCCEEDED!');
+  assert.doesNotMatch(i18n.t('result.stamped',{city:'TOKYO',race:1,completed:1}),/won|victory/i);
+  i18n.setLocale('zh-Hans');
+  assert.equal(i18n.t('role.staff'),'补给员');
+  assert.equal(i18n.t('celebration.staffSuccess'),'补给成功！');
+  assert.doesNotMatch(i18n.t('result.complete')+i18n.t('city.progress',{completed:1}),/获胜|胜利/);
+  assert.equal(i18n.formatNumber(1234567,{notation:'compact',maximumFractionDigits:1}),
+    new Intl.NumberFormat('zh-Hans',{notation:'compact',maximumFractionDigits:1}).format(1234567));
+  i18n.setLocale('en-GB');
+});
+
+test('Canvas feedback and installed PWA do not contain unlocalized legacy labels',()=>{
+  const fs=require('node:fs');
+  const path=require('node:path');
+  const root=path.resolve(__dirname,'..');
+  const game=fs.readFileSync(path.join(root,'src/js/game.js'),'utf8');
+  const pwa=fs.readFileSync(path.join(root,'src/pwa/update.js'),'utf8');
+  const reactions=fs.readFileSync(path.join(root,'src/js/reactions.js'),'utf8');
+  assert.doesNotMatch(game,/THE VOLUNTEER WINS!|SNACK STATION HERO!|FEVER OVER! COMBO RESET|INFERNO! DISCO TIME!|0 PENALTY!/);
+  assert.doesNotMatch(game,/Reactions\.caption\(/);
+  assert.doesNotMatch(reactions,/captionKey|function caption\(/);
+  assert.match(game,/function fitLabel\(/);
+  assert.match(pwa,/data-i18n="pwa.ready"/);
 });

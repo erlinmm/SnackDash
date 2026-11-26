@@ -356,7 +356,7 @@ async def check_city_mode_rendering(browser):
 
 
 async def check_athlete_reactions(browser):
-    """Athlete speech is native; player gloss is localized; only impacts hurt."""
+    """Athlete speech is native-only, independent of player UI language."""
     page=await browser.new_page(viewport={'width':390,'height':844})
     errors=[]
     page.on('pageerror',lambda e: errors.append(str(e)))
@@ -384,14 +384,14 @@ async def check_athlete_reactions(browser):
       g.throwing={runnerId:bad.id,supply:g.supplies.held,elapsed:0,hit:false,reloaded:false,feverAtRelease:false};
       g.tickThrow(.42);
       const collided=g.effects.filter(f=>f.kind==='athleteReaction').at(-1);
-      g.draw(); // Rendering CJK native script and Chinese gloss must not throw.
+      g.draw(); // Rendering CJK native speech without translated captions must work.
       const accessible=document.getElementById('runnerReactionText').textContent;
-      const gloss=window.GameReactions.caption(collided.reaction,'zh-Hans',window.GameI18n.t);
+      
       return {
         before,afterEmptyTap,thanksCount,wrongCount:g.wrong,
         thanksEvent:received.reaction.event,thanksNative:received.reaction.text,
         painEvent:collided.reaction.event,painNative:collided.reaction.text,
-        nationality:bad.identity.nationality,gloss,accessible
+        nationality:bad.identity.nationality,accessible
       };
     }""")
     assert outcome['before']==outcome['afterEmptyTap']==0,outcome
@@ -399,8 +399,61 @@ async def check_athlete_reactions(browser):
     assert outcome['thanksEvent']=='thanks' and outcome['thanksNative'].startswith('Asante'),outcome
     assert outcome['wrongCount']==1 and outcome['painEvent']=='pain',outcome
     assert outcome['painNative'] in ('痛い！','いたっ！'),outcome
-    assert outcome['gloss']=='哎哟！',outcome
-    assert outcome['painNative'] in outcome['accessible'] and '哎哟！' in outcome['accessible'],outcome
+    assert outcome['accessible']==outcome['painNative'],outcome
+    assert '哎哟！' not in outcome['accessible'],outcome
+    assert not errors,errors
+    await page.close()
+
+
+async def check_localized_canvas(browser):
+    """Canvas messages use the UI locale and fit into their fixed panels."""
+    page=await browser.new_page(viewport={'width':390,'height':844})
+    errors=[]
+    page.on('pageerror',lambda e: errors.append(str(e)))
+    await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
+    await page.locator('#languageSelect').select_option('zh-Hans')
+    await page.locator('#startBtn').click()
+    observed=await page.evaluate("""() => {
+      const g=window.SnackDashDebug.getGame();
+      const ctx=document.querySelector('#scene').getContext('2d');
+      const original=ctx.fillText.bind(ctx);
+      const render=fn=>{
+        const drawn=[];
+        ctx.fillText=(content,x,y,...rest)=>{
+          const text=String(content);
+          drawn.push({text,font:ctx.font,
+            width:ctx.measureText(text).width*Math.abs(ctx.getTransform().a)});
+          original(content,x,y,...rest);
+        };
+        try{fn();}finally{ctx.fillText=original;}
+        return drawn;
+      };
+      g.phase='playing';g.goFlash=.7;
+      const go=render(()=>g.draw()).find(v=>v.text==='开始！');
+      g.goFlash=0;g.effects=[];
+      g.popEffect({kind:'feverEntry',mode:'fever',textKey:'mode.fever.short',x:195,y:308,life:.6});
+      const fever=render(()=>g.draw());
+      g.effects=[];
+      g.popEffect({kind:'feverEntry',mode:'inferno',textKey:'mode.inferno.short',x:195,y:308,life:.6});
+      const inferno=render(()=>g.draw());
+      g.effects=[];g.phase='celebrate';g.celebrationTime=.8;
+      const celebration=render(()=>g.draw());
+      g.score=12;g.showResults(true);
+      return {go,fever:fever.map(v=>v.text),inferno:inferno.map(v=>v.text),
+        celebration:celebration.map(v=>v.text),
+        result:document.querySelector('#resultKicker').textContent,
+        heading:document.querySelector('#resultHeading').textContent,
+        staff:window.GameI18n.t('role.staff')};
+    }""")
+    assert observed['go'] is not None,observed
+    assert observed['go']['width']<=170,observed
+    assert 'FEVER！' in observed['fever'],observed
+    assert 'INFERNO！' in observed['inferno'],observed
+    assert '补给站之星！' in observed['celebration'],observed
+    assert '补给成功！' in observed['celebration'],observed
+    assert observed['result']=='补给成功！',observed
+    assert observed['heading']=='优秀补给员！',observed
+    assert observed['staff']=='补给员',observed
     assert not errors,errors
     await page.close()
 
@@ -533,7 +586,9 @@ async def main():
         await check_city_invitation(browser)
         print('City invitations passed: 8/10, 9/10, restart, and acknowledgment')
         await check_athlete_reactions(browser)
-        print('Athlete native thanks and pain reactions plus player-language gloss passed')
+        print('Athlete native thanks and pain reactions without translations passed')
+        await check_localized_canvas(browser)
+        print('Localized Canvas transitions, celebrations and glyph fitting passed')
         await check_city_mode_rendering(browser)
         print('Ten city / three-mode rendering and reduced motion passed')
         await browser.close()

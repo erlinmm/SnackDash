@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#fff8ec">
-  <meta name="description" content="Snack Dash! A silly marathon supply-station maths game. Find a runner whose number divides your supply, or vice versa.">
+  <meta name="description" content="Snack Dash! A marathon aid-station maths game. Match runners with supplies and complete each support mission." data-i18n-content="app.description">
   <title>Snack Dash! V26 — Natural Arrivals & Learning Loops</title>
   <!-- BUILD:CSS -->
 </head>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="top-actions">
-        <button class="debug-exit-btn hidden" id="exitDebugBtn" type="button" aria-label="Exit debug mode">EXIT DEBUG ✕</button>
+        <button class="debug-exit-btn hidden" id="exitDebugBtn" type="button" aria-label="Exit debug mode" data-i18n-aria-label="debug.exit" data-i18n="debug.exit">EXIT DEBUG ✕</button>
         <button class="icon-btn" id="soundBtn" type="button" title="Turn sound off" aria-label="Turn sound off">🔊</button>
       </div>
     </header>
@@ -33,7 +33,7 @@
           <option value="zh-Hans">简体中文（预览）</option>
         </select>
       </div>
-      <div class="debug-indicator hidden" id="debugIndicator">🛠 DEBUG MODE · ALL 100 RACES OPEN · RESULTS NOT SAVED</div>
+      <div class="debug-indicator hidden" id="debugIndicator" data-i18n="debug.indicator">🛠 DEBUG MODE · ALL 100 RACES OPEN · RESULTS NOT SAVED</div>
       <div class="intro-card">
         <div class="intro-copy">
           <span class="eyebrow" data-i18n="intro.kicker">THE BIGGEST LITTLE SNACK TOUR</span>
@@ -56,7 +56,7 @@
       </div>
 
       <section class="instructions" aria-label="How to play" data-i18n-aria-label="intro.howToPlay">
-        <div class="instruction"><span class="instruction-emoji">1️⃣</span><span data-i18n="instructions.step1">Your volunteer picks up supplies. Tap a table item to swap it with the one in hand.</span></div>
+        <div class="instruction"><span class="instruction-emoji">1️⃣</span><span data-i18n="instructions.step1">The staff member picks up supplies. Tap a table item to swap it with the one in hand.</span></div>
         <div class="instruction"><span class="instruction-emoji">2️⃣</span><span data-i18n="instructions.step2">Tap a runner if either number divides the other exactly.</span></div>
         <div class="instruction"><span class="instruction-emoji">3️⃣</span><span data-i18n="instructions.step3">5 good catches → FEVER; 10 → INFERNO! Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</span></div>
       </section>
@@ -64,9 +64,9 @@
       <section class="tour-section" aria-label="World tour city map">
         <div class="section-header world-header">
           <div><span class="eyebrow" data-i18n="intro.tourKicker">✦ THE GREAT SNACK TOUR ✦</span><h2 data-i18n="intro.world">100 races · 10 cities</h2></div>
-          <div class="progress-badge" id="progressBadge">0 / 100 won</div>
+          <div class="progress-badge" id="progressBadge">0 / 100 completed</div>
         </div>
-        <p class="world-subtitle" data-i18n="intro.worldSubtitle">Every city starts easy and builds to a tricky tenth race. Win 9 races in each city to receive an invitation to the next!</p>
+        <p class="world-subtitle" data-i18n="intro.worldSubtitle">Every city starts easy and builds to a tricky tenth race. Successfully serve 9 races in each city to receive an invitation to the next!</p>
         <div class="tour-map" id="cityMap" aria-label="Choose a marathon city" data-i18n-aria-label="intro.chooseCity"></div>
         <div class="passport-card" id="cityDetail" aria-label="Select a race" data-i18n-aria-label="intro.pickRace">
           <div class="passport-header">
@@ -88,7 +88,7 @@
     <dialog id="howToPlayDialog" class="how-to-play-dialog" aria-labelledby="howToPlayTitle">
       <h2 id="howToPlayTitle" data-i18n="intro.howToPlay">How to play</h2>
       <ol>
-        <li data-i18n="instructions.step1">Your volunteer picks up supplies. Tap a table item to swap it with the one in hand.</li>
+        <li data-i18n="instructions.step1">The staff member picks up supplies. Tap a table item to swap it with the one in hand.</li>
         <li data-i18n="instructions.step2">Tap a runner if either number divides the other exactly.</li>
         <li data-i18n="instructions.step3">5 good catches → FEVER; 10 → INFERNO! Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</li>
       </ol>
@@ -137,12 +137,12 @@
         <div class="result-overlay hidden" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultHeading">
           <div class="result-card">
             <div class="result-mascot" id="resultMascot">🏆</div>
-            <div class="eyebrow" id="resultKicker">RACE COMPLETE!</div>
-            <h2 id="resultHeading">SUPER SERVER!</h2>
+            <div class="eyebrow" id="resultKicker">SUPPLY SERVICE COMPLETE!</div>
+            <h2 id="resultHeading">AID STATION STAR!</h2>
             <div class="result-score" id="resultScore"><strong class="score-main">12</strong><span class="score-unit">points</span></div>
-            <p id="resultText">Your volunteer has earned a victory dance!</p>
+            <p id="resultText">The staff member completed the support mission!</p>
             <div class="result-stats" id="resultStats"></div>
-            <button class="btn btn-primary full" id="resultPrimary" type="button">NEXT LEVEL ➜</button>
+            <button class="btn btn-primary full" id="resultPrimary" type="button">NEXT RACE ➜</button>
             <div class="result-actions">
               <button class="btn btn-outline" id="retryBtn" type="button" data-i18n="game.retry">↻ Retry</button>
               <button class="btn btn-outline" id="backBtn" type="button" data-i18n="game.levels">Levels</button>

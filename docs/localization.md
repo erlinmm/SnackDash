@@ -11,7 +11,8 @@ network call, or change to gameplay, race scoring, Combo, Fever, or Inferno.
 - `GameI18n.setLocale(code)`, `locale()`, `availableLocales()`, `subscribe(fn)`:
   runtime language selection. User choice persists under `snackDashLocaleV1`.
 - `GameI18n.apply()`: update static elements marked `data-i18n`,
-  `data-i18n-aria-label`, `data-i18n-title` and `data-i18n-placeholder`.
+  `data-i18n-aria-label`, `data-i18n-title`, `data-i18n-content` (page
+  description) and `data-i18n-placeholder`.
   Uses textContent or setAttribute: no HTML string injection.
 - `GameI18n.formatNumber(value)`: locale-aware display of numeric scores.
   Scoring calculations remain unchanged.
@@ -24,10 +25,10 @@ network call, or change to gameplay, race scoring, Combo, Fever, or Inferno.
 ## Current languages
 
 English (`en-GB`) is the default. Simplified Chinese (`zh-Hans`) is a
-**preview** for the first group of menu labels, main prompts, invitations and
-result messages. Some decorative speech bubbles, PWA-update
-prompts and other secondary status strings are still English. City postcards,
-race selection, invitations and the three-step rules use the selected locale. No additional
+**preview** with localized menu labels, game feedback, Fever/Inferno transitions,
+celebration banners, invitations, PWA updates and result messages. Athlete
+speech is always in their native language. City postcards, race selection,
+invitations and the three-step rules use the selected locale. No additional
 translations should be advertised as complete.
 
 ## Next passes
@@ -74,9 +75,9 @@ race mathematics, character appearance, and city visuals.
   previousIndex)` to obtain an original-language line. An event with no
   reviewed language pack returns `null`, never a made-up translation or a
   fake "native" English line.
-- `GameReactions.caption(reaction, playerLocale, GameI18n.t)` gives a concise
-  explanation for the player's UI language; it is omitted when the language
-  matches the athlete's native language. New packs can be added using
+- Athlete speech is **native-language only**, regardless of the player's
+  UI locale. There is no translation subtitle or `caption()` API.
+  New reviewed packs can be added using
   `registerPack('es-ES', {thanks:['¡Gracias!'], pain:['¡Ay!']})`, followed by
   `registerProfile('ES','es-ES')` after linguistic review.
 - On correct supply contact the runner says thanks, upgraded to a cheer in
@@ -84,9 +85,9 @@ race mathematics, character appearance, and city visuals.
   natural pain interjection. An empty-space tap is not an injury; it never
   produces an athlete pain line. Surprise and disappointment have reviewed
   banks but await suitable real game events.
-- The phrase appears in a Canvas speech bubble, with the native words larger
-  and any player's-language meaning below. A hidden live-region also exposes
-  the same text for assistive technology. No external audio or synthesis has
+- The phrase appears alone in a Canvas speech bubble. A hidden live-region
+  repeats only the original-language text for assistive technology.
+  No external audio or synthesis has
   been introduced; a future voice asset can be keyed by `nativeLanguage`
   and event without changing hit detection.
 - A dedicated seed-derived PRNG controls identity and phrase variation, so
@@ -102,3 +103,26 @@ Pain interjections are grounded in dictionary and language-learning examples:
 [Cambridge Korean](https://dictionary.cambridge.org/dictionary/english-korean/ouch),
 [Collins French/German/Chinese](https://www.collinsdictionary.com/english-language-learning/ouch),
 [Swahili Aa! in a teaching example](https://www.swahilipod101.com/lesson/swahili-teachers-answer-your-questions-15-what-are-interjections).
+
+## Complete UI text audit
+
+System-generated messages use `GameI18n.t(key, params)` for transitions,
+combo and scoring feedback, mistake cues, short Canvas labels, celebration
+banners, Staff labels and PWA update messages. English is the fallback;
+Simplified Chinese has a directly translated value for each English key.
+
+Staff are **aid-station staff members**, called **Staff** in English and
+**补给员** in Simplified Chinese. Their work is successful/completed,
+not a win in the runner's race. Internal scoring state variables are unchanged.
+
+Canvas uses `fitLabel()` to measure glyph widths and reduce or scale text
+within fixed-size overlays instead of assuming Latin character widths.
+Mode effect visuals use semantic `mode` values instead of comparing display
+strings to English literals. Installed PWA update notices subscribe to locale
+changes and can switch languages while the notice is visible.
+No external localization libraries or network translation are required.
+
+Automated checks verify English and Chinese key coverage, named placeholders,
+native-only speech, Canvas text rendering, portrait layout, offline builds
+and installed PWA update flows. Other languages require translated catalogs
+and native-speaker review before being presented as supported.

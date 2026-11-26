@@ -22,6 +22,7 @@ class BuildTests(unittest.TestCase):
             self.assertIn('GameReactions', content)
             self.assertIn('id="runnerReactionText"', content)
             self.assertIn('id="languageSelect"', content)
+            self.assertIn('data-i18n-content="app.description"', content)
             self.assertIn('id="howToPlayDialog"', content)
             self.assertNotIn('id="menuFullscreenBtn"', content)
             self.assertNotIn('id="gameFullscreenBtn"', content)

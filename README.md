@@ -111,3 +111,15 @@ The offline, dependency-free `src/js/reactions.js` module handles event packs,
 athlete profiles, safe unsupported-language behavior and variation. Reaction
 strings are kept outside scoring and scene physics. See
 `docs/localization.md` for extension and source review requirements.
+
+## Localization of system feedback
+
+All visible system feedback (including Fever/Inferno changes, correct/incorrect
+supplies, no-penalty cues, Canvas celebrations and PWA updates) is translated
+through `src/js/locales.js`. English and Simplified Chinese catalogs have
+matching keys and parameter names, with fallback for later partial locales.
+
+The playable aid-station character is called **Staff** / **补给员**. Their
+support task may succeed or be completed, but they do not win the marathon.
+Athlete thanks/pain/cheers remain strictly in their own native-language words,
+with no translated subtitles. The same applies to screen-reader announcements.

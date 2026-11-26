@@ -22,7 +22,7 @@ test('every reaction event has native-script words and no made-up fallback',()=>
       assert.ok(response,athlete.nativeLanguage+' '+event);
       assert.equal(response.event,event);
       assert.equal(response.nativeLanguage,athlete.nativeLanguage);
-      assert.equal(response.captionKey,'reaction.'+event);
+      assert.ok(!Object.hasOwn(response,'captionKey'));
       assert.ok(response.text.length>0);
     }
   }
@@ -45,16 +45,15 @@ test('wrong-hit pain is not an English OUCH for Japanese, Korean or Swahili',()=
   }
 });
 
-test('gloss follows the player language without changing the native line',()=>{
+test('native-only athlete speech is independent of player interface language',()=>{
   const athlete={nationality:'KE',nativeLanguage:'sw-KE'};
   const pain=reactions.select(athlete,'pain',()=>0);
   i18n.setLocale('zh-Hans');
-  assert.equal(reactions.caption(pain,i18n.locale(),i18n.t),'哎哟！');
-  i18n.setLocale('en-GB');
-  assert.equal(reactions.caption(pain,i18n.locale(),i18n.t),'Ouch!');
   assert.equal(pain.text,'Aa!');
-  assert.equal(reactions.caption(pain,'sw-TZ',i18n.t),'');
-  assert.equal(reactions.caption(null,'en-GB',i18n.t),'');
+  assert.ok(!Object.hasOwn(pain,'captionKey'));
+  assert.equal(typeof reactions.caption,'undefined');
+  i18n.setLocale('en-GB');
+  assert.equal(reactions.select(athlete,'pain',()=>0).text,'Aa!');
 });
 
 test('repeated feedback alternates when variants are available',()=>{

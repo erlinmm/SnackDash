@@ -21,10 +21,7 @@
     if(!Number.isFinite(value))return fullScoreText(value);
     const magnitude=Math.abs(value);
     if(magnitude<1e6)return fullScoreText(value);
-    const tiers=[[1e12,'T'],[1e9,'B'],[1e6,'M']];
-    if(magnitude>=1e15)return value.toExponential(decimals).replace('e+','e');
-    const [unit,suffix]=tiers.find(([unit])=>magnitude>=unit);
-    return I18n.formatNumber(Number((value/unit).toFixed(decimals)))+suffix;
+    return I18n.formatNumber(value,{notation:'compact',maximumFractionDigits:decimals});
   }
   function raceBandForEvent(event){
     return event<=3?'QUARTER MARATHON':event<=6?'HALF MARATHON':event<=9?'FULL MARATHON':'ULTRA MARATHON';
@@ -471,7 +468,24 @@
   function circle(x,y,r,fill,stroke,sw=1){ctx.beginPath();ctx.arc(x,y,r,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=sw;ctx.stroke();}}
   function line(x1,y1,x2,y2,col,sw=2){ctx.strokeStyle=col;ctx.lineWidth=sw;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
   function label(txt,x,y,size,col='#24374a',align='center',font='1000'){
-    ctx.fillStyle=col;ctx.font=`${font} ${size}px 'Trebuchet MS',system-ui,sans-serif`;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(String(txt),x,y);
+    ctx.fillStyle=col;ctx.font=`${font} ${size}px system-ui,-apple-system,sans-serif`;
+    ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(String(txt),x,y);
+  }
+  // Canvas glyph fitting for CJK, accents and longer future translations.
+  function fitLabel(txt,x,y,maxSize,maxWidth,col='#24374a',minSize=10){
+    const value=String(txt);
+    let size=maxSize;
+    ctx.save();
+    for(;size>minSize;size--){
+      ctx.font=`1000 ${size}px system-ui,-apple-system,sans-serif`;
+      if(ctx.measureText(value).width<=maxWidth)break;
+    }
+    ctx.font=`1000 ${size}px system-ui,-apple-system,sans-serif`;
+    const measured=ctx.measureText(value).width;
+    const scale=measured>maxWidth?maxWidth/measured:1;
+    ctx.translate(x,y);ctx.scale(scale,1);
+    label(value,0,0,size,col);
+    ctx.restore();
   }
 
   class Sfx {
@@ -1201,8 +1215,7 @@
       history[event]=reaction.index;
       this.effects=this.effects.filter(f=>f.kind!=='athleteReaction'||f.runnerId!==runner.id);
       this.popEffect({kind:'athleteReaction',runnerId:runner.id,reaction,x,y,life:1.12});
-      const gloss=Reactions.caption(reaction,I18n.locale(),tr);
-      $('runnerReactionText').textContent=gloss?reaction.text+' — '+gloss:reaction.text;
+      $('runnerReactionText').textContent=reaction.text;
     }
     tickThrow(dt){
       if(!this.throwing)return;
@@ -1214,7 +1227,8 @@
         if(!runner)throw Error('Throw target disappeared during flight');
         const yes=matches(t.supply.number,runner.number);
         const fxX=this.runnerX(runner),fxY=runner.y+runnerVisualOffset(runner)-18*runnerScale(runner);
-        const outcome=resolveHit(this.combo,this.fever,runner.successes,yes);
+        const previousMode=this.inferno?'inferno':this.fever?'fever':'normal';
+      const outcome=resolveHit(this.combo,this.fever,runner.successes,yes);
         this.score+=outcome.delta;
         this.combo=outcome.combo;this.fever=outcome.fever;this.inferno=outcome.inferno;
         this.maxCombo=Math.max(this.maxCombo,this.combo);
@@ -1247,39 +1261,39 @@
             }
           }
           if(outcome.infernoActivated){
-            this.popEffect({kind:'feverEntry',text:'INFERNO!',x:W/2,y:H*.44,life:.68});
-            showMessage('🪩 INFERNO! DISCO TIME!',1450);
+            this.popEffect({kind:'feverEntry',mode:'inferno',textKey:'mode.inferno.short',x:W/2,y:H*.44,life:.68});
+            showMessage(tr('mode.inferno.enter'),1450);
             audio.infernoStart();
           }
           if(outcome.activated){
-            this.popEffect({kind:'feverEntry',text:'FEVER!',x:W/2,y:H*.44,life:.55});
-            showMessage('🔥 FEVER! THE WHOLE CITY CHEERS!',1450);
+            this.popEffect({kind:'feverEntry',mode:'fever',textKey:'mode.fever.short',x:W/2,y:H*.44,life:.55});
+            showMessage(tr('mode.fever.enter'),1450);
             audio.feverStart();
           } else if(this.score>=GOAL && this.score-outcome.delta<GOAL) showMessage(tr('game.goal'),1200);
           const tier=outcome.delta<=20?1:outcome.delta<=30?2:3;
-          this.popEffect({kind:'score',text:`+${outcome.delta}`,x:fxX,y:fxY-48,
+          this.popEffect({kind:'score',text:'+'+I18n.formatNumber(outcome.delta),x:fxX,y:fxY-48,
             size:tier===1?25:tier===2?29:34,color:this.inferno?'#ffdc65':this.fever?'#e8a048':'#0f9870',life:.52});
           if(!(outcome.activated||outcome.infernoActivated))
             this.popEffect({kind:'hitBurst',x:fxX,y:fxY-10,tier,
               mode:this.inferno?'inferno':this.fever?'fever':'normal',
               life:tier===3?.55:.43});
           const transformText=oldRunnerNumber>t.supply.number ? `${oldRunnerNumber} ÷ ${t.supply.number} = ${runner.number}` : `${oldRunnerNumber} × ${t.supply.number} = ${runner.number}`;
-          updateMatchHint(`${transformText} ✓ · Combo ${this.combo} · +${outcome.delta}`);
+          updateMatchHint(tr('feedback.correct',{equation:transformText,combo:this.combo,points:I18n.formatNumber(outcome.delta)}));
           if(this.inferno&&tier===3&&!outcome.infernoActivated){/* mega cue already played above */}
           else if(this.fever)audio.feverHit(this.combo);else audio.combo(runner.successes);
         }else{
           this.wrong++;runner.mood='angry';runner.moodTimer=1.25;
           if(outcome.ended){
-            showMessage('FEVER OVER! COMBO RESET',1300);
-            this.popEffect({kind:'feverEnd',text:'FEVER OVER',x:W/2,y:H*.38,life:.34});
+            showMessage(tr('mode.'+previousMode+'.end'),1300);
+            this.popEffect({kind:'feverEnd',mode:previousMode,textKey:'mode.'+previousMode+'.endShort',x:W/2,y:H*.38,life:.34});
             audio.feverEnd();
           }else audio.wrong();
-          if(outcome.delta<0)this.popEffect({kind:'score',text:`−${Math.abs(outcome.delta)}`,x:fxX,y:fxY-42,color:'#db5344',life:1.05});
-          else this.popEffect({kind:'combo',text:'0 PENALTY!',x:fxX,y:fxY-65,life:.42});
+          if(outcome.delta<0)this.popEffect({kind:'score',text:'−'+I18n.formatNumber(Math.abs(outcome.delta)),x:fxX,y:fxY-42,color:'#db5344',life:1.05});
+          else this.popEffect({kind:'combo',textKey:'feedback.noPenalty',x:fxX,y:fxY-65,life:.42});
           this.popEffect({kind:'bonk',x:fxX,y:fxY-22,life:.7});
           // An incorrect supply actually hit this athlete, so use a pain reaction.
           this.emitRunnerReaction(runner,'pain',fxX,fxY-71);
-          updateMatchHint(`${t.supply.number} and ${runner.number}: no match · ${outcome.delta} points · combo reset`);
+          updateMatchHint(tr('feedback.incorrect',{supply:t.supply.number,runner:runner.number,points:I18n.formatNumber(outcome.delta)}));
         }
         // The runner might have left the screen during the throwing pose.
         // Replace them while the *previous* supply roster is still in force.
@@ -1457,7 +1471,7 @@
           const x=hand.x+Math.sin(p*Math.PI)*33;
           const y=hand.y-16-Math.sin(p*Math.PI)*100;
           drawSupply({type:'water',number:this.supplies.held.number},x,y,27,p*Math.PI*5,true);
-          if(p>.87)label('WHAT A CATCH!',hand.x,304,12,'#1b7c78');
+          if(p>.87)fitLabel(tr('celebration.specialCatch'),hand.x,304,12,180,'#1b7c78');
         }
       }
       if(this.throwing)drawThrownSupply(this.throwing,this.runners,this);
@@ -1483,12 +1497,12 @@
         if(this.celebrationTime<2.2){
           ctx.save();ctx.translate(W/2,89);ctx.rotate(Math.sin(this.sceneTime*8)*.035);
           roundedRect(-158,-36,316,70,20,'#fff8da','#2b4a4f',3);
-          label(this.config.level===100?'ALL 100 RACES!':'SNACK STATION HERO!',0,-8,19,'#1a7775');
-          label('THE VOLUNTEER WINS!',0,16,13,'#db7849');ctx.restore();
+          fitLabel(tr(this.config.level===100?'celebration.allRaces':'celebration.stationHero'),0,-8,19,292,'#1a7775');
+          fitLabel(tr('celebration.staffSuccess'),0,16,16,292,'#db7849');ctx.restore();
         }
       }
       if(this.phase==='countdown')drawCountdown(Math.max(1,Math.ceil(this.countdown/0.5)),false);
-      if(this.phase==='playing' && this.goFlash>0)drawCountdown('GO!',true);
+      if(this.phase==='playing' && this.goFlash>0)drawCountdown('',true);
       if(this.phase==='paused')drawPause();
     }
   }
@@ -1672,7 +1686,7 @@
       roundedRect(x-33,45,66,78,9,i===0?'#ffe6a9':'#fff6e5',i===0?'#e2a256':'#d7bb99',2);
       if(!s){
         label('↻',x,73,24,'#9b8071');
-        label('REFILL',x,99,9,'#947a67');
+        fitLabel(tr('role.refill'),x,99,9,68,'#947a67');
         return;
       }
       // The number is a high-positioned label; the pictogram stays unobscured.
@@ -1808,7 +1822,7 @@
     else line(-20,-3,-29,19,'#e8b68d',10);
     roundedRect(-25,-16,51,48,13,scene.shirt,'#333d4e',4.1);
     roundedRect(-14,8,28,20,4,'#fff6d9','#344254',2.8);
-    label('Volunteer',0,19,6.7,'#a05d44');
+    fitLabel(tr('role.staff'),0,19,6.7,47,'#a05d44',6);
     // An extremely enthusiastic volunteer throwing arm.
     if(isDancing){
       line(20,-3,35,-25+Math.sin(celebrationTime*10)*4,'#e8b68d',9);
@@ -1954,26 +1968,28 @@
     }else if(f.kind==='rays'){
       for(let i=0;i<12;i++){const angle=TAU*i/12+p*.4;line(f.x+Math.cos(angle)*18,f.y+Math.sin(angle)*18,f.x+Math.cos(angle)*(36+32*p),f.y+Math.sin(angle)*(34+31*p),i%2?'#fff7a0':'#ffcd69',4.4);}
     }else if(f.kind==='feverEntry'||f.kind==='feverEnd'){
-      const size=(f.text==='INFERNO!'?34:31)+4*Math.sin(Math.PI*Math.min(1,p));
+      const inferno=f.mode==='inferno';
+      const size=(inferno?34:31)+4*Math.sin(Math.PI*Math.min(1,p));
+      const caption=f.textKey?tr(f.textKey):f.text;
       ctx.save();ctx.translate(f.x,f.y);ctx.rotate(Math.sin(p*22)*.08);
-      const bw=f.text==='INFERNO!'?216:188;
-      roundedRect(-bw/2,-32,bw,64,17,f.text==='INFERNO!'?'#6332a2':f.kind==='feverEntry'?'#ffe479':'#d3cee9',
-        f.text==='INFERNO!'?'#ffdb70':'#aa3d78',4);
+      const bw=inferno?216:188;
+      roundedRect(-bw/2,-32,bw,64,17,inferno?'#6332a2':f.kind==='feverEntry'?'#ffe479':'#d3cee9',
+        inferno?'#ffdb70':'#aa3d78',4);
       if(f.kind==='feverEntry'){
         for(let i=0;i<8;i++){
           const a=i*TAU/8;
           line(Math.cos(a)*(bw/2+6),Math.sin(a)*39,
             Math.cos(a)*(bw/2+21),Math.sin(a)*52,
-            f.text==='INFERNO!'?'#e8a0ff':'#ffd17c',3);
+            inferno?'#e8a0ff':'#ffd17c',3);
         }
       }
-      label(f.text,0,2,size,f.text==='INFERNO!'?'#fff1ba':f.kind==='feverEntry'?'#ad4470':'#5f4775');
+      fitLabel(caption,0,2,size,bw-18,inferno?'#fff1ba':f.kind==='feverEntry'?'#ad4470':'#5f4775');
       ctx.restore();
     }else if(f.kind==='jumpShout'){
       ctx.translate(f.x,f.y-p*26);
       ctx.rotate(Math.sin(p*20)*.08);
       roundedRect(-92,-23,184,43,12,'#ffe364','#d84386',4);
-      label('✦ '+f.text+' ✦',0,-1,18,'#a92874');
+      fitLabel('✦ '+(f.textKey?tr(f.textKey):f.text)+' ✦',0,-1,18,163,'#a92874');
     }else if(f.kind==='heavyImpact'){
       ctx.beginPath();ctx.arc(f.x,f.y,12+38*p,0,TAU);
       ctx.strokeStyle='#ffe38b';ctx.lineWidth=4*(1-p);ctx.stroke();
@@ -1985,33 +2001,29 @@
         ctx.fillStyle=['#fcd45d','#eb83b9','#86cae7','#aee29e'][i%4];ctx.fillRect(-4,-7,8,14);ctx.restore();
       }
     }else if(f.kind==='combo'){
-      const bw=Math.max(130,f.text.length*10+22),x=clamp(f.x,bw/2+7,W-bw/2-7),y=Math.max(159,f.y-p*31);
-      roundedRect(x-bw/2,y-17,bw,33,13,'#ffe271','#d4814c',2.6);label(f.text,x,y-1,17,'#b65043');
+      const msg=f.textKey?tr(f.textKey):f.text;
+      ctx.font="1000 17px system-ui,-apple-system,sans-serif";
+      const bw=Math.min(W-20,Math.max(130,Math.ceil(ctx.measureText(msg).width+22)));
+      const x=clamp(f.x,bw/2+7,W-bw/2-7),y=Math.max(159,f.y-p*31);
+      roundedRect(x-bw/2,y-17,bw,33,13,'#ffe271','#d4814c',2.6);
+      fitLabel(msg,x,y-1,17,bw-20,'#b65043');
     }else if(f.kind==='bonk'){
       for(let i=0;i<5;i++){
         const a=TAU*i/5;label(i%2?'★':'✴',f.x+Math.cos(a)*(13+p*25),f.y+Math.sin(a)*(12+p*25),20,'#f9de75');
       }
     }else if(f.kind==='athleteReaction'){
-      // Speech is always in the athlete's script; the short player-language
-      // gloss changes with UI locale without changing the saved reaction.
-      const speech=f.reaction,meaning=Reactions.caption(speech,I18n.locale(),tr);
+      // Athlete speech remains strictly in their native language, no gloss.
+      const speech=f.reaction;
       ctx.font="900 19px system-ui,-apple-system,sans-serif";
-      const nativeWidth=ctx.measureText(speech.text).width;
-      ctx.font="700 15px system-ui,-apple-system,sans-serif";
-      const meaningWidth=meaning?ctx.measureText(meaning).width:0;
-      const bw=Math.min(W-24,Math.max(84,Math.ceil(Math.max(nativeWidth,meaningWidth)+26)));
-      const height=meaning?55:38,x=clamp(f.x,bw/2+9,W-bw/2-9);
+      const bw=Math.min(W-24,Math.max(84,Math.ceil(ctx.measureText(speech.text).width+26)));
+      const height=38,x=clamp(f.x,bw/2+9,W-bw/2-9);
       const y=clamp(f.y-p*20,158,H-height-8);
       roundedRect(x-bw/2,y-height/2,bw,height,12,
         speech.event==='pain'?'#fff1df':'#fffbe7',
         speech.event==='pain'?'#bf6b51':'#4b7877',2.5);
       ctx.save();
       ctx.direction=/^(ar|he|fa|ur)\b/.test(speech.nativeLanguage)?'rtl':'ltr';
-      label(speech.text,x,y+(meaning?-11:0),19,'#355569');
-      if(meaning){
-        ctx.direction=document.documentElement.dir==='rtl'?'rtl':'ltr';
-        label(meaning,x,y+14,15,'#86655a');
-      }
+      fitLabel(speech.text,x,y,19,bw-24,'#355569');
       ctx.restore();
     }
     ctx.restore();
@@ -2117,13 +2129,13 @@
     ctx.fillStyle=isGo?'rgba(255,236,158,.16)':'rgba(26,55,66,.24)';ctx.fillRect(0,0,W,H);
     ctx.save();ctx.translate(W/2,H/2-17);
     if(!isGo){circle(0,0,83,'#fff5c9','#304f54',5);label(text,0,6,100,'#eb7f58');}
-    else {roundedRect(-125,-64,250,119,23,'#fff6ce','#4f686b',5);label(tr('game.go'),0,0,85,'#ec7453');}
+    else {roundedRect(-125,-64,250,119,23,'#fff6ce','#4f686b',5);fitLabel(tr('game.go'),0,0,85,168,'#ec7453');}
     ctx.restore();
   }
   function drawPause(){
     ctx.fillStyle='rgba(29,49,64,.63)';ctx.fillRect(0,0,W,H);
     roundedRect(48,255,W-96,164,22,'#fff8e3','#364d57',4);
-    label(tr('game.paused'),W/2,303,42,'#e87f55');label(tr('game.resume'),W/2,360,14,'#546c76');
+    fitLabel(tr('game.paused'),W/2,303,42,W-122,'#e87f55');fitLabel(tr('game.resume'),W/2,360,14,W-123,'#546c76');
   }
 
   /* ---------- User interface ---------- */
@@ -2247,7 +2259,7 @@
       const cfg=LEVELS[selectedCity*10+i],won=isWon(cfg.level);
       const b=document.createElement('button');b.type='button';
       b.className=`level-tile ${selected===cfg.level?'selected':''} ${won?'won':''}`;
-      b.setAttribute('aria-label',tr('city.raceAria',{city:cityText(CITIES[selectedCity],'name'),index:i+1,seconds:cfg.seconds,band:raceBandLabel(cfg.event),state:tr(won?'city.won':'city.notWon')}));
+      b.setAttribute('aria-label',tr('city.raceAria',{city:cityText(CITIES[selectedCity],'name'),index:i+1,seconds:cfg.seconds,band:raceBandLabel(cfg.event),state:tr(won?'city.completed':'city.notCompleted')}));
       b.setAttribute('aria-pressed',String(selected===cfg.level));
       b.innerHTML=`<span class="tile-star">${won?'★':'✦'}</span><span class="tile-name"></span><span class="tile-number">${String(i+1).padStart(2,'0')}</span><span class="tile-detail"></span>`;
       b.querySelector('.tile-name').textContent=tr('race.short.'+raceBandKey(cfg.event));
@@ -2296,9 +2308,6 @@
   // fullscreen session; no dedicated fullscreen buttons appear in the UI.
   const standalone=()=>window.matchMedia('(display-mode: standalone)').matches
     ||navigator.standalone===true
-    // The browser Fullscreen API also matches display-mode:fullscreen.
-    // An API fullscreen session is not an installed PWA and must retain
-    // its working Exit Fullscreen button.
     ||(window.matchMedia('(display-mode: fullscreen)').matches&&!fullscreenIsActive());
   function enterRaceFullscreen(){
     if(standalone())return;

@@ -45,17 +45,8 @@
     if(!lines?.length)return null;
     let index=Math.max(0,Math.min(lines.length-1,Math.floor(random()*lines.length)));
     if(lines.length>1&&index===previousIndex)index=(index+1)%lines.length;
-    return Object.freeze({
-      event,nativeLanguage,text:lines[index],index,
-      captionKey:'reaction.'+event
-    });
+    return Object.freeze({event,nativeLanguage,text:lines[index],index});
   }
-  function caption(reaction,playerLocale,translate){
-    if(!reaction)return '';
-    if(languageOf(reaction.nativeLanguage)===languageOf(playerLocale))return '';
-    return typeof translate==='function'?translate(reaction.captionKey):'';
-  }
-
   // Short reactions for game feedback. Pain interjections for Japanese, Korean,
   // French, German, Dutch and Chinese are documented in Cambridge/Collins
   // dictionaries. Swahili Aa! (pain) is documented in language-learning material.
@@ -85,7 +76,7 @@
   ])registerProfile(country,language);
 
   const api=Object.freeze({EVENTS,languageOf,registerPack,registerProfile,
-    availableProfiles,chooseProfile,select,caption});
+    availableProfiles,chooseProfile,select});
   root.GameReactions=api;
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
