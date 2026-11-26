@@ -680,3 +680,23 @@ html:has(.app.in-game),body:has(.app.in-game){height:100%;overflow:hidden;oversc
     grid-template-columns:29px 35px 63px minmax(0,1fr) 45px 45px;
   }
 }
+
+
+/* The landscape HUD uses two rows. Give Restart and Pause equal, wide
+   second-row touch targets rather than shrinking them to fit beside pills. */
+@media (orientation:landscape) and (min-width:560px) and (max-height:619px) {
+  .app.installed-mode.in-game .scoreboard{
+    display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-template-rows:40px 40px;gap:4px 3px;align-content:center;
+  }
+  .app.installed-mode.in-game .scoreboard #levelsBtn{grid-column:1;grid-row:1}
+  .app.installed-mode.in-game .scoreboard .level-pill{grid-column:2;grid-row:1}
+  .app.installed-mode.in-game .scoreboard .time-pill{grid-column:3/5;grid-row:1}
+  .app.installed-mode.in-game .scoreboard .total-pill{grid-column:5/7;grid-row:1}
+  .app.installed-mode.in-game .scoreboard .restart-btn{grid-column:1/4;grid-row:2}
+  .app.installed-mode.in-game .scoreboard .pause-btn{grid-column:4/7;grid-row:2}
+  .app.installed-mode.in-game .scoreboard .small-btn,
+  .app.installed-mode.in-game .scoreboard .score-pill{
+    flex:none;width:100%;min-width:0;min-height:40px;height:40px;
+  }
+}
