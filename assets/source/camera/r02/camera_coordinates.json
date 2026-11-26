@@ -24,7 +24,8 @@
       "wideRoadBottom": [
         425,
         1230
-      ]
+      ],
+      "notes": "Provisional choice: wider, clearer aid station."
     },
     "B": {
       "vanishingPoint": [
@@ -32,15 +33,16 @@
         239
       ],
       "tableBox": [
-        190,
-        380,
-        205,
-        172
+        198,
+        383,
+        175,
+        146
       ],
       "wideRoadBottom": [
         425,
         1230
-      ]
+      ],
+      "notes": "Table and worker scaled down ~15%, vanishing point shifted left to give the leftmost lane more usable width; slots remain identical to candidate A."
     }
   },
   "anchors": {
