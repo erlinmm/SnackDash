@@ -774,3 +774,9 @@ html:lang(zh-Hans) .city-name,html:lang(zh-Hans) .passport-title h3{letter-spaci
   .language-setting .help-toggle{font-size:12px;padding:5px 8px}
   .app:not(.in-game) .tour-map .city-name{font-size:15px}
 }
+
+/* Short portrait phones: reserve space for the language/help row without
+   reducing text size or button tap areas. */
+@media(orientation:portrait) and (max-width:530px) and (max-height:600px){
+  .app:not(.in-game) .language-setting{margin-bottom:2px}
+}
