@@ -700,3 +700,11 @@ html:has(.app.in-game),body:has(.app.in-game){height:100%;overflow:hidden;oversc
     flex:none;width:100%;min-width:0;min-height:40px;height:40px;
   }
 }
+
+/* Offline locale picker: compact, keyboard accessible, menu-only. */
+.language-setting{display:flex;justify-content:flex-end;align-items:center;gap:8px;
+  margin:-5px 1px 11px;font-size:11px;font-weight:900;color:#586d7e}
+.language-setting select{font:inherit;font-size:12px;font-weight:700;
+  border:1.5px solid #d6c9b7;border-radius:9px;padding:5px 8px;
+  background:#fffdf8;color:#27354a;max-width:170px;min-height:34px}
+.language-setting select:focus-visible{outline:3px solid #0d929c;outline-offset:2px}
