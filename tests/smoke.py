@@ -408,6 +408,27 @@ async def check_selection_only(browser, width, height):
     await page.close()
 
 
+async def check_landscape_fallback(browser, width, height):
+    """Landscape is unsupported for layout, but browser fallback must not crash.
+
+    Installed PWA and supported fullscreen browsers request portrait orientation.
+    Desktop/unsupported browsers may still open the HTML in a wide viewport:
+    exercise initialization and starting a race without imposing portrait fit.
+    """
+    assert width > height
+    page=await browser.new_page(viewport={'width':width,'height':height})
+    errors=[]
+    page.on('pageerror',lambda e: errors.append(str(e)))
+    await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
+    assert await page.locator('#startBtn').count()==1
+    # Dispatch through the app without requiring a landscape-visible tap target.
+    await page.evaluate("document.querySelector('#startBtn').click()")
+    assert await page.locator('#gameScreen').is_visible(),(width,height)
+    assert await page.evaluate("window.SnackDashDebug.getGame() !== null"),(width,height)
+    assert not errors,(width,height,errors)
+    await page.close()
+
+
 async def check_installed_controls(browser):
     """The check-mark button is inert in installed apps; its width is shared."""
     for width,height in [(320,568),(390,844),(844,390)]:
@@ -454,12 +475,17 @@ async def check_installed_controls(browser):
 async def main():
     async with async_playwright() as p:
         browser=await p.chromium.launch(headless=True, executable_path=os.environ.get('PLAYWRIGHT_CHROMIUM_EXECUTABLE') or None, args=['--no-sandbox'])
-        for dims in [(320,568),(360,740),(390,844),(414,896),(430,932),(768,1024),(820,1180),(844,390)]:
+        # The installed app is portrait-only; geometry checks cover supported
+        # portrait sizes. Wide-window fallback is checked separately below.
+        for dims in [(320,568),(360,740),(390,844),(414,896),(430,932),(768,1024),(820,1180)]:
             await check(browser,*dims)
-            print('Smoke passed:',dims)
-        for dims in [(360,640),(390,700),(568,320),(914,411),(1024,768)]:
+            print('Portrait smoke passed:',dims)
+        for dims in [(360,640),(390,700)]:
             await check_selection_only(browser,*dims)
-            print('Selection fit passed:',dims)
+            print('Portrait selection fit passed:',dims)
+        for dims in [(568,320),(844,390),(914,411),(1024,768)]:
+            await check_landscape_fallback(browser,*dims)
+            print('Landscape fallback passed:',dims)
         await check_installed_controls(browser)
         print('Installed app passed: no check-mark controls, equal Restart/Pause widths')
         await check_fullscreen_flow(browser)
