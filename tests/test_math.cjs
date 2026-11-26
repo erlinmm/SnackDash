@@ -32,22 +32,48 @@ test('arithmetic and learning rules match known examples', () => {
   assert.ok(math.pairDifficultyScore(5,250).level<=2);
 });
 
-test('mode-based Combo powers multiply runner repeat-hit rewards', () => {
-  for (const successes of [0,1,2,3,4,5]) {
-    assert.equal(math.resolveHit(2,false,successes,true).delta,3*2**successes);
-    assert.equal(math.resolveHit(5,true,successes,true).delta,6**2*4**successes);
-    assert.equal(math.resolveHit(10,true,successes,true).delta,11**3*16**successes);
+test('Normal, Fever and Inferno apply the agreed Combo and repeat-hit multipliers', () => {
+  const modes=[
+    {combo:2,fever:false,base:3,multipliers:[1,2,4]},
+    {combo:5,fever:true,base:6**2,multipliers:[1,3,9]},
+    {combo:10,fever:true,base:11**2*(11-9),multipliers:[1,4,16]}
+  ];
+  for(const {combo,fever,base,multipliers} of modes){
+    for(let successes=0;successes<6;successes++){
+      const outcome=math.resolveHit(combo,fever,successes,true);
+      const expectedMultiplier=multipliers[Math.min(successes,2)];
+      assert.equal(outcome.runnerMultiplier,expectedMultiplier);
+      assert.equal(outcome.delta,base*expectedMultiplier);
+    }
   }
-  // Threshold hits count as the first catch in their newly activated mode.
-  assert.equal(math.resolveHit(4,false,2,true).delta,5**2*16);
-  assert.equal(math.resolveHit(9,true,2,true).delta,10**3*256);
+  // Threshold hits already use the newly activated mode.
+  assert.equal(math.resolveHit(4,false,0,true).delta,25);
+  assert.equal(math.resolveHit(4,false,2,true).delta,225);
+  assert.equal(math.resolveHit(9,true,0,true).delta,100);
+  assert.equal(math.resolveHit(9,true,2,true).delta,1600);
   assert.equal(math.resolveHit(9,true,2,true).infernoActivated,true);
-  // From Combo 10, three catches of the same previously untouched runner.
-  const scores=[math.resolveHit(10,true,0,true).delta,
-                math.resolveHit(11,true,1,true).delta,
-                math.resolveHit(12,true,2,true).delta];
-  assert.deepEqual(scores,[1331,27648,562432]);
-  assert.equal(scores.reduce((a,b)=>a+b,0),591411);
+  // 20 unique runners, followed by three hits on a new runner at Combo 21–23.
+  let combo=0,fever=false,score=0;
+  for(let hit=0;hit<20;hit++){
+    const outcome=math.resolveHit(combo,fever,0,true);
+    score+=outcome.delta;combo=outcome.combo;fever=outcome.fever;
+  }
+  assert.equal(score,19075);
+  const rewards=[];
+  for(let successes=0;successes<3;successes++){
+    const outcome=math.resolveHit(combo,fever,successes,true);
+    rewards.push(outcome.delta);score+=outcome.delta;
+    combo=outcome.combo;fever=outcome.fever;
+  }
+  assert.deepEqual(rewards,[5292,25168,118496]);
+  assert.equal(score,168031);
+  // 30 unique successful runners are worth 131,935 total.
+  combo=0;fever=false;score=0;
+  for(let hit=0;hit<30;hit++){
+    const outcome=math.resolveHit(combo,fever,0,true);
+    score+=outcome.delta;combo=outcome.combo;fever=outcome.fever;
+  }
+  assert.equal(score,131935);
   // An incorrect hit still ends Combo; powered-up misses have no point penalty.
   assert.equal(math.resolveHit(12,true,3,false).delta,0);
   assert.equal(math.resolveHit(12,true,3,false).combo,0);
