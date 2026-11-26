@@ -2288,11 +2288,20 @@
     return !!(document.fullscreenElement||document.webkitFullscreenElement);
   }
   function updateFullscreenButtons(){
-    const active=fullscreenIsActive();
+    const active=fullscreenIsActive(),installed=standalone();
+    // Installed apps already own the screen; the former check-mark
+    // fullscreen control was inert. Hide it on both screens.
+    $('app').classList.toggle('installed-mode',installed);
     for(const id of ['menuFullscreenBtn','gameFullscreenBtn']){
       const button=$(id);
-      button.textContent=standalone()?'✓':active?'❐':'⛶';
-      if(standalone()){button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Installed app');button.title='Installed app';continue;}
+      button.classList.toggle('hidden',installed);
+      if(installed){
+        button.setAttribute('aria-pressed','true');
+        button.setAttribute('aria-label','Installed app');
+        button.title='Installed app';
+        continue;
+      }
+      button.textContent=active?'❐':'⛶';
       button.setAttribute('aria-pressed',String(active));
       button.setAttribute('aria-label',active?'Exit fullscreen':'Enter fullscreen');
       button.title=active?'Exit fullscreen':'Enter fullscreen';
