@@ -11,7 +11,7 @@ def package(source, site):
     site.mkdir(parents=True,exist_ok=True)
     page=source.read_text(encoding='utf-8')
     head='<link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">'
-    manifest={'id':'./','name':'SnackDash','short_name':'SnackDash','start_url':'./','scope':'./','display':'standalone','orientation':'any','background_color':'#fff9ed','theme_color':'#fff8ec','icons':[{'src':f'icon-{n}.png','sizes':f'{n}x{n}','type':'image/png','purpose':'any'} for n in (192,512)]+[{'src':'icon-maskable-512.png','sizes':'512x512','type':'image/png','purpose':'maskable'}]}
+    manifest={'id':'./','name':'SnackDash','short_name':'SnackDash','start_url':'./','scope':'./','display':'standalone','orientation':'portrait','background_color':'#fff9ed','theme_color':'#fff8ec','icons':[{'src':f'icon-{n}.png','sizes':f'{n}x{n}','type':'image/png','purpose':'any'} for n in (192,512)]+[{'src':'icon-maskable-512.png','sizes':'512x512','type':'image/png','purpose':'maskable'}]}
     (site/'manifest.webmanifest').write_text(json.dumps(manifest),encoding='utf-8')
     for n in (192,512):
         (site/f'icon-{n}.png').write_bytes(icon(n))
