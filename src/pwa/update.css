@@ -1,0 +1,8 @@
+#pwaUpdatePanel[hidden]{display:none!important}
+#pwaUpdatePanel{position:fixed;z-index:90;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));width:min(390px,calc(100% - 24px));max-height:calc(100dvh - 24px);overflow:auto;background:#fff9ed;color:#27354a;border:2px solid #dfbb95;border-radius:18px;box-shadow:0 8px 30px #27354a38;padding:14px;text-align:center}
+#pwaUpdatePanel strong{font-size:19px}
+#pwaUpdatePanel p{font-size:12px;margin:6px 0 10px}
+#pwaUpdatePanel>div{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+#pwaUpdatePanel button{min-height:44px}
+#pwaUpdateStatus:empty{display:none}
+body:has(.app.in-game) #pwaUpdatePanel{display:none!important}
