@@ -83,3 +83,17 @@ nativeLocale, labelKey})` returns both without overwriting the native script.
 The 20 festival names, graphics, broader UI, and further locale catalogs are
 **not included** in this foundation task. See `docs/localization.md` for scope
 and migration notes.
+
+## Localized city selector and mobile instructions
+
+City postcards, race tiles, the selected-city passport and city invitations
+now resolve names, landmarks, country labels and descriptive text through the
+current language catalog. The menu's **How to play** control opens a scrollable
+dialog containing the translated three-step rules, including the exact existing
+scoring formulas. English and Simplified Chinese are included in the offline
+HTML; Chinese remains a partial preview for other game areas.
+
+There are no visible manual fullscreen controls. Starting a race still requests
+fullscreen when supported, and returning to the city selector keeps that mode.
+Installed PWA portrait orientation and browser fullscreen portrait requests
+are preserved. Browsers that cannot lock orientation remain playable.

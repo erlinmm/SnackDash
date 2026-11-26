@@ -5,6 +5,10 @@
   const {LEVELS,CITIES,cityUnlockedCount,cityCleared,seededRandom,randInt,pick,matches,transformRunnerNumber,resolveHit,NumberDirector,legalBib}=window.GameMath;
   const I18n=window.GameI18n;
   const tr=(key,params)=>I18n.t(key,params);
+  // The game data stays language-neutral; UI names are resolved by stable city IDs.
+  const cityText=(city,field)=>I18n.lookup('city.'+city.id+'.'+field)||city[field];
+  const raceBandKey=event=>event<=3?'quarter':event<=6?'half':event<=9?'full':'ultra';
+  const raceBandLabel=event=>tr('race.band.'+raceBandKey(event));
   // Keep very large Inferno scores legible in the HUD and final result.
   // The headline uses a compact value; the exact whole-number value is
   // preserved in the result details (and as the HUD's accessible label).
@@ -1371,7 +1375,7 @@
       $('resultText').textContent=debugMode?tr('result.debug'):
         !won?tr('result.failure'):
         this.config.level===100?tr('result.allComplete'):
-        tr('result.stamped',{city:city.name,race:this.config.event,completed:cityCleared(prefs.best,this.config.cityIndex)});
+        tr('result.stamped',{city:cityText(city,'name'),race:this.config.event,completed:cityCleared(prefs.best,this.config.cityIndex)});
       const accuracy=this.correct+this.wrong?Math.round(this.correct/(this.correct+this.wrong)*100):0;
       $('resultStats').textContent=tr('result.stats',{correct:this.correct,wrong:this.wrong,accuracy,combo:this.maxCombo});
       const next=won?nextPlayable(this.config.level):null;
@@ -1405,14 +1409,14 @@
       $('comboPanel').classList.toggle('fever',this.fever);
       $('comboPanel').classList.toggle('inferno',this.inferno);
       $('comboPanel').style.setProperty('--fever-city',CITIES[this.config.cityIndex].color);
-      $('feverPlaque').textContent=this.inferno?'🪩 INFERNO! 🔥':'🔥 FEVER!! 🔥';
+      $('feverPlaque').textContent=tr(this.inferno?'hud.modeInferno':'hud.modeFever');
       stage.classList.toggle('fever-active',this.fever);
       stage.classList.toggle('inferno-active',this.inferno);
-      $('comboValue').textContent=this.fever?`${this.combo} COMBO`:`COMBO ${this.combo}`;
+      $('comboValue').textContent=tr(this.fever?'hud.comboPower':'hud.comboNormal',{combo:this.combo});
       $('comboIcon').textContent=this.inferno?'🪩':this.fever?'🔥':'⚡';
-      $('comboDetail').textContent=this.inferno?'C² × (C−9) · RUNNER ×4/REPEAT':this.fever?'C² · RUNNER ×3/REPEAT':`COMBO · RUNNER ×2/REPEAT · ${Math.max(0,5-this.combo)} TO FEVER`;
+      $('comboDetail').textContent=this.inferno?tr('hud.comboDetail.inferno'):this.fever?tr('hud.comboDetail.fever'):tr('hud.comboDetail.normal',{remaining:Math.max(0,5-this.combo)});
       $('comboFill').style.width=`${Math.min(100,this.combo/5*100)}%`;
-      $('feverStatus').textContent=this.inferno?'DISCO!':this.fever?'ON FIRE!':this.combo===0?'READY?':`${this.combo}/5`;
+      $('feverStatus').textContent=this.inferno?tr('hud.disco'):this.fever?tr('hud.onFire'):this.combo===0?tr('hud.ready'):`${this.combo}/5`;
     }
     draw(){
       // Small real screen shake for 30+ point Fever hits. Pointer mapping uses
@@ -2137,12 +2141,14 @@
     art.style.setProperty('--city-sky',city.sky);
     $('cityInvitationNumber').textContent=`${String(index+1).padStart(2,'0')} / 10`;
     $('cityInvitationIcon').textContent=city.icon;
-    $('cityInvitationLandmark').textContent=city.landmark;
-    $('cityInvitationName').textContent=city.name;
-    $('cityInvitationSubtitle').textContent=city.subtitle;
-    const invitationCityName=city.name.toLowerCase().replace(/\b\w/g,ch=>ch.toUpperCase());
+    $('cityInvitationLandmark').textContent=cityText(city,'landmark');
+    $('cityInvitationName').textContent=cityText(city,'name');
+    $('cityInvitationSubtitle').textContent=cityText(city,'subtitle');
+    const displayName=cityText(city,'name');
+    const invitationCityName=I18n.locale()==='en-GB'
+      ?displayName.toLowerCase().replace(/\b\w/g,ch=>ch.toUpperCase()):displayName;
     $('cityInvitationText').textContent=tr('invitation.body',{city:invitationCityName});
-    $('cityInvitationVisit').textContent=tr('invitation.visit',{city:city.name});
+    $('cityInvitationVisit').textContent=tr('invitation.visit',{city:displayName});
     overlay.classList.remove('hidden');
     $('cityInvitationVisit').focus({preventScroll:true});
   }
@@ -2170,8 +2176,9 @@
     selectedCity=clamp(selectedCity,0,debugMode?9:unlockedCities-1);
     if(!isOpen(selected))selected=selectedCity*10+1;
     const complete=LEVELS.filter(cfg=>isWon(cfg.level)).length;
-    $('progressBadge').textContent=`${complete} / 100 won`;
+    $('progressBadge').textContent=tr('city.progress',{completed:complete});
     const map=$('cityMap'),previousScroll=map.scrollLeft;map.innerHTML='';
+    map.setAttribute('data-tour-caption',tr('intro.tourFooter'));
     $('exitDebugBtn').classList.toggle('hidden',!debugMode);
     $('debugIndicator').classList.toggle('hidden',!debugMode);
     CITIES.forEach((city,idx)=>{
@@ -2180,14 +2187,22 @@
       b.className=`city-stop ${active?'chosen':''} ${open?'open':'locked'} ${done===10?'complete':''}`;
       b.style.setProperty('--city-color',city.color);
       b.style.setProperty('--city-sky',city.sky);
-      b.setAttribute('aria-label',`${city.name}, city ${idx+1}, ${done} of 10 races won${open?', available':', locked'}`);
+      b.setAttribute('aria-label',tr('city.cardAria',{city:cityText(city,'name'),index:idx+1,done,state:tr(open?'city.state.available':'city.state.locked')}));
       b.setAttribute('aria-pressed',String(active));
       const num=String(idx+1).padStart(2,'0');
+      // Build the card structure once and assign localized text safely.
       b.innerHTML=`<span class="city-route-dot" aria-hidden="true">●</span>
-        <span class="city-postcard"><span class="city-postmark">${num} / 10</span><span class="city-emblem">${open?city.icon:'🔒'}</span>
-        <span class="city-skyline">${city.landmark}</span></span>
-        <span class="city-name">${city.name}</span><span class="city-country">${open?city.subtitle:'Earn 9 stamps in the previous city'}</span>
-        <span class="city-status">${debugMode?'🛠 DEBUG':!open?'🔒 LOCKED':done===10?'★ STAMPED':`${done} / 10 STAMPS`}</span>`;
+        <span class="city-postcard"><span class="city-postmark">${num} / 10</span><span class="city-emblem"></span>
+        <span class="city-skyline"></span></span>
+        <span class="city-name"></span><span class="city-country"></span>
+        <span class="city-status"></span>`;
+      b.querySelector('.city-emblem').textContent=open?city.icon:'🔒';
+      b.querySelector('.city-skyline').textContent=cityText(city,'landmark');
+      b.querySelector('.city-name').textContent=cityText(city,'name');
+      b.querySelector('.city-country').textContent=open?cityText(city,'subtitle'):tr('city.hint.locked');
+      b.querySelector('.city-status').textContent=debugMode?tr('city.status.debug')
+        :!open?tr('city.status.locked')
+        :done===10?tr('city.status.complete'):tr('city.status.stamps',{done});
       if(open)b.addEventListener('click',()=>{
         selectedCity=idx;
         if(Math.floor((selected-1)/10)!==idx)selected=idx*10+1;
@@ -2201,19 +2216,21 @@
     $('cityDetail').style.setProperty('--city-color',city.color);
     $('cityDetail').style.setProperty('--city-sky',city.sky);
     $('citySymbol').textContent=city.icon;
-    $('cityCaption').textContent=`CITY ${String(selectedCity+1).padStart(2,'0')} / 10 · ${city.country}`;
-    $('cityTitle').textContent=city.name;
-    $('citySubtitle').textContent=city.subtitle;
-    $('cityStamp').innerHTML=`${stamps} / 10<br>STAMPS`;
+    $('cityCaption').textContent=tr('city.chapter',{index:String(selectedCity+1).padStart(2,'0'),country:cityText(city,'country')});
+    $('cityTitle').textContent=cityText(city,'name');
+    $('citySubtitle').textContent=cityText(city,'subtitle');
+    $('cityStamp').replaceChildren(document.createTextNode(`${stamps} / 10`),document.createElement('br'),document.createTextNode(tr('city.stamps')));
     $('cityEventRange').textContent='01 — 10';
     const g=$('levelGrid');g.innerHTML='';
     for(let i=0;i<10;i++){
       const cfg=LEVELS[selectedCity*10+i],won=isWon(cfg.level);
       const b=document.createElement('button');b.type='button';
       b.className=`level-tile ${selected===cfg.level?'selected':''} ${won?'won':''}`;
-      b.setAttribute('aria-label',`${CITIES[selectedCity].name} race ${i+1}, ${cfg.seconds} seconds, ${cfg.raceBand.toLowerCase()}, ${won?'won':'not yet won'}`);
+      b.setAttribute('aria-label',tr('city.raceAria',{city:cityText(CITIES[selectedCity],'name'),index:i+1,seconds:cfg.seconds,band:raceBandLabel(cfg.event),state:tr(won?'city.won':'city.notWon')}));
       b.setAttribute('aria-pressed',String(selected===cfg.level));
-      b.innerHTML=`<span class="tile-star">${won?'★':'✦'}</span><span class="tile-name">${cfg.raceBand.split(' ')[0]}</span><span class="tile-number">${String(i+1).padStart(2,'0')}</span><span class="tile-detail">${cfg.seconds} SEC</span>`;
+      b.innerHTML=`<span class="tile-star">${won?'★':'✦'}</span><span class="tile-name"></span><span class="tile-number">${String(i+1).padStart(2,'0')}</span><span class="tile-detail"></span>`;
+      b.querySelector('.tile-name').textContent=tr('race.short.'+raceBandKey(cfg.event));
+      b.querySelector('.tile-detail').textContent=tr('race.tileTime',{seconds:cfg.seconds});
       b.addEventListener('click',()=>{
         selected=cfg.level;
         if(!recordRaceTap(i+1))renderLevelGrid();
@@ -2224,8 +2241,9 @@
   }
   function renderSelection(){
     const cfg=LEVELS[selected-1];
-    $('selectedTitle').textContent=`RACE ${String(cfg.event).padStart(2,'0')} · ${CITIES[cfg.cityIndex].name}`;
-    $('selectedMeta').textContent=`${cfg.raceBand} · ${cfg.runners} runners · ${cfg.seconds} sec · ${cfg.minMatches===cfg.maxMatches?cfg.minMatches:`${cfg.minMatches}–${cfg.maxMatches}`} matches · supply 2–${cfg.supplyMax}`;
+    $('selectedTitle').textContent=tr('race.eventTitle',{event:String(cfg.event).padStart(2,'0'),city:cityText(CITIES[cfg.cityIndex],'name')});
+    const matchesCount=cfg.minMatches===cfg.maxMatches?cfg.minMatches:`${cfg.minMatches}–${cfg.maxMatches}`;
+    $('selectedMeta').textContent=tr('race.meta',{band:raceBandLabel(cfg.event),runners:cfg.runners,seconds:cfg.seconds,matches:matchesCount,max:cfg.supplyMax});
   }
   function sizeScene(){
     const screen=$('gameScreen'), app=$('app');
@@ -2253,17 +2271,14 @@
     pixelRatio=ratio;
   }
   let pixelRatio=1;
-  // Fullscreen is shared between level selection and gameplay. Browser
-  // policy requires a user gesture to enter, but switching screens does not
-  // change this mode; use the two dedicated buttons to toggle it.
+  // Starting a race requests fullscreen. Returning to levels retains the
+  // fullscreen session; no dedicated fullscreen buttons appear in the UI.
   const standalone=()=>window.matchMedia('(display-mode: standalone)').matches
     ||navigator.standalone===true
     // The browser Fullscreen API also matches display-mode:fullscreen.
     // An API fullscreen session is not an installed PWA and must retain
     // its working Exit Fullscreen button.
     ||(window.matchMedia('(display-mode: fullscreen)').matches&&!fullscreenIsActive());
-  let installPrompt=null;
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
   function enterRaceFullscreen(){
     if(standalone())return;
     const root=document.documentElement;
@@ -2281,37 +2296,8 @@
       }catch(__){}
     }
   }
-  function leaveRaceFullscreen(){
-    if(!document.fullscreenElement&&!document.webkitFullscreenElement)return;
-    const exit=document.exitFullscreen||document.webkitExitFullscreen;
-    if(!exit)return;
-    try{
-      const pending=exit.call(document);
-      if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
-    }catch(_){}
-  }
   function fullscreenIsActive(){
     return !!(document.fullscreenElement||document.webkitFullscreenElement);
-  }
-  function updateFullscreenButtons(){
-    const active=fullscreenIsActive(),installed=standalone();
-    // Installed apps already own the screen; the former check-mark
-    // fullscreen control was inert. Hide it on both screens.
-    $('app').classList.toggle('installed-mode',installed);
-    for(const id of ['menuFullscreenBtn','gameFullscreenBtn']){
-      const button=$(id);
-      button.classList.toggle('hidden',installed);
-      if(installed){
-        button.setAttribute('aria-pressed','true');
-        button.setAttribute('aria-label',tr('game.fullscreenInstalled'));
-        button.title=tr('game.fullscreenInstalled');
-        continue;
-      }
-      button.textContent=active?'❐':'⛶';
-      button.setAttribute('aria-pressed',String(active));
-      button.setAttribute('aria-label',tr(active?'game.fullscreenExit':'game.fullscreenEnter'));
-      button.title=tr(active?'game.fullscreenExit':'game.fullscreenEnter');
-    }
   }
   // Installed PWAs get a portrait preference from the manifest. For a
   // regular browser, Android can also lock portrait while fullscreen.
@@ -2324,13 +2310,6 @@
       const pending=orientation.lock('portrait');
       if(pending&&typeof pending.catch==='function')pending.catch(()=>{});
     }catch(_){}
-  }
-  function toggleFullscreen(){
-    if(standalone())return;
-    if(fullscreenIsActive())leaveRaceFullscreen();
-    else if(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen)enterRaceFullscreen();
-    else if(installPrompt){installPrompt.prompt();installPrompt=null;}
-    else window.alert(tr('game.installTip'));
   }
   function showMenu(){
     // Keep fullscreen active when returning to level selection.
@@ -2383,8 +2362,10 @@
     renderLevelGrid();
     if(invitationOpenIndex!==null)showPendingCityInvitation();
     if(game){game.syncHUD();if(game.resultsShown)game.showResults(game.phase==='celebrate');}
-    updateSoundIcon();updateFullscreenButtons();sizeScene();
+    updateSoundIcon();sizeScene();
   });
+  $('howToPlayBtn').addEventListener('click',()=>$('howToPlayDialog').showModal());
+  $('howToPlayClose').addEventListener('click',()=>$('howToPlayDialog').close());
   $('cityInvitationVisit').addEventListener('click',()=>acknowledgeCityInvitation(true));
   $('cityInvitationLater').addEventListener('click',()=>acknowledgeCityInvitation(false));
   $('exitDebugBtn').addEventListener('click',()=>setDebugMode(false));
@@ -2394,8 +2375,6 @@
     enterRaceFullscreen();
     startLevel(selected);
   });
-  $('menuFullscreenBtn').addEventListener('click',toggleFullscreen);
-  $('gameFullscreenBtn').addEventListener('click',toggleFullscreen);
   $('levelsBtn').addEventListener('click',showMenu);
   $('backBtn').addEventListener('click',showMenu);
   $('retryBtn').addEventListener('click',()=>game&&startLevel(game.config.level));
@@ -2425,7 +2404,6 @@
   // Fullscreen changes the visible phone height even without a normal resize.
   for(const eventName of ['fullscreenchange','webkitfullscreenchange']){
     document.addEventListener(eventName,()=>{
-      updateFullscreenButtons();
       requestPortraitOrientation();
       sizeScene();requestAnimationFrame(sizeScene);
     });
@@ -2452,7 +2430,7 @@
     requestAnimationFrame(frame);
   }
   reconcileCityUnlocks();
-  renderLevelGrid();updateSoundIcon();updateFullscreenButtons();requestPortraitOrientation();sizeScene();requestAnimationFrame(frame);
+  renderLevelGrid();updateSoundIcon();requestPortraitOrientation();sizeScene();requestAnimationFrame(frame);
   showPendingCityInvitation();
 
   // Debug mode is hidden in the race-tile sequence and never persists progress.

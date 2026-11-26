@@ -25,8 +25,9 @@ network call, or change to gameplay, race scoring, Combo, Fever, or Inferno.
 
 English (`en-GB`) is the default. Simplified Chinese (`zh-Hans`) is a
 **preview** for the first group of menu labels, main prompts, invitations and
-result messages. Many level descriptions, decorative speech bubbles, PWA-update
-prompts, game help blocks and city names are still English. No additional
+result messages. Some decorative speech bubbles, PWA-update
+prompts and other secondary status strings are still English. City postcards,
+race selection, invitations and the three-step rules use the selected locale. No additional
 translations should be advertised as complete.
 
 ## Next passes
@@ -41,3 +42,19 @@ translations should be advertised as complete.
    readers, offline PWA, persistence and fonts for Japanese/Korean/Chinese.
 
 The locale catalog must never define speed, scoring or collision rules.
+
+## Card and help screen coverage
+
+The city data in `src/js/math.js` continues to define gameplay IDs and
+rules, never translated names. `src/js/locales.js` defines
+`city.<id>.<field>` (`name`, `country`, `landmark`, `subtitle`) and
+presentation keys such as `city.cardAria`, `race.meta` and
+`instructions.step1`. Every card is rebuilt when the locale changes.
+Festival labels stay a distinct native-name plus localized-explanation pair,
+and actual festival records are not part of this patch.
+
+Phones display translated rules via the **How to play** dialog. The formerly
+visible fullscreen toggles are intentionally absent in both menu and race
+screens. Start still requests fullscreen and the screen orientation lock where
+supported. Tests cover localizable card content, readable font sizes, the
+rules dialog, automatic fullscreen, PWA portrait support and offline builds.

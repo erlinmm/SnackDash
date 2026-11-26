@@ -73,3 +73,24 @@ test('a saved unknown locale falls back to English',()=>{
   assert.equal(i18n.init(),'en-GB');
   cache.delete('snackDashLocaleV1');
 });
+
+test('all ten cities and gameplay instructions resolve in both UI languages',()=>{
+  const math=require('../src/js/math.js');
+  for(const locale of ['en-GB','zh-Hans']){
+    assert.equal(i18n.setLocale(locale),true);
+    for(const city of math.CITIES){
+      for(const field of ['name','country','landmark','subtitle']){
+        const key='city.'+city.id+'.'+field;
+        assert.ok(i18n.lookup(key),locale+': '+key);
+      }
+    }
+    for(const key of ['intro.howToPlay','intro.tourFooter','instructions.step1',
+      'instructions.step2','instructions.step3','city.cardAria','race.eventTitle','city.stamps']){
+      assert.ok(i18n.lookup(key),locale+': '+key);
+    }
+  }
+  assert.equal(i18n.t('city.tokyo.name'),'东京');
+  assert.equal(i18n.t('city.tokyo.landmark'),'东京塔');
+  assert.match(i18n.t('instructions.step2'),/整除/);
+  i18n.setLocale('en-GB');
+});

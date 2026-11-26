@@ -21,13 +21,13 @@
       <div class="top-actions">
         <button class="debug-exit-btn hidden" id="exitDebugBtn" type="button" aria-label="Exit debug mode">EXIT DEBUG ✕</button>
         <button class="icon-btn" id="soundBtn" type="button" title="Turn sound off" aria-label="Turn sound off">🔊</button>
-        <button class="icon-btn fullscreen-toggle" id="menuFullscreenBtn" type="button" title="Enter fullscreen" aria-label="Enter fullscreen" aria-pressed="false">⛶</button>
       </div>
     </header>
 
-    <section class="menu" id="menuScreen" aria-label="Choose a level">
+    <section class="menu" id="menuScreen" aria-label="Choose a level" data-i18n-aria-label="intro.chooseLevel">
       <div class="language-setting">
-        <label for="languageSelect" data-i18n="ui.language">Language</label>
+        <button class="help-toggle" id="howToPlayBtn" type="button" data-i18n="intro.howToPlay">How to play</button>
+        <label for="languageSelect" class="visually-hidden" data-i18n="ui.language">Language</label>
         <select id="languageSelect" aria-label="Language" data-i18n-aria-label="ui.language">
           <option value="en-GB">English</option>
           <option value="zh-Hans">简体中文（预览）</option>
@@ -40,9 +40,9 @@
           <h1><span data-i18n="intro.line1">100 races.</span><br><em data-i18n="intro.line2">One snack hero!</em></h1>
           <p data-i18n="intro.description">Ten cities. A hundred races. Five catches light FEVER; ten ignite INFERNO!</p>
           <div class="rules-chips">
-            <span>🔥 <b>5</b> → FEVER · <b>10</b> → INFERNO!</span>
-            <span>🪩 <b>INFERNO</b> Combo² × (Combo−9)!</span>
-            <span>🏆 Goal <b>10 points</b></span>
+            <span data-i18n="intro.ruleModes">🔥 5 → FEVER · 10 → INFERNO!</span>
+            <span data-i18n="intro.ruleInferno">🪩 INFERNO Combo² × (Combo−9)!</span>
+            <span data-i18n="intro.ruleGoal">🏆 Goal 10 points</span>
           </div>
         </div>
         <div class="intro-illustration" aria-hidden="true">
@@ -55,20 +55,20 @@
         </div>
       </div>
 
-      <section class="instructions" aria-label="How to play">
-        <div class="instruction"><span class="instruction-emoji">1️⃣</span><span>Your volunteer picks up supplies. <b>Tap a table item to swap it</b> with the one in hand.</span></div>
-        <div class="instruction"><span class="instruction-emoji">2️⃣</span><span><b>Tap a runner</b> if either number divides the other exactly.</span></div>
-        <div class="instruction"><span class="instruction-emoji">3️⃣</span><span><b>5 good catches → FEVER; 10 → INFERNO!</b> Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</span></div>
+      <section class="instructions" aria-label="How to play" data-i18n-aria-label="intro.howToPlay">
+        <div class="instruction"><span class="instruction-emoji">1️⃣</span><span data-i18n="instructions.step1">Your volunteer picks up supplies. Tap a table item to swap it with the one in hand.</span></div>
+        <div class="instruction"><span class="instruction-emoji">2️⃣</span><span data-i18n="instructions.step2">Tap a runner if either number divides the other exactly.</span></div>
+        <div class="instruction"><span class="instruction-emoji">3️⃣</span><span data-i18n="instructions.step3">5 good catches → FEVER; 10 → INFERNO! Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</span></div>
       </section>
 
       <section class="tour-section" aria-label="World tour city map">
         <div class="section-header world-header">
-          <div><span class="eyebrow">✦ THE GREAT SNACK TOUR ✦</span><h2 data-i18n="intro.world">100 races · 10 cities</h2></div>
+          <div><span class="eyebrow" data-i18n="intro.tourKicker">✦ THE GREAT SNACK TOUR ✦</span><h2 data-i18n="intro.world">100 races · 10 cities</h2></div>
           <div class="progress-badge" id="progressBadge">0 / 100 won</div>
         </div>
         <p class="world-subtitle" data-i18n="intro.worldSubtitle">Every city starts easy and builds to a tricky tenth race. Win 9 races in each city to receive an invitation to the next!</p>
-        <div class="tour-map" id="cityMap" aria-label="Choose a marathon city"></div>
-        <div class="passport-card" id="cityDetail" aria-label="Select a race">
+        <div class="tour-map" id="cityMap" aria-label="Choose a marathon city" data-i18n-aria-label="intro.chooseCity"></div>
+        <div class="passport-card" id="cityDetail" aria-label="Select a race" data-i18n-aria-label="intro.pickRace">
           <div class="passport-header">
             <div class="passport-symbol" id="citySymbol">🌸</div>
             <div class="passport-title"><span class="eyebrow" id="cityCaption">CITY 01 / 10</span><h3 id="cityTitle">TOKYO</h3><p id="citySubtitle">Cherry Blossom Sprint</p></div>
@@ -84,6 +84,16 @@
       </section>
       <p class="save-hint" data-i18n="intro.saveHint">🔒 Your city stamps and best scores are saved on this device.</p>
     </section>
+
+    <dialog id="howToPlayDialog" class="how-to-play-dialog" aria-labelledby="howToPlayTitle">
+      <h2 id="howToPlayTitle" data-i18n="intro.howToPlay">How to play</h2>
+      <ol>
+        <li data-i18n="instructions.step1">Your volunteer picks up supplies. Tap a table item to swap it with the one in hand.</li>
+        <li data-i18n="instructions.step2">Tap a runner if either number divides the other exactly.</li>
+        <li data-i18n="instructions.step3">5 good catches → FEVER; 10 → INFERNO! Normal scores Combo × 2^(prior hits); FEVER scores Combo² × 3^(prior hits); INFERNO scores Combo² × (Combo−9) × 4^(prior hits). Repeated runner bonuses keep growing without a cap. Wrong throws end the bonus mode without a penalty.</li>
+      </ol>
+      <button class="btn btn-primary" id="howToPlayClose" type="button" data-i18n="intro.close">Close</button>
+    </dialog>
 
     <!-- The invitation uses exactly the same postcard artwork as the city map. -->
     <div class="city-invitation-overlay hidden" id="cityInvitationOverlay" role="dialog" aria-modal="true"
@@ -107,15 +117,14 @@
       </div>
     </div>
 
-    <section class="game-screen hidden" id="gameScreen" aria-label="Snack Dash gameplay">
+    <section class="game-screen hidden" id="gameScreen" aria-label="Snack Dash gameplay" data-i18n-aria-label="game.gameplayAria">
       <div class="scoreboard">
-        <button class="small-btn" id="levelsBtn" type="button" aria-label="Return to level selection">‹ <span data-i18n="hud.levels">Levels</span></button>
+        <button class="small-btn" id="levelsBtn" type="button" aria-label="Return to level selection" data-i18n-aria-label="hud.backToLevels">‹ <span data-i18n="hud.levels">Levels</span></button>
         <div class="score-pill level-pill"><span class="score-label" data-i18n="hud.race">RACE</span><strong id="hudLevel">1</strong></div>
         <div class="score-pill time-pill" id="timePill"><span class="score-label" data-i18n="hud.time">TIME</span><strong id="hudTime">01:00</strong></div>
         <div class="score-pill total-pill"><span class="score-label" data-i18n="hud.points">POINTS</span><strong><span id="hudScore">0</span><small> / 10</small></strong></div>
-        <button class="small-btn restart-btn" id="restartBtn" type="button" title="Restart level" aria-label="Restart level">↻</button>
-        <button class="small-btn pause-btn" id="pauseBtn" type="button" aria-label="Pause game">Ⅱ</button>
-        <button class="small-btn fullscreen-toggle" id="gameFullscreenBtn" type="button" title="Enter fullscreen" aria-label="Enter fullscreen" aria-pressed="false">⛶</button>
+        <button class="small-btn restart-btn" id="restartBtn" type="button" title="Restart level" aria-label="Restart level" data-i18n-title="game.restartLevel" data-i18n-aria-label="game.restartLevel">↻</button>
+        <button class="small-btn pause-btn" id="pauseBtn" type="button" aria-label="Pause game" data-i18n-aria-label="game.pause">Ⅱ</button>
       </div>
       <div class="combo-panel" id="comboPanel" aria-live="off">
         <div class="combo-indicator"><span id="comboIcon">⚡</span> <strong id="comboValue">COMBO 0</strong><small id="comboDetail">5 IN A ROW → FEVER</small></div>
@@ -124,7 +133,7 @@
         <span class="fever-status" id="feverStatus">READY?</span>
       </div>
       <div class="scene-shell" id="sceneShell">
-        <canvas id="scene" width="390" height="700" aria-label="Marathon road with moving runners. Tap a runner to throw the held supply." role="img"></canvas>
+        <canvas id="scene" width="390" height="700" aria-label="Marathon road with moving runners. Tap a runner to throw the held supply." data-i18n-aria-label="game.sceneAria" role="img"></canvas>
         <div class="result-overlay hidden" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultHeading">
           <div class="result-card">
             <div class="result-mascot" id="resultMascot">🏆</div>
@@ -146,7 +155,7 @@
         <div class="held-status"><span class="held-icon" id="heldIcon">💧</span><div><small data-i18n="hud.inHand">IN YOUR HAND</small><strong id="heldNumber">6</strong></div></div>
         <div class="hand-rule"><strong data-i18n="hud.findMatch">Find a whole-number match!</strong><span id="matchHint" data-i18n="hud.tapRunner">Tap a runner to throw.</span></div>
       </div>
-      <p class="game-footnote"><b>5 Combo → Fever · 10 Combo → Inferno.</b> Tap table items to swap. FEVER: Combo² × 3^(prior hits); INFERNO: Combo² × (Combo−9) × 4^(prior hits); misses end bonus mode without a penalty.</p>
+      <p class="game-footnote" data-i18n="instructions.footnote">5 Combo → Fever · 10 Combo → Inferno. Tap table items to swap. FEVER: Combo² × 3^(prior hits); INFERNO: Combo² × (Combo−9) × 4^(prior hits); misses end bonus mode without a penalty.</p>
     </section>
   </main>
   <!-- BUILD:I18N -->

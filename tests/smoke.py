@@ -27,15 +27,42 @@ async def check(browser, width, height):
     assert menu_dims['top']>=-2,(width,height,menu_dims)
     if menu_dims['height']<=menu_dims['viewport']+2:
         assert abs(menu_dims['top']-menu_dims['bottom'])<=4,(width,height,menu_dims)
-    assert await page.locator('#menuFullscreenBtn').is_visible()
+    assert await page.locator('#menuFullscreenBtn').count()==0
+    assert await page.locator('#gameFullscreenBtn').count()==0
     await assert_selection_fits(page, width, height)
     # Exercise offline locale switching without altering scoring or save-state.
     assert await page.locator('#languageSelect').input_value() == 'en-GB'
     await page.locator('#languageSelect').select_option('zh-Hans')
     assert await page.locator('[data-i18n="intro.pickRace"]').text_content() == '选择比赛'
     assert await page.evaluate("document.documentElement.lang") == 'zh-Hans'
+    assert await page.locator('.city-stop').first.locator('.city-name').text_content() == '东京'
+    assert await page.locator('.city-stop').first.locator('.city-skyline').text_content() == '东京塔'
+    assert await page.locator('#cityTitle').text_content() == '东京'
+    assert '日本' in await page.locator('#cityCaption').text_content()
+    assert '印章' in await page.locator('#cityStamp').text_content()
+    assert '东京' in await page.locator('#selectedTitle').text_content()
+    assert '运动员' in await page.locator('#selectedMeta').text_content()
+    await assert_selection_fits(page,width,height)
+    font=await page.evaluate("""() => {
+      const card=document.querySelector('.city-stop');
+      const sz=selector=>parseFloat(getComputedStyle(card.querySelector(selector)).fontSize);
+      const nr=card.querySelector('.city-name').getBoundingClientRect();
+      return {name:sz('.city-name'),landmark:sz('.city-skyline'),
+        status:sz('.city-status'),nameBottom:nr.bottom,cardBottom:card.getBoundingClientRect().bottom};
+    }""")
+    assert font['name']>=15 and font['landmark']>=10 and font['status']>=10,(width,height,font)
+    assert font['nameBottom']<=font['cardBottom']+2,(width,height,font)
+    assert await page.locator('#howToPlayBtn').text_content()=='玩法说明'
+    await page.locator('#howToPlayBtn').click()
+    assert await page.locator('#howToPlayDialog').is_visible()
+    help_text=await page.locator('#howToPlayDialog').inner_text()
+    assert '整除' in help_text and 'FEVER' in help_text and 'INFERNO' in help_text
+    await page.locator('#howToPlayClose').click()
+    assert not await page.locator('#howToPlayDialog').is_visible()
     await page.locator('#languageSelect').select_option('en-GB')
     assert await page.locator('[data-i18n="intro.pickRace"]').text_content() == 'CHOOSE YOUR RACE'
+    assert await page.locator('.city-stop').first.locator('.city-name').text_content() == 'TOKYO'
+    assert await page.locator('#howToPlayBtn').text_content()=='How to play'
     await page.locator('#startBtn').click()
     await page.wait_for_timeout(1900)
     dims=await page.evaluate('''() => ({
@@ -50,16 +77,12 @@ async def check(browser, width, height):
     assert dims['tray']<=dims['viewport']+3,(width,height,dims)
     hud=await page.evaluate("""() => {
       const b=document.querySelector('.scoreboard');
-      const full=document.querySelector('#gameFullscreenBtn');
       const pause=document.querySelector('#pauseBtn');
-      const bb=b.getBoundingClientRect(),f=full.getBoundingClientRect(),p=pause.getBoundingClientRect();
-      return {scroll:b.scrollWidth,client:b.clientWidth,
-        right:f.right,edge:bb.right,pauseRight:p.right,fullLeft:f.left};
+      const bb=b.getBoundingClientRect(),p=pause.getBoundingClientRect();
+      return {scroll:b.scrollWidth,client:b.clientWidth,right:p.right,edge:bb.right};
     }""")
     assert hud['scroll']<=hud['client']+2,(width,height,hud)
     assert hud['right']<=hud['edge']+2,(width,height,hud)
-    if width <= height:
-        assert hud['fullLeft']>=hud['pauseRight']-2,(width,height,hud)
 
     # Without changing the canvas size, the complete in-game stack should
     # share any leftover height between its top and bottom margins.
@@ -149,79 +172,41 @@ async def check(browser, width, height):
 
 
 async def check_fullscreen_flow(browser):
-    # Use deterministic browser API stubs: native fullscreen support varies
-    # between headless Chromium, Brave local files, and mobile WebKit.
-    page = await browser.new_page(viewport={'width':390,'height':844})
+    """Automatic fullscreen keeps portrait orientation without manual buttons."""
+    page=await browser.new_page(viewport={'width':390,'height':844})
     errors=[]
     page.on('pageerror',lambda error: errors.append(str(error)))
     await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
     await page.evaluate("""() => {
-      const test={requests:0,exits:0,active:false};
+      const state={requests:0,active:false};
       window.__portraitCalls=[];
       Object.defineProperty(screen.orientation,'lock',{configurable:true,
         value:mode=>{window.__portraitCalls.push(mode);return Promise.resolve();}
       });
       Object.defineProperty(document,'fullscreenElement',{
-        configurable:true,get:()=>test.active?document.documentElement:null
+        configurable:true,get:()=>state.active?document.documentElement:null
       });
       document.documentElement.requestFullscreen=()=>{
-        test.requests++;
-        test.active=true;
+        state.requests++;state.active=true;
         document.dispatchEvent(new Event('fullscreenchange'));
         return Promise.resolve();
       };
-      document.exitFullscreen=()=>{
-        test.exits++;
-        test.active=false;
-        document.dispatchEvent(new Event('fullscreenchange'));
-        return Promise.resolve();
-      };
-      window.__fullscreenTest=test;
+      window.__fullscreenTest=state;
     }""")
-    # Menu fullscreen control is independently usable before a race starts.
-    await page.locator('#menuFullscreenBtn').click()
-    first=await page.evaluate("({...window.__fullscreenTest})")
-    assert first=={'requests':1,'exits':0,'active':True},first
-    assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='true'
-    assert await page.locator('#gameFullscreenBtn').get_attribute('aria-pressed')=='true'
-    assert 'portrait' in await page.evaluate("window.__portraitCalls")
-    await page.locator('#menuFullscreenBtn').click()
-    assert await page.evaluate('window.__fullscreenTest.exits')==1
-    assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='false'
-
-    # Let's Serve still enters fullscreen when it was off.
+    assert await page.locator('#menuFullscreenBtn').count()==0
+    assert await page.locator('#gameFullscreenBtn').count()==0
     await page.locator('#startBtn').click()
-    start=await page.evaluate("({...window.__fullscreenTest})")
-    assert start=={'requests':2,'exits':1,'active':True}, start
-    assert await page.locator('#gameFullscreenBtn').get_attribute('aria-pressed')=='true'
+    state=await page.evaluate("({...window.__fullscreenTest})")
+    assert state=={'requests':1,'active':True},state
+    assert 'portrait' in await page.evaluate('window.__portraitCalls')
     await page.locator('#restartBtn').click()
-    assert await page.evaluate("({...window.__fullscreenTest})")==start
-
-    # Returning to level selection MUST keep fullscreen active.
+    assert await page.evaluate("({...window.__fullscreenTest})")==state
     await page.locator('#levelsBtn').click()
-    menu=await page.evaluate("({...window.__fullscreenTest})")
-    assert menu==start, menu
+    assert await page.evaluate("({...window.__fullscreenTest})")==state
     assert await page.locator('#menuScreen').is_visible()
-    assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='true'
     await page.locator('#startBtn').click()
-    assert await page.evaluate("({...window.__fullscreenTest})")==start, 'No duplicate request while already fullscreen'
-
-    # On the game screen, the button sits directly to the right of Pause.
-    await page.locator('#gameFullscreenBtn').click()
-    off=await page.evaluate("({...window.__fullscreenTest})")
-    assert off=={'requests':2,'exits':2,'active':False},off
-    assert await page.locator('#gameFullscreenBtn').get_attribute('aria-pressed')=='false'
-    await page.locator('#gameFullscreenBtn').click()
-    on=await page.evaluate("({...window.__fullscreenTest})")
-    assert on=={'requests':3,'exits':2,'active':True},on
-    await page.locator('#levelsBtn').click()
-    assert await page.evaluate("({...window.__fullscreenTest})")==on
-    assert await page.locator('#menuFullscreenBtn').get_attribute('aria-pressed')=='true'
-    # Leaving fullscreen from the menu does not navigate away.
-    await page.locator('#menuFullscreenBtn').click()
-    assert await page.evaluate('window.__fullscreenTest.exits')==3
-    assert await page.locator('#menuScreen').is_visible()
-    assert not errors, errors
+    assert await page.evaluate("({...window.__fullscreenTest})")==state
+    assert not errors,errors
     await page.close()
 
 
@@ -421,6 +406,8 @@ async def check_landscape_fallback(browser, width, height):
     page.on('pageerror',lambda e: errors.append(str(e)))
     await page.set_content(HTML.read_text(encoding='utf-8'),wait_until='load')
     assert await page.locator('#startBtn').count()==1
+    assert await page.locator('#menuFullscreenBtn').count()==0
+    assert await page.locator('#gameFullscreenBtn').count()==0
     # Dispatch through the app without requiring a landscape-visible tap target.
     await page.evaluate("document.querySelector('#startBtn').click()")
     assert await page.locator('#gameScreen').is_visible(),(width,height)
@@ -430,7 +417,7 @@ async def check_landscape_fallback(browser, width, height):
 
 
 async def check_installed_controls(browser):
-    """The check-mark button is inert in installed apps; its width is shared."""
+    """Installed PWA requests portrait without visible fullscreen controls."""
     for width,height in [(320,568),(390,844),(844,390)]:
         page=await browser.new_page(viewport={'width':width,'height':height})
         errors=[]
@@ -452,10 +439,10 @@ async def check_installed_controls(browser):
               ? {matches:true} : realMatchMedia(query);
           document.dispatchEvent(new Event('fullscreenchange'));
         }""")
-        assert not await page.locator('#menuFullscreenBtn').is_visible(),(width,height)
+        assert await page.locator('#menuFullscreenBtn').count()==0,(width,height)
         assert 'portrait' in await page.evaluate("window.__portraitCalls"),(width,height)
         await page.locator('#startBtn').click()
-        assert not await page.locator('#gameFullscreenBtn').is_visible(),(width,height)
+        assert await page.locator('#gameFullscreenBtn').count()==0,(width,height)
         widths=await page.evaluate("""() => {
           const restart=document.getElementById('restartBtn').getBoundingClientRect();
           const pause=document.getElementById('pauseBtn').getBoundingClientRect();
@@ -467,7 +454,7 @@ async def check_installed_controls(browser):
         assert widths['restart']>38,(width,height,widths)
         assert widths['scroll']<=widths['client']+3,(width,height,widths)
         await page.locator('#levelsBtn').click()
-        assert not await page.locator('#menuFullscreenBtn').is_visible(),(width,height)
+        assert await page.locator('#menuFullscreenBtn').count()==0,(width,height)
         assert not errors,(width,height,errors)
         await page.close()
 
@@ -487,9 +474,9 @@ async def main():
             await check_landscape_fallback(browser,*dims)
             print('Landscape fallback passed:',dims)
         await check_installed_controls(browser)
-        print('Installed app passed: no check-mark controls, equal Restart/Pause widths')
+        print('Installed app passed: portrait lock, no fullscreen buttons, Restart/Pause width')
         await check_fullscreen_flow(browser)
-        print('Fullscreen flow passed: menu/game toggles, Serve, levels, restart')
+        print('Fullscreen flow passed: auto Serve fullscreen, portrait lock, level return')
         await check_city_invitation(browser)
         print('City invitations passed: 8/10, 9/10, restart, and acknowledgment')
         await check_city_mode_rendering(browser)
