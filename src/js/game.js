@@ -2210,6 +2210,7 @@
     if(!isOpen(selected))selected=selectedCity*10+1;
     const complete=LEVELS.filter(cfg=>isWon(cfg.level)).length;
     $('progressBadge').textContent=tr('city.progress',{completed:complete});
+    $('progressBadge').setAttribute('aria-label',tr('city.progressAria',{completed:complete}));
     const map=$('cityMap'),previousScroll=map.scrollLeft;map.innerHTML='';
     map.setAttribute('data-tour-caption',tr('intro.tourFooter'));
     $('exitDebugBtn').classList.toggle('hidden',!debugMode);
