@@ -372,7 +372,7 @@ async def assert_selection_fits(page, width, height):
         passportBottom:passport.getBoundingClientRect().bottom,
         gridBottom:grid.bottom,startBottom:button.bottom,
         mapBottom:map.bottom,
-        cityCount:map.querySelectorAll('.city-stop').length
+        cityCount:document.querySelectorAll('#cityMap .city-stop').length
       };
     }""")
     assert bounds['cityCount']==10,(width,height,bounds)
