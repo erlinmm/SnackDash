@@ -23,11 +23,12 @@ jobs:
           node --check src/js/i18n.js
           node --check src/js/locales.js
           node --check src/js/math.js
+          node --check src/js/reactions.js
           node --check src/js/game.js
           bash -n scripts/publish_release.sh
       - name: Run mathematical and build unit tests
         run: |
-          node --test tests/test_math.cjs tests/test_i18n.cjs
+          node --test tests/test_math.cjs tests/test_i18n.cjs tests/test_reactions.cjs
           python -m unittest discover -s tests -p 'test_*.py'
       - name: Build offline HTML and ZIP
         run: python scripts/build.py --zip

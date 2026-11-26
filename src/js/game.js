@@ -4,6 +4,7 @@
   'use strict';
   const {LEVELS,CITIES,cityUnlockedCount,cityCleared,seededRandom,randInt,pick,matches,transformRunnerNumber,resolveHit,NumberDirector,legalBib}=window.GameMath;
   const I18n=window.GameI18n;
+  const Reactions=window.GameReactions;
   const tr=(key,params)=>I18n.t(key,params);
   // The game data stays language-neutral; UI names are resolved by stable city IDs.
   const cityText=(city,field)=>I18n.lookup('city.'+city.id+'.'+field)||city[field];
@@ -405,20 +406,6 @@
   const FEVER_SPEED_MULTIPLIERS=[2,4,6,9,11];
   const INFERNO_SPEED_MULTIPLIERS=[3,6,8,10,12];
   const BIG_REWARD_JUMP=20, HEAVY_REWARD_IMPACT=30;
-  const MESSAGES=['YOU GOT THIS!','LOOK AT THOSE LEGS!','KEEP THE SNACKS COMING!'];
-  // Original city-themed comic bubbles and festival edging for Fever mode.
-  const FEVER_THEMES={
-    tokyo:{motifs:['🌸','✿','🌸'],cheers:['SAKURA POWER!','ARIGATŌ!','YATTA!']},
-    seoul:{motifs:['✦','💮','✦'],cheers:['DAEBAK!','GREAT CATCH!','THANK YOU!']},
-    london:{motifs:['👑','✦','☂️'],cheers:['BRILLIANT!','CHEERS!','JOLLY GOOD!']},
-    berlin:{motifs:['🐻','✦','★'],cheers:['DANKE!','WUNDERBAR!','SUPER!']},
-    amsterdam:{motifs:['🌷','✦','🌷'],cheers:['DANK JE!','HOORAY!','LOVELY!']},
-    paris:{motifs:['✦','🥐','✦'],cheers:['MERCI!','MAGNIFIQUE!','BRAVO!']},
-    boston:{motifs:['★','🏅','★'],cheers:['YOU DID IT!','THANK YOU!','GO BOSTON!']},
-    chicago:{motifs:['🌬️','✦','★'],cheers:['WINDY CITY!','NICE ONE!','THANK YOU!']},
-    newyork:{motifs:['🗽','★','✦'],cheers:['YOU ROCK!','BIG APPLE!','AMAZING!']},
-    sydney:{motifs:['🌊','✦','🐚'],cheers:['BEAUTY!','CHEERS, MATE!','LEGEND!']}
-  };
   const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
   const mix=(a,b,t)=>a+(b-a)*t;
   const easeOut=t=>1-Math.pow(1-t,3);
@@ -815,6 +802,8 @@
   class Marathon {
     constructor(config,seed){
       this.config=config;this.rng=seededRandom(seed);this.director=new NumberDirector(config,this.rng);
+      // Independent RNG: reaction diversity must not affect bibs or scoring.
+      this.reactionRng=seededRandom((seed^0x9e3779b9)>>>0);
       const {numbers,held}=this.director.createLineup();
       this.supplies=this.director.createSupplies(numbers,held);
       this.runners=[];this.departing=[];this.nextId=1;this.score=0;this.correct=0;this.wrong=0;
@@ -830,6 +819,7 @@
       this.learning=new LearningOpportunityDirector(this);
       this.assertReady();this.syncHUD();
       $('resultOverlay').classList.add('hidden');$('gameMessage').classList.remove('show');
+      $('runnerReactionText').textContent='';
       $('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label',tr('game.pause'));
       audio.nextBeat=0;audio.beatNumber=0;
     }
@@ -863,6 +853,7 @@
         laneJitter:jitter,laneIndex,targetLaneIndex:laneIndex,laneChangeCooldown:0,
         lateralVelocity:0,speed,baseSpeed:speed,sizeBoost:0,
         seed:this.rand(0,TAU),sway:this.rand(1.1,3.2),look:createLook(this.rng),
+        identity:Reactions.chooseProfile(this.reactionRng),reactionHistory:{},
         mood:'normal',moodTimer:0,successes:0,cheerTimer:0,feverCheerTimer:0,joyJumpTimer:0,joyJumpHeight:0,
         yBounce:this.rand(0,TAU)};
     }
@@ -1203,6 +1194,16 @@
       this.pendingSupply=false;
       this.refillPendingSlots();
     }
+    emitRunnerReaction(runner,event,x,y){
+      const history=runner.reactionHistory||(runner.reactionHistory={});
+      const reaction=Reactions.select(runner.identity,event,this.reactionRng,history[event]??-1);
+      if(!reaction)return; // Unsupported languages never impersonate other languages.
+      history[event]=reaction.index;
+      this.effects=this.effects.filter(f=>f.kind!=='athleteReaction'||f.runnerId!==runner.id);
+      this.popEffect({kind:'athleteReaction',runnerId:runner.id,reaction,x,y,life:1.12});
+      const gloss=Reactions.caption(reaction,I18n.locale(),tr);
+      $('runnerReactionText').textContent=gloss?reaction.text+' — '+gloss:reaction.text;
+    }
     tickThrow(dt){
       if(!this.throwing)return;
       const t=this.throwing;
@@ -1229,6 +1230,7 @@
           // replan every fast runner before the next movement frame.
           this.traffic.plan(true);
           runner.mood='happy';runner.moodTimer=0;runner.cheerTimer=this.fever?1.85:1.3;
+          this.emitRunnerReaction(runner,this.fever?'cheer':'thanks',fxX,fxY-71);
           this.cheerFlash=this.fever?.9:.4;
           if(this.fever){
             runner.feverCheerTimer=1.45;
@@ -1275,7 +1277,8 @@
           if(outcome.delta<0)this.popEffect({kind:'score',text:`−${Math.abs(outcome.delta)}`,x:fxX,y:fxY-42,color:'#db5344',life:1.05});
           else this.popEffect({kind:'combo',text:'0 PENALTY!',x:fxX,y:fxY-65,life:.42});
           this.popEffect({kind:'bonk',x:fxX,y:fxY-22,life:.7});
-          if(!outcome.ended)this.popEffect({kind:'bubble',text:pick(this.rng,['HEY!','OUCH!','RUDE!']),x:fxX,y:fxY-68,life:.48});
+          // An incorrect supply actually hit this athlete, so use a pain reaction.
+          this.emitRunnerReaction(runner,'pain',fxX,fxY-71);
           updateMatchHint(`${t.supply.number} and ${runner.number}: no match · ${outcome.delta} points · combo reset`);
         }
         // The runner might have left the screen during the throwing pose.
@@ -1988,10 +1991,28 @@
       for(let i=0;i<5;i++){
         const a=TAU*i/5;label(i%2?'★':'✴',f.x+Math.cos(a)*(13+p*25),f.y+Math.sin(a)*(12+p*25),20,'#f9de75');
       }
-    }else if(f.kind==='bubble'){
-      const bw=Math.max(77,f.text.length*9.4+17),x=clamp(f.x,55,W-55),y=Math.max(155,f.y-p*25);
-      roundedRect(x-bw/2,y-19,bw,32,12,f.fever?'#ffe2f6':'#fffce8',f.fever?'#a22d8f':'#4e6470',f.fever?3.5:2);
-      label(f.text,x,y-2,12,f.fever?'#912273':'#46616b');
+    }else if(f.kind==='athleteReaction'){
+      // Speech is always in the athlete's script; the short player-language
+      // gloss changes with UI locale without changing the saved reaction.
+      const speech=f.reaction,meaning=Reactions.caption(speech,I18n.locale(),tr);
+      ctx.font="900 19px system-ui,-apple-system,sans-serif";
+      const nativeWidth=ctx.measureText(speech.text).width;
+      ctx.font="700 15px system-ui,-apple-system,sans-serif";
+      const meaningWidth=meaning?ctx.measureText(meaning).width:0;
+      const bw=Math.min(W-24,Math.max(84,Math.ceil(Math.max(nativeWidth,meaningWidth)+26)));
+      const height=meaning?55:38,x=clamp(f.x,bw/2+9,W-bw/2-9);
+      const y=clamp(f.y-p*20,158,H-height-8);
+      roundedRect(x-bw/2,y-height/2,bw,height,12,
+        speech.event==='pain'?'#fff1df':'#fffbe7',
+        speech.event==='pain'?'#bf6b51':'#4b7877',2.5);
+      ctx.save();
+      ctx.direction=/^(ar|he|fa|ur)\b/.test(speech.nativeLanguage)?'rtl':'ltr';
+      label(speech.text,x,y+(meaning?-11:0),19,'#355569');
+      if(meaning){
+        ctx.direction=document.documentElement.dir==='rtl'?'rtl':'ltr';
+        label(meaning,x,y+14,15,'#86655a');
+      }
+      ctx.restore();
     }
     ctx.restore();
   }

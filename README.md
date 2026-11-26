@@ -97,3 +97,17 @@ There are no visible manual fullscreen controls. Starting a race still requests
 fullscreen when supported, and returning to the city selector keeps that mode.
 Installed PWA portrait orientation and browser fullscreen portrait requests
 are preserved. Browsers that cannot lock orientation remain playable.
+
+## Runner multilingual reactions
+
+Athletes now have individual nationality and native-language profiles that are
+independent of their appearance and of the host city. Correct supplies trigger
+native-language thanks or cheers; an incorrect **impact** triggers a native
+pain reaction (for example, Japanese `痛い！`, Korean `아야!`, Swahili
+`Aa!`). The Canvas bubble includes a small explanation in the selected player
+language when needed. No runner claims pain if the player taps empty road.
+
+The offline, dependency-free `src/js/reactions.js` module handles event packs,
+athlete profiles, safe unsupported-language behavior and variation. Reaction
+strings are kept outside scoring and scene physics. See
+`docs/localization.md` for extension and source review requirements.
