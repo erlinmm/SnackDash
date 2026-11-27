@@ -58,3 +58,8 @@ dialog{max-width:min(560px,95vw);max-height:90dvh;border:2px solid #d54b75;borde
 .scoreboard .tokyo-asset-skin,.combo-panel.tokyo-asset-skin{background-color:transparent!important;background-size:100% 100%!important;background-repeat:no-repeat!important;box-shadow:none!important;border-color:transparent!important}
 .staff-mark.has-portrait{width:47px;height:47px;border-radius:8px;background-size:cover;background-position:center;color:transparent;font-size:0;flex:none}
 @media(max-height:480px) and (orientation:landscape){.staff-mark.has-portrait{width:31px;height:31px}}
+
+/* r03 festival skins have ivory centers in all three modes. Retain high
+   contrast when the old gradient styling would have used white text. */
+.combo-panel.tokyo-asset-skin.fever,.combo-panel.tokyo-asset-skin.fever .fever-plaque{color:#9b2456!important;text-shadow:none!important}
+.combo-panel.tokyo-asset-skin.inferno,.combo-panel.tokyo-asset-skin.inferno .fever-plaque{color:#522277!important;text-shadow:none!important}
