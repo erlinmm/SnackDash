@@ -223,6 +223,7 @@ def run(browser):
       localStorage.setItem('snackDashPracticeV1','main-practice-sentinel');
     }""")
     page.reload()
+    page.wait_for_function("document.documentElement.dataset.tokyoAssets==='ready'")
     page.locator('#languageSelect').select_option('zh-Hans')
     assert page.locator('#tokyoFemale').inner_text().find('女补给员') >= 0
     assert page.evaluate("document.documentElement.lang") == 'zh-Hans'
