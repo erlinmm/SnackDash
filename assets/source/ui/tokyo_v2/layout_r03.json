@@ -110,12 +110,20 @@
   "runner": {
     "bibAsset": "assets/source/ui/tokyo_v2/normal/runner_bib_empty.svg",
     "bibSize": [
-      104,
-      70
+      94,
+      66
     ],
     "dynamic1to4Digits": true,
     "reactionAsset": "assets/source/ui/tokyo_v2/normal/runner_reaction_bubble_empty.svg",
-    "nativeLanguageFrom": "src/js/reactions.js in feature/i18n-foundation (read only)"
+    "nativeLanguageFrom": "src/js/reactions.js in feature/i18n-foundation (read only)",
+    "runnerLocalBibRect": [
+      82,
+      144,
+      94,
+      66
+    ],
+    "bibArtRevision": "Step05 r03, not integrated",
+    "readableAt640": "pending; mid/far 1000 at risk"
   },
   "reserve": {
     "slotAsset": "assets/source/approved-rebuild-r03/ui/backup_slot_empty.svg",

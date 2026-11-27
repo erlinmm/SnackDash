@@ -1,3 +1,5 @@
+> **r02 archived description.** All model files have been upgraded to Step 05 r03. Use [the new guide](README-r03.md), [new cast index](casting-index-r03.json) and [new bib spec](bib/bib-design-spec-r03.json).
+
 # Step 05 — Runner cast and Step 07 gait / reaction sketches
 
 22 independent, original editable SVG runner masters: 11 language/nationality profiles × 2 requested visual examples. The country metadata **does not** determine appearance in the running game. These are intentional visual casting samples with modern unbranded clothing.

@@ -1,6 +1,8 @@
 # SnackDash V2 — Tokyo Steps 09–10 art-review pack (r03)
 
-**Status: REVIEW.** Source geometry from owner-approved Tokyo Normal / Fever / revised Inferno reference images. Preview SVGs are editable *technical compositions*, not new owner-approved finished visuals or gameplay-integrated assets. Base branch `main2`; review head `feature/main2-steps05-08-assets-r01`. Original 1–4 approved visual references and derived r03 camera/station/supply sources are present on the same branch (copied unchanged from the dedicated earlier art branch).
+**Status: REVIEW.** Source geometry from owner-approved Tokyo Normal / Fever / revised Inferno reference images. Preview SVGs are editable *technical compositions*, not new owner-approved finished visuals or gameplay-integrated assets. Ancestor branch `feature/main2-landscape-assets-r02`; review head `feature/main2-steps05-08-assets-r01`. Original 1–4 approved visual references and derived r03 camera/station/supply sources are present on the same branch (copied unchanged from the dedicated earlier art branch).
+
+**Step 05 r03 runner update:** These six technical Step 10 images still embed the *earlier* r02 runner drawings. They have NOT been regenerated or approved with new r03 runner source. See [new cast and bib studies](../steps05-08/README.md); do not use older embedded numerals for new bib approval.
 
 ## Start here: full 1280×720 landscapes
 

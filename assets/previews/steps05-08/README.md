@@ -1,6 +1,8 @@
 # SnackDash V2 — Steps 05–08 (r02) visual review pack
 
-**Base:** main2. **Branch:** feature/main2-steps05-08-assets-r01. **Status:** review; not merged, approved, tested, or integrated into game code.
+**Base:** feature/main2-landscape-assets-r02. **Branch:** feature/main2-steps05-08-assets-r01. **Status:** review; not merged, approved, tested, or integrated into game code.
+
+> **Step 05 r03 refresh (2026-11-27):** The 22 runner SVGs and their 8-frame loops were rebuilt on this branch. This r02 page is an **older comparison**. Use the [new female cast](runner_cast_female_r03.svg), [new male cast](runner_cast_male_r03.svg), [near/mid/far number tests](bib_near_mid_far_8_48_168_1000_r03.svg) and [640×360 four-digit check](bib_640_device_scale_four_digits_r03.svg). Mid/far 4-digit numerals are not yet legible at phone size; runtime code remains unchanged. [Step 05 r03 QA](qa-report-r03.json).
 
 These are actual self-contained editable SVG vector art assets. Transparent source SVG components are separated from composited 1280×720 review sheets. They are not PNG sprite atlases and must not be described as gameplay-tested production exports.
 
