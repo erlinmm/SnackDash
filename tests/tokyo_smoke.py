@@ -22,7 +22,7 @@ def record(name, **details):
     print("PASS", name, details, flush=True)
 
 def wait_playing(page):
-    page.wait_for_function("window.SnackDashDebug.getGame() !== null")
+    page.wait_for_function("window.SnackDashDebug.getGame() !== null", timeout=5000)
     page.evaluate("""() => {
       const g=SnackDashDebug.getGame();
       for(let i=0;i<100&&g.phase==='countdown';i++)g.update(.05);
@@ -227,6 +227,29 @@ def run(browser):
     assert page.locator('#tokyoMale').get_attribute('aria-pressed')=='true'
     page.locator('#languageSelect').select_option('en-GB')
     page.locator('#tokyoFemale').click()
+    # Stress the startup geometry with deterministic seeds, including the
+    # eight-runner races which exposed the original rejection-sampling bug.
+    starts=page.evaluate("""() => {
+      const random=Math.random,now=Date.now,results=[];
+      try{
+        Date.now=()=>0;
+        for(let race=1;race<=10;race++){
+          for(let seed=1;seed<=12;seed++){
+            Math.random=()=>seed*10091/0xFFFFFFFF;
+            document.querySelector('[data-race="'+race+'"]').click();
+            document.getElementById('startBtn').click();
+            const g=SnackDashDebug.getGame();
+            if(!g||g.config.event!==race)throw Error('Startup failed: '+race+'/'+seed);
+            g.assertReady();
+            results.push([race,seed,g.runners.length]);
+            document.getElementById('levelsBtn').click();
+          }
+        }
+      }finally{Math.random=random;Date.now=now}
+      return results.length;
+    }""")
+    assert starts==120
+    record("deterministic starting geometry", launches=starts)
     start(page,1)
     assert_dimensions(page)
     swap_both(page)

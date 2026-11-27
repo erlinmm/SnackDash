@@ -62,6 +62,35 @@
     const bounce=includeCheer&&!reducedMotion()&&r.feverCheerTimer>0?.065*Math.sin((1-r.feverCheerTimer/1.45)*Math.PI):0;
     return r.look.height*base*(boost+bounce);
   };
+  // The portrait random rejection sampler can exhaust its search with eight
+  // larger landscape silhouettes. Use depth bands for dense starts and as
+  // a safety fallback for sparse ones; subsequent traffic remains canonical.
+  const tokyoOriginalPopulate=Marathon.prototype.populate;
+  Marathon.prototype.populate=function(numbers){
+    if(numbers.length<8){
+      try{tokyoOriginalPopulate.call(this,numbers);return}
+      catch(e){
+        if(e.message!=='Cannot safely place starting runners')throw e;
+        this.runners=[];this.nextId=1;
+      }
+    }
+    const shuffle=items=>{
+      const result=items.slice();
+      for(let i=result.length-1;i>0;i--){
+        const j=randInt(this.rng,0,i);
+        [result[i],result[j]]=[result[j],result[i]];
+      }
+      return result;
+    };
+    const cells=shuffle([218,416,634].flatMap(y=>[0,1,2].map(lane=>({y,lane}))));
+    for(const [i,number] of shuffle(numbers).entries()){
+      const c=cells[i],y=c.y+this.rand(-5,5);
+      const r=this.makeRunner(number,y,LANES[c.lane]);
+      if(this.runners.some(other=>runnerFootprintsClash(r,r.y,r.lane,other,other.y,other.lane,9)))
+        throw Error('Landscape starting grid clearance invariant failed');
+      this.runners.push(r);
+    }
+  };
   const tokyoJump=runnerVisualOffset;
   runnerVisualOffset=r=>reducedMotion()?0:tokyoJump(r);
   volunteerHandPoint=()=>game?tHand(game):{x:290,y:462};
