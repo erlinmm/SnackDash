@@ -64,7 +64,7 @@
   };
   const tokyoJump=runnerVisualOffset;
   runnerVisualOffset=r=>reducedMotion()?0:tokyoJump(r);
-  volunteerHandPoint=()=>game?tHand(game):{x:290,y:482};
+  volunteerHandPoint=()=>game?tHand(game):{x:290,y:462};
 
   // Hide the world map and restrict navigation, without changing LEVELS/CITIES.
   isOpen=level=>Number.isInteger(level)&&level>=1&&level<=10;
@@ -162,6 +162,7 @@
     $('comboPanel').dataset.mode=tMode(this);
     $('gameScreen').dataset.mode=tMode(this);
     $('gameScreen').dataset.qa=String(!!this.qaFixture);
+    for(const id of ['restartBtn','pauseBtn','tokyoSoundBtn'])$(id).disabled=!!this.qaFixture;
   };
   Marathon.prototype.draw=function(){tDraw(this)};
   const tokyoOriginalSound=updateSoundIcon;
@@ -170,7 +171,7 @@
     const b=$('tokyoSoundBtn');b.textContent=$('soundBtn').textContent;b.title=$('soundBtn').title;
     b.setAttribute('aria-label',$('soundBtn').getAttribute('aria-label'));
   };
-  $('tokyoSoundBtn').addEventListener('click',()=>$('soundBtn').click());
+  $('tokyoSoundBtn').addEventListener('click',()=>{if(!game?.qaFixture)$('soundBtn').click()});
 
   // Explicit fixture. No simulated scores or state transitions are applied
   // to normal play; QA is frozen, view-only, and cannot write race or practice

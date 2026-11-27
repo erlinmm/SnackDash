@@ -166,6 +166,15 @@ def screenshot_six(page):
     page.locator('[data-scene="dense"]').click()
     assert state(page)["count"] == 8
     assert page.evaluate("SnackDashDebug.getGame().runners.some(r=>r.number===1000)")
+    assert page.evaluate("""() => {
+        const g=SnackDashDebug.getGame(),old=g.supplies.held.number;
+        for(const n of [6,8,12,13]){
+            g.supplies.held.number=n;g.draw();
+            if(!g.runners.some(r=>GameMath.matches(n,r.number)))return false;
+        }
+        g.supplies.held.number=old;g.draw();
+        return [12,18,24,321,1000].every(n=>g.runners.some(r=>r.number===n));
+    }""")
     page.wait_for_timeout(100)
     page.locator('#gameScreen').screenshot(path=str(OUT/"dense_four_digit.png"))
     back(page)
@@ -245,6 +254,7 @@ def run(browser):
     assert page.evaluate("""() => ['snackDashSaveV2','snackDashSaveV1','snackDashLocaleV1','snackDashPracticeV1'].map(k=>localStorage.getItem(k))""")==["main-save-sentinel","main-legacy-sentinel","main-locale-sentinel","main-practice-sentinel"]
     record("all ten races started and won with isolated progress",races=sorted(scores))
     start(page,1)
+    page.evaluate(HITS_JS,{"count":1,"correct":False})
     finish(page,False)
     record("timer expiry and failure screen")
     ctx.close()

@@ -118,7 +118,7 @@
       for(let i=0;i<5;i++){let x=85+i*250,y=102+i%2*29;tOval(c,x,y,48,15,'#ffffff9d');tOval(c,x-17,y-9,25,18,'#ffffffb0');tOval(c,x+17,y-6,29,16,'#ffffffb0')}
     }
     for(let i=0;i<28;i++){const x=i*47-10,base=238+(i%3)*9;const h=76+(i*53)%105,w=39+i%3*12;tBuilding(c,x,base,w,h,pal,i,night)}
-    tTower(c,793,252,night);
+    tTower(c,568,246,night);
     c.fillStyle=pal.pavement;c.fillRect(0,249,W,H-249);
     // Camera-fixed roadway and exactly two dividing lines (three lanes).
     const top=145,leftY=y=>roadCenter(y)-roadHalfWidth(y),rightY=y=>roadCenter(y)+roadHalfWidth(y);
@@ -200,7 +200,7 @@
       tLine(ctx,ex,ey,hx,hy,ink,10);tLine(ctx,ex,ey,hx,hy,skin,7.5);tOval(ctx,hx,hy,5,6,skin,ink,1.2)
     }
     ctx.save();ctx.scale(look.width,1);
-    tRect(ctx,-22,-23,44,43,11,tGradient(ctx,-20,-22,22,22,shirt,'#3b55758f'),ink,1.8);
+    tRect(ctx,-22,-23,44,43,11,shirt,ink,1.8);
     tPoly(ctx,[[-22,-17],[-15,-21],[-12,18],[-21,18]],'#ffffff45');
     tPoly(ctx,[[22,-17],[15,-21],[12,18],[21,18]],'#20354a33');
     tRect(ctx,-29,-13,58,28,4,'#fffdf7','#34384e',1.7);
@@ -239,7 +239,7 @@
     tPoly(ctx,[[a.left,a.top],[a.right-13,a.top],[a.right,a.front],[a.left+2,a.front]],tGradient(ctx,0,490,0,518,'#ffe4b7','#d9a875'),'#73524d',3);
     tLine(ctx,a.left+12,a.top+8,a.right-22,a.top+8,'#c39063',2);
     tRect(ctx,a.left+1,a.front-4,a.right-a.left-1,13,3,'#ce956c','#79574c',2);
-    tText(ctx,'TOKYO  •  AID STATION',178,544,14,mode==='inferno'?'#ffe5ab':'#fff9ec');
+    tText(ctx,'東京  •  給水所',178,544,14,mode==='inferno'?'#ffe5ab':'#fff9ec');
     for(const [i,b] of TOKYO_SLOTS.entries()){
       const s=g.supplies.queue[i];tRect(ctx,b.x,b.y,b.w,b.h,12,'#fff5df','#6f5860',2.5);
       tRect(ctx,b.x+4,b.y+4,b.w-8,b.h-8,9,'#fffdf6','#e3cda6',1);
@@ -250,7 +250,13 @@
     }
   }
   function tStaffBase(g){return mix(658,TOKYO_TABLE.contact,clamp(g.staffElevation||0,0,1))}
-  function tHand(g){return {x:290,y:tStaffBase(g)-176}}
+  function tStaffReach(g){
+    if(reducedMotion())return 0;
+    if(g.throwing&&!g.throwing.hit)return Math.sin(Math.min(1,g.throwing.elapsed/.41)*Math.PI)*16;
+    if(g.swapCue)return Math.sin(clamp(g.swapCue.age/g.swapCue.duration,0,1)*Math.PI)*7;
+    return 0
+  }
+  function tHand(g){return {x:290+tStaffReach(g),y:tStaffBase(g)-196}}
   function tCostumePattern(c,mode,x,y,r){
     if(mode==='normal'){tRect(c,x-r*.6,y-r*.6,r*1.2,r*1.2,1,'#fff0df')}
     else if(mode==='fever')tFlower(c,x,y,r,'#fff1f2','#e7a35f');
@@ -260,7 +266,7 @@
     const mode=tMode(g),female=tokyoVolunteer==='female',base=tStaffBase(g),skin='#efb98f',ink='#563a44';
     const cloth=mode==='normal'?'#245f9c':mode==='fever'?'#e16795':female?'#bd345c':'#46337d',shadow=mode==='normal'?'#19446f':mode==='fever'?'#a94378':female?'#782c4d':'#2e285b',trim=mode==='inferno'?'#f4cd70':'#fff2dd';
     const elevation=clamp(g.staffElevation||0,0,1),t=g.sceneTime;
-    const reach=g.throwing&&!g.throwing.hit?Math.sin(Math.min(1,g.throwing.elapsed/.41)*Math.PI)*16:0;
+    const reach=tStaffReach(g);
     ctx.save();ctx.translate(149,base);
     if(mode==='inferno'||elevation>.5)tOval(ctx,0,-1,63,6,'#593b4c40');
     // Feet contact the existing tabletop at y=500. Female long garment
@@ -288,8 +294,8 @@
     tPoly(ctx,[[38,-182],[73,-191],[107,-153],[82,-124],[43,-148]],cloth,ink,2.7);
     tCostumePattern(ctx,mode,66,-158,mode==='inferno'?16:10);
     tLine(ctx,85,-153,105,-161,trim,7);
-    tLine(ctx,100,-159,130+reach,-175,ink,25);tLine(ctx,100,-159,130+reach,-175,skin,20);
-    tOval(ctx,141+reach,-176,14,13,skin,ink,2);
+    tLine(ctx,100,-159,130+reach,-195,ink,25);tLine(ctx,100,-159,130+reach,-195,skin,20);
+    tOval(ctx,141+reach,-196,14,13,skin,ink,2);
     // Head with recognizable identity across costumes.
     if(female){tOval(ctx,-22,-270,31,27,'#46323d',ink,3);tOval(ctx,-46,-232,16,26,'#46323d');tOval(ctx,12,-244,29,29,'#46323d')}
     else{tPoly(ctx,[[-43,-245],[-48,-271],[-31,-266],[-21,-289],[-9,-277],[7,-289],[18,-272],[38,-276],[43,-246]],'#49323b',ink,2.5)}
@@ -306,7 +312,9 @@
       tLine(ctx,-41,-254,39,-254,mode==='inferno'?'#f4cb72':'#fff6de',9);tOval(ctx,5,-254,5,4,mode==='fever'?'#ec7bad':'#b94b64');
       tPoly(ctx,[[-40,-253],[-69,-263],[-59,-246],[-45,-248]],trim,ink,1.2);
     }
+    const blink=!reducedMotion()&&!g.qaFixture&&t%4.9>4.78;
     for(const [x,y] of [[-8,-240],[24,-239]]){
+      if(blink){tLine(ctx,x-7,y,x+7,y,'#49323b',2.7);continue}
       tOval(ctx,x,y,8.5,10.5,'#fffaf0',ink,1.5);tOval(ctx,x+2,y+1,5.5,7,'#4c333c');tOval(ctx,x+4,y-2,2.4,2.7,'#fff');
       tLine(ctx,x-7,y-14,x+7,y-15,'#54353d',2.5)
     }
