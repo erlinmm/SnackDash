@@ -1,5 +1,7 @@
 # SnackDash r02 — Tokyo landscape art / steps 01–04
 
+> **2026-11-27 approved references supersede exploratory r02 mockups:** See [the Tokyo reference contract](../../references/tokyo/approved/README.md) and [owner-approved gallery](https://chatgpt.com/space/page_47596f3a8a2881918ad2bd9b7bed05f5). The three source images are preserved off-repository pending binary transfer; the vector A/B drawings below remain exploratory only.
+
 **Review branch:** `feature/main2-landscape-assets-r02`  
 **Source:** `main2@c102ab0329d696199161ba0747633b721e82c4e9`  
 **Current stage:** **review**, *not* approved/runtime-integrated.  

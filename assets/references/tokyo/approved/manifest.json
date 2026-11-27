@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "id": "snackdash-tokyo-approved-r02",
+  "type": "owner-approved-visual-reference-set",
+  "status": "approved_visual_direction",
+  "approvalDate": "2026-11-27",
+  "approvedBy": "project owner in ChatGPT conversation",
+  "source": "Three original user-uploaded screen references (not re-generated)",
+  "targetRepo": "erlinmm/SnackDash",
+  "targetBranch": "feature/main2-landscape-assets-r02",
+  "sourceGalleryUrl": "https://chatgpt.com/space/page_47596f3a8a2881918ad2bd9b7bed05f5",
+  "binaryAssetsInGitHub": false,
+  "binaryStatus": "PENDING: direct binary transfer of the unchanged WEBP originals; no image bytes are committed by this manifest",
+  "images": [
+    {
+      "mode": "normal",
+      "sourceUpload": "1000084020.png",
+      "expectedRepoPath": "assets/references/tokyo/approved/tokyo_normal_approved_r02.webp",
+      "trueFormat": "webp",
+      "width": 1536,
+      "height": 865,
+      "bytes": 276620,
+      "sha256": "ce4fb734618ad0ea2676602e3ad41afdb02c184ed6a0fb46fae31f6d4788e3cb",
+      "normalBehavior": "Staff behind the physical aid table"
+    },
+    {
+      "mode": "fever",
+      "sourceUpload": "1000084019.png",
+      "expectedRepoPath": "assets/references/tokyo/approved/tokyo_fever_approved_r02.webp",
+      "trueFormat": "webp",
+      "width": 1536,
+      "height": 864,
+      "bytes": 285424,
+      "sha256": "162a4aaac4f918595f3e63cffa601fac95b2a1f1545b144fc3dc90a61c0c8551",
+      "normalBehavior": "Staff behind the same fixed aid table"
+    },
+    {
+      "mode": "inferno",
+      "sourceUpload": "1000084014.png",
+      "expectedRepoPath": "assets/references/tokyo/approved/tokyo_inferno_approved_r02.webp",
+      "trueFormat": "webp",
+      "width": 1536,
+      "height": 864,
+      "bytes": 329434,
+      "sha256": "f3c3980fa1de3b9f951d90a69c476b5104e9c2be0c194d65d8c0641f2442d86d",
+      "normalBehavior": "Staff on top of the same fixed tabletop; no clipping"
+    }
+  ],
+  "appliesTo": [
+    "camera elevation",
+    "landscape framing and left-bend road geometry",
+    "Tokyo skyline and riverside",
+    "runner and prop size relationships",
+    "chibi runner style",
+    "numeric bib visibility",
+    "staff positioning and occlusion",
+    "real supply interaction",
+    "mode-specific lighting and costumes"
+  ],
+  "reviewNotes": [
+    "This review supersedes provisional camera A/B and vector style mockups where they conflict with the user-approved references.",
+    "Approved full-frame images are visual design references, not independent layers or gameplay sprites.",
+    "Preserve exact bytes and colors when committing source images; put any derived art into other files.",
+    "The visible reference skyline/tower is locked as depicted in the supplied images, regardless of earlier proposals."
+  ],
+  "runtimeStatus": "not_integrated"
+}
