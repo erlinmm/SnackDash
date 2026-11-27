@@ -10,7 +10,7 @@
   "targetBranch": "feature/main2-landscape-assets-r02",
   "sourceGalleryUrl": "https://chatgpt.com/space/page_47596f3a8a2881918ad2bd9b7bed05f5",
   "binaryAssetsInGitHub": true,
-  "binaryStatus": "COMMITTED: the three original WEBP binary files are present in the GitHub branch at expectedRepoPath; archive checksums recorded per file",
+  "binaryStatus": "COMMITTED: three approved WEBP files present in GitHub, including 2026-11-27 Inferno replacement; originals maintained byte-for-byte",
   "images": [
     {
       "mode": "normal",
@@ -40,16 +40,26 @@
     },
     {
       "mode": "inferno",
-      "sourceUpload": "1000084014.png",
+      "sourceUpload": "1000084030.png",
       "expectedRepoPath": "assets/references/tokyo/approved/tokyo_inferno_approved_r02.webp",
       "trueFormat": "webp",
       "width": 1536,
       "height": 864,
-      "bytes": 329434,
-      "sha256": "f3c3980fa1de3b9f951d90a69c476b5104e9c2be0c194d65d8c0641f2442d86d",
+      "bytes": 317894,
+      "sha256": "024d87c27f60545af4518e307432b5e9585b33e3265fd0a4c2e6d28a77bd3bc1",
       "normalBehavior": "Staff on top of the same fixed tabletop; no clipping",
       "repositoryFileStatus": "committed",
-      "gitBlobSha": "2e593521a25e652f71f562d1266132293289c28b"
+      "gitBlobSha": "3a8334afb97d3b977eedb8b75960ac75963c0c83",
+      "approvalRevision": "2026-11-27-inferno-replacement",
+      "replaces": {
+        "date": "2026-11-27",
+        "reason": "Replaced by newer image explicitly approved by project owner",
+        "sourceUpload": "1000084014.png",
+        "bytes": 329434,
+        "sha256": "f3c3980fa1de3b9f951d90a69c476b5104e9c2be0c194d65d8c0641f2442d86d",
+        "gitBlobSha": "2e593521a25e652f71f562d1266132293289c28b",
+        "historyCommit": "3efd1b3ab6ebb73c438c7e9c4909d81743fcbbf3"
+      }
     }
   ],
   "appliesTo": [

@@ -16,7 +16,7 @@ The owner supplied **three complete reference images** and explicitly approved t
 ### Fever
 ![Tokyo Fever — owner approved](./tokyo_fever_approved_r02.webp)
 
-### Inferno
+### Inferno (revised 2026-11-27)
 ![Tokyo Inferno — owner approved](./tokyo_inferno_approved_r02.webp)
 
 ## Approved image inventory
@@ -25,7 +25,9 @@ The owner supplied **three complete reference images** and explicitly approved t
 |---|---|---|---|
 | Normal | `tokyo_normal_approved_r02.webp` | 1536 × 865 | `ce4fb734618ad0ea2676602e3ad41afdb02c184ed6a0fb46fae31f6d4788e3cb` |
 | Fever | `tokyo_fever_approved_r02.webp` | 1536 × 864 | `162a4aaac4f918595f3e63cffa601fac95b2a1f1545b144fc3dc90a61c0c8551` |
-| Inferno | `tokyo_inferno_approved_r02.webp` | 1536 × 864 | `f3c3980fa1de3b9f951d90a69c476b5104e9c2be0c194d65d8c0641f2442d86d` |
+| Inferno | `tokyo_inferno_approved_r02.webp` | 1536 × 864 | `024d87c27f60545af4518e307432b5e9585b33e3265fd0a4c2e6d28a77bd3bc1` |
+
+> **Inferno replacement (2026-11-27):** The owner-provided `1000084030.png` is now the approved Inferno source. The preceding `1000084014.png` version has been superseded, remains available in Git history (commit `3efd1b3`), and must not be treated as the current reference. Normal and Fever are unchanged.
 
 Original user filenames end in `.png` but the binary headers are **WEBP**. Preserve bytes and SHA-256 when transferring to GitHub; use the `.webp` extension. See [manifest](./manifest.json).
 
