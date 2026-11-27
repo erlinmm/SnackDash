@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="390" viewBox="0 0 320 390" role="img" aria-label="Tokyo male normal windup"><title>SnackDash Tokyo male normal windup</title><g id="volunteer_male_normal_windup" transform="translate(-5 0)">
+ <ellipse cx="143" cy="365" rx="69" ry="7" fill="#2d3352" opacity=".09"/>
+ <g id="legs"><path d="M116 211 Q115 269 113 340" stroke="#2b324f" stroke-width="30" stroke-linecap="round"/><path d="M165 215 Q170 269 174 344" stroke="#2b324f" stroke-width="29" stroke-linecap="round"/><path d="M97 343 Q116 326 137 343 L140 353 L95 353Z" fill="#ecf3f9" stroke="#263650" stroke-width="3"/><path d="M155 346 Q174 329 195 346 L198 356 L154 356Z" fill="#ecf3f9" stroke="#263650" stroke-width="3"/></g>
+ <g id="arm_back"><path d="M104 135 Q67 146 85 203 L115 220" stroke="#2e477c" stroke-width="25" stroke-linecap="round" fill="none"/><ellipse cx="115" cy="220" rx="11" ry="12" fill="#dcb28e" stroke="#323549" stroke-width="2"/></g>
+ <g id="torso"><path d="M104 122 Q125 119 141 125 Q155 119 176 127 L193 218 Q144 241 94 214Z" fill="#2e477c" stroke="#29324c" stroke-width="4"/>
+<path d="M106 125 L139 179 L172 126 Q159 120 145 124 L140 141 L133 125Z" fill="#f1eadb" opacity=".9"/>
+<path d="M126 127 L141 146 L148 128" fill="none" stroke="#29324c" stroke-width="3"/>
+<path d="M103 139 L123 184 L107 213" stroke="#fff" stroke-width="7" opacity=".20" fill="none"/>
+<path d="M157 159 L184 214" stroke="#273248" stroke-width="13" opacity=".18" fill="none"/>
+<path d="M90 210 Q136 223 192 210 L188 232 Q139 246 92 231Z" fill="#bb9a65" stroke="#303248" stroke-width="4"/>
+<path d="M135 216 Q144 210 152 220 Q145 234 135 216Z" fill="#f1eadb"/>
+<g fill="none" stroke="#f1eadb" stroke-width="3" opacity=".85"><path d="M90 198 Q98 187 106 198 T122 198 M92 207 Q100 196 108 207 T124 207"/><path d="M165 198 Q172 187 180 198 T196 198 M166 208 Q174 197 182 208 T197 208"/></g></g><g id="sleeves"><path d="M104 129 Q89 123 76 143 L70 195 Q88 214 105 198 L124 156Z" fill="#2e477c" stroke="#29324c" stroke-width="4"/>
+<path d="M77 188 Q88 201 103 189" stroke="#f1eadb" stroke-width="9" fill="none"/>
+<path d="M172 131 Q197 122 214 147 L207 141 Q185 190 172 165Z" fill="#2e477c" stroke="#29324c" stroke-width="4"/>
+<path d="M194 132 Q207 144 220 127" fill="none" stroke="#f1eadb" stroke-width="9"/>
+</g><g id="arm_front"><path d="M207 116 Q203 108 199 94" stroke="#dcb28e" stroke-width="18" stroke-linecap="round" fill="none"/><ellipse cx="199" cy="94" rx="12" ry="11" fill="#dcb28e" stroke="#31354b" stroke-width="2"/></g><g id="held_supply" transform="translate(207 76) rotate(-22)"><path d="M-7 -24 L7 -24 L9 -17 L12 -11 L12 22 Q0 30 -12 22 L-12 -11 L-9 -17Z" fill="#b9e8ff" fill-opacity=".88" stroke="#2c5175" stroke-width="3"/><rect x="-7" y="-31" width="14" height="8" rx="2" fill="#3d7ec2" stroke="#27476c" stroke-width="2"/><path d="M-8 -5 Q-2 -9 4 -6 L4 15" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".67"/><path d="M-10 2 H10" stroke="#86c5ea" stroke-width="4" opacity=".55"/></g>
+ <g id="face"><path d="M104 59 Q106 35 136 34 Q162 35 169 61 L168 94 Q155 120 137 123 Q113 118 105 96Z" fill="#dcb28e" stroke="#30334b" stroke-width="3.5"/>
+ <path d="M112 79 Q122 71 131 80 M144 80 Q154 72 163 79" fill="none" stroke="#403644" stroke-width="3" stroke-linecap="round"/>
+ <ellipse cx="123" cy="84" rx="5.1" ry="6.5" fill="#fff"/><ellipse cx="153" cy="84" rx="5.1" ry="6.5" fill="#fff"/>
+ <circle cx="124" cy="84" r="4.1" fill="#34313b"/><circle cx="153" cy="84" r="4.1" fill="#34313b"/><circle cx="125" cy="82.5" r="1.5" fill="white"/><circle cx="154" cy="82.5" r="1.5" fill="white"/>
+ <path d="M138 89 L134 96 L142 97" fill="none" stroke="#b98970" stroke-width="1.8"/>
+ <path d="M124 103 Q138 115 154 102 Q143 117 132 114Z" fill="#703d47"/><path d="M129 105 Q140 110 149 104" stroke="#f9eee9" stroke-width="4" fill="none"/><circle cx="114" cy="100" r="9" fill="#ef9297" opacity=".19"/></g>
+ <g id="hair"><path d="M97 68 Q88 32 109 31 L111 21 L124 29 Q137 14 144 28 L158 22 L156 38 Q170 37 169 67 Q146 52 120 57 L106 74Z" fill="#292936" stroke="#293146" stroke-width="3"/><path d="M94 54 Q125 58 168 49" stroke="#f7f5ed" stroke-width="11" fill="none"/><path d="M104 57 L86 85 L79 73" fill="#f7f5ed" stroke="#293146" stroke-width="2"/></g>
+ <g id="hand_foreground"><path d="M195 90 Q206 82 210 93" fill="none" stroke="#dcb28e" stroke-width="5" stroke-linecap="round"/></g>
+ </g></svg>

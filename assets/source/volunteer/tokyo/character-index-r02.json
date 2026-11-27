@@ -1,0 +1,65 @@
+{
+  "edition": "r02",
+  "modelCount": 6,
+  "assets": [
+    {
+      "assetId": "volunteer_tokyo_female_normal",
+      "mode": "normal",
+      "sex": "female",
+      "source": "assets/source/volunteer/tokyo/female/normal/outfit_master.svg",
+      "frames": 8,
+      "status": "review",
+      "rights": "Original SVG constructed for SnackDash. Review only."
+    },
+    {
+      "assetId": "volunteer_tokyo_female_fever",
+      "mode": "fever",
+      "sex": "female",
+      "source": "assets/source/volunteer/tokyo/female/fever/outfit_master.svg",
+      "frames": 8,
+      "status": "review",
+      "rights": "Original SVG constructed for SnackDash. Review only."
+    },
+    {
+      "assetId": "volunteer_tokyo_female_inferno",
+      "mode": "inferno",
+      "sex": "female",
+      "source": "assets/source/volunteer/tokyo/female/inferno/outfit_master.svg",
+      "frames": 9,
+      "status": "review",
+      "rights": "Original SVG constructed for SnackDash. Review only."
+    },
+    {
+      "assetId": "volunteer_tokyo_male_normal",
+      "mode": "normal",
+      "sex": "male",
+      "source": "assets/source/volunteer/tokyo/male/normal/outfit_master.svg",
+      "frames": 8,
+      "status": "review",
+      "rights": "Original SVG constructed for SnackDash. Review only."
+    },
+    {
+      "assetId": "volunteer_tokyo_male_fever",
+      "mode": "fever",
+      "sex": "male",
+      "source": "assets/source/volunteer/tokyo/male/fever/outfit_master.svg",
+      "frames": 8,
+      "status": "review",
+      "rights": "Original SVG constructed for SnackDash. Review only."
+    },
+    {
+      "assetId": "volunteer_tokyo_male_inferno",
+      "mode": "inferno",
+      "sex": "male",
+      "source": "assets/source/volunteer/tokyo/male/inferno/outfit_master.svg",
+      "frames": 9,
+      "status": "review",
+      "rights": "Original SVG constructed for SnackDash. Review only."
+    }
+  ],
+  "baselineFoot": [
+    145,
+    355
+  ],
+  "notes": "Each gender reuses its face and hair across all modes. Both behind table in Normal/Fever; above unchanged table in Inferno. Long kimono in Inferno hides legs."
+}
