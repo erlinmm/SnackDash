@@ -1,0 +1,82 @@
+{
+  "assetId": "fx_tokyo_fever_receive_normal",
+  "revision": "r03",
+  "city": "tokyo",
+  "mode": "fever",
+  "event": "receive",
+  "motion": "normal",
+  "canvas": [
+    192,
+    160
+  ],
+  "status": "review",
+  "reviewOnly": true,
+  "frames": [
+    {
+      "id": "frame_0",
+      "src": "frame_00.svg",
+      "durationMs": 60,
+      "peak": false,
+      "anchor": "receiver_hand",
+      "localSize": [
+        192,
+        160
+      ]
+    },
+    {
+      "id": "frame_1",
+      "src": "frame_01.svg",
+      "durationMs": 90,
+      "peak": false,
+      "anchor": "receiver_hand",
+      "localSize": [
+        192,
+        160
+      ]
+    },
+    {
+      "id": "frame_2",
+      "src": "frame_02.svg",
+      "durationMs": 110,
+      "peak": true,
+      "anchor": "receiver_hand",
+      "localSize": [
+        192,
+        160
+      ]
+    },
+    {
+      "id": "frame_3",
+      "src": "frame_03.svg",
+      "durationMs": 100,
+      "peak": false,
+      "anchor": "receiver_hand",
+      "localSize": [
+        192,
+        160
+      ]
+    },
+    {
+      "id": "frame_4",
+      "src": "frame_04.svg",
+      "durationMs": 65,
+      "peak": false,
+      "anchor": "receiver_hand",
+      "localSize": [
+        192,
+        160
+      ]
+    }
+  ],
+  "loop": false,
+  "triggerSource": "gameplay event / mode state only",
+  "eventSync": "DO NOT change gameplay score, input or throw timing",
+  "readingMask": [
+    "runner_bib",
+    "hand_number",
+    "reserve_0",
+    "reserve_1",
+    "hud_text"
+  ],
+  "rights": "Original procedural vector effect. No licensed icons."
+}

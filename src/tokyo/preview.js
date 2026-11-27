@@ -53,10 +53,10 @@
 
   // Chest/bib is the canonical gameplay anchor. Project lane centers using
   // the runner's estimated shoe contact depth on the illustrated road.
-  roadCenter=y=>805-20*tFootDepth(y);
-  roadHalfWidth=y=>32+468*tFootDepth(y);
+  roadCenter=y=>{const {left,right}=tRoadAt(y);return (left+right)/2};
+  roadHalfWidth=y=>{const {left,right}=tRoadAt(y);return (right-left)/2};
   runnerScale=(r,y=r.y,includeCheer=true)=>{
-    const boost=1+Math.min(.12,(r.sizeBoost??r.successes)*.035);
+    const boost=1+Math.min(.08,(r.sizeBoost??r.successes)*.025);
     return tBodyHeight(y)/128*clamp(r.look.height,.96,1.04)*boost;
   };
   runnerFootprint=(r,y=r.y,lane=r.lane)=>{
@@ -68,14 +68,14 @@
     const x=this.runnerX(r),y=r.y+runnerVisualOffset(r);
     // Retire when the bib is no longer readable, not after a cropped head
     // remains below the frame. The current item always has a visible target.
-    return y>=110&&y<=H-16&&x>=342&&x<=W-18;
+    return y>=205&&y<=H-20&&x>=330&&x<=W-22;
   };
   // Three depth bands keep the large foreground actor and the far bibs
   // visible simultaneously. Initial lanes are randomized, not nationality.
   Marathon.prototype.populate=function(numbers){
     const shuffle=a=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=randInt(this.rng,0,i);[b[i],b[j]]=[b[j],b[i]]}return b};
     const near=shuffle([0,1,2]).slice(0,2),mid=shuffle([0,1,2]),far=shuffle([0,1,2]);
-    const cells=[...near.map((lane,i)=>({lane,y:516+i*26})),...mid.map((lane,i)=>({lane,y:375+i*5})),...far.map((lane,i)=>({lane,y:292+i*3}))];
+    const cells=[...near.map((lane,i)=>({lane,y:520+i*20})),...mid.map((lane,i)=>({lane,y:390+i*6})),...far.map((lane,i)=>({lane,y:260+i*5}))];
     if(numbers.length===6)cells.splice(4,1);
     for(const [i,n] of shuffle(numbers).entries()){
       const c=cells[i],r=this.makeRunner(n,c.y+this.rand(-3,3),LANES[c.lane]);this.runners.push(r);
@@ -179,9 +179,48 @@
     }
   };
   const tokyoOriginalHUD=Marathon.prototype.syncHUD;
+  let tokyoHUDSkin=null;
+  function applyTokyoHUD(mode){
+    if(tokyoHUDSkin===mode)return;
+    tokyoHUDSkin=mode;
+    for(const [selector,name] of [
+      ['.level-pill','race_panel_empty'],['#timePill','time_panel_empty'],['.total-pill','score_panel_empty'],
+      ['#comboPanel','festival_banner_2line_empty'],['#pauseBtn','pause_button_empty'],
+      ['#restartBtn','pause_button_empty'],['#tokyoSoundBtn','pause_button_empty'],
+      ['#levelsBtn','progress_panel_empty']
+    ]){
+      const key=artManifest.ui[mode+'/'+name],node=document.querySelector(selector);
+      if(node&&key){node.style.backgroundImage='url("'+TOKYO_ART.images[key]+'")';node.classList.add('tokyo-asset-skin')}
+    }
+  }
+  // The review WAV cues are attached to existing events; they never decide
+  // whether a throw succeeds or advance a combo. Keep the canonical synthesized
+  // cue as a fallback if the browser cannot decode or play the new sample.
+  const tokyoAudioCache=new Map();
+  function useTokyoCue(method,key){
+    const original=audio[method].bind(audio);
+    audio[method]=function(...args){
+      if(!this.enabled)return;
+      const ac=this.audio,uri=TOKYO_ART.sounds[key];
+      if(!ac||!uri){original(...args);return}
+      try{
+        if(!tokyoAudioCache.has(key)){
+          const raw=Uint8Array.from(atob(uri.split(',')[1]),c=>c.charCodeAt(0));
+          tokyoAudioCache.set(key,ac.decodeAudioData(raw.buffer));
+        }
+        tokyoAudioCache.get(key).then(buffer=>{
+          if(!this.enabled)return;
+          const player=ac.createBufferSource(),gain=ac.createGain();
+          player.buffer=buffer;gain.gain.value=.44;player.connect(gain);gain.connect(ac.destination);player.start();
+        }).catch(()=>{tokyoAudioCache.delete(key);original(...args)});
+      }catch(_){original(...args)}
+    };
+  }
+  for(const [method,key] of [['swapConfirm','supply_swap'],['correct','supply_catch'],['wrong','miss_soft'],['feverStart','fever_enter'],['infernoStart','inferno_enter']])useTokyoCue(method,key);
   Marathon.prototype.syncHUD=function(){
     tokyoOriginalHUD.call(this);
     $('feverPlaque').textContent=tr('tokyo.'+tMode(this));
+    applyTokyoHUD(tMode(this));
     $('comboPanel').dataset.mode=tMode(this);
     $('gameScreen').dataset.mode=tMode(this);
     $('gameScreen').dataset.qa=String(!!this.qaFixture);
@@ -209,12 +248,12 @@
     game.combo=fixtureMode==='inferno'?10:fixtureMode==='fever'?5:0;
     game.fever=fixtureMode!=='normal';game.inferno=fixtureMode==='inferno';
     game.staffElevation=game.inferno?1:0;
-    const locations=dense?[[290,0],[295,1],[300,2],[377,0],[380,1],[383,2],[519,0],[543,2]]
-      :[[291,0],[300,2],[312,1],[420,0],[433,1],[535,2]];
+    const locations=dense?[[260,0],[265,1],[270,2],[390,0],[396,1],[402,2],[520,0],[540,2]]
+      :[[260,0],[270,2],[279,1],[390,0],[417,1],[535,2]];
     const bibs=dense?[12,18,24,321,1000,72,144,156]:[12,18,24,36,72,63];
     game.runners.forEach((r,i)=>{
       const [y,lane]=locations[i];r.y=y;r.laneIndex=lane;r.targetLaneIndex=lane;
-      r.lane=LANES[lane];r.artIndex=dense?[0,4,2,3,1,5,2,1][i]:[0,2,5,3,4,1][i];r.number=bibs[i];r.sway=0;r.speed=r.baseSpeed;
+      r.lane=LANES[lane];r.artIndex=dense?[0,6,13,9,16,19,3,21][i]:[0,8,13,4,16,21][i];r.number=bibs[i];r.sway=0;r.speed=r.baseSpeed;
     });
     // These numbers are runtime fixtures, not baked art. All displayed
     // fixture supplies have matching runners; initial-pool restrictions are
@@ -231,6 +270,6 @@
     geometry:()=>({width:W,height:H,lanes:LANES.length,table:{...TOKYO_TABLE},slots:TOKYO_SLOTS.map(s=>({...s})),
       staff:tokyoVolunteer,hand:game?tHand(game):null,staffFoot:game?tStaffBase(game):null,
       scaleAt:game?[runnerScale(game.runners[0],200),runnerScale(game.runners[0],400),runnerScale(game.runners[0],640)]:[],
-      mode:game?tMode(game):null,fixture:!!game?.qaFixture,assetsReady:tokyoAssetsReady,artVersion:artManifest.version}),
+      mode:game?tMode(game):null,fixture:!!game?.qaFixture,assetsReady:tokyoAssetsReady,artVersion:artManifest.version,sourceCommit:artManifest.sourceCommit,runnerCast:artManifest.runners.length,runFrames:artManifest.runners.reduce((n,r)=>n+r.frames.length,0),staffFrames:Object.values(artManifest.staff).reduce((n,s)=>n+Object.keys(s.frames).length,0),crowdGroups:Object.keys(artManifest.crowd).length}),
   });
 

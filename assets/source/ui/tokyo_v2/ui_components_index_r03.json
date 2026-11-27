@@ -1,0 +1,407 @@
+{
+  "revision": "r03",
+  "date": "2026-11-27",
+  "status": "review",
+  "components": [
+    {
+      "id": "ui_tokyo_normal_race_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/race_panel_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        208,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_progress_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/progress_panel_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        207,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_time_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/time_panel_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        140,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_score_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/score_panel_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        196,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_festival_banner_2line_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/festival_banner_2line_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        302,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. Two separate rows: native event name and player-language description.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_pause_button_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/pause_button_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        67,
+        70
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_fullscreen_button_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/fullscreen_button_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        67,
+        70
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_fever_race_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/fever/race_panel_empty.svg",
+      "mode": "fever",
+      "sourceSize": [
+        208,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_fever_progress_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/fever/progress_panel_empty.svg",
+      "mode": "fever",
+      "sourceSize": [
+        207,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_fever_time_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/fever/time_panel_empty.svg",
+      "mode": "fever",
+      "sourceSize": [
+        140,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_fever_score_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/fever/score_panel_empty.svg",
+      "mode": "fever",
+      "sourceSize": [
+        196,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_fever_festival_banner_2line_empty",
+      "path": "assets/source/ui/tokyo_v2/fever/festival_banner_2line_empty.svg",
+      "mode": "fever",
+      "sourceSize": [
+        302,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. Two separate rows: native event name and player-language description.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_fever_pause_button_empty",
+      "path": "assets/source/ui/tokyo_v2/fever/pause_button_empty.svg",
+      "mode": "fever",
+      "sourceSize": [
+        67,
+        70
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_fever_fullscreen_button_empty",
+      "path": "assets/source/ui/tokyo_v2/fever/fullscreen_button_empty.svg",
+      "mode": "fever",
+      "sourceSize": [
+        67,
+        70
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_inferno_race_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/inferno/race_panel_empty.svg",
+      "mode": "inferno",
+      "sourceSize": [
+        208,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_inferno_progress_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/inferno/progress_panel_empty.svg",
+      "mode": "inferno",
+      "sourceSize": [
+        207,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_inferno_time_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/inferno/time_panel_empty.svg",
+      "mode": "inferno",
+      "sourceSize": [
+        140,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_inferno_score_panel_empty",
+      "path": "assets/source/ui/tokyo_v2/inferno/score_panel_empty.svg",
+      "mode": "inferno",
+      "sourceSize": [
+        196,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_inferno_festival_banner_2line_empty",
+      "path": "assets/source/ui/tokyo_v2/inferno/festival_banner_2line_empty.svg",
+      "mode": "inferno",
+      "sourceSize": [
+        302,
+        82
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. Two separate rows: native event name and player-language description.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_inferno_pause_button_empty",
+      "path": "assets/source/ui/tokyo_v2/inferno/pause_button_empty.svg",
+      "mode": "inferno",
+      "sourceSize": [
+        67,
+        70
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_inferno_fullscreen_button_empty",
+      "path": "assets/source/ui/tokyo_v2/inferno/fullscreen_button_empty.svg",
+      "mode": "inferno",
+      "sourceSize": [
+        67,
+        70
+      ],
+      "status": "review",
+      "notes": "Text area intentionally blank; text is an independent runtime/compositor overlay. ",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_runner_bib_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/runner_bib_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        104,
+        70
+      ],
+      "status": "review",
+      "notes": "Separate bib text (1–4 digits) with independent anchored font fitting.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_runner_reaction_bubble_empty",
+      "path": "assets/source/ui/tokyo_v2/normal/runner_reaction_bubble_empty.svg",
+      "mode": "normal",
+      "sourceSize": [
+        280,
+        106
+      ],
+      "status": "review",
+      "notes": "Native athlete short phrase, independent of player-language UI.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_runner_selection_ring",
+      "path": "assets/source/ui/tokyo_v2/normal/runner_selection_ring.svg",
+      "mode": "normal",
+      "sourceSize": [
+        158,
+        165
+      ],
+      "status": "review",
+      "notes": "Compositor positions behind runner; must not cover bib.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_staff_avatar_frame_normal",
+      "path": "assets/source/ui/tokyo_v2/normal/staff_avatar_frame_normal.svg",
+      "mode": "normal",
+      "sourceSize": [
+        135,
+        143
+      ],
+      "status": "review",
+      "notes": "Decorative empty avatar window; male/female source avatars inserted as independent images.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_action_button_normal",
+      "path": "assets/source/ui/tokyo_v2/normal/action_button_normal.svg",
+      "mode": "normal",
+      "sourceSize": [
+        192,
+        68
+      ],
+      "status": "review",
+      "notes": "Empty rounded action button skin; no player text.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_staff_avatar_frame_selected",
+      "path": "assets/source/ui/tokyo_v2/normal/staff_avatar_frame_selected.svg",
+      "mode": "normal",
+      "sourceSize": [
+        135,
+        143
+      ],
+      "status": "review",
+      "notes": "Decorative empty avatar window; male/female source avatars inserted as independent images.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_action_button_selected",
+      "path": "assets/source/ui/tokyo_v2/normal/action_button_selected.svg",
+      "mode": "normal",
+      "sourceSize": [
+        192,
+        68
+      ],
+      "status": "review",
+      "notes": "Empty rounded action button skin; no player text.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_staff_avatar_frame_pressed",
+      "path": "assets/source/ui/tokyo_v2/normal/staff_avatar_frame_pressed.svg",
+      "mode": "normal",
+      "sourceSize": [
+        135,
+        143
+      ],
+      "status": "review",
+      "notes": "Decorative empty avatar window; male/female source avatars inserted as independent images.",
+      "alpha": true,
+      "containsRuntimeText": false
+    },
+    {
+      "id": "ui_tokyo_normal_action_button_pressed",
+      "path": "assets/source/ui/tokyo_v2/normal/action_button_pressed.svg",
+      "mode": "normal",
+      "sourceSize": [
+        192,
+        68
+      ],
+      "status": "review",
+      "notes": "Empty rounded action button skin; no player text.",
+      "alpha": true,
+      "containsRuntimeText": false
+    }
+  ],
+  "componentCount": 30,
+  "layers": [
+    "skin",
+    "supplies",
+    "fx_below_text",
+    "dynamic_text",
+    "controls"
+  ],
+  "license": "Original editable vector UI skins for SnackDash, no third-party fonts/icons",
+  "notes": "Theme variants depend on mode, selection of male/female independent of locale; 1280x720 review positioning from approved camera."
+}

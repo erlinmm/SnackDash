@@ -1,0 +1,33 @@
+{
+  "outline": "#22395C",
+  "bibWhite": "#FFFDF4",
+  "bibNavy": "#082878",
+  "normal": {
+    "sky": "#218EF1",
+    "jacketBlue": "#267DC3",
+    "pavement": "#8F6EAD",
+    "skin": "#F3B28F",
+    "water": "#27B9EA"
+  },
+  "fever": {
+    "sky": "#319DF0",
+    "jacketPink": "#F273A9",
+    "lantern": "#F9B84A",
+    "sakura": "#FF8DCB",
+    "bib": "#FFFDF4"
+  },
+  "inferno": {
+    "sky": "#18298D",
+    "robeViolet": "#5B1A97",
+    "fireGold": "#FFC760",
+    "firePink": "#F856C5",
+    "water": "#35C9FE"
+  },
+  "materials": {
+    "hair": "#653D2F",
+    "cap": "#237CDB",
+    "clothWarm": "#F474AF",
+    "skinWarm": "#F7B28F"
+  },
+  "rule": "Same character silhouette and number contrast across all three lighting modes; lighting overlays must not change epidermal identity."
+}

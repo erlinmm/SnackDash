@@ -52,3 +52,9 @@ dialog{max-width:min(560px,95vw);max-height:90dvh;border:2px solid #d54b75;borde
 
 /* Illustrated art pass: the HUD remains a separate responsive layer. */
 .scoreboard{top:1.25%;height:9.3%;gap:clamp(4px,.65cqw,10px)}.combo-panel{top:1.25%;height:9.3%;left:51%;right:25%;border:2px solid #fff9;border-radius:16px}.score-pill,.scoreboard .small-btn{border-radius:13px;background:linear-gradient(#fffef8,#fff3dd);border:1.8px solid #f4f7ff;box-shadow:0 3px 0 #20384a47,0 0 0 1px #34536f40}.combo-panel.fever{background:linear-gradient(110deg,#ff6bab,#be367c);color:white;border-color:#ffe2f1}.combo-panel.fever .fever-plaque{color:#fff7db}.combo-panel.inferno{background:linear-gradient(110deg,#482a88,#9c43a5);border-color:#f3c5ff;color:#fff1b0}.game-message{left:35%;top:12%;width:25%;font-size:clamp(9px,1.2cqw,16px)}
+
+/* r03 independent, blank HUD skins: keep all existing DOM buttons, labels and
+   score text live, not baked into the underlying SVG. */
+.scoreboard .tokyo-asset-skin,.combo-panel.tokyo-asset-skin{background-color:transparent!important;background-size:100% 100%!important;background-repeat:no-repeat!important;box-shadow:none!important;border-color:transparent!important}
+.staff-mark.has-portrait{width:47px;height:47px;border-radius:8px;background-size:cover;background-position:center;color:transparent;font-size:0;flex:none}
+@media(max-height:480px) and (orientation:landscape){.staff-mark.has-portrait{width:31px;height:31px}}

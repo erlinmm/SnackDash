@@ -1,9 +1,30 @@
 {
-  "project": "SnackDash V2 Tokyo Landscape Playtest",
-  "version": 2,
-  "status": "illustrated review candidate; not production art approval",
-  "runtimeManifest": "assets/exports/tokyo/manifest.json",
-  "sourceStreet": "assets/source/tokyo/normal-street.webp",
-  "referenceArchive": "assets/previews/character-r01/manifest.json",
-  "note": "The original geometric renderer is superseded. Seven independent WebP exports are embedded in the preview HTML. Review composites are not rendered as backgrounds. See runtimeManifest for provenance and remaining art limitations."
+  "version": 3,
+  "sourceBranch": "feature/main2-steps05-08-assets-r01",
+  "sourceCommit": "5cd2840daaef280f239fd3b404cc146572c030ed",
+  "runtimeBuilder": "scripts/tokyo_assets.py",
+  "runtimeStatus": "review",
+  "sourceAssets": {
+    "runners": 22,
+    "runFrames": 176,
+    "staffOutfits": 6,
+    "staffFrames": 50,
+    "crowdGroups": 18,
+    "streetPlates": 3,
+    "fxTimelines": 42,
+    "audioCues": 5
+  },
+  "fallbackSupplyTypes": [
+    "apple",
+    "orange",
+    "bar",
+    "juice"
+  ],
+  "gel": "embedded, not substituted for canonical bar",
+  "layout": "r03 vertical reserves",
+  "notes": [
+    "Original source masters preserved; baked sample items removed only from runtime derivatives.",
+    "No full scene review SVG used as game artwork.",
+    "Physical-device visual acceptance pending."
+  ]
 }

@@ -1,0 +1,133 @@
+{
+  "revision": "r03",
+  "state": "review",
+  "sourceCanvas": [
+    256,
+    320
+  ],
+  "oldRect": [
+    101,
+    149,
+    57,
+    43
+  ],
+  "newRect": [
+    82,
+    144,
+    94,
+    66
+  ],
+  "areaRatio": 2.531,
+  "ink": "#101D32",
+  "paper": "#FFFDF6",
+  "outline": "#1E3051",
+  "digitFontSizes": {
+    "one": 48,
+    "two": 44,
+    "three": 39,
+    "four": 34
+  },
+  "digitSource": "runtime overlay (no baked digits in runner masters)",
+  "priority": "digits over costume",
+  "minimumActualGlyphHeight640": "target >=14px, preference >=16px",
+  "artOnlyLimit": "mid/far 4-digit fonts too small after whole-character shrink; do not claim mobile pass until renderer / target eligibility reviewed",
+  "tests": [
+    {
+      "position": "near",
+      "number": 8,
+      "runnerHeight1280": 266,
+      "bibWidth1280": 78.1,
+      "bibWidth640": 39.1,
+      "nominalFont640": 20
+    },
+    {
+      "position": "near",
+      "number": 48,
+      "runnerHeight1280": 266,
+      "bibWidth1280": 78.1,
+      "bibWidth640": 39.1,
+      "nominalFont640": 18.3
+    },
+    {
+      "position": "near",
+      "number": 168,
+      "runnerHeight1280": 266,
+      "bibWidth1280": 78.1,
+      "bibWidth640": 39.1,
+      "nominalFont640": 16.2
+    },
+    {
+      "position": "near",
+      "number": 1000,
+      "runnerHeight1280": 266,
+      "bibWidth1280": 78.1,
+      "bibWidth640": 39.1,
+      "nominalFont640": 14.1
+    },
+    {
+      "position": "mid",
+      "number": 8,
+      "runnerHeight1280": 178,
+      "bibWidth1280": 52.3,
+      "bibWidth640": 26.1,
+      "nominalFont640": 13.4
+    },
+    {
+      "position": "mid",
+      "number": 48,
+      "runnerHeight1280": 178,
+      "bibWidth1280": 52.3,
+      "bibWidth640": 26.1,
+      "nominalFont640": 12.2
+    },
+    {
+      "position": "mid",
+      "number": 168,
+      "runnerHeight1280": 178,
+      "bibWidth1280": 52.3,
+      "bibWidth640": 26.1,
+      "nominalFont640": 10.8
+    },
+    {
+      "position": "mid",
+      "number": 1000,
+      "runnerHeight1280": 178,
+      "bibWidth1280": 52.3,
+      "bibWidth640": 26.1,
+      "nominalFont640": 9.5
+    },
+    {
+      "position": "far",
+      "number": 8,
+      "runnerHeight1280": 143,
+      "bibWidth1280": 42,
+      "bibWidth640": 21,
+      "nominalFont640": 10.7
+    },
+    {
+      "position": "far",
+      "number": 48,
+      "runnerHeight1280": 143,
+      "bibWidth1280": 42,
+      "bibWidth640": 21,
+      "nominalFont640": 9.8
+    },
+    {
+      "position": "far",
+      "number": 168,
+      "runnerHeight1280": 143,
+      "bibWidth1280": 42,
+      "bibWidth640": 21,
+      "nominalFont640": 8.7
+    },
+    {
+      "position": "far",
+      "number": 1000,
+      "runnerHeight1280": 143,
+      "bibWidth1280": 42,
+      "bibWidth640": 21,
+      "nominalFont640": 7.6
+    }
+  ],
+  "runtimeCodeChanged": false
+}

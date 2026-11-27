@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 3,
+  "visualSource": "owner-approved Tokyo Normal/Fever/Revised Inferno (Nov 2026)",
+  "status": "derived review geometry, not original image or measured real-world pinhole calibration",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "approvedCamera": "A",
+  "cameraAlternative": "B is layout-only width stress, not owner-approved art",
+  "road": {
+    "screenSpaceModel": "monotonic PCHIP left/right traced boundaries; lane lines linear across width at equal y",
+    "yControlPoints": [
+      194,
+      215,
+      242,
+      280,
+      330,
+      390,
+      470,
+      550,
+      635,
+      720
+    ],
+    "leftX": [
+      732,
+      710,
+      658,
+      601,
+      533,
+      467,
+      392,
+      345,
+      304,
+      270
+    ],
+    "rightX": [
+      846,
+      895,
+      946,
+      999,
+      1057,
+      1121,
+      1190,
+      1261,
+      1336,
+      1420
+    ],
+    "laneFractions": [
+      0,
+      0.3333333333333333,
+      0.6666666666666666,
+      1
+    ],
+    "farBendDirection": "road recedes towards the upper-middle/right"
+  },
+  "runnerScale": {
+    "formula": "spriteHeightPx = 18 + 0.36 * footY",
+    "uniformAcrossEligibleAndBackground": true,
+    "targetEligible": 7,
+    "notes": "Stylized screen-space perspective scale calibrated from approved sample; does not encode age or real-world physical size"
+  },
+  "runners": [
+    {
+      "id": "runner_12",
+      "number": "12",
+      "x": 475,
+      "y": 662,
+      "eligible": true,
+      "shirt": "#1f78c9",
+      "skin": "#c88866",
+      "hair": "#5a3029",
+      "height": 256.32,
+      "road_fraction": 0.171,
+      "hit_box": {
+        "center": [
+          475,
+          536.4
+        ],
+        "width": 118,
+        "height": 205
+      }
+    },
+    {
+      "id": "runner_18",
+      "number": "18",
+      "x": 750,
+      "y": 690,
+      "eligible": true,
+      "shirt": "#f66b97",
+      "skin": "#e5ae85",
+      "hair": "#6b3431",
+      "height": 266.4,
+      "road_fraction": 0.423,
+      "hit_box": {
+        "center": [
+          750,
+          559.5
+        ],
+        "width": 123,
+        "height": 213
+      }
+    },
+    {
+      "id": "runner_24",
+      "number": "24",
+      "x": 1048,
+      "y": 626,
+      "eligible": true,
+      "shirt": "#f3be2f",
+      "skin": "#cb936f",
+      "hair": "#613f31",
+      "height": 243.36,
+      "road_fraction": 0.726,
+      "hit_box": {
+        "center": [
+          1048,
+          506.8
+        ],
+        "width": 112,
+        "height": 195
+      }
+    },
+    {
+      "id": "runner_36",
+      "number": "36",
+      "x": 588,
+      "y": 508,
+      "eligible": true,
+      "shirt": "#7650b9",
+      "skin": "#e0a381",
+      "hair": "#522d3b",
+      "height": 200.88,
+      "road_fraction": 0.257,
+      "hit_box": {
+        "center": [
+          588,
+          409.6
+        ],
+        "width": 92,
+        "height": 161
+      }
+    },
+    {
+      "id": "runner_30",
+      "number": "30",
+      "x": 814,
+      "y": 444,
+      "eligible": true,
+      "shirt": "#2463aa",
+      "skin": "#e0a987",
+      "hair": "#332b2c",
+      "height": 177.84,
+      "road_fraction": 0.531,
+      "hit_box": {
+        "center": [
+          814,
+          356.9
+        ],
+        "width": 82,
+        "height": 142
+      }
+    },
+    {
+      "id": "runner_42",
+      "number": "42",
+      "x": 951,
+      "y": 522,
+      "eligible": true,
+      "shirt": "#df665b",
+      "skin": "#dbab87",
+      "hair": "#472d30",
+      "height": 205.92,
+      "road_fraction": 0.675,
+      "hit_box": {
+        "center": [
+          951,
+          421.1
+        ],
+        "width": 95,
+        "height": 165
+      }
+    },
+    {
+      "id": "runner_48",
+      "number": "48",
+      "x": 642,
+      "y": 347,
+      "eligible": true,
+      "shirt": "#e5ac1d",
+      "skin": "#a76545",
+      "hair": "#433c32",
+      "height": 142.92,
+      "road_fraction": 0.229,
+      "hit_box": {
+        "center": [
+          642,
+          277.0
+        ],
+        "width": 72,
+        "height": 114
+      }
+    },
+    {
+      "id": "runner_27",
+      "number": "27",
+      "x": 759,
+      "y": 285,
+      "eligible": false,
+      "shirt": "#ef7392",
+      "skin": "#dca17a",
+      "hair": "#3a322e",
+      "height": 120.6,
+      "road_fraction": 0.401,
+      "hit_box": null
+    },
+    {
+      "id": "runner_56",
+      "number": "56",
+      "x": 866,
+      "y": 276,
+      "eligible": false,
+      "shirt": "#54abd7",
+      "skin": "#e6b28d",
+      "hair": "#3f3634",
+      "height": 117.36,
+      "road_fraction": 0.67,
+      "hit_box": null
+    },
+    {
+      "id": "runner_39",
+      "number": "39",
+      "x": 785,
+      "y": 247,
+      "eligible": false,
+      "shirt": "#6e70b8",
+      "skin": "#91654d",
+      "hair": "#2c2c31",
+      "height": 106.92,
+      "road_fraction": 0.445,
+      "hit_box": null
+    },
+    {
+      "id": "runner_71",
+      "number": "71",
+      "x": 820,
+      "y": 224,
+      "eligible": false,
+      "shirt": "#69b98b",
+      "skin": "#d7b195",
+      "hair": "#313f46",
+      "height": 98.64,
+      "road_fraction": 0.573,
+      "hit_box": null
+    }
+  ],
+  "hitboxOverlapPairsAbove0_02": [],
+  "safeZones": {
+    "hud": [
+      15,
+      12,
+      1258,
+      110
+    ],
+    "backup_0": [
+      12,
+      548,
+      160,
+      629
+    ],
+    "backup_1": [
+      12,
+      635,
+      160,
+      715
+    ],
+    "bubble": [
+      215,
+      185,
+      384,
+      317
+    ],
+    "runner_corridor": [
+      400,
+      200,
+      1225,
+      710
+    ],
+    "landmark": [
+      1056,
+      4,
+      1220,
+      193
+    ]
+  },
+  "touchPolicy": {
+    "minimumPortraitCSSpxNotApplicable": true,
+    "notDeviceMeasured": true,
+    "minimumHitboxAt1280": {
+      "width": 72,
+      "height": 94
+    },
+    "only7Eligible": true,
+    "closeRunnerSelection": "frontmost if regions overlap"
+  },
+  "responsive": {
+    "base": "1280x720",
+    "thumbnail": "640x360",
+    "wide19_5x9": "preserve center 1280x720; outer bands are illustrative extensions, not final art",
+    "narrow4x3": "960x540 content with 90px top/bottom letterbox until UI reflow validated"
+  },
+  "uiNumbers": {
+    "bubble": [
+      "6",
+      "12",
+      "13"
+    ],
+    "backup": [
+      4,
+      8
+    ],
+    "bib": [
+      "12",
+      "18",
+      "24",
+      "36",
+      "30",
+      "42",
+      "48",
+      "1000"
+    ]
+  },
+  "statusTests": {
+    "smallPixelsVisualOnly": true,
+    "hardwareTouchTest": "pending"
+  }
+}

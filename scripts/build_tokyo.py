@@ -7,13 +7,14 @@ adapter. A changed upstream anchor fails the build instead of silently drifting.
 """
 from pathlib import Path
 import argparse
-import base64
-import json
+import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 TOKYO = ROOT / "src/tokyo"
 WIDTH, HEIGHT = 1280, 720
+sys.path.insert(0, str(ROOT / "scripts"))
+from tokyo_assets import embedded_js
 
 def read(path):
     return (ROOT / path).read_text(encoding="utf-8")
@@ -36,9 +37,9 @@ def specialize_game(game, adapter):
         ("(attempt<120?(i+attempt)%2:(attempt%3))", "((i+attempt)%3)", 1),
         ("clamp(desiredY+this.rand(-35,35),43,646)", "clamp(desiredY+this.rand(-35,35),190,650)", 1),
         ("this.rand(42,651)", "this.rand(185,650)", 1),
-        ("this.makeRunner(n,12,LANES", "this.makeRunner(n,290,LANES", 1),
-        ("const y of [8,18,30,42]", "const y of [290,296,302,308]", 1),
-        ("best={y:8,lane:1,score:0}", "best={y:290,lane:1,score:0}", 1),
+        ("this.makeRunner(n,12,LANES", "this.makeRunner(n,260,LANES", 1),
+        ("const y of [8,18,30,42]", "const y of [260,266,272,278]", 1),
+        ("best={y:8,lane:1,score:0}", "best={y:260,lane:1,score:0}", 1),
         ("this.hitstopRemaining=reducedMotion()?0:.04;", "this.hitstopRemaining=0;", 1),
         ("this.shakeRemaining=reducedMotion()?0:.12;", "this.shakeRemaining=0;", 1),
         ("if(t.elapsed>=.88)", "if(t.elapsed>=.48)", 1),
@@ -50,23 +51,7 @@ def specialize_game(game, adapter):
     return exact(game, anchor, "\n" + adapter + "\n" + anchor)
 
 def illustrated_art():
-    """Embed the independent raster atlases. No remote assets."""
-    root = ROOT / "assets/exports/tokyo"
-    manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
-    if manifest["version"] != 2:
-        raise RuntimeError("Unexpected Tokyo artwork version")
-    names = set(manifest["backgrounds"].values()) | {
-        "staff.webp", "runners.webp", "supplies.webp", "table-texture.webp"
-    }
-    images = {}
-    for name in sorted(names):
-        data = (root / name).read_bytes()
-        if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
-            raise RuntimeError(f"Invalid WebP artwork: {name}")
-        images[name] = "data:image/webp;base64," + base64.b64encode(data).decode("ascii")
-    return "window.SnackDashTokyoArt=" + json.dumps(
-        {"manifest": manifest, "images": images}, ensure_ascii=False, separators=(",", ":")
-    ) + ";\n"
+    return embedded_js()
 
 def build(destination):
     page = read("src/index.template.html")

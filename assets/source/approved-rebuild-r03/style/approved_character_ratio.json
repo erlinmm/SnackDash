@@ -1,0 +1,48 @@
+{
+  "reference": "approved Tokyo trio at 1536x864 source images",
+  "target": "cute chibi runners (~2.5–3.5 visual heads in approved illustrations, not 3.5–4.5 as old provisional gray asset)",
+  "readableBib": {
+    "foregroundAt1280": "~60–85 px wide",
+    "middle": "~45–60 px",
+    "fourDigitTest": "dynamic fitted 1000 in 60 px bib"
+  },
+  "continuity": {
+    "formula": "spriteHeightPx = 18 + 0.36 * footY",
+    "uniformAcrossEligibleAndBackground": true,
+    "targetEligible": 7,
+    "notes": "Stylized screen-space perspective scale calibrated from approved sample; does not encode age or real-world physical size"
+  },
+  "sampleCrops": {
+    "staffNormal": [
+      0,
+      245,
+      340,
+      735
+    ],
+    "staffFever": [
+      0,
+      240,
+      350,
+      740
+    ],
+    "staffInferno": [
+      0,
+      190,
+      370,
+      670
+    ],
+    "runnerField": [
+      390,
+      220,
+      1340,
+      850
+    ]
+  },
+  "modeConsistency": [
+    "head-to-body ratio",
+    "water item silhouette",
+    "bottle-cap blue",
+    "railings and lane geometry"
+  ],
+  "status": "approval/reference extraction, not newly approved independent character models"
+}

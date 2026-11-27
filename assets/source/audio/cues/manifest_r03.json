@@ -1,0 +1,66 @@
+{
+  "revision": "r03",
+  "status": "review",
+  "format": "WAV PCM mono 16-bit 16000 Hz",
+  "originality": "Entirely original synthesized waves created for SnackDash review; no sampled music or sound packs.",
+  "cues": [
+    {
+      "id": "supply_swap",
+      "path": "assets/source/audio/cues/supply_swap_review_r03.wav",
+      "durationMs": 230,
+      "description": "Soft exchange click and gentle high glint",
+      "maxPeak": 0.13162235327244814,
+      "rms": 0.029485305883446444,
+      "sampleCount": 3680,
+      "sizeBytes": 7404,
+      "sha": "4a79d0ef4ebf53f7e986246168cbc6aa54c61ea8"
+    },
+    {
+      "id": "supply_catch",
+      "path": "assets/source/audio/cues/supply_catch_review_r03.wav",
+      "durationMs": 340,
+      "description": "Short bright caught-supply confirmation",
+      "maxPeak": 0.10953528123992878,
+      "rms": 0.0288449356338202,
+      "sampleCount": 5440,
+      "sizeBytes": 10924,
+      "sha": "1378280b42c58db6f078445045372c35e3133bae"
+    },
+    {
+      "id": "fever_enter",
+      "path": "assets/source/audio/cues/fever_enter_review_r03.wav",
+      "durationMs": 580,
+      "description": "Three ascending original game stings",
+      "maxPeak": 0.12652763984527346,
+      "rms": 0.03127183561148828,
+      "sampleCount": 9280,
+      "sizeBytes": 18604,
+      "sha": "8d213ab6233c8bce94f6fb923926f9c40e29308b"
+    },
+    {
+      "id": "inferno_enter",
+      "path": "assets/source/audio/cues/inferno_enter_review_r03.wav",
+      "durationMs": 900,
+      "description": "Full original layered sparkle and soft festival tail",
+      "maxPeak": 0.09522641249807509,
+      "rms": 0.02626800083507518,
+      "sampleCount": 14400,
+      "sizeBytes": 28844,
+      "sha": "804c6b167fb9f1a81be2d5f482c062353a9775a7"
+    },
+    {
+      "id": "miss_soft",
+      "path": "assets/source/audio/cues/miss_soft_review_r03.wav",
+      "durationMs": 330,
+      "description": "Subtle soft descending correction, not alarming",
+      "maxPeak": 0.100869941886424,
+      "rms": 0.025127753727847882,
+      "sampleCount": 5280,
+      "sizeBytes": 10604,
+      "sha": "36bc64458977f396084cd0d3f2e11178560c6374"
+    }
+  ],
+  "mixNotes": "Dry cues, no normalization applied. Check gain, speakers, overlapping triggers and limiter before any game release. The companion visual review is legible with audio muted.",
+  "sync": "Align by gameplay event; cues do not drive the event.",
+  "qa": "Audible quality, perceived loudness and device mix not yet reviewed"
+}

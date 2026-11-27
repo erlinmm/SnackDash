@@ -121,7 +121,10 @@ def assert_dimensions(page):
     g = page.evaluate("SnackDashTokyoQA.geometry()")
     b = page.locator('#scene').bounding_box()
     assert (g["width"], g["height"], g["lanes"]) == (1280,720,3), g
-    assert g["assetsReady"] and g["artVersion"]==2,g
+    assert g["assetsReady"] and g["artVersion"]==3,g
+    assert g["sourceCommit"]=="5cd2840daaef280f239fd3b404cc146572c030ed",g
+    assert (g["runnerCast"],g["runFrames"],g["staffFrames"],g["crowdGroups"])==(22,176,50,18),g
+    assert g["slots"][0]["x"]==g["slots"][1]["x"] and g["slots"][0]["y"]<g["slots"][1]["y"],g
     assert len(g["slots"]) == 2 and g["scaleAt"][0] < g["scaleAt"][1] < g["scaleAt"][2], g
     assert abs(b["width"]/b["height"]-16/9) < .025, b
     viewport = page.viewport_size
@@ -258,7 +261,11 @@ def run(browser):
     assert_dimensions(page)
     swap_both(page)
     # Real successful throws must drive both threshold transitions.
-    hits=page.evaluate(HITS_JS,{"count":10,"correct":True})
+    hits=page.evaluate(HITS_JS,{"count":5,"correct":True})
+    page.locator("#gameScreen").screenshot(path=str(OUT/"live_race_fever.png"))
+    hits+=page.evaluate(HITS_JS,{"count":5,"correct":True})
+    page.evaluate("for(let i=0;i<12;i++)SnackDashDebug.getGame().update(.05);SnackDashDebug.getGame().draw()")
+    page.locator("#gameScreen").screenshot(path=str(OUT/"live_race_inferno.png"))
     assert hits[3]["combo"]==4 and not hits[3]["fever"]
     assert hits[4]["combo"]==5 and hits[4]["fever"] and not hits[4]["inferno"]
     assert hits[8]["combo"]==9 and not hits[8]["inferno"]

@@ -27,10 +27,36 @@ class TokyoBuildTests(unittest.TestCase):
             self.assertIn("resolveHit(this.combo",page)
             self.assertIn("this.supplies.queue.length<2",page)
             self.assertIn("window.SnackDashTokyoArt=",page)
-            self.assertEqual(page.count("data:image/webp;base64,"),7)
+            self.assertEqual(page.count("data:image/webp;base64,"),4)
+            self.assertIn("5cd2840daaef280f239fd3b404cc146572c030ed",page)
+            self.assertIn("runner/body_22/frame_07",page)
+            self.assertIn("staff/male/inferno/descend",page)
+            self.assertIn("crowd/fever/far/right",page)
+            self.assertIn("supply/gel/flight",page)
+            self.assertIn("audio/wav;base64,",page)
             self.assertIn("tRunnerBib",page)
             self.assertNotIn("function tBuilding(",page)
             self.assertNotIn("function tSpectator(",page)
+
+    def test_r03_art_pack(self):
+        from tokyo_assets import build_pack
+        import base64
+        pack=build_pack()
+        m=pack["manifest"]
+        self.assertEqual(m["version"],3)
+        self.assertEqual(len(m["runners"]),22)
+        self.assertEqual(sum(len(r["frames"]) for r in m["runners"]),176)
+        self.assertEqual(sum(len(x["frames"]) for x in m["staff"].values()),50)
+        self.assertEqual(len(m["crowd"]),18)
+        self.assertEqual(len(m["fx"]),42)
+        self.assertEqual(len(pack["sounds"]),5)
+        self.assertEqual(len(m["slots"]),2)
+        for key,url in pack["images"].items():
+            if key.startswith("staff/") or key.endswith("/receive_supply"):
+                payload=base64.b64decode(url.split(",",1)[1])
+                self.assertNotIn(b'id="held_supply"',payload)
+                self.assertNotIn(b'id="received_supply"',payload)
+        self.assertEqual(set(m["fallbackSupplies"]),{"apple","orange","bar","juice"})
 
     def test_exact_anchor_is_fail_closed(self):
         with self.assertRaises(RuntimeError):

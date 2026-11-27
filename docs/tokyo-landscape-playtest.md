@@ -1,81 +1,37 @@
-# Tokyo Landscape Playtest — illustrated art pass r02
+# Tokyo Landscape Playtest — r03 source asset integration
 
-The prior geometric actor and street renderer is superseded. The approved
-Step 10 review board is the visual target. This branch reuses the canonical
-SnackDash engine, rather than creating a different arithmetic game.
+Current branch: feature/tokyo-landscape-playtest. Asset source: feature/main2-steps05-08-assets-r01 @ 5cd2840daaef280f239fd3b404cc146572c030ed. Source directories are copied by Git tree SHA, not regenerated or merged. The original r02 raster atlas is historical, except for four canonical supply icons missing from the newer pack.
 
-## Run
+## Build and run
 
     python scripts/build_tokyo.py --zip
 
-Open dist/Snack_Dash_Tokyo_Preview.html in a browser in landscape. All seven
-WebP assets are embedded; no external images or network access are required.
-The canonical 100-race build is unchanged.
+Open dist/Snack_Dash_Tokyo_Preview.html in a browser in landscape. The build embeds all runtime assets, metadata, and review WAV audio. No network, server, or third-party Python package is required. The regular 100-race build remains unchanged.
 
-## Artwork and source provenance
+## Integrated assets
 
-See assets/exports/tokyo/manifest.json for the independent atlas, source
-descriptions and attachment coordinates.
+- New independent Normal/Fever/Inferno empty Tokyo riverside plates, shared high-angle curved road, traced camera coordinates and unchanged station geometry. Lane centers are interpolated between the supplied camera control points using the projected shoe depth; not a pinhole calibration.
+- All 22 r03 runner bodies, 176 source gait frames at the authored loop timing, receive/thanks/pain/cheer and additional reaction/selection poses. Appearance and nationality/native-language identity are selected independently. The per-body source scale and transformed blank bib anchor are used to render live digits.
+- All six staff outfits and 50 source action frames, including climb/descend/throw/swap poses. The source frame pivot and item anchor drive the visual attachment. Reference bottles in staff and runner receive SVGs are removed from the runtime derivation; the real current item is composited instead.
+- All 18 crowd groups, clipped to sidewalk areas; remove the source's straight review rail because the empty plates already contain curved railings. Crowd art is mode-specific; there are no dedicated crowd motion frames in the source.
+- New fixed-height table, water/banana hand/flight/slot images, empty speech bubble and reserve skin. Gel is embedded but not selected by the canonical item generator; apple/orange/bar/juice still use the existing raster icons, as no replacement exists. Existing supply type and number distributions remain unchanged.
+- New vertical two-slot arrangement follows the most recent r03 layout manifest, superseding the earlier side-by-side review layout. Both controls remain fixed in every mode.
+- Blank HUD skins and independent staff avatars, preserving existing interactive buttons including return, pause, restart and sound. Native festival labels and all numeric text remain dynamic.
+- Mode-specific FX and normal/reduced motion frame timelines, with independent score and bib text. Five review WAV cues attach to existing swap, normal catch, miss and mode-entry sound hooks; original synth cues remain fallback and higher combo/music cues remain.
+- Source images are embedded directly. Build-time XML processing only strips named baked props/duplicate barriers; original masters are unchanged. Browser caches up to 96 rasterized SVG frames; no procedural character drawing or full review composition is rendered.
 
-- Three illustrated street backgrounds share the same reprojected lane
-  geometry. Normal uses a new independent Tokyo street master; Fever uses
-  cherry-blossom grading and isolated sakura textures; Inferno uses a night
-  grade and isolated r01 firework light.
-- Six staff cutouts: female Inferno's long robe and feet are isolated from
-  r01/tokyo_inferno_supply_number_only.png. Male costumes are isolated
-  from the approved Step 10 board, with the clipped Inferno hair cap
-  repaired using its Normal character. Female Normal/Fever use new
-  illustrated working art. No sample supply, number bubble, table,
-  other actor or UI is retained in the cutouts. Male sources are lower
-  resolution than final production masters.
-- Six full-body runner identities with blank chest bibs follow r01's
-  visual style. Appearance selection is independent of the canonical
-  eleven nationality/native-language profiles. This is not the full
-  planned 22-person cast.
-- Six canonical physical supplies. Water and banana use isolated
-  illustrated objects. Apple, orange, energy bar and juice use
-  provisional emoji-derived raster icons. The energy bar remains an
-  energy bar, rather than being silently changed into energy gel.
-- Wooden and textile textures, with a fixed table and two stable
-  backup slots. All numbers and gameplay UI are dynamic.
+## Functional behavior
 
-The complete review board or any full mockup is never rendered as
-a game background. The old geometric stand-in actor/scenery routines
-are removed from the preview renderer. Canvas composites the art,
-animates attachments and draws real-time numbers, controls and effects.
-
-## Interaction and geometry
-
-The bib is the gameplay anchor. Lane centers are projected using estimated
-shoe-contact depth. Initial runners occupy three depth bands. Sprite
-rectangles guide pointer selection, while the canonical throw transaction,
-score calculations, number transformation, supply rules and native
-reactions remain intact. Active bibs are drawn above the actor layer to
-improve readability during brief overtakes. A runner is retired when its
-bib leaves the visible scene. Canonical speed and traffic logic are retained.
-
-Continuous lower-leg flex and a body bob simulate the running stride. Dedicated hand-authored run, catch, disappointed face, climb and
-crowd animation sheets are still missing. Inferno moves the illustrated
-staff onto the original table; the movement is not yet a frame-by-frame
-climb. This art pass is a review candidate, not production art approval.
-
-Both backup slots follow Step 10's side-by-side layout. The preview's
-progress, locale, staff preference and learning history remain isolated.
-QA fixtures are view-only and do not record results.
+Canonical math, score, race difficulty/timers, native athlete reactions, learning, and isolated preview save keys remain unchanged. All ten Tokyo races are playable. The existing shortened visual throw recovery and disabled hitstop remain preview-only. QA fixtures are view-only, do not record scores, and are separate from true combo transitions.
 
 ## Verification
 
     node --check src/tokyo/art.js
     node --check src/tokyo/preview.js
+    node --test tests/test_math.cjs tests/test_i18n.cjs tests/test_reactions.cjs
     python -m unittest discover -s tests -p 'test_*.py'
     python scripts/build_tokyo.py --zip
     python tests/tokyo_smoke.py
+    python tests/smoke.py
 
-The branch workflow runs the canonical tests and regular game regression,
-validates offline atlas decoding, captures the six staff/mode screenshots
-and eight-runner fixture, and exercises the ten races, seeded starts,
-scoring, swaps, mode transitions, rotation, input and save isolation.
-The CI artifacts are the actual browser screenshots and standalone build.
-Physical-device performance and art fidelity require separate user review.
-
-No main, main2 or art-assets branch modification, merge or production release.
+CI builds and tests the actual game, captures six QA screenshots, the eight-runner fixture and live Fever/Inferno states. The new source art is explicitly review status, not production-approved. Source r03 notes flag mid/far four-digit bib size on small phones; runtime uses a modest minimum digit plate size without removing targets. Final physical-device readability, crowd motion, exact art fidelity and Safari compatibility remain for review. No production release, no merge, no changes to main/main2 or the source art branch.

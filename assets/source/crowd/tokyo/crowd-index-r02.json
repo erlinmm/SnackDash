@@ -1,0 +1,167 @@
+{
+  "edition": "r02",
+  "scope": "Tokyo first pack",
+  "modes": [
+    "normal",
+    "fever",
+    "inferno"
+  ],
+  "depths": [
+    "near",
+    "mid",
+    "far"
+  ],
+  "sides": [
+    "left",
+    "right"
+  ],
+  "groupCount": 18,
+  "festivalLayers": 3,
+  "crowds": [
+    {
+      "assetId": "crowd_tokyo_normal_near_left",
+      "mode": "normal",
+      "depth": "near",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/normal/near/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_normal_near_right",
+      "mode": "normal",
+      "depth": "near",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/normal/near/crowd_right.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_normal_mid_left",
+      "mode": "normal",
+      "depth": "mid",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/normal/mid/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_normal_mid_right",
+      "mode": "normal",
+      "depth": "mid",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/normal/mid/crowd_right.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_normal_far_left",
+      "mode": "normal",
+      "depth": "far",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/normal/far/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_normal_far_right",
+      "mode": "normal",
+      "depth": "far",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/normal/far/crowd_right.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_fever_near_left",
+      "mode": "fever",
+      "depth": "near",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/fever/near/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_fever_near_right",
+      "mode": "fever",
+      "depth": "near",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/fever/near/crowd_right.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_fever_mid_left",
+      "mode": "fever",
+      "depth": "mid",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/fever/mid/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_fever_mid_right",
+      "mode": "fever",
+      "depth": "mid",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/fever/mid/crowd_right.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_fever_far_left",
+      "mode": "fever",
+      "depth": "far",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/fever/far/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_fever_far_right",
+      "mode": "fever",
+      "depth": "far",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/fever/far/crowd_right.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_inferno_near_left",
+      "mode": "inferno",
+      "depth": "near",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/inferno/near/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_inferno_near_right",
+      "mode": "inferno",
+      "depth": "near",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/inferno/near/crowd_right.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_inferno_mid_left",
+      "mode": "inferno",
+      "depth": "mid",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/inferno/mid/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_inferno_mid_right",
+      "mode": "inferno",
+      "depth": "mid",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/inferno/mid/crowd_right.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_inferno_far_left",
+      "mode": "inferno",
+      "depth": "far",
+      "side": "left",
+      "source": "assets/source/crowd/tokyo/inferno/far/crowd_left.svg",
+      "status": "review"
+    },
+    {
+      "assetId": "crowd_tokyo_inferno_far_right",
+      "mode": "inferno",
+      "depth": "far",
+      "side": "right",
+      "source": "assets/source/crowd/tokyo/inferno/far/crowd_right.svg",
+      "status": "review"
+    }
+  ],
+  "notes": "Six visible near figures per side, including parent-child, senior, wheelchair spectator; same identity and alignment across modes. Ten-city crowd expansion is reserved for later iteration per playbook."
+}
