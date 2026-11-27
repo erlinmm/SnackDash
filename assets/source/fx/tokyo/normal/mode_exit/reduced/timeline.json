@@ -1,0 +1,60 @@
+{
+  "assetId": "fx_tokyo_normal_mode_exit_reduced",
+  "revision": "r03",
+  "city": "tokyo",
+  "mode": "normal",
+  "event": "mode_exit",
+  "motion": "reduced",
+  "canvas": [
+    660,
+    180
+  ],
+  "status": "review",
+  "reviewOnly": true,
+  "frames": [
+    {
+      "id": "frame_0",
+      "src": "frame_00.svg",
+      "durationMs": 100,
+      "peak": false,
+      "anchor": "festival_banner",
+      "localSize": [
+        660,
+        180
+      ]
+    },
+    {
+      "id": "frame_1",
+      "src": "frame_01.svg",
+      "durationMs": 170,
+      "peak": true,
+      "anchor": "festival_banner",
+      "localSize": [
+        660,
+        180
+      ]
+    },
+    {
+      "id": "frame_2",
+      "src": "frame_02.svg",
+      "durationMs": 100,
+      "peak": false,
+      "anchor": "festival_banner",
+      "localSize": [
+        660,
+        180
+      ]
+    }
+  ],
+  "loop": false,
+  "triggerSource": "gameplay event / mode state only",
+  "eventSync": "DO NOT change gameplay score, input or throw timing",
+  "readingMask": [
+    "runner_bib",
+    "hand_number",
+    "reserve_0",
+    "reserve_1",
+    "hud_text"
+  ],
+  "rights": "Original procedural vector effect. No licensed icons."
+}
