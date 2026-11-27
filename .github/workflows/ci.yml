@@ -26,6 +26,8 @@ jobs:
           node --check src/js/reactions.js
           node --check src/js/game.js
           bash -n scripts/publish_release.sh
+      - name: Install landscape compiler test dependencies
+        run: python -m pip install -r scripts/requirements-landscape.txt
       - name: Run mathematical and build unit tests
         run: |
           node --test tests/test_math.cjs tests/test_i18n.cjs tests/test_reactions.cjs

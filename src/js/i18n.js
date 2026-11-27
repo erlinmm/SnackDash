@@ -2,7 +2,7 @@
 (function(root){
   'use strict';
   const DEFAULT_LOCALE='en-GB';
-  const STORAGE_KEY='snackDashLocaleV1';
+  const STORAGE_KEY=root.SnackDashRuntime?.storage?.locale??'snackDashLocaleV1';
   const catalogs=new Map();
   const listeners=new Set();
   let currentLocale=DEFAULT_LOCALE;

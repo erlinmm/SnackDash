@@ -86,14 +86,13 @@ HITS_JS = """({count, correct}) => {
         m.matches(g.supplies.held.number,r.number)===correct)
         .sort((a,b)=>Math.abs(a.y-390)-Math.abs(b.y-390));
       for(const r of targets){
-        g.tryThrow(g.runnerX(r),Math.max(1,Math.min(719,r.y-8)));
+        g.throwSupply(r.id);
         if(!g.throwing)continue;
         const actual=g.runners.find(a=>a.id===g.throwing.runnerId);
         if(actual&&m.matches(g.throwing.supply.number,actual.number)===correct){
           chosen=actual;break;
         }
-        // Only test selection probes are discarded before any time or scoring.
-        g.throwing=null;
+        throw Error('Semantic target mismatch');
       }
       if(!chosen){
         for(let i=0;i<10;i++)g.update(.025);
@@ -121,14 +120,15 @@ def assert_dimensions(page):
     g = page.evaluate("SnackDashTokyoQA.geometry()")
     b = page.locator('#scene').bounding_box()
     assert (g["width"], g["height"], g["lanes"]) == (1280,720,3), g
-    assert g["assetsReady"] and g["artVersion"]==3,g
-    assert g["sourceCommit"]=="5cd2840daaef280f239fd3b404cc146572c030ed",g
-    assert (g["runnerCast"],g["runFrames"],g["staffFrames"],g["crowdGroups"])==(22,176,50,18),g
-    assert g["slots"][0]["x"]==g["slots"][1]["x"] and g["slots"][0]["y"]<g["slots"][1]["y"],g
+    assert g["assetsReady"] and g["schemaVersion"]==1,g
+    assert g["cityId"]=="tokyo",g
+    assert g["runnerCast"]>=2 and g["runFrames"]>=g["runnerCast"],g
+    assert g["pages"]<g["sprites"],g
+    assert page.evaluate("Object.values(SnackDashAssetPack.images).every(x=>!x.startsWith('data:image/svg'))")
     assert len(g["slots"]) == 2 and g["scaleAt"][0] < g["scaleAt"][1] < g["scaleAt"][2], g
     assert abs(b["width"]/b["height"]-16/9) < .025, b
     viewport = page.viewport_size
-    for key in ("levelsBtn","timePill","hudScore","comboPanel","restartBtn","pauseBtn","tokyoSoundBtn"):
+    for key in ("levelsBtn","timePill","hudScore","comboPanel","restartBtn","pauseBtn","tokyoSoundBtn","gameFullscreenBtn"):
         r=page.locator("#"+key).bounding_box()
         assert r and r["x"] >= -1 and r["y"] >= -1 and r["x"]+r["width"]<=viewport["width"]+1 and r["y"]+r["height"]<=viewport["height"]+1, (key,r,viewport)
     return g
@@ -308,7 +308,7 @@ def run(browser):
           const g=SnackDashDebug.getGame();
           const r=g.runners.filter(r=>g.onScreen(r)&&GameMath.matches(g.supplies.held.number,r.number))
             .sort((a,b)=>Math.abs(a.y-390)-Math.abs(b.y-390))[0];
-          return {x:g.runnerX(r),y:Math.min(709,Math.max(110,r.y-8))};
+          return {x:g.runnerX(r),y:r.y};
         }""")
         tap(page,target["x"],target["y"],touch)
         page.wait_for_function("SnackDashDebug.getGame().correct + SnackDashDebug.getGame().wrong > 0")

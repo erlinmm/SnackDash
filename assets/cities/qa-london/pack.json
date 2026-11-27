@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "extends": "tokyo",
+  "id": "qa-london",
+  "raceCityId": "london",
+  "artRevision": "synthetic-replacement-test",
+  "reviewStatus": "test-only",
+  "patches": [
+    {
+      "path": [
+        "backgrounds",
+        "normal"
+      ],
+      "value": "bg/fever"
+    },
+    {
+      "path": [
+        "resources",
+        "fixture/runner/a"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/runner-a.svg"
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "fixture/runner/b"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/runner-b.svg"
+      }
+    },
+    {
+      "path": [
+        "runners",
+        0,
+        "frames"
+      ],
+      "value": [
+        {
+          "image": "fixture/runner/a",
+          "sourceSize": [
+            384,
+            480
+          ],
+          "pivot": [
+            192,
+            272
+          ],
+          "anchors": {
+            "bib": [
+              192,
+              272,
+              140,
+              78
+            ],
+            "hand": [
+              292,
+              220
+            ]
+          },
+          "durationMs": 65
+        },
+        {
+          "image": "fixture/runner/b",
+          "sourceSize": [
+            384,
+            480
+          ],
+          "pivot": [
+            192,
+            272
+          ],
+          "anchors": {
+            "bib": [
+              192,
+              272,
+              140,
+              78
+            ],
+            "hand": [
+              292,
+              220
+            ]
+          },
+          "durationMs": 135
+        },
+        {
+          "image": "fixture/runner/a",
+          "sourceSize": [
+            384,
+            480
+          ],
+          "pivot": [
+            192,
+            272
+          ],
+          "anchors": {
+            "bib": [
+              192,
+              272,
+              140,
+              78
+            ],
+            "hand": [
+              292,
+              220
+            ]
+          },
+          "durationMs": 90
+        }
+      ]
+    },
+    {
+      "path": [
+        "scene",
+        "staff",
+        "height"
+      ],
+      "value": 390
+    },
+    {
+      "path": [
+        "scene",
+        "staff",
+        "ground"
+      ],
+      "value": [
+        153,
+        690
+      ]
+    },
+    {
+      "path": [
+        "scene",
+        "staff",
+        "table"
+      ],
+      "value": [
+        153,
+        533
+      ]
+    },
+    {
+      "path": [
+        "staff",
+        "female-normal",
+        "frames",
+        "idle",
+        "anchors",
+        "hand"
+      ],
+      "value": [
+        270,
+        150
+      ]
+    },
+    {
+      "path": [
+        "scene",
+        "slots",
+        0,
+        "rect"
+      ],
+      "value": [
+        10,
+        620,
+        148,
+        82
+      ]
+    },
+    {
+      "path": [
+        "scene",
+        "slots",
+        1,
+        "rect"
+      ],
+      "value": [
+        170,
+        620,
+        148,
+        82
+      ]
+    },
+    {
+      "path": [
+        "scene",
+        "hud",
+        "score",
+        "rect"
+      ],
+      "value": [
+        414,
+        100,
+        174,
+        70
+      ]
+    },
+    {
+      "path": [
+        "scene",
+        "labels"
+      ],
+      "value": {
+        "en-GB": {
+          "title": "London · asset replacement fixture",
+          "normal": "Normal",
+          "fever": "Fixture Fever",
+          "inferno": "Fixture Inferno"
+        },
+        "zh-Hans": {
+          "title": "伦敦 · 资产替换测试",
+          "normal": "普通",
+          "fever": "测试 FEVER",
+          "inferno": "测试 INFERNO"
+        }
+      }
+    }
+  ]
+}

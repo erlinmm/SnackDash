@@ -77,6 +77,7 @@
     return VOLUNTEER_SCENES[city?.id]||VOLUNTEER_SCENES.tokyo;
   }
   function volunteerHandPoint(cityIndex){
+    if(presentation)return presentation.handPoint(game);
     const scene=volunteerScene(cityIndex);
     // Exact neutral held supply position inside drawVolunteer: (38,-26) × VOLUNTEER_SCALE.
     return {x:scene.x+38*VOLUNTEER_SCALE,y:scene.y-26*VOLUNTEER_SCALE};
@@ -390,7 +391,19 @@
     ctx.restore();
   }
 
-  const W=390,H=700,GOAL=10,TAU=Math.PI*2;
+  // The ordinary portrait build uses these defaults. Landscape presentation
+  // supplies a validated scene contract before the engine starts.
+  const runtime=window.SnackDashRuntime||{};
+  const W=runtime.width??390,H=runtime.height??700,GOAL=10,TAU=Math.PI*2;
+  const backupCount=runtime.backupCount??3;
+  const previewCity=runtime.previewCityId==null?null:CITIES.findIndex(c=>c.id===runtime.previewCityId);
+  if(previewCity===-1)throw Error('Unknown preview city '+runtime.previewCityId);
+  const entryY=runtime.entryY??[8,18,30,42];
+  const throwTiming=Object.freeze({hit:.41,recovery:runtime.throwRecovery??.88});
+  const saveKeys=Object.freeze({legacy:runtime.storage?.legacy??'snackDashSaveV1',
+    progress:runtime.storage?.progress??'snackDashSaveV2',
+    practice:runtime.storage?.practice??'snackDashPracticeV1'});
+  let presentation=null;
   const $=id=>document.getElementById(id);
   const canvas=$('scene'), ctx=canvas.getContext('2d',{alpha:false});
   const stage=$('sceneShell');
@@ -424,9 +437,10 @@
     return false;
   }
   // The world's ten city chapters are unlocked as groups of ten races.
-  function isOpen(level){return level>=1&&level<=100&&(debugMode||Math.floor((level-1)/10)<unlockedCities);}
+  function isOpen(level){return level>=1&&level<=100&&(previewCity!==null?Math.floor((level-1)/10)===previewCity:(debugMode||Math.floor((level-1)/10)<unlockedCities));}
   function isWon(level){return (prefs.best[level]??-Infinity)>=GOAL;}
   function nextPlayable(level){
+    if(previewCity!==null){for(let i=previewCity*10+1;i<=previewCity*10+10;i++)if(i!==level&&!isWon(i))return i;return null;}
     if(debugMode)return level<100?level+1:null;
     const city=Math.floor((level-1)/10);
     for(let i=city*10+1;i<=city*10+10;i++)if(!isWon(i))return i;
@@ -434,15 +448,15 @@
     return null;
   }
 
-  selectedCity=clamp(prefs.selectedCity||0,0,unlockedCities-1);
+  selectedCity=previewCity??clamp(prefs.selectedCity||0,0,unlockedCities-1);
   selected=selectedCity*10+1;
   let game=null, prevFrame=0, lastHudText='';
   let toastTimeout=null;
 
   function loadPrefs(){
     try {
-      const old=JSON.parse(localStorage.getItem('snackDashSaveV1')||'{}');
-      const saved=JSON.parse(localStorage.getItem('snackDashSaveV2')||'null');
+      const old=JSON.parse(localStorage.getItem(saveKeys.legacy)||'{}');
+      const saved=JSON.parse(localStorage.getItem(saveKeys.progress)||'null');
       // Preserve the prior ten level records as first-city records if needed.
       const d=saved||{best:old.best||{},sound:old.sound!==false,selectedCity:0};
       return {best:d.best||{},sound:d.sound!==false,selectedCity:d.selectedCity||0,
@@ -457,7 +471,7 @@
   function savePrefs(){
     if(debugMode)return;
     try{prefs.selectedCity=selectedCity;prefs.unlockedCities=unlockedCities;
-      localStorage.setItem('snackDashSaveV2',JSON.stringify(prefs));}
+      localStorage.setItem(saveKeys.progress,JSON.stringify(prefs));}
     catch(e){/* Offline/private browsing remains playable */}
   }
 
@@ -547,10 +561,12 @@
   // Its narrow top-right entrance widens beyond the lower/right edges of
   // the canvas. The bottom-right corner is road, never a roadside verge.
   function roadCenter(y){
+    if(presentation)return presentation.roadCenter(y);
     const p=clamp(y/H,0,1);
     return 335-205*p+6*Math.sin(p*Math.PI*1.27);
   }
   function roadHalfWidth(y){
+    if(presentation)return presentation.roadHalfWidth(y);
     const p=clamp(y/H,0,1);
     return 49+246*Math.pow(p,1.28);
   }
@@ -561,9 +577,10 @@
     return -Math.pow(Math.sin(Math.PI*p),2)*(r.joyJumpHeight||30);
   }
   // The only remaining jump is the small celebration after a high score.
-  function runnerVisualOffset(r){return runnerJumpOffset(r);}
+  function runnerVisualOffset(r){return presentation&&reducedMotion()?0:runnerJumpOffset(r);}
 
   function runnerScale(r,y=r.y,includeCheer=true){
+    if(presentation)return presentation.runnerScale(r,y,includeCheer);
     const depth=clamp(y/H,0,1);
     // Entrance is 1/3 smaller than v2; close runners retain their old size.
     const depthSize=(.66+.48*depth)*(2/3+depth/3);
@@ -581,6 +598,7 @@
 
   function runnerXAt(r,y,lane){return roadCenter(y)+lane*roadHalfWidth(y)*.89;}
   function runnerFootprint(r,y=r.y,lane=r.lane){
+    if(presentation)return presentation.trafficFootprint(r,y,lane);
     // Purely diagnostic outline; never blocks movement.
     const s=runnerScale(r,y,false);
     // Bounding boxes include hair, shoes, broad cartoon arms, lateral sway,
@@ -707,7 +725,7 @@
     [12,3],[12,4],[12,5],[12,6],[12,7],[12,8],[12,9],[12,11],
     [13,3],[13,4],[13,5],[13,6],[13,7],[13,8],[13,9],[13,10],[13,11]
   ];
-  const PRACTICE_KEY='snackDashPracticeV1';
+  const PRACTICE_KEY=saveKeys.practice;
   function readPracticeHistory(){
     try{
       const data=JSON.parse(localStorage.getItem(PRACTICE_KEY)||'{}');
@@ -819,7 +837,7 @@
       // Independent RNG: reaction diversity must not affect bibs or scoring.
       this.reactionRng=seededRandom((seed^0x9e3779b9)>>>0);
       const {numbers,held}=this.director.createLineup();
-      this.supplies=this.director.createSupplies(numbers,held);
+      this.supplies=this.director.createSupplies(numbers,held,backupCount);
       this.runners=[];this.departing=[];this.nextId=1;this.score=0;this.correct=0;this.wrong=0;
       this.combo=0;this.fever=false;this.inferno=false;this.maxCombo=0;this.feverImpact=0;this.feverHits=0;this.usedSupplies=[];
       this.hitstopRemaining=0;this.shakeRemaining=0;this.shakePower=0;this.impactClock=0;this.impactFlash=0;
@@ -872,6 +890,7 @@
         yBounce:this.rand(0,TAU)};
     }
     populate(numbers){
+      if(presentation){presentation.populate(this,numbers);return;}
       // No rigid formation: spread runners naturally through three lanes,
       // while verifying real projected silhouette separation at entry.
       const shuffled=numbers.slice();
@@ -905,13 +924,13 @@
       const n=forcedNumber ?? this.director.replacement(old.spawnNumber??old.number,others,this.suppliesList());
       if(!legalBib(n,this.config))throw Error(`Illegal newly spawned runner bib ${n}`);
       this.runners=this.runners.filter(r=>r!==old);
-      const replacement=this.makeRunner(n,12,LANES[randInt(this.rng,0,2)]);
+      const replacement=this.makeRunner(n,runtime.initialEntryY??12,LANES[randInt(this.rng,0,2)]);
       // Every entrant starts near the vanishing point. NEVER look for an
       // available position in the middle of the road, even during rescue.
       // Free Overtaking allows brief overlaps; choose the least crowded of
       // three top lanes but always keep the entrance in the first 42px.
       let best=null;
-      for(const y of [8,18,30,42])for(let lane=0;lane<3;lane++){
+      for(const y of entryY)for(let lane=0;lane<3;lane++){
         const xLane=LANES[lane]+replacement.laneJitter;
         replacement.y=y;replacement.lane=xLane;
         if(!this.onScreen(replacement))continue;
@@ -924,7 +943,7 @@
         const score=crowd+y*.025+(lane===2?.04:0);
         if(!best||score<best.score)best={y,lane,score};
       }
-      if(!best)best={y:8,lane:1,score:0};
+      if(!best)best={y:entryY[0],lane:1,score:0};
       replacement.y=best.y;replacement.entryFade=.24;
       replacement.laneIndex=best.lane;
       replacement.targetLaneIndex=best.lane;
@@ -933,6 +952,7 @@
       this.traffic.plan(true);
     }
     update(dt){
+      if(this.qaFixture||presentation?.suspended())return;
       if(this.phase==='paused'||this.phase==='results')return;
       // Hitstop pauses the world for a few frames, but does NOT pause the
       // round's real-time countdown. This is a visual impact cue only.
@@ -985,12 +1005,14 @@
         this.lastCheck+=dt;
         if(this.lastCheck>2&&!this.throwing){this.assertReady();this.lastCheck=0;}
       }
+      presentation?.update(this,dt);
       this.syncHUD();
     }
     // A runner stays in the active population, and remains tappable, for as
     // long as ANY of their drawn body (including just the hair) is on screen.
     // This keeps the game's solvability invariant aligned with visible targets.
     onScreen(r){
+      if(presentation)return presentation.visible(this,r);
       const size=runnerScale(r),x=this.runnerX(r);
       const y=r.y+runnerVisualOffset(r),top=y-68*size,bottom=y+56*size;
       return top<=H && bottom>=0 && x+29*size>=0 && x-29*size<=W;
@@ -1031,7 +1053,7 @@
         }else if(this.supplies.queue.some(item=>this.visibleMatchCount(item.number)===0)){
           this.reconcileSuppliesAfterRosterChange();
           this.syncHUD();
-        }else if(this.supplies.queue.length<3)this.refillPendingSlots();
+        }else if(this.supplies.queue.length<backupCount)this.refillPendingSlots();
       }
     }
     matchableSupplyNumbers(){
@@ -1093,7 +1115,7 @@
       const fresh=this.playableSupplyNumbers();
       const used=new Set([this.supplies.held.number,
         ...this.supplies.queue.map(s=>s.number)]);
-      while(this.supplies.queue.length<3){
+      while(this.supplies.queue.length<backupCount){
         const candidates=fresh.filter(n=>!used.has(n));
         if(!candidates.length)break;
         const item=this.issueFromChoices(candidates);
@@ -1194,10 +1216,10 @@
       this.supplies.queue=kept.filter(x=>x.number!==next.number);
       if(lesson && lesson.second!==next.number){
         const hasFollowup=this.supplies.queue.some(x=>x.number===lesson.second);
-        if(!hasFollowup && this.supplies.queue.length<3 &&
+        if(!hasFollowup && this.supplies.queue.length<backupCount &&
             this.playableSupplyNumbers().includes(lesson.second)){
           this.supplies.queue.push(this.issueFromChoices([lesson.second]));
-        }else if(!hasFollowup && this.supplies.queue.length>=3 &&
+        }else if(!hasFollowup && this.supplies.queue.length>=backupCount &&
             this.playableSupplyNumbers().includes(lesson.second)){
           // Replace an *unheld* item, keeping the original three-item table.
           this.supplies.queue.pop();
@@ -1221,7 +1243,7 @@
       if(!this.throwing)return;
       const t=this.throwing;
       t.elapsed+=dt;
-      if(!t.hit && t.elapsed>=.41){
+      if(!t.hit && t.elapsed>=throwTiming.hit){
         t.hit=true;
         const runner=this.runners.find(r=>r.id===t.runnerId);
         if(!runner)throw Error('Throw target disappeared during flight');
@@ -1254,8 +1276,8 @@
               runner.joyJumpHeight=Math.min(this.inferno?52:34,24+(outcome.delta-20)*.66);
             }
             if(outcome.delta>HEAVY_REWARD_IMPACT && this.inferno && !outcome.infernoActivated){
-              this.hitstopRemaining=reducedMotion()?0:.04;
-              this.shakeRemaining=reducedMotion()?0:.12;
+              this.hitstopRemaining=reducedMotion()||runtime.disableImpactPause?0:.04;
+              this.shakeRemaining=reducedMotion()||runtime.disableImpactPause?0:.12;
               this.shakePower=2.7;this.impactFlash=0;
               audio.megaHit(outcome.delta);
             }
@@ -1307,20 +1329,26 @@
         t.reloaded=true;
         this.assertReady();this.syncHUD();
       }
-      if(t.elapsed>=.88){
+      if(t.elapsed>=throwTiming.recovery){
         this.throwing=null;
         this.assertReady();this.syncHUD();audio.grab();
       }
     }
     runnerX(r){return roadCenter(r.y)+r.lane*roadHalfWidth(r.y)*.89+Math.sin(this.sceneTime*1.7+r.seed)*r.sway;}
     trySwap(x,y){
+      if(this.qaFixture)return true;
+      if(presentation){const index=presentation.pickSlot(x,y);return index===null?false:(this.swapSupply(index),true);}
       if(this.phase!=='playing'||this.throwing)return false;
       // Three tray hit areas. A tap exchanges the selected supply with the
       // one in the volunteer's hand, without consuming either item.
       if(y<40||y>130||x<17||x>230)return false;
       const i=Math.round((x-50)/72);
       if(i<0||i>2||Math.abs(x-(50+i*72))>34)return false;
-      if(!this.supplies.queue[i])return false;
+      return this.swapSupply(i);
+    }
+    // Semantic commands are independent of a particular scene or sprite.
+    swapSupply(i){
+      if(this.qaFixture||this.phase!=='playing'||this.throwing||!Number.isInteger(i)||i<0||i>=backupCount||!this.supplies.queue[i])return false;
       const previousHand=this.supplies.held.number;
       [this.supplies.held,this.supplies.queue[i]]=[this.supplies.queue[i],this.supplies.held];
       this.learning.recordSwap(previousHand);
@@ -1332,7 +1360,8 @@
       return true;
     }
     tryThrow(x,y){
-      if(this.phase!=='playing'||this.throwing||this.pendingSupply)return;
+      if(this.qaFixture||this.phase!=='playing'||this.throwing||this.pendingSupply)return;
+      if(presentation){const id=presentation.pickRunner(this,x,y);if(id==null){showMessage(tr('game.tapRunner'),650);return;}return this.throwSupply(id);}
       let nearest=null,score=Infinity;
       // Tap the entire on-screen silhouette. In particular, an athlete whose
       // shoulders have passed below the bottom border is still selectable by
@@ -1348,9 +1377,16 @@
         if((ellipse<1.38||hairOnly)&&rank<score){nearest=r;score=rank;}
       }
       if(!nearest){showMessage(tr('game.tapRunner'),650);return;}
+      return this.throwSupply(nearest.id);
+    }
+    throwSupply(id){
+      if(this.qaFixture||this.phase!=='playing'||this.throwing||this.pendingSupply)return false;
+      const nearest=this.runners.find(r=>r.id===id&&this.onScreen(r));
+      if(!nearest)return false;
       this.swapCue=null; // A throw cancels the cue; the new supply is already active.
       this.throwing={runnerId:nearest.id,supply:this.supplies.held,elapsed:0,hit:false,reloaded:false,feverAtRelease:this.fever};
-      audio.throw();
+      presentation?.throwStarted(this,this.throwing);
+      audio.throw();return true;
     }
     popEffect(fx){this.effects.push({age:0,...fx});}
     finish(){
@@ -1434,8 +1470,10 @@
       $('comboDetail').textContent=this.inferno?tr('hud.comboDetail.inferno'):this.fever?tr('hud.comboDetail.fever'):tr('hud.comboDetail.normal',{remaining:Math.max(0,5-this.combo)});
       $('comboFill').style.width=`${Math.min(100,this.combo/5*100)}%`;
       $('feverStatus').textContent=this.inferno?tr('hud.disco'):this.fever?tr('hud.onFire'):this.combo===0?tr('hud.ready'):`${this.combo}/5`;
+      presentation?.syncHUD(this);
     }
     draw(){
+      if(presentation){presentation.draw(this);return;}
       // Small real screen shake for 30+ point Fever hits. Pointer mapping uses
       // the live bounding rectangle so the moving canvas remains tappable.
       const strength=!reducedMotion()&&this.shakeRemaining>0?this.shakePower*Math.pow(this.shakeRemaining/.13,1.25):0;
@@ -2144,7 +2182,7 @@
   // we check the saved stamps, then persist city access before showing
   // invitations. If the app closes before acknowledgement, the dialog returns.
   function reconcileCityUnlocks(){
-    if(debugMode)return;
+    if(previewCity!==null||debugMode)return;
     const eligible=cityUnlockedCount(prefs.best);
     if(eligible>unlockedCities){
       unlockedCities=eligible;
@@ -2152,7 +2190,7 @@
     }
   }
   function nextPendingCityInvitation(){
-    if(debugMode)return null;
+    if(previewCity!==null||debugMode)return null;
     for(let index=1;index<unlockedCities;index++){
       if(!prefs.invitationsAcknowledged.includes(index))return index;
     }
@@ -2206,6 +2244,7 @@
   }
 
   function renderLevelGrid(){
+    if(presentation){presentation.renderMenu();return;}
     selectedCity=clamp(selectedCity,0,debugMode?9:unlockedCities-1);
     if(!isOpen(selected))selected=selectedCity*10+1;
     const complete=LEVELS.filter(cfg=>isWon(cfg.level)).length;
@@ -2280,6 +2319,7 @@
     $('selectedMeta').textContent=tr('race.meta',{band:raceBandLabel(cfg.event),runners:cfg.runners,seconds:cfg.seconds,matches:matchesCount,max:cfg.supplyMax});
   }
   function sizeScene(){
+    if(presentation){presentation.resize();return;}
     const screen=$('gameScreen'), app=$('app');
     const result=$('resultOverlay');
     if(result.parentElement!==document.body){
@@ -2311,7 +2351,7 @@
     ||navigator.standalone===true
     ||(window.matchMedia('(display-mode: fullscreen)').matches&&!fullscreenIsActive());
   function enterRaceFullscreen(){
-    if(standalone())return;
+    if(runtime.previewCityId||standalone())return;
     const root=document.documentElement;
     if(document.fullscreenElement||document.webkitFullscreenElement)return;
     const request=root.requestFullscreen||root.webkitRequestFullscreen;
@@ -2334,6 +2374,7 @@
   // regular browser, Android can also lock portrait while fullscreen.
   // Other browsers may reject or omit this API; gameplay still works.
   function requestPortraitOrientation(){
+    if(runtime.previewCityId)return;
     if(!standalone()&&!fullscreenIsActive())return;
     const orientation=window.screen&&window.screen.orientation;
     if(!orientation||typeof orientation.lock!=='function')return;
@@ -2345,6 +2386,7 @@
   function showMenu(){
     // Keep fullscreen active when returning to level selection.
     resetPasswordQueue();
+    if(previewCity!==null)debugMode=false;
     game=null;stage.style.transform='';stage.classList.remove('fever-active','inferno-active');$('app').classList.remove('in-game');$('gameScreen').classList.add('hidden');$('menuScreen').classList.remove('hidden');
     $('resultOverlay').classList.add('hidden');
     reconcileCityUnlocks();
@@ -2352,11 +2394,12 @@
     showPendingCityInvitation();
   }
   function startLevel(level){
-    if(!isOpen(level))return;
+    if(!isOpen(level)||presentation&&!presentation.ready())return;
     resetPasswordQueue();
     stage.style.transform='';selected=level;selectedCity=Math.floor((level-1)/10);savePrefs();lastHudText='';
     $('menuScreen').classList.add('hidden');$('gameScreen').classList.remove('hidden');$('app').classList.add('in-game');
     sizeScene();game=new Marathon(LEVELS[level-1],randSeed());
+    presentation?.raceStarted(game);
     requestAnimationFrame(sizeScene);
     $('matchHint').textContent=tr('hud.tapRunner');
     window.scrollTo({top:0,behavior:'instant'});
@@ -2375,6 +2418,7 @@
     else startLevel(game.config.level);
   }
   function setDebugMode(enabled){
+    if(previewCity!==null)return;
     debugMode=Boolean(enabled);
     resetPasswordQueue();
     if(!debugMode){
@@ -2383,6 +2427,20 @@
       savePrefs();
     }
     renderLevelGrid();
+  }
+  // Stable installation boundary. No generated source, closure injection or
+  // prototype monkey-patching is needed by a new city pack.
+  if(window.SnackDashCreatePresentation){
+    presentation=window.SnackDashCreatePresentation({
+      W,H,GOAL,TAU,$,canvas,ctx,stage,I18n,tr,cityText,LEVELS,CITIES,previewCity,LANES,
+      clamp,mix,randInt,approach,runnerXAt,runnerScale,runnerVisualOffset,reducedMotion,
+      fitLabel,roundedRect,audio,throwTiming,cityCleared,isWon,renderSelection,
+      getGame:()=>game,getPrefs:()=>prefs,getSelected:()=>selected,
+      select:level=>{if(isOpen(level))selected=level;},renderLevelGrid,
+      startLevel,showMenu,
+      createFixture(level,seed){debugMode=true;startLevel(level);game=new Marathon(LEVELS[level-1],seed);game.qaFixture=true;return game;},
+      getPixelRatio:()=>pixelRatio,setPixelRatio:n=>{pixelRatio=n;}
+    });
   }
   $('languageSelect').value=I18n.locale();
   $('languageSelect').addEventListener('change',event=>{
@@ -2418,13 +2476,14 @@
   function updateSoundIcon(){
     $('soundBtn').textContent=prefs.sound?'🔊':'🔇';
     const label=tr(prefs.sound?'game.soundOff':'game.soundOn');$('soundBtn').title=label;$('soundBtn').setAttribute('aria-label',label);
+    presentation?.syncSound();
   }
   canvas.addEventListener('pointerdown',ev=>{
     if(!game)return;
     ev.preventDefault();const bounds=canvas.getBoundingClientRect();
     const x=(ev.clientX-bounds.left)/bounds.width*W,y=(ev.clientY-bounds.top)/bounds.height*H;
     if(game.phase==='paused'){
-      if(x>=48&&x<=W-48&&y>=255&&y<=419)game.pause();
+      if(presentation?presentation.pauseHit(x,y):(x>=48&&x<=W-48&&y>=255&&y<=419))game.pause();
       return;
     }
     if(game.trySwap(x,y))return;

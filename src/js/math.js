@@ -387,9 +387,9 @@ function supplyDifficultyWeight(event,level){
       return this.makeSupply(chosen);
     }
 
-    createSupplies(numbers, initialHeld) {
+    createSupplies(numbers, initialHeld, backupCount=3) {
       const held=this.makeSupply(initialHeld),queue=[];
-      for(let i=0;i<3;i++)queue.push(this.chooseSupply(numbers));
+      for(let i=0;i<backupCount;i++)queue.push(this.chooseSupply(numbers));
       return {held,queue};
     }
 

@@ -1,68 +1,81 @@
+import base64
+import copy
+import hashlib
 import importlib.util
+import io
+import json
 from pathlib import Path
-from tempfile import TemporaryDirectory
+import sys
 import unittest
+from PIL import Image
 
-ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("tokyo_build",ROOT/"scripts/build_tokyo.py")
-tokyo = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(tokyo)
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/"scripts"))
+from scene_assets import load_pack, validate, compile_pack, runtime_settings, read_image, embedded_js
+from build_city import build
 
-class TokyoBuildTests(unittest.TestCase):
-    def test_standalone_and_isolated(self):
-        with TemporaryDirectory() as d:
-            page = tokyo.build(Path(d)/"tokyo.html").read_text(encoding="utf-8")
-            self.assertIn('width="1280" height="720"',page)
-            self.assertIn("SnackDashTokyoQA",page)
-            self.assertIn("snackDashTokyoPreviewSaveV1",page)
-            self.assertIn("snackDashTokyoPreviewLocaleV1",page)
-            self.assertIn("snackDashTokyoPreviewPracticeV1",page)
-            self.assertNotIn("'snackDashSaveV2'",page)
-            self.assertNotIn("'snackDashLocaleV1'",page)
-            self.assertNotIn("'snackDashPracticeV1'",page)
-            self.assertNotIn("<!-- BUILD:",page)
-            self.assertNotIn('src="https://',page)
-            self.assertNotIn('href="https://',page)
-            self.assertIn("const W=1280,H=720,GOAL=10",page)
-            self.assertIn("resolveHit(this.combo",page)
-            self.assertIn("this.supplies.queue.length<2",page)
-            self.assertIn("window.SnackDashTokyoArt=",page)
-            self.assertEqual(page.count("data:image/webp;base64,"),4)
-            self.assertIn("5cd2840daaef280f239fd3b404cc146572c030ed",page)
-            self.assertIn("runner/body_22/frame_07",page)
-            self.assertIn("staff/male/inferno/descend",page)
-            self.assertIn("crowd/fever/far/right",page)
-            self.assertIn("supply/gel/flight",page)
-            self.assertIn("audio/wav;base64,",page)
-            self.assertIn("tRunnerBib",page)
-            self.assertNotIn("function tBuilding(",page)
-            self.assertNotIn("function tSpectator(",page)
+class LandscapePackTests(unittest.TestCase):
+    def test_pack_contract_and_replacement_fixture(self):
+        a,b=load_pack("tokyo"),load_pack("qa-london")
+        self.assertEqual(a["raceCityId"],"tokyo")
+        self.assertEqual(b["raceCityId"],"london")
+        self.assertTrue(validate(a))
+        self.assertTrue(validate(b))
+        self.assertNotEqual(a["backgrounds"]["normal"],b["backgrounds"]["normal"])
+        self.assertNotEqual(a["scene"]["slots"],b["scene"]["slots"])
+        self.assertNotEqual(a["scene"]["hud"],b["scene"]["hud"])
+        self.assertNotEqual(a["runners"][0]["frames"][0]["sourceSize"],b["runners"][0]["frames"][0]["sourceSize"])
+        self.assertNotEqual(len(a["runners"][0]["frames"]),len(b["runners"][0]["frames"]))
+        self.assertNotEqual(a["staff"]["female-normal"]["frames"]["idle"]["anchors"],b["staff"]["female-normal"]["frames"]["idle"]["anchors"])
+        self.assertNotEqual(runtime_settings(a)["storage"],runtime_settings(b)["storage"])
 
-    def test_r03_art_pack(self):
-        from tokyo_assets import build_pack
-        import base64
-        pack=build_pack()
-        m=pack["manifest"]
-        self.assertEqual(m["version"],3)
-        self.assertEqual(len(m["runners"]),22)
-        self.assertEqual(sum(len(r["frames"]) for r in m["runners"]),176)
-        self.assertEqual(sum(len(x["frames"]) for x in m["staff"].values()),50)
-        self.assertEqual(len(m["crowd"]),18)
-        self.assertEqual(len(m["fx"]),42)
-        self.assertEqual(len(pack["sounds"]),5)
-        self.assertEqual(len(m["slots"]),2)
-        for key,url in pack["images"].items():
-            if key.startswith("staff/") or key.endswith("/receive_supply"):
-                payload=base64.b64decode(url.split(",",1)[1])
-                self.assertNotIn(b'id="held_supply"',payload)
-                self.assertNotIn(b'id="received_supply"',payload)
-        self.assertEqual(set(m["fallbackSupplies"]),{"apple","orange","bar","juice"})
+    def test_missing_required_asset_and_bad_release_fail_closed(self):
+        pack=load_pack("tokyo")
+        pack["backgrounds"]["inferno"]="missing"
+        with self.assertRaisesRegex(ValueError,"undeclared resource"):
+            validate(pack)
+        pack=load_pack("tokyo")
+        pack["resources"][pack["backgrounds"]["normal"]]["path"]="assets/no-such-image.png"
+        with self.assertRaisesRegex(ValueError,"Missing asset"):
+            validate(pack)
+        with self.assertRaisesRegex(ValueError,"not visually approved"):
+            compile_pack(load_pack("tokyo"),release=True)
+        with self.assertRaisesRegex(ValueError,"not visually approved"):
+            compile_pack(load_pack("qa-london"),release=True)
 
-    def test_exact_anchor_is_fail_closed(self):
-        with self.assertRaises(RuntimeError):
-            tokyo.exact("not present","anchor","replacement")
-        with self.assertRaises(RuntimeError):
-            tokyo.exact("aa","a","b")
+    def test_no_missing_release_or_frame_metadata(self):
+        pack=load_pack("tokyo")
+        for frame in pack["staff"]["female-normal"]["frames"].values():
+            frame.pop("event",None)
+        with self.assertRaisesRegex(ValueError,"release marker"):
+            validate(pack)
+        pack=load_pack("tokyo")
+        del pack["runners"][0]["frames"][0]["anchors"]["bib"]
+        with self.assertRaises((ValueError,KeyError)):
+            validate(pack)
 
-if __name__=="__main__":
-    unittest.main()
+    def test_cropped_legacy_atlas_is_not_resized(self):
+        pack=load_pack("tokyo")
+        spec=pack["resources"][pack["supplies"]["apple"]["hand"]]
+        image,size,offset,digest=read_image(spec)
+        self.assertEqual(image.size,tuple(spec["rect"][2:]))
+        self.assertEqual(size,spec["sourceSize"])
+        self.assertEqual(offset,spec["trimOffset"])
+        self.assertEqual(digest,hashlib.sha256((ROOT/spec["path"]).read_bytes()).hexdigest())
+
+    def test_build_uses_unmodified_common_sources(self):
+        # A full raster build is exercised separately in CI. This test
+        # independently proves the build does not text-patch game or maths.
+        import tempfile
+        pack=load_pack("tokyo")
+        stub={"manifest":pack,"images":{},"sprites":{},"sounds":{}}
+        with tempfile.TemporaryDirectory() as d:
+            html=build(Path(d)/"a.html",compiled=stub).read_text()
+            for name in ("game.js","math.js","i18n.js"):
+                self.assertIn((ROOT/"src/js"/name).read_text(),html)
+            self.assertIn("window.SnackDashAssetPack=",html)
+            self.assertIn("snackDashTokyoPreviewSaveV1",html)
+            self.assertNotIn("<!-- BUILD:",html)
+            self.assertIn('id="gameFullscreenBtn"',html)
+
+if __name__=="__main__":unittest.main()
