@@ -1,0 +1,161 @@
+{
+  "revision": "r03",
+  "date": "2026-11-27",
+  "branch": "feature/main2-steps05-08-assets-r01",
+  "state": "review",
+  "runnerMasters": 22,
+  "runnerRunFrames": 176,
+  "runnerCatchPoses": 22,
+  "runnerReactions": 88,
+  "cheerPoses": 22,
+  "selectionPoses": 22,
+  "partExports": 198,
+  "bib": {
+    "old": [
+      101,
+      149,
+      57,
+      43
+    ],
+    "new": [
+      82,
+      144,
+      94,
+      66
+    ],
+    "areaIncrease": 2.531,
+    "screenEstimates": [
+      {
+        "position": "near",
+        "number": 8,
+        "runnerHeight1280": 266,
+        "bibWidth1280": 78.1,
+        "bibWidth640": 39.1,
+        "nominalFont640": 20
+      },
+      {
+        "position": "near",
+        "number": 48,
+        "runnerHeight1280": 266,
+        "bibWidth1280": 78.1,
+        "bibWidth640": 39.1,
+        "nominalFont640": 18.3
+      },
+      {
+        "position": "near",
+        "number": 168,
+        "runnerHeight1280": 266,
+        "bibWidth1280": 78.1,
+        "bibWidth640": 39.1,
+        "nominalFont640": 16.2
+      },
+      {
+        "position": "near",
+        "number": 1000,
+        "runnerHeight1280": 266,
+        "bibWidth1280": 78.1,
+        "bibWidth640": 39.1,
+        "nominalFont640": 14.1
+      },
+      {
+        "position": "mid",
+        "number": 8,
+        "runnerHeight1280": 178,
+        "bibWidth1280": 52.3,
+        "bibWidth640": 26.1,
+        "nominalFont640": 13.4
+      },
+      {
+        "position": "mid",
+        "number": 48,
+        "runnerHeight1280": 178,
+        "bibWidth1280": 52.3,
+        "bibWidth640": 26.1,
+        "nominalFont640": 12.2
+      },
+      {
+        "position": "mid",
+        "number": 168,
+        "runnerHeight1280": 178,
+        "bibWidth1280": 52.3,
+        "bibWidth640": 26.1,
+        "nominalFont640": 10.8
+      },
+      {
+        "position": "mid",
+        "number": 1000,
+        "runnerHeight1280": 178,
+        "bibWidth1280": 52.3,
+        "bibWidth640": 26.1,
+        "nominalFont640": 9.5
+      },
+      {
+        "position": "far",
+        "number": 8,
+        "runnerHeight1280": 143,
+        "bibWidth1280": 42,
+        "bibWidth640": 21,
+        "nominalFont640": 10.7
+      },
+      {
+        "position": "far",
+        "number": 48,
+        "runnerHeight1280": 143,
+        "bibWidth1280": 42,
+        "bibWidth640": 21,
+        "nominalFont640": 9.8
+      },
+      {
+        "position": "far",
+        "number": 168,
+        "runnerHeight1280": 143,
+        "bibWidth1280": 42,
+        "bibWidth640": 21,
+        "nominalFont640": 8.7
+      },
+      {
+        "position": "far",
+        "number": 1000,
+        "runnerHeight1280": 143,
+        "bibWidth1280": 42,
+        "bibWidth640": 21,
+        "nominalFont640": 7.6
+      }
+    ]
+  },
+  "checks": [
+    {
+      "topic": "11 nationality/language profiles × two visual examples",
+      "status": "FILES_COMPLETE"
+    },
+    {
+      "topic": "5 facial silhouettes, adulthood aging accents and body build",
+      "status": "DESIGN_UPDATED_AWAITING_ART_APPROVAL"
+    },
+    {
+      "topic": "blank high-contrast bib and dynamic numeric overlays",
+      "status": "ASSET_UPDATED"
+    },
+    {
+      "topic": "legibility 640×360 near four-digit",
+      "status": "NOT_DEVICE_TESTED"
+    },
+    {
+      "topic": "legibility 640×360 mid/far four-digit",
+      "status": "NOT_PASSABLE_BY_ASSET_ONLY"
+    },
+    {
+      "topic": "actual game renderer",
+      "status": "UNCHANGED_REQUIRES_SEPARATE_APPROVAL"
+    },
+    {
+      "topic": "production PNG/WebP and phone FPS",
+      "status": "NOT_COMPLETE"
+    }
+  ],
+  "previews": [
+    "bib_near_mid_far_8_48_168_1000_r03.svg",
+    "bib_640_device_scale_four_digits_r03.svg"
+  ],
+  "visualSignOff": "not granted"
+}

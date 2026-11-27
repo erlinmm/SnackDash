@@ -1,5 +1,5 @@
 {
-  "edition": "r02",
+  "edition": "r02-compatibility-after-r03-rebuild",
   "canvas": [
     256,
     320
@@ -24,12 +24,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_02",
@@ -49,12 +50,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_03",
@@ -74,12 +76,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_04",
@@ -99,12 +102,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_05",
@@ -124,12 +128,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_06",
@@ -149,12 +154,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_07",
@@ -174,12 +180,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_08",
@@ -199,12 +206,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_09",
@@ -224,12 +232,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_10",
@@ -249,12 +258,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_11",
@@ -274,12 +284,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_12",
@@ -299,12 +310,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_13",
@@ -324,12 +336,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_14",
@@ -349,12 +362,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_15",
@@ -374,12 +388,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_16",
@@ -399,12 +414,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_17",
@@ -424,12 +440,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_18",
@@ -449,12 +466,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_19",
@@ -474,12 +492,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_20",
@@ -499,12 +518,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_21",
@@ -524,12 +544,13 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     },
     {
       "assetId": "body_22",
@@ -549,13 +570,15 @@
         "disappointment"
       ],
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
       ],
-      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness.",
+      "sourceAssetRevision": "r03"
     }
   ],
-  "notes": "Country/language are metadata. Appearance is independent of the profile in gameplay; these are selectable casting examples."
+  "notes": "Country/language are metadata. Appearance is independent of the profile in gameplay; these are selectable casting examples.",
+  "supersededBy": "assets/source/runner/casting-index-r03.json"
 }
