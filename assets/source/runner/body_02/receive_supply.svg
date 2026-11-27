@@ -47,4 +47,4 @@
  <ellipse cx="130" cy="97" rx="6" ry="8" fill="#713b4a"/></g>
  <g id="hair"><path d="M92 65 Q87 29 119 27 Q154 17 165 52 L162 75 Q153 57 149 45 Q131 56 110 49 Q104 62 96 76Z" fill="#1c1c1d" stroke="#263047" stroke-width="3"/></g>
  <g id="bib_placeholder"><rect x="101" y="149" width="57" height="43" rx="6" fill="#fffdf9" stroke="#31425c" stroke-width="3.5"/><path d="M108 154 H150" stroke="#e3e7ed" stroke-width="3"/></g>
- </g></svg>
+ </g><g id="received_supply" transform="translate(225 108) rotate(20)"><path d="M-9 -18 H9 L11 -11 L13 -5 V22 Q0 29 -13 22 V-5 L-11 -11Z" fill="#b7e4f6" stroke="#356582" stroke-width="3"/><rect x="-6" y="-26" width="12" height="9" rx="2" fill="#4488be" stroke="#345b82" stroke-width="1.8"/><path d="M-6 -7 V16" stroke="#fff" stroke-width="4" opacity=".74"/></g><path id="fingers_over_supply" d="M215 128 Q224 116 234 125" fill="none" stroke="#a57657" stroke-width="4" stroke-linecap="round"/></svg>
