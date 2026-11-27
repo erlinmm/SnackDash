@@ -1,0 +1,33 @@
+    <section class="menu" id="menuScreen" aria-label="Tokyo race selection">
+      <div class="menu-heading"><div class="eyebrow" data-i18n="tokyo.kicker">SNACKDASH V2 · PLAYTEST</div>
+        <h1 data-i18n="tokyo.title">Tokyo Landscape</h1>
+        <p data-i18n="tokyo.subtitle">Marathon aid station · Ten races · Three festival modes</p>
+      </div>
+      <div class="menu-columns">
+        <section class="selection-card">
+          <div class="section-head"><h2 data-i18n="intro.pickRace">Choose your race</h2><span id="tokyoProgress"></span></div>
+          <div id="levelGrid" class="level-grid"></div>
+          <div class="selection-copy"><strong id="selectedTitle"></strong><small id="selectedMeta"></small></div>
+          <button class="btn primary" id="startBtn" type="button" data-i18n="intro.start">Let's serve!</button>
+        </section>
+        <section class="selection-card settings-card">
+          <h2 data-i18n="tokyo.staff">Choose staff</h2>
+          <div class="staff-options" role="group" aria-label="Staff">
+            <button type="button" id="tokyoFemale" aria-pressed="true"><span class="staff-mark female">花</span><span data-i18n="tokyo.female">Female</span></button>
+            <button type="button" id="tokyoMale" aria-pressed="false"><span class="staff-mark male">祭</span><span data-i18n="tokyo.male">Male</span></button>
+          </div>
+          <div class="settings-row"><label for="languageSelect" data-i18n="ui.language">Language</label><select id="languageSelect"></select></div>
+          <button class="btn" id="howToPlayBtn" type="button" data-i18n="intro.howToPlay">How to play</button>
+          <div class="mode-key"><span data-i18n="tokyo.normal">Normal</span><span data-i18n="tokyo.fever">花見 · Sakura Fever</span><span data-i18n="tokyo.inferno">花火 · Fireworks Inferno</span></div>
+          <details class="qa-panel"><summary data-i18n="tokyo.qa">QA · non-persistent scenes</summary>
+            <div class="qa-buttons">
+              <button type="button" data-scene="normal" data-i18n="tokyo.normal">Normal</button>
+              <button type="button" data-scene="fever" data-i18n="tokyo.fever">Sakura Fever</button>
+              <button type="button" data-scene="inferno" data-i18n="tokyo.inferno">Fireworks Inferno</button>
+              <button type="button" data-scene="dense" data-i18n="tokyo.dense">8 runners / 4-digit bibs</button>
+            </div>
+          </details>
+        </section>
+      </div>
+      <p class="menu-footer" data-i18n="tokyo.isolated">Preview scores, preferences and practice history are separate from the regular game.</p>
+    </section>
