@@ -9,8 +9,8 @@
   "targetRepo": "erlinmm/SnackDash",
   "targetBranch": "feature/main2-landscape-assets-r02",
   "sourceGalleryUrl": "https://chatgpt.com/space/page_47596f3a8a2881918ad2bd9b7bed05f5",
-  "binaryAssetsInGitHub": false,
-  "binaryStatus": "PENDING: direct binary transfer of the unchanged WEBP originals; no image bytes are committed by this manifest",
+  "binaryAssetsInGitHub": true,
+  "binaryStatus": "COMMITTED: the three original WEBP binary files are present in the GitHub branch at expectedRepoPath; archive checksums recorded per file",
   "images": [
     {
       "mode": "normal",
@@ -21,7 +21,9 @@
       "height": 865,
       "bytes": 276620,
       "sha256": "ce4fb734618ad0ea2676602e3ad41afdb02c184ed6a0fb46fae31f6d4788e3cb",
-      "normalBehavior": "Staff behind the physical aid table"
+      "normalBehavior": "Staff behind the physical aid table",
+      "repositoryFileStatus": "committed",
+      "gitBlobSha": "b6e1a0c6b7ef9a1b266c571d43111b1bfe76d569"
     },
     {
       "mode": "fever",
@@ -32,7 +34,9 @@
       "height": 864,
       "bytes": 285424,
       "sha256": "162a4aaac4f918595f3e63cffa601fac95b2a1f1545b144fc3dc90a61c0c8551",
-      "normalBehavior": "Staff behind the same fixed aid table"
+      "normalBehavior": "Staff behind the same fixed aid table",
+      "repositoryFileStatus": "committed",
+      "gitBlobSha": "4f3b2e34bc7602859a7a666232eab159e3ce0643"
     },
     {
       "mode": "inferno",
@@ -43,7 +47,9 @@
       "height": 864,
       "bytes": 329434,
       "sha256": "f3c3980fa1de3b9f951d90a69c476b5104e9c2be0c194d65d8c0641f2442d86d",
-      "normalBehavior": "Staff on top of the same fixed tabletop; no clipping"
+      "normalBehavior": "Staff on top of the same fixed tabletop; no clipping",
+      "repositoryFileStatus": "committed",
+      "gitBlobSha": "2e593521a25e652f71f562d1266132293289c28b"
     }
   ],
   "appliesTo": [

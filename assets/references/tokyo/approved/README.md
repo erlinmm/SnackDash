@@ -6,7 +6,18 @@ The owner supplied **three complete reference images** and explicitly approved t
 
 [View the three originals side by side in the approved reference gallery](https://chatgpt.com/space/page_47596f3a8a2881918ad2bd9b7bed05f5)
 
-> **Binary transfer status:** The original images have been stored in the linked approved gallery with verified checksums. **Their binary bytes have not yet been committed to this GitHub repository**. This folder contains the approved design contract and target filenames. Do not interpret the manifest as proof of image upload. The unchanged originals are available in the separately provided handoff ZIP.
+> **Binary transfer status: COMPLETE.** All three original images are committed below as unchanged WEBP files with the original SHA-256 values; they are the approved visual reference baselines.
+
+## Original approved screenshots
+
+### Normal
+![Tokyo Normal — owner approved](./tokyo_normal_approved_r02.webp)
+
+### Fever
+![Tokyo Fever — owner approved](./tokyo_fever_approved_r02.webp)
+
+### Inferno
+![Tokyo Inferno — owner approved](./tokyo_inferno_approved_r02.webp)
 
 ## Approved image inventory
 
