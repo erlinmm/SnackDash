@@ -1,6 +1,8 @@
 # SnackDash r02 — Tokyo landscape art / steps 01–04
 
-> **2026-11-27 approved references supersede exploratory r02 mockups:** See [the Tokyo reference contract](../../references/tokyo/approved/README.md) and [owner-approved gallery](https://chatgpt.com/space/page_47596f3a8a2881918ad2bd9b7bed05f5). The three source images are preserved off-repository pending binary transfer; the vector A/B drawings below remain exploratory only.
+> **Current steps 01–04 rebuild:** [approved-reference-calibrated source art and QA](approved-rebuild-r03/README.md) (2026-11-27). The prior camera A/B SVGs farther down are retained as exploratory history; they are **not** the approved-reference geometry. The latest approved Inferno image is already committed in [the official Tokyo reference set](../../references/tokyo/approved/README.md).
+
+> **2026-11-27 approved references supersede exploratory r02 mockups:** See [the Tokyo reference contract](../../references/tokyo/approved/README.md) and [owner-approved gallery](https://chatgpt.com/space/page_47596f3a8a2881918ad2bd9b7bed05f5). The three original approved images are committed in GitHub; the vector A/B drawings below remain exploratory only.
 
 **Review branch:** `feature/main2-landscape-assets-r02`  
 **Source:** `main2@c102ab0329d696199161ba0747633b721e82c4e9`  

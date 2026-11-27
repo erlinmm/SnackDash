@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "project": "SnackDash V2",
-  "branch": "main2",
-  "catalogStatus": "planning_only",
-  "disclaimer": "This is an art-direction inventory. It is NOT a runtime manifest and contains NO finished asset references. All original local event names require cultural/official verification before approval.",
+  "branch": "feature/main2-landscape-assets-r02",
+  "catalogStatus": "review_prototypes_present",
+  "disclaimer": "Art-direction catalog only, NOT a runtime manifest. Three owner-approved Tokyo source screenshots are present; derived step 01–04 geometry, environment and supplies are review candidates, not finished integrated runtime sprite assets. Local event names still require independent verification.",
   "stage": {
     "targetCanvas": {
-      "width": 390,
-      "height": 700,
-      "orientation": "portrait"
+      "width": 1280,
+      "height": 720,
+      "orientation": "landscape"
     },
-    "camera": "front-facing-runners-three-lanes",
-    "volunteerPosition": "left_stall",
+    "camera": "tokyo-approved-high-angle-curved-three-lanes",
+    "volunteerPosition": "left_fixed_table_behind_normal_fever_on_table_inferno",
     "backupSupplySlots": 2
   },
   "families": [
@@ -22,10 +22,10 @@
         "city",
         "mode"
       ],
-      "status": "planned",
-      "masterPath": null,
+      "status": "review",
+      "masterPath": "assets/source/approved-rebuild-r03/street/tokyo/shared_empty_environment_plate.webp",
       "exportPath": null,
-      "previewPath": null
+      "previewPath": "assets/previews/landscape-r02/approved-rebuild-r03/03_tokyo_normal_station_occlusion_review.webp"
     },
     {
       "id": "volunteer_costume",
@@ -73,10 +73,10 @@
         "city",
         "mode"
       ],
-      "status": "planned",
-      "masterPath": null,
+      "status": "review",
+      "masterPath": "assets/source/approved-rebuild-r03/station/tokyo/shared_table_frame.svg",
       "exportPath": null,
-      "previewPath": null
+      "previewPath": "assets/previews/landscape-r02/approved-rebuild-r03/03_tokyo_inferno_station_occlusion_review.webp"
     },
     {
       "id": "backup_supply",
@@ -85,10 +85,10 @@
         "slot",
         "itemType"
       ],
-      "status": "planned",
-      "masterPath": null,
+      "status": "review",
+      "masterPath": "assets/source/approved-rebuild-r03/supply/water/master.svg",
       "exportPath": null,
-      "previewPath": null
+      "previewPath": "assets/previews/landscape-r02/approved-rebuild-r03/04_supplies_alpha_contact_sheet.png"
     },
     {
       "id": "festival_ambient_fx",
@@ -167,7 +167,10 @@
       },
       "sourcePath": null,
       "previewPath": null,
-      "exportPath": null
+      "exportPath": null,
+      "visualReferenceStatus": "owner_approved",
+      "artReviewStatus": "review",
+      "latestInfernoReference": "assets/references/tokyo/approved/tokyo_inferno_approved_r02.webp"
     },
     {
       "id": "seoul",
@@ -421,5 +424,21 @@
       "previewPath": null,
       "exportPath": null
     }
-  ]
+  ],
+  "approvedTokyoReferenceSet": "assets/references/tokyo/approved/README.md",
+  "latestArtReview": {
+    "revision": "approved-rebuild-r03",
+    "date": "2026-11-27",
+    "status": "review",
+    "sourceRoot": "assets/source/approved-rebuild-r03/",
+    "previewRoot": "assets/previews/landscape-r02/approved-rebuild-r03/",
+    "qa": "assets/previews/landscape-r02/approved-rebuild-r03/QA_approved_steps_01_04.json",
+    "stepsCompletedForReview": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "runtimeIntegrated": false
+  }
 }

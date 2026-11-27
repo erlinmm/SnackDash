@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "canvas": [
+    1280,
+    720
+  ],
+  "sourcePlate": "assets/source/approved-rebuild-r03/street/tokyo/shared_empty_environment_plate.webp",
+  "storage": "lossless cropped alpha WEBP, exact RGB recomposition against the archived source plate",
+  "layers": [
+    {
+      "id": "skyline",
+      "region": "skyline",
+      "path": "assets/source/approved-rebuild-r03/street/tokyo/layers/skyline_master.webp",
+      "offset": [
+        0,
+        0
+      ],
+      "size": [
+        1280,
+        201
+      ],
+      "bytes": 371858
+    },
+    {
+      "id": "left_street",
+      "region": "left_street",
+      "path": "assets/source/approved-rebuild-r03/street/tokyo/layers/left_street_master.webp",
+      "offset": [
+        0,
+        201
+      ],
+      "size": [
+        727,
+        519
+      ],
+      "bytes": 558594
+    },
+    {
+      "id": "right_river",
+      "region": "right_river",
+      "path": "assets/source/approved-rebuild-r03/street/tokyo/layers/right_river_master.webp",
+      "offset": [
+        864,
+        201
+      ],
+      "size": [
+        416,
+        370
+      ],
+      "bytes": 228142
+    },
+    {
+      "id": "road_far",
+      "region": "road",
+      "path": "assets/source/approved-rebuild-r03/street/tokyo/layers/road_far_master.webp",
+      "offset": [
+        389,
+        201
+      ],
+      "size": [
+        806,
+        275
+      ],
+      "bytes": 301678
+    },
+    {
+      "id": "road_near",
+      "region": "road",
+      "path": "assets/source/approved-rebuild-r03/street/tokyo/layers/road_near_master.webp",
+      "offset": [
+        271,
+        476
+      ],
+      "size": [
+        1009,
+        244
+      ],
+      "bytes": 314364
+    }
+  ]
+}

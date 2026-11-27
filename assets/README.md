@@ -1,8 +1,10 @@
 # SnackDash V2 — Art asset library
 
-**Branch:** `main2` | **Status:** library structure and design plans only | **Not runtime assets**
+**Feature-branch review:** `feature/main2-landscape-assets-r02` | **Status:** Tokyo reference images approved; steps 01–04 rebuild is review-only | **Not runtime assets**
 
 This directory is a dedicated design workspace for the major V2 visual refresh. Do not modify `src/`, tests, game rules or build scripts as part of asset reviews. Do not merge or overwrite `feature/i18n-foundation`, which is being developed independently.
+
+[Open the current steps 01–04 review](previews/landscape-r02/approved-rebuild-r03/README.md) · [Open approved Tokyo references](references/tokyo/approved/README.md)
 
 ## Layout
 
@@ -14,7 +16,7 @@ This directory is a dedicated design workspace for the major V2 visual refresh. 
 | `references/` | Cultural references, event verification, rights/provenance notes | No |
 | `catalog.json` | Index of planned asset families and current statuses | No |
 
-No finished production art, sound effects, animation atlases or runtime exports have been committed as of this setup.
+Three owner-approved Tokyo screenshots are available in `references/tokyo/approved/`. The new geometry/street/supply components in `source/approved-rebuild-r03/` are review candidates only; no finished production animation atlas or integrated runtime sprites have been committed.
 
 ## Proposed naming (pending art-pipeline approval)
 
@@ -42,7 +44,7 @@ Each library entry should specify: `id`, `family`, `city` if relevant, `mode`, `
 
 ## Constraints
 
-1. The target is the existing **390×700 portrait** gameplay coordinate system, subject to future camera/layout approval. No runner viewed from behind. Runners move from far field toward the camera.
+1. For this Tokyo asset-review branch, the target is **1280×720 landscape** with a high-angle left-bending three-lane approach traced against owner-approved Normal/Fever/Inferno screenshots. Runtime game coordinates are **not** changed in this art branch. No runner viewed from behind. Runners move from far field toward the camera.
 2. Two visible backup supplies stacked on the lower-left; swap touch regions must follow the artwork in a future *separately approved* implementation.
 3. Volunteer operates from behind a fixed-height stall in Normal/Fever; stands on that **same** tabletop in Inferno. Long female robes hang down and do not reveal legs.
 4. Real local activities, original-script names and localized explanations remain distinct. Verify names and cultural claims before marking art as approved.

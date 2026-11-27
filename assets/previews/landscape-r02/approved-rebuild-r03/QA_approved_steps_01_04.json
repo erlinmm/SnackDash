@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 3,
+  "referenceIntegrity": {
+    "normal": {
+      "sha256": "ce4fb734618ad0ea2676602e3ad41afdb02c184ed6a0fb46fae31f6d4788e3cb",
+      "sourcePx": [
+        1536,
+        865
+      ]
+    },
+    "fever": {
+      "sha256": "162a4aaac4f918595f3e63cffa601fac95b2a1f1545b144fc3dc90a61c0c8551",
+      "sourcePx": [
+        1536,
+        864
+      ]
+    },
+    "inferno": {
+      "sha256": "024d87c27f60545af4518e307432b5e9585b33e3265fd0a4c2e6d28a77bd3bc1",
+      "sourcePx": [
+        1536,
+        864
+      ]
+    }
+  },
+  "camera": {
+    "activeCount": 7,
+    "runnerScaleMonotonic": true,
+    "screenSpaceLaneWidthMonotonic": true,
+    "hitboxIouPairs": [],
+    "hitboxCollisionReviewNeeded": false
+  },
+  "step03": {
+    "fourPartLayerRecompositionExact": true,
+    "sameTableCoordinatesAllModes": true,
+    "volunteerOcclusionOrderBehindInNormalFever": true,
+    "infernoFeetOnUnchangedTabletop": "illustrated proxy contact; manual visual review still required",
+    "losslessLayerReassemblyFromStoredCrops": true,
+    "layerTiles": 5
+  },
+  "step04": {
+    "alphaExports": {
+      "water_hand": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 18816,
+        "hasRealAlpha": true
+      },
+      "water_flight": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 18844,
+        "hasRealAlpha": true
+      },
+      "water_slot": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 1550,
+        "hasRealAlpha": true
+      },
+      "gel_hand": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 21614,
+        "hasRealAlpha": true
+      },
+      "gel_flight": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 21699,
+        "hasRealAlpha": true
+      },
+      "gel_slot": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 1775,
+        "hasRealAlpha": true
+      },
+      "banana_hand": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 11720,
+        "hasRealAlpha": true
+      },
+      "banana_flight": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 11732,
+        "hasRealAlpha": true
+      },
+      "banana_slot": {
+        "cornerAlpha": 0,
+        "nontransparentPixels": 1005,
+        "hasRealAlpha": true
+      },
+      "speech_number_empty": {
+        "cornerAlpha": 0,
+        "hasRealAlpha": true
+      },
+      "backup_slot_empty": {
+        "cornerAlpha": 0,
+        "hasRealAlpha": true
+      }
+    },
+    "bubbleSourceTextFree": true,
+    "twoSlotsOnlyInAssembly": true,
+    "samePhysicalObjectForHandFlightAndIcon": true,
+    "gelNotMappedToRuntime": true
+  },
+  "manualDeviceQA": "pending",
+  "deliverableStatus": "review; original three screenshots already approved; derived files require separate review",
+  "sourceBranch": "feature/main2-landscape-assets-r02",
+  "userApprovedReferenceRevisedInfernoSHA256": "024d87c27f60545af4518e307432b5e9585b33e3265fd0a4c2e6d28a77bd3bc1"
+}
