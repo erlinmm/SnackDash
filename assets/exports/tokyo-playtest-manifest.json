@@ -1,53 +1,9 @@
 {
-  "version": 1,
   "project": "SnackDash V2 Tokyo Landscape Playtest",
-  "status": "provisional",
-  "logicalCanvas": [
-    1280,
-    720
-  ],
-  "reference": "User-attached Tokyo Step 10 review board (not a runtime asset)",
-  "sourceReviewArchive": "assets/previews/character-r01/manifest.json",
-  "productionSpritesReused": [],
-  "runtimeReused": [
-    "canonical GameMath and NumberDirector",
-    "canonical game state and traffic/learning/reactions/audio",
-    "canonical physical supply vector renderer"
-  ],
-  "provisional": [
-    {
-      "source": "src/tokyo/art.js",
-      "families": [
-        "Tokyo environment x3",
-        "female/male staff x3",
-        "modular front-facing runners",
-        "crowd and festival props",
-        "table, petals, fireworks and score FX"
-      ],
-      "format": "Canvas vector primitives",
-      "status": "provisional replaceable original artwork"
-    },
-    {
-      "source": "src/tokyo/preview.css",
-      "families": [
-        "HUD",
-        "race selector"
-      ],
-      "status": "prototype UI"
-    }
-  ],
-  "physicalSupplies": {
-    "water": "bottled water",
-    "banana": "banana",
-    "apple": "apple",
-    "orange": "orange",
-    "bar": "wrapped energy bar (not energy gel)",
-    "juice": "juice carton"
-  },
-  "notes": [
-    "No review-board crop is used as a sprite.",
-    "Earlier vertical tray placement is superseded by Step 10 side-by-side placement.",
-    "Two tray positions; a temporarily unfillable position remains a refill state under canonical number eligibility.",
-    "No production-ready layered characters, atlas or frame metadata exists in base repository."
-  ]
+  "version": 2,
+  "status": "illustrated review candidate; not production art approval",
+  "runtimeManifest": "assets/exports/tokyo/manifest.json",
+  "sourceStreet": "assets/source/tokyo/normal-street.webp",
+  "referenceArchive": "assets/previews/character-r01/manifest.json",
+  "note": "The original geometric renderer is superseded. Seven independent WebP exports are embedded in the preview HTML. Review composites are not rendered as backgrounds. See runtimeManifest for provenance and remaining art limitations."
 }

@@ -51,44 +51,34 @@
   $('tokyoFemale').setAttribute('aria-pressed',String(tokyoVolunteer==='female'));
   $('tokyoMale').setAttribute('aria-pressed',String(tokyoVolunteer==='male'));
 
-  // Real perspective projection, not a stretch of the portrait raster.
-  // The canonical traffic, hit tests, placement and visual renderer all use
-  // these same functions. New runners arrive just below the HUD at the horizon.
-  roadCenter=y=>785+25*tDepth(y);
-  roadHalfWidth=y=>130+335*tDepth(y);
+  // Chest/bib is the canonical gameplay anchor. Project lane centers using
+  // the runner's estimated shoe contact depth on the illustrated road.
+  roadCenter=y=>805-20*tFootDepth(y);
+  roadHalfWidth=y=>32+468*tFootDepth(y);
   runnerScale=(r,y=r.y,includeCheer=true)=>{
-    const p=tDepth(y),base=.91+.63*p;
-    const boost=1+Math.min(.27,(r.sizeBoost??r.successes)*.075);
-    const bounce=includeCheer&&!reducedMotion()&&r.feverCheerTimer>0?.065*Math.sin((1-r.feverCheerTimer/1.45)*Math.PI):0;
-    return r.look.height*base*(boost+bounce);
+    const boost=1+Math.min(.12,(r.sizeBoost??r.successes)*.035);
+    return tBodyHeight(y)/128*clamp(r.look.height,.96,1.04)*boost;
   };
-  // The portrait random rejection sampler can exhaust its search with eight
-  // larger landscape silhouettes. Use depth bands for dense starts and as
-  // a safety fallback for sparse ones; subsequent traffic remains canonical.
-  const tokyoOriginalPopulate=Marathon.prototype.populate;
+  runnerFootprint=(r,y=r.y,lane=r.lane)=>{
+    const b=tRunnerRect(r,y,runnerXAt(r,y,lane));
+    const left=Math.max(0,b.x),right=Math.min(W,b.x+b.w),top=Math.max(0,b.y),bottom=Math.min(H,b.y+b.h);
+    return left<right&&top<bottom?{left,right,top,bottom}:null;
+  };
+  Marathon.prototype.onScreen=function(r){
+    const x=this.runnerX(r),y=r.y+runnerVisualOffset(r);
+    // Retire when the bib is no longer readable, not after a cropped head
+    // remains below the frame. The current item always has a visible target.
+    return y>=110&&y<=H-16&&x>=342&&x<=W-18;
+  };
+  // Three depth bands keep the large foreground actor and the far bibs
+  // visible simultaneously. Initial lanes are randomized, not nationality.
   Marathon.prototype.populate=function(numbers){
-    if(numbers.length<8){
-      try{tokyoOriginalPopulate.call(this,numbers);return}
-      catch(e){
-        if(e.message!=='Cannot safely place starting runners')throw e;
-        this.runners=[];this.nextId=1;
-      }
-    }
-    const shuffle=items=>{
-      const result=items.slice();
-      for(let i=result.length-1;i>0;i--){
-        const j=randInt(this.rng,0,i);
-        [result[i],result[j]]=[result[j],result[i]];
-      }
-      return result;
-    };
-    const cells=shuffle([218,416,634].flatMap(y=>[0,1,2].map(lane=>({y,lane}))));
-    for(const [i,number] of shuffle(numbers).entries()){
-      const c=cells[i],y=c.y+this.rand(-5,5);
-      const r=this.makeRunner(number,y,LANES[c.lane]);
-      if(this.runners.some(other=>runnerFootprintsClash(r,r.y,r.lane,other,other.y,other.lane,9)))
-        throw Error('Landscape starting grid clearance invariant failed');
-      this.runners.push(r);
+    const shuffle=a=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=randInt(this.rng,0,i);[b[i],b[j]]=[b[j],b[i]]}return b};
+    const near=shuffle([0,1,2]).slice(0,2),mid=shuffle([0,1,2]),far=shuffle([0,1,2]);
+    const cells=[...near.map((lane,i)=>({lane,y:516+i*26})),...mid.map((lane,i)=>({lane,y:375+i*5})),...far.map((lane,i)=>({lane,y:292+i*3}))];
+    if(numbers.length===6)cells.splice(4,1);
+    for(const [i,n] of shuffle(numbers).entries()){
+      const c=cells[i],r=this.makeRunner(n,c.y+this.rand(-3,3),LANES[c.lane]);this.runners.push(r);
     }
   };
   const tokyoJump=runnerVisualOffset;
@@ -126,7 +116,7 @@
   showMenu=()=>{debugMode=false;tokyoOriginalMenu()};
   startLevel=level=>{
     debugMode=false;
-    if(!isOpen(level))return;
+    if(!tokyoAssetsReady||!isOpen(level))return;
     tokyoOriginalStart(level);
     if(game)game.staffElevation=0;
     if(innerHeight>innerWidth&&game&&game.phase==='countdown')game.pause();
@@ -178,9 +168,13 @@
   Marathon.prototype.tryThrow=function(x,y){
     if(this.qaFixture)return;
     const previous=this.throwing;
-    tokyoOriginalThrow.call(this,x,y);
+    const candidates=this.runners.filter(r=>this.onScreen(r)).map(r=>({r,b:tRunnerRect(r,r.y,this.runnerX(r))})).filter(({b})=>x>=b.x-10&&x<=b.x+b.w+10&&y>=b.y-10&&y<=Math.min(H,b.y+b.h)+10);
+    candidates.sort((a,b)=>Math.hypot(x-a.b.bibX,y-a.b.bibY)-Math.hypot(x-b.b.bibX,y-b.b.bibY));
+    const target=candidates[0]?.r;
+    if(target)tokyoOriginalThrow.call(this,this.runnerX(target),target.y+runnerVisualOffset(target)-8*runnerScale(target));
+    else tokyoOriginalThrow.call(this,x,y);
     if(this.throwing&&this.throwing!==previous){
-      const hand=tHand(this);this.throwing.tokyoOrigin={x:hand.x+7,y:hand.y-13};
+      const hand=tHand(this);this.throwing.tokyoOrigin={x:hand.x,y:hand.y};
       this.throwing.tokyoMode=tMode(this);
     }
   };
@@ -207,7 +201,7 @@
   // data. The same real renderer draws fixtures and ordinary games.
   function tokyoInspect(mode){
     const dense=mode==='dense',cfg=LEVELS[dense?9:0],fixtureMode=dense?'normal':mode;
-    if(!['normal','fever','inferno'].includes(fixtureMode))return;
+    if(!tokyoAssetsReady||!['normal','fever','inferno'].includes(fixtureMode))return;
     debugMode=true;
     tokyoOriginalStart(cfg.level);
     game=new Marathon(cfg,0x32f11a+cfg.level);
@@ -215,12 +209,12 @@
     game.combo=fixtureMode==='inferno'?10:fixtureMode==='fever'?5:0;
     game.fever=fixtureMode!=='normal';game.inferno=fixtureMode==='inferno';
     game.staffElevation=game.inferno?1:0;
-    const locations=dense?[[198,0],[222,2],[309,1],[390,0],[408,2],[520,1],[640,0],[650,2]]
-      :[[208,0],[240,2],[322,1],[452,0],[520,2],[630,1]];
+    const locations=dense?[[290,0],[295,1],[300,2],[377,0],[380,1],[383,2],[519,0],[543,2]]
+      :[[291,0],[300,2],[312,1],[420,0],[433,1],[535,2]];
     const bibs=dense?[12,18,24,321,1000,72,144,156]:[12,18,24,36,72,63];
     game.runners.forEach((r,i)=>{
       const [y,lane]=locations[i];r.y=y;r.laneIndex=lane;r.targetLaneIndex=lane;
-      r.lane=LANES[lane];r.number=bibs[i];r.sway=0;r.speed=r.baseSpeed;
+      r.lane=LANES[lane];r.artIndex=dense?[0,4,2,3,1,5,2,1][i]:[0,2,5,3,4,1][i];r.number=bibs[i];r.sway=0;r.speed=r.baseSpeed;
     });
     // These numbers are runtime fixtures, not baked art. All displayed
     // fixture supplies have matching runners; initial-pool restrictions are
@@ -237,5 +231,6 @@
     geometry:()=>({width:W,height:H,lanes:LANES.length,table:{...TOKYO_TABLE},slots:TOKYO_SLOTS.map(s=>({...s})),
       staff:tokyoVolunteer,hand:game?tHand(game):null,staffFoot:game?tStaffBase(game):null,
       scaleAt:game?[runnerScale(game.runners[0],200),runnerScale(game.runners[0],400),runnerScale(game.runners[0],640)]:[],
-      mode:game?tMode(game):null,fixture:!!game?.qaFixture}),
+      mode:game?tMode(game):null,fixture:!!game?.qaFixture,assetsReady:tokyoAssetsReady,artVersion:artManifest.version}),
   });
+

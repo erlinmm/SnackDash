@@ -1,0 +1,244 @@
+{
+  "version": 2,
+  "backgrounds": {
+    "normal": "normal.webp",
+    "fever": "fever.webp",
+    "inferno": "inferno.webp"
+  },
+  "staff": {
+    "female-normal": {
+      "rect": [
+        5,
+        5,
+        367,
+        401
+      ],
+      "hand": [
+        0.9209809264305178,
+        0.5635910224438903
+      ],
+      "source": "new illustrated normal pose, isolated from working art; sample bottle removed"
+    },
+    "female-fever": {
+      "rect": [
+        517,
+        5,
+        375,
+        382
+      ],
+      "hand": [
+        0.936,
+        0.5340314136125655
+      ],
+      "source": "new illustrated sakura pose, isolated from working art; sample gel removed"
+    },
+    "female-inferno": {
+      "rect": [
+        1029,
+        5,
+        173,
+        239
+      ],
+      "hand": [
+        0.9190751445086706,
+        0.3179916317991632
+      ],
+      "source": "r01/tokyo_inferno_supply_number_only.png; isolated full-length robe and feet"
+    },
+    "male-normal": {
+      "rect": [
+        5,
+        517,
+        445,
+        442
+      ],
+      "hand": [
+        0.9280898876404494,
+        0.5678733031674208
+      ],
+      "source": "approved Step 10 board, normal male cutout; banana removed"
+    },
+    "male-fever": {
+      "rect": [
+        517,
+        517,
+        418,
+        440
+      ],
+      "hand": [
+        0.9258373205741627,
+        0.5659090909090909
+      ],
+      "source": "approved Step 10 board, fever male cutout; bottle removed"
+    },
+    "male-inferno": {
+      "rect": [
+        1029,
+        517,
+        456,
+        498
+      ],
+      "hand": [
+        0.9407894736842105,
+        0.4959839357429719
+      ],
+      "source": "approved Step 10 board, inferno male cutout; gel removed; clipped hair top repaired from same character normal pose"
+    }
+  },
+  "runners": [
+    {
+      "rect": [
+        4,
+        2,
+        253,
+        505
+      ],
+      "bib": [
+        0.5968379446640316,
+        0.41188118811881186,
+        0.2648221343873518,
+        0.0891089108910891
+      ],
+      "gender": "female",
+      "source": "generated transparent full-body cast, r01 visual references"
+    },
+    {
+      "rect": [
+        388,
+        2,
+        233,
+        506
+      ],
+      "bib": [
+        0.5064377682403434,
+        0.4308300395256917,
+        0.3090128755364807,
+        0.09683794466403162
+      ],
+      "gender": "male",
+      "source": "generated transparent full-body cast, r01 visual references"
+    },
+    {
+      "rect": [
+        772,
+        2,
+        233,
+        502
+      ],
+      "bib": [
+        0.47639484978540775,
+        0.4043824701195219,
+        0.2918454935622318,
+        0.09362549800796813
+      ],
+      "gender": "male",
+      "source": "generated transparent full-body cast, r01 visual references"
+    },
+    {
+      "rect": [
+        1156,
+        2,
+        238,
+        506
+      ],
+      "bib": [
+        0.6470588235294118,
+        0.41699604743083,
+        0.2857142857142857,
+        0.09288537549407115
+      ],
+      "gender": "female",
+      "source": "generated transparent full-body cast, r01 visual references"
+    },
+    {
+      "rect": [
+        1540,
+        2,
+        249,
+        511
+      ],
+      "bib": [
+        0.6104417670682731,
+        0.4090019569471624,
+        0.26907630522088355,
+        0.09001956947162426
+      ],
+      "gender": "female",
+      "source": "generated transparent full-body cast, r01 visual references"
+    },
+    {
+      "rect": [
+        1924,
+        2,
+        240,
+        509
+      ],
+      "bib": [
+        0.5833333333333334,
+        0.4106090373280943,
+        0.2833333333333333,
+        0.08840864440078586
+      ],
+      "gender": "female",
+      "source": "generated transparent full-body cast, r01 visual references"
+    }
+  ],
+  "supplies": {
+    "water": {
+      "rect": [
+        28,
+        9,
+        71,
+        110
+      ]
+    },
+    "banana": {
+      "rect": [
+        137,
+        20,
+        110,
+        88
+      ]
+    },
+    "apple": {
+      "rect": [
+        269,
+        9,
+        102,
+        110
+      ]
+    },
+    "orange": {
+      "rect": [
+        394,
+        9,
+        108,
+        110
+      ]
+    },
+    "bar": {
+      "rect": [
+        521,
+        10,
+        110,
+        108
+      ]
+    },
+    "juice": {
+      "rect": [
+        668,
+        9,
+        72,
+        110
+      ]
+    }
+  },
+  "notes": [
+    "Clean alpha cutouts only; no full review board or baked gameplay UI is rendered.",
+    "Male costumes are lower-resolution Step 10 art crops; female Inferno reused r01 full body.",
+    "Normal source street was independently illustrated; Fever and Inferno use the same geometry with color grading, petals and fireworks.",
+    "Six full body runner appearances are used independently of native reaction profiles; not a 22-character production atlas.",
+    "Normal/Fever staff cutouts end behind the table; Inferno has complete feet/robe.",
+    "Canonical item types unchanged; emoji artwork for apple, orange, bar, juice is provisional."
+  ]
+}

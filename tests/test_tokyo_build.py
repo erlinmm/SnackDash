@@ -26,6 +26,11 @@ class TokyoBuildTests(unittest.TestCase):
             self.assertIn("const W=1280,H=720,GOAL=10",page)
             self.assertIn("resolveHit(this.combo",page)
             self.assertIn("this.supplies.queue.length<2",page)
+            self.assertIn("window.SnackDashTokyoArt=",page)
+            self.assertEqual(page.count("data:image/webp;base64,"),7)
+            self.assertIn("tRunnerBib",page)
+            self.assertNotIn("function tBuilding(",page)
+            self.assertNotIn("function tSpectator(",page)
 
     def test_exact_anchor_is_fail_closed(self):
         with self.assertRaises(RuntimeError):

@@ -120,6 +120,7 @@ def assert_dimensions(page):
     g = page.evaluate("SnackDashTokyoQA.geometry()")
     b = page.locator('#scene').bounding_box()
     assert (g["width"], g["height"], g["lanes"]) == (1280,720,3), g
+    assert g["assetsReady"] and g["artVersion"]==2,g
     assert len(g["slots"]) == 2 and g["scaleAt"][0] < g["scaleAt"][1] < g["scaleAt"][2], g
     assert abs(b["width"]/b["height"]-16/9) < .025, b
     viewport = page.viewport_size
@@ -207,6 +208,7 @@ def run(browser):
         page.on("console",lambda msg:errors.append(msg.text) if msg.type=="error" else None)
         page.goto(URL)
         page.locator("#startBtn").wait_for(state="visible")
+        page.wait_for_function("document.documentElement.dataset.tokyoAssets==='ready'")
         return ctx,page
 
     ctx,page=context(1280,720)
