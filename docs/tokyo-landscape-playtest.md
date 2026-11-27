@@ -54,8 +54,7 @@ reactions remain intact. Active bibs are drawn above the actor layer to
 improve readability during brief overtakes. A runner is retired when its
 bib leaves the visible scene. Canonical speed and traffic logic are retained.
 
-Alternating lower-body transforms and a body bob simulate the running
-stride. Dedicated hand-authored run, catch, disappointed face, climb and
+Continuous lower-leg flex and a body bob simulate the running stride. Dedicated hand-authored run, catch, disappointed face, climb and
 crowd animation sheets are still missing. Inferno moves the illustrated
 staff onto the original table; the movement is not yet a frame-by-frame
 climb. This art pass is a review candidate, not production art approval.

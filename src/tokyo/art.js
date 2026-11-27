@@ -58,16 +58,20 @@
     // Floor-contact shadow is placed on the photographed/illustrated roadway.
     const footY=y+h-2,shadowH=Math.max(3,h*.037);
     if(footY<H+12){ctx.save();ctx.globalAlpha=.25;tOval(ctx,x-10,footY,w*.40,shadowH,'#20233e',null,1,-.16);ctx.restore()}
-    const [sx,sy,sw,sh]=art.rect,split=Math.round(sh*.55),dh=h*split/sh;
-    // Alternating stride uses the actual lower-body image, preserving the
-    // face, hair, singlet and blank bib. The clip stays on the shorts seam.
-    if(motion&&Math.sin(phase)<0){
-      ctx.save();ctx.beginPath();ctx.rect(xx-w*.35,y+dh-1,w*1.7,h-dh+2);ctx.clip();
-      ctx.translate(2*x,0);ctx.scale(-1,1);
-      tSprite('runners.webp',[sx,sy+split,sw,sh-split],xx,y+dh,w,h-dh);ctx.restore();
+    const [sx,sy,sw,sh]=art.rect,split=Math.round(sh*.64),dh=h*split/sh;
+    // Art is a single illustrated pose. Deform only the lower legs with a
+    // continuous, small stride flex; never mirror a torso seam or duplicate
+    // a hand. Replace this transform with real frames when art is approved.
+    if(motion){
       tSprite('runners.webp',[sx,sy,sw,split+1],xx,y,w,dh+1);
+      const bands=6,remaining=sh-split;
+      for(let i=0;i<bands;i++){
+        const a=Math.floor(split+remaining*i/bands),b=Math.min(sh,Math.ceil(split+remaining*(i+1)/bands)+1);
+        const p=i/bands,dx=Math.sin(phase)*w*.065*p*p;
+        tSprite('runners.webp',[sx,sy+a,sw,b-a],xx+dx,y+a*h/sh,w,(b-a)*h/sh);
+      }
     }else tSprite('runners.webp',art.rect,xx,y,w,h);
-    if(r.cheerTimer>0&&motion){ctx.save();ctx.globalAlpha=Math.min(.9,r.cheerTimer*2);tStar(ctx,x+w*.43,by-h*.20,Math.min(15,h*.055),'#ffdc79','#fff6c8');ctx.restore()}
+    if(r.cheerTimer>0&&motion){ctx.save();ctx.globalAlpha=Math.min(.9,r.cheerTimer*2);tStar(ctx,x+w*.43,r.y+jump+bob-h*.20,Math.min(15,h*.055),'#ffdc79','#fff6c8');ctx.restore()}
   }
   function tRunnerBib(r,g,x){
     const rect=tRunnerRect(r,r.y,x),{art,w,h}=rect;

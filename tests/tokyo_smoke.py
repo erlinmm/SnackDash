@@ -109,6 +109,7 @@ HITS_JS = """({count, correct}) => {
       throw Error('Canonical score/mode mismatch');
     if(chosen.number!==expectedBib)throw Error('Canonical bib transform mismatch');
     g.assertReady();
+    g.draw(); // Exercise the real renderer during each catch, not only QA stills.
     if(g.supplies.queue.length>2)throw Error('Invisible third supply');
     steps.push({combo:g.combo,score:g.score,delta:outcome.delta,
       fever:g.fever,inferno:g.inferno,prior,supply,bib:chosen.number});
