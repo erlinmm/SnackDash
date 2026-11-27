@@ -1,0 +1,561 @@
+{
+  "edition": "r02",
+  "canvas": [
+    256,
+    320
+  ],
+  "masterCount": 22,
+  "runners": [
+    {
+      "assetId": "body_01",
+      "nationality": "KE",
+      "gender": "female",
+      "nativeLanguage": "sw-KE",
+      "bodyBuild": "compact",
+      "complexionHex": "#855039",
+      "hairStyle": "twists",
+      "source": "assets/source/runner/body_01/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_02",
+      "nationality": "KE",
+      "gender": "male",
+      "nativeLanguage": "sw-KE",
+      "bodyBuild": "lean",
+      "complexionHex": "#573524",
+      "hairStyle": "cropped",
+      "source": "assets/source/runner/body_02/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_03",
+      "nationality": "TZ",
+      "gender": "female",
+      "nativeLanguage": "sw-TZ",
+      "bodyBuild": "lean",
+      "complexionHex": "#68412f",
+      "hairStyle": "coily",
+      "source": "assets/source/runner/body_03/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_04",
+      "nationality": "TZ",
+      "gender": "male",
+      "nativeLanguage": "sw-TZ",
+      "bodyBuild": "tall",
+      "complexionHex": "#a56a47",
+      "hairStyle": "texture",
+      "source": "assets/source/runner/body_04/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_05",
+      "nationality": "JP",
+      "gender": "female",
+      "nativeLanguage": "ja-JP",
+      "bodyBuild": "compact",
+      "complexionHex": "#eac4a3",
+      "hairStyle": "bob",
+      "source": "assets/source/runner/body_05/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_06",
+      "nationality": "JP",
+      "gender": "male",
+      "nativeLanguage": "ja-JP",
+      "bodyBuild": "lean",
+      "complexionHex": "#c8946a",
+      "hairStyle": "wavy",
+      "source": "assets/source/runner/body_06/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_07",
+      "nationality": "KR",
+      "gender": "female",
+      "nativeLanguage": "ko-KR",
+      "bodyBuild": "tall",
+      "complexionHex": "#d7ad88",
+      "hairStyle": "braid",
+      "source": "assets/source/runner/body_07/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_08",
+      "nationality": "KR",
+      "gender": "male",
+      "nativeLanguage": "ko-KR",
+      "bodyBuild": "compact",
+      "complexionHex": "#bb8b69",
+      "hairStyle": "texture",
+      "source": "assets/source/runner/body_08/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_09",
+      "nationality": "GB",
+      "gender": "female",
+      "nativeLanguage": "en-GB",
+      "bodyBuild": "average",
+      "complexionHex": "#72412f",
+      "hairStyle": "natural",
+      "source": "assets/source/runner/body_09/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_10",
+      "nationality": "GB",
+      "gender": "male",
+      "nativeLanguage": "en-GB",
+      "bodyBuild": "tall",
+      "complexionHex": "#ebc3a8",
+      "hairStyle": "short",
+      "source": "assets/source/runner/body_10/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_11",
+      "nationality": "US",
+      "gender": "female",
+      "nativeLanguage": "en-US",
+      "bodyBuild": "average",
+      "complexionHex": "#af7650",
+      "hairStyle": "wavy",
+      "source": "assets/source/runner/body_11/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_12",
+      "nationality": "US",
+      "gender": "male",
+      "nativeLanguage": "en-US",
+      "bodyBuild": "compact",
+      "complexionHex": "#633e30",
+      "hairStyle": "coily",
+      "source": "assets/source/runner/body_12/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_13",
+      "nationality": "AU",
+      "gender": "female",
+      "nativeLanguage": "en-AU",
+      "bodyBuild": "lean",
+      "complexionHex": "#c18e62",
+      "hairStyle": "ponytail",
+      "source": "assets/source/runner/body_13/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_14",
+      "nationality": "AU",
+      "gender": "male",
+      "nativeLanguage": "en-AU",
+      "bodyBuild": "tall",
+      "complexionHex": "#e8c3a0",
+      "hairStyle": "short",
+      "source": "assets/source/runner/body_14/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_15",
+      "nationality": "DE",
+      "gender": "female",
+      "nativeLanguage": "de-DE",
+      "bodyBuild": "average",
+      "complexionHex": "#edc9af",
+      "hairStyle": "braid",
+      "source": "assets/source/runner/body_15/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_16",
+      "nationality": "DE",
+      "gender": "male",
+      "nativeLanguage": "de-DE",
+      "bodyBuild": "tall",
+      "complexionHex": "#a47455",
+      "hairStyle": "curly",
+      "source": "assets/source/runner/body_16/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_17",
+      "nationality": "NL",
+      "gender": "female",
+      "nativeLanguage": "nl-NL",
+      "bodyBuild": "compact",
+      "complexionHex": "#916347",
+      "hairStyle": "natural",
+      "source": "assets/source/runner/body_17/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_18",
+      "nationality": "NL",
+      "gender": "male",
+      "nativeLanguage": "nl-NL",
+      "bodyBuild": "tall",
+      "complexionHex": "#e7bf99",
+      "hairStyle": "texture",
+      "source": "assets/source/runner/body_18/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_19",
+      "nationality": "FR",
+      "gender": "female",
+      "nativeLanguage": "fr-FR",
+      "bodyBuild": "lean",
+      "complexionHex": "#694332",
+      "hairStyle": "braid",
+      "source": "assets/source/runner/body_19/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_20",
+      "nationality": "FR",
+      "gender": "male",
+      "nativeLanguage": "fr-FR",
+      "bodyBuild": "average",
+      "complexionHex": "#d9ae86",
+      "hairStyle": "wavy",
+      "source": "assets/source/runner/body_20/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_21",
+      "nationality": "CN",
+      "gender": "female",
+      "nativeLanguage": "zh-Hans",
+      "bodyBuild": "compact",
+      "complexionHex": "#e1b598",
+      "hairStyle": "bob",
+      "source": "assets/source/runner/body_21/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    },
+    {
+      "assetId": "body_22",
+      "nationality": "CN",
+      "gender": "male",
+      "nativeLanguage": "zh-Hans",
+      "bodyBuild": "tall",
+      "complexionHex": "#bd8966",
+      "hairStyle": "swept",
+      "source": "assets/source/runner/body_22/run_front/runner_master.svg",
+      "status": "review",
+      "poseCount": 8,
+      "faceReactions": [
+        "thanks",
+        "pain",
+        "surprise",
+        "disappointment"
+      ],
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ],
+      "rights": "Original procedural SVG created for SnackDash, 2026-11-27. Not based on real athlete likeness."
+    }
+  ],
+  "notes": "Country/language are metadata. Appearance is independent of the profile in gameplay; these are selectable casting examples."
+}

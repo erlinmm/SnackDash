@@ -1,0 +1,308 @@
+{
+  "assetId": "body_22",
+  "revision": "r02",
+  "sourceSize": [
+    256,
+    320
+  ],
+  "cycleMs": 800,
+  "frames": [
+    {
+      "id": "frame_00",
+      "source": "frames/frame_00.svg",
+      "durationMs": 100,
+      "pivot": [
+        129,
+        304
+      ],
+      "anchors": {
+        "feet_left": [
+          108,
+          295
+        ],
+        "feet_right": [
+          148,
+          295
+        ],
+        "hand_supply": [
+          199,
+          170
+        ],
+        "head": [
+          129,
+          75
+        ],
+        "torso": [
+          129,
+          158
+        ]
+      },
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ]
+    },
+    {
+      "id": "frame_01",
+      "source": "frames/frame_01.svg",
+      "durationMs": 100,
+      "pivot": [
+        129,
+        304
+      ],
+      "anchors": {
+        "feet_left": [
+          108,
+          295
+        ],
+        "feet_right": [
+          148,
+          295
+        ],
+        "hand_supply": [
+          199,
+          170
+        ],
+        "head": [
+          129,
+          75
+        ],
+        "torso": [
+          129,
+          158
+        ]
+      },
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ]
+    },
+    {
+      "id": "frame_02",
+      "source": "frames/frame_02.svg",
+      "durationMs": 100,
+      "pivot": [
+        129,
+        304
+      ],
+      "anchors": {
+        "feet_left": [
+          108,
+          295
+        ],
+        "feet_right": [
+          148,
+          295
+        ],
+        "hand_supply": [
+          199,
+          170
+        ],
+        "head": [
+          129,
+          75
+        ],
+        "torso": [
+          129,
+          158
+        ]
+      },
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ]
+    },
+    {
+      "id": "frame_03",
+      "source": "frames/frame_03.svg",
+      "durationMs": 100,
+      "pivot": [
+        129,
+        304
+      ],
+      "anchors": {
+        "feet_left": [
+          108,
+          295
+        ],
+        "feet_right": [
+          148,
+          295
+        ],
+        "hand_supply": [
+          199,
+          170
+        ],
+        "head": [
+          129,
+          75
+        ],
+        "torso": [
+          129,
+          158
+        ]
+      },
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ]
+    },
+    {
+      "id": "frame_04",
+      "source": "frames/frame_04.svg",
+      "durationMs": 100,
+      "pivot": [
+        129,
+        304
+      ],
+      "anchors": {
+        "feet_left": [
+          108,
+          295
+        ],
+        "feet_right": [
+          148,
+          295
+        ],
+        "hand_supply": [
+          199,
+          170
+        ],
+        "head": [
+          129,
+          75
+        ],
+        "torso": [
+          129,
+          158
+        ]
+      },
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ]
+    },
+    {
+      "id": "frame_05",
+      "source": "frames/frame_05.svg",
+      "durationMs": 100,
+      "pivot": [
+        129,
+        304
+      ],
+      "anchors": {
+        "feet_left": [
+          108,
+          295
+        ],
+        "feet_right": [
+          148,
+          295
+        ],
+        "hand_supply": [
+          199,
+          170
+        ],
+        "head": [
+          129,
+          75
+        ],
+        "torso": [
+          129,
+          158
+        ]
+      },
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ]
+    },
+    {
+      "id": "frame_06",
+      "source": "frames/frame_06.svg",
+      "durationMs": 100,
+      "pivot": [
+        129,
+        304
+      ],
+      "anchors": {
+        "feet_left": [
+          108,
+          295
+        ],
+        "feet_right": [
+          148,
+          295
+        ],
+        "hand_supply": [
+          199,
+          170
+        ],
+        "head": [
+          129,
+          75
+        ],
+        "torso": [
+          129,
+          158
+        ]
+      },
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ]
+    },
+    {
+      "id": "frame_07",
+      "source": "frames/frame_07.svg",
+      "durationMs": 100,
+      "pivot": [
+        129,
+        304
+      ],
+      "anchors": {
+        "feet_left": [
+          108,
+          295
+        ],
+        "feet_right": [
+          148,
+          295
+        ],
+        "hand_supply": [
+          199,
+          170
+        ],
+        "head": [
+          129,
+          75
+        ],
+        "torso": [
+          129,
+          158
+        ]
+      },
+      "bibRect": [
+        101,
+        149,
+        57,
+        43
+      ]
+    }
+  ],
+  "notes": "Illustrated key poses; anchors are review starting points. Confirm real extrema and registered positions before runtime integration."
+}

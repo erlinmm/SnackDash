@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" role="img" aria-label="GB male run"><title>Original SnackDash runner body_10</title><g id="body_10_pose" transform="translate(0 3.6739403974420594e-16)">
+ <ellipse cx="131" cy="304" rx="69" ry="7" fill="#26385c" opacity=".10"/>
+ <g id="legs"><g id="leg_left">
+ <path d="M108 200 Q102 220 92 227" stroke="#24344a" stroke-width="26" stroke-linecap="round" fill="none"/>
+ <path d="M92 227 Q90 250 98 277" stroke="#25334b" stroke-width="19" stroke-linecap="round" fill="none"/>
+ <path d="M92 231 Q90 251 98 274" stroke="#ebc3a8" stroke-width="14" stroke-linecap="round" fill="none"/>
+ <path d="M84 277 Q98 264 115 279 Q126 288 106 290 L80 287Z" fill="#f48c76" stroke="#273753" stroke-width="3"/>
+ <path d="M89 280 L108 284" stroke="#ffffff" stroke-width="3" opacity=".8"/>
+ </g><g id="leg_right">
+ <path d="M150 200 Q156 220 138 227" stroke="#24344a" stroke-width="26" stroke-linecap="round" fill="none"/>
+ <path d="M138 227 Q140 250 168 287" stroke="#25334b" stroke-width="19" stroke-linecap="round" fill="none"/>
+ <path d="M138 231 Q140 251 168 284" stroke="#ebc3a8" stroke-width="14" stroke-linecap="round" fill="none"/>
+ <path d="M154 287 Q168 274 185 289 Q196 298 176 300 L150 297Z" fill="#eef7ff" stroke="#273753" stroke-width="3"/>
+ <path d="M159 290 L178 294" stroke="#ffffff" stroke-width="3" opacity=".8"/>
+ </g></g>
+ <g id="arm_left">
+ <path d="M80 133 Q61 143 47 169" fill="none" stroke="#28364f" stroke-width="24" stroke-linecap="round"/>
+ <path d="M80 133 Q61 143 47 169" fill="none" stroke="#273c67" stroke-width="19" stroke-linecap="round"/>
+ <path d="M47 169 Q44 181 63 202" stroke="#ebc3a8" stroke-width="16" stroke-linecap="round" fill="none"/>
+ <ellipse cx="63" cy="202" rx="10" ry="11" fill="#ebc3a8" stroke="#26344a" stroke-width="2"/>
+ 
+ </g>
+ <g id="torso"><path d="M99 123 Q129 113 160 123 L173 167 Q165 190 160 206 Q129 214 96 206 Q87 190 85 168Z" fill="#273c67" stroke="#28394e" stroke-width="3"/>
+ <path d="M102 126 Q120 121 129 130 Q138 121 157 126 L150 142 Q130 150 107 141Z" fill="#f48c76" opacity=".84"/>
+ <path d="M103 150 L108 196 Q104 203 100 201" stroke="#fff" stroke-opacity=".20" stroke-width="6" fill="none"/>
+ <path d="M148 144 L158 198" stroke="#193451" stroke-opacity=".18" stroke-width="10" fill="none"/>
+ <path d="M116 113 L116 122 Q129 132 141 122 L141 111Z" fill="#ebc3a8"/>
+ <path d="M99 198 Q130 211 161 198 L157 214 Q128 221 102 214Z" fill="#223045"/>
+ <path d="M110 205 L108 218 M145 207 L147 219" stroke="#f48c76" stroke-width="5"/>
+ </g>
+ <g id="arm_right">
+ <path d="M178 133 Q197 143 199 145" fill="none" stroke="#28364f" stroke-width="24" stroke-linecap="round"/>
+ <path d="M178 133 Q197 143 199 145" fill="none" stroke="#273c67" stroke-width="19" stroke-linecap="round"/>
+ <path d="M199 145 Q202 157 207 170" stroke="#ebc3a8" stroke-width="16" stroke-linecap="round" fill="none"/>
+ <ellipse cx="207" cy="170" rx="10" ry="11" fill="#ebc3a8" stroke="#26344a" stroke-width="2"/>
+ 
+ </g>
+ <g id="face"><path d="M97 67 Q99 42 128 40 Q155 41 160 67 L159 91 Q151 115 129 118 Q105 115 98 91Z" fill="#ebc3a8" stroke="#26344a" stroke-width="3"/>
+ <path d="M102 83 Q97 93 106 102" stroke="#fff1dd" stroke-width="5" opacity=".22" fill="none"/>
+ <ellipse cx="99" cy="85" rx="5" ry="10" fill="#ebc3a8" stroke="#26344a" stroke-width="2"/><ellipse cx="159" cy="85" rx="5" ry="10" fill="#ebc3a8" stroke="#26344a" stroke-width="2"/>
+ <path d="M107 71 L121 70 M136 70 L150 71" fill="none" stroke="#874635" stroke-width="3.3" stroke-linecap="round"/>
+ <ellipse cx="114" cy="82" rx="5.4" ry="7.5" fill="#fff"/><ellipse cx="144" cy="82" rx="5.4" ry="7.5" fill="#fff"/>
+ <circle cx="116" cy="82" r="4.4" fill="#242f42"/><circle cx="144" cy="82" r="4.4" fill="#242f42"/>
+ <circle cx="117" cy="80.5" r="1.7" fill="#fff"/><circle cx="145" cy="80.5" r="1.7" fill="#fff"/>
+ <path d="M129 84 L125 92 Q128 94 133 92" stroke="#9d6d58" stroke-width="1.6" fill="none"/>
+ <ellipse cx="109" cy="96" rx="8" ry="4" fill="#ee8382" opacity=".21"/><ellipse cx="150" cy="96" rx="8" ry="4" fill="#ee8382" opacity=".21"/>
+ <path d="M120 93 Q129 100 140 92" fill="none" stroke="#643b3f" stroke-width="3.2" stroke-linecap="round"/></g>
+ <g id="hair"><path d="M92 65 Q87 29 119 27 Q154 17 165 52 L162 75 Q153 57 149 45 Q131 56 110 49 Q104 62 96 76Z" fill="#874635" stroke="#263047" stroke-width="3"/></g>
+ <g id="bib_placeholder"><rect x="101" y="149" width="57" height="43" rx="6" fill="#fffdf9" stroke="#31425c" stroke-width="3.5"/><path d="M108 154 H150" stroke="#e3e7ed" stroke-width="3"/></g>
+ </g></svg>
