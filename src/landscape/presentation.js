@@ -65,7 +65,20 @@
       }
       ports.renderSelection();
     }
+    // The orientation hint and race state must agree, even if the browser
+    // applies CSS media queries before it dispatches the resize event.
+    const orientation=root.matchMedia('(orientation: portrait)');
+    function syncOrientation(game=ports.getGame()){
+      const portrait=orientation.matches;
+      if(portrait&&game&&['playing','countdown'].includes(game.phase)&&!game.qaFixture)game.pause();
+      const app=$('app'),value=portrait?'portrait':'landscape';
+      if(app.dataset.orientation!==value)app.dataset.orientation=value;
+      return portrait;
+    }
+    if(orientation.addEventListener)orientation.addEventListener('change',()=>{syncOrientation();resize()});
+    else if(orientation.addListener)orientation.addListener(()=>{syncOrientation();resize()});
     function resize(){
+      syncOrientation();
       const screen=$('gameScreen'),app=$('app'),result=$('resultOverlay');
       if(result.parentElement!==document.body)document.body.appendChild(result);
       if(app.classList.contains('in-game')){
@@ -75,8 +88,6 @@
         const width=Math.max(1,Math.floor(Math.min(vw,vh*W/H)));
         screen.style.width=width+'px';screen.style.height=width*H/W+'px';
         stage.style.width='100%';stage.style.height='100%';
-        const game=ports.getGame();
-        if(innerHeight>innerWidth&&game&&['playing','countdown'].includes(game.phase)&&!game.qaFixture)game.pause();
       }
       const width=screen.clientWidth||Math.min(innerWidth,W),ratio=Math.max(.75,Math.min(2,(root.devicePixelRatio||1)*width/W));
       if(canvas.width!==Math.round(W*ratio)||canvas.height!==Math.round(H*ratio)){canvas.width=Math.round(W*ratio);canvas.height=Math.round(H*ratio)}
@@ -172,8 +183,8 @@
     return {ready:render.ready,renderMenu,resize,syncHUD,syncSound,draw:render.draw,update:render.update,
       roadCenter:render.roadCenter,roadHalfWidth:render.roadHalfWidth,runnerScale:render.runnerScale,trafficFootprint:render.trafficFootprint,
       populate:render.populate,visible:render.visible,pickSlot:render.pickSlot,pickRunner:render.pickRunner,handPoint:render.handPoint,
-      throwStarted:render.throwStarted,suspended:()=>innerHeight>innerWidth,
+      throwStarted:render.throwStarted,suspended:()=>syncOrientation(),
       pauseHit:(x,y)=>x>=W/2-150&&x<=W/2+150&&y>=H/2-75&&y<=H/2+75,
-      raceStarted:g=>{render.setElevation(g,0);if(innerHeight>innerWidth&&g.phase==='countdown')g.pause()}};
+      raceStarted:g=>{render.setElevation(g,0);syncOrientation(g)}};
   };
 })(window);
