@@ -8,6 +8,23 @@
     let staff='female';
     try{if(localStorage.getItem(staffKey)==='male')staff='male'}catch(_){}
     const render=root.SnackDashCreateRenderer(ports,pack,()=>staff);
+    const sound=root.SnackDashCreateAudio(ports,pack);
+    let messageText='',messageUntil=0,hintText='';
+    const hud=root.SnackDashCreateHUD($('landscapeHud'),manifest.hud,manifest.clips,{
+      W,H,tr,formatNumber:(v,options)=>I18n.formatNumber(v,options),reducedMotion:ports.reducedMotion,
+      drawAsset:render.drawAsset,ready:render.ready,sceneBounds:()=>canvas.getBoundingClientRect(),
+      command:name=>{if(name==='fullscreen')toggleFullscreen();else ports.command(name)}
+    });
+    ports.hudAnchor=hud.anchor;
+    ports.visualEvent=(g,e)=>{hud.event(e,g.sceneTime*1000);sound.event(g,e)};
+    function model(g){
+      return {...ports.snapshot(g),'mode.label':tr('tokyo.'+render.mode(g)),
+        'message.text':messageText,'message.active':performance.now()<messageUntil,'hint.text':hintText};
+    }
+    function reset(g){
+      messageText='';messageUntil=0;hintText=tr('hud.tapRunner');
+      hud.reset();render.reset(g);sound.reset(g);
+    }
     const common={
       'en-GB':{'tokyo.kicker':'SNACKDASH V2 · TECHNICAL REVIEW','tokyo.subtitle':'Marathon aid station · Ten races · Three modes',
         'tokyo.staff':'Choose staff','tokyo.female':'Female','tokyo.male':'Male','tokyo.qa':'QA · non-persistent scenes','tokyo.qaActive':'QA · VIEW ONLY',
@@ -79,8 +96,7 @@
     else if(orientation.addListener)orientation.addListener(()=>{syncOrientation();resize()});
     function resize(){
       syncOrientation();
-      const screen=$('gameScreen'),app=$('app'),result=$('resultOverlay');
-      if(result.parentElement!==document.body)document.body.appendChild(result);
+      const screen=$('gameScreen'),app=$('app');
       if(app.classList.contains('in-game')){
         const style=getComputedStyle(app),padX=parseFloat(style.paddingLeft)+parseFloat(style.paddingRight),padY=parseFloat(style.paddingTop)+parseFloat(style.paddingBottom);
         const vw=Math.min(app.clientWidth,root.visualViewport?.width||innerWidth)-padX;
@@ -88,42 +104,26 @@
         const width=Math.max(1,Math.floor(Math.min(vw,vh*W/H)));
         screen.style.width=width+'px';screen.style.height=width*H/W+'px';
         stage.style.width='100%';stage.style.height='100%';
+        hud.resize(width,width*H/W);
       }
       const width=screen.clientWidth||Math.min(innerWidth,W),ratio=Math.max(.75,Math.min(2,(root.devicePixelRatio||1)*width/W));
       if(canvas.width!==Math.round(W*ratio)||canvas.height!==Math.round(H*ratio)){canvas.width=Math.round(W*ratio);canvas.height=Math.round(H*ratio)}
       ports.setPixelRatio(canvas.width/W);
     }
-    // These selectors are semantic DOM roles, not scene coordinates.
-    const hudNodes={levels:'#levelsBtn',race:'.level-pill',time:'#timePill',score:'.total-pill',combo:'#comboPanel',
-      restart:'#restartBtn',pause:'#pauseBtn',sound:'#tokyoSoundBtn',fullscreen:'#gameFullscreenBtn'};
-    let hudMode=null;
-    function hud(m){
-      if(hudMode===m)return;
-      hudMode=m;
-      for(const [role,layout] of Object.entries(scene.hud)){
-        const node=document.querySelector(hudNodes[role]),[x,y,w,h]=layout.rect;
-        if(!node)throw Error('Missing HUD role: '+role);
-        Object.assign(node.style,{left:x/W*100+'%',top:y/H*100+'%',width:w/W*100+'%',height:h/H*100+'%',right:'auto',bottom:'auto',
-          backgroundImage:'url("'+render.imageURL(manifest.ui[m+'/'+layout.skin])+'")',
-          color:layout.ink?.[m]||scene.uiText.ink});
-        node.style.setProperty('--hud-font',(layout.fontSize/W*100)+'cqw');
-        node.classList.add('tokyo-asset-skin');
-      }
-      $('comboPanel').style.color=m==='inferno'?scene.uiText.infernoInk:m==='fever'?scene.uiText.feverInk:scene.uiText.ink;
-    }
     function syncHUD(g){
       const m=render.mode(g);
-      $('feverPlaque').textContent=tr('tokyo.'+m);
-      hud(m);$('comboPanel').dataset.mode=m;$('gameScreen').dataset.mode=m;
-      $('gameScreen').dataset.qa=String(!!g.qaFixture);
-      for(const id of ['restartBtn','pauseBtn','tokyoSoundBtn'])$(id).disabled=!!g.qaFixture;
+      $('gameScreen').dataset.mode=m;$('gameScreen').dataset.qa=String(Boolean(g.qaFixture));
+      hud.render(model(g),g.sceneTime*1000);sound.sync(g,m);
+    }
+    function draw(g){
+      // Also refresh controls while paused, and expire message overlays.
+      syncHUD(g);render.draw(g);
     }
     function syncSound(){
-      const source=$('soundBtn'),b=$('tokyoSoundBtn');
-      b.textContent=source.textContent;b.title=source.title;b.setAttribute('aria-label',source.getAttribute('aria-label'));
+      const g=ports.getGame();
+      if(g)syncHUD(g);else sound.sync(null,'normal');
     }
-    $('tokyoSoundBtn').addEventListener('click',()=>$('soundBtn').click());
-    $('gameFullscreenBtn').addEventListener('click',async()=>{
+    async function toggleFullscreen(){
       try{
         if(document.fullscreenElement||document.webkitFullscreenElement){
           const exit=document.exitFullscreen||document.webkitExitFullscreen;if(exit)await exit.call(document);
@@ -132,59 +132,41 @@
         }
       }catch(_){/* Landscape remains playable without fullscreen. */}
       resize();
-    });
-    const audioCache=new Map(),audio=ports.audio;
-    function attachSound(method,key){
-      if(!pack.sounds[key])return; // optional, explicitly declared audio hooks
-      const fallback=audio[method].bind(audio);
-      audio[method]=function(...args){
-        if(!this.enabled)return;
-        const ac=this.audio;
-        if(!ac){fallback(...args);return}
-        try{
-          if(!audioCache.has(key)){
-            const bytes=Uint8Array.from(atob(pack.sounds[key].split(',')[1]),c=>c.charCodeAt(0));
-            audioCache.set(key,ac.decodeAudioData(bytes.buffer));
-          }
-          audioCache.get(key).then(buffer=>{
-            if(!this.enabled)return;
-            const player=ac.createBufferSource(),gain=ac.createGain();
-            player.buffer=buffer;gain.gain.value=.44;player.connect(gain);gain.connect(ac.destination);player.start();
-          }).catch(()=>{audioCache.delete(key);fallback(...args)});
-        }catch(_){fallback(...args)}
-      };
     }
-    for(const [method,key] of [['swapConfirm','supply_swap'],['correct','supply_catch'],['wrong','miss_soft'],['feverStart','fever_enter'],['infernoStart','inferno_enter']])attachSound(method,key);
+    function event(g,e){render.event(g,e)}
+    function menu(){sound.reset(null);hud.reset();messageText='';messageUntil=0}
+    function message(text,duration){messageText=text;messageUntil=performance.now()+duration}
+    function hint(text){hintText=text}
     function inspect(m){
       const dense=m==='dense',fixtureMode=dense?'normal':m;
       if(!render.ready()||!['normal','fever','inferno'].includes(fixtureMode))return;
       const g=ports.createFixture(previewCity*10+(dense?10:1),0x32f11a+(dense?10:1));
       g.phase='playing';g.countdown=0;g.goFlash=0;g.combo=fixtureMode==='inferno'?10:fixtureMode==='fever'?5:0;
-      g.fever=fixtureMode!=='normal';g.inferno=fixtureMode==='inferno';render.setElevation(g,g.inferno?1:0);
+      g.fever=fixtureMode!=='normal';g.inferno=fixtureMode==='inferno';
       const positions=scene.fixtures[dense?'dense':'normal'],bibs=dense?[12,18,24,321,1000,72,144,156]:[12,18,24,36,72,63];
-      g.runners.forEach((r,i)=>{const [y,lane]=positions[i];r.y=y;r.laneIndex=r.targetLaneIndex=lane;r.lane=ports.LANES[lane];r.artIndex=i%manifest.runners.length;r.number=bibs[i];r.sway=0;r.speed=r.baseSpeed});
+      g.runners.forEach((r,i)=>{const [y,lane]=positions[i];r.y=y;r.laneIndex=r.targetLaneIndex=lane;r.lane=ports.LANES[lane];r.artIndex=i%manifest.actors.runners.length;r.number=bibs[i];r.sway=0;r.speed=r.baseSpeed});
       g.supplies.held={number:8,type:fixtureMode==='fever'?'bar':'water',id:1};
       g.supplies.queue=[{number:12,type:'water',id:2},{number:9,type:'banana',id:3}];g.pendingSupply=false;
-      g.assertReady();g.syncHUD();resize();g.draw();
+      reset(g);g.assertReady();g.syncHUD();resize();g.draw();
     }
     for(const b of document.querySelectorAll('[data-scene]'))b.addEventListener('click',()=>inspect(b.dataset.scene));
     const qa=Object.freeze({
-      inspect,trace:()=>{const g=ports.getGame();return g?render.trace(g):null},
+      inspect,trace:()=>{const g=ports.getGame();return g?{...render.trace(g),hud:hud.trace(),audio:sound.trace()}:null},
       geometry:()=>{const g=ports.getGame();return {width:W,height:H,lanes:ports.LANES.length,table:{...scene.table},slots:render.slotRects(),staff,
         hand:g?render.handPoint(g):null,staffFoot:g?render.staffContact(g).y:null,
         scaleAt:g?[render.runnerScale(g.runners[0],200),render.runnerScale(g.runners[0],400),render.runnerScale(g.runners[0],640)]:[],
         mode:g?render.mode(g):null,fixture:!!g?.qaFixture,assetsReady:render.ready(),
         schemaVersion:manifest.schemaVersion,artRevision:manifest.artRevision,sourceCommit:manifest.sourceCommit,cityId:manifest.id,
-        runnerCast:manifest.runners.length,runFrames:manifest.runners.reduce((n,r)=>n+r.frames.length,0),
-        staffFrames:Object.values(manifest.staff).reduce((n,a)=>n+Object.keys(a.frames).length,0),crowdGroups:Object.keys(manifest.crowd).length,
+        runnerCast:manifest.actors.runners.length,runFrames:Object.values(manifest.clips).reduce((n,c)=>n+c.frames.length,0),
+        staffFrames:Object.keys(manifest.clips).filter(k=>k.startsWith('staff/')).reduce((n,k)=>n+manifest.clips[k].frames.length,0),
+        crowdGroups:manifest.actors.crowds.length,
         pages:Object.keys(pack.images).length,sprites:Object.keys(pack.sprites).length}}});
     root.SnackDashLandscapeQA=qa;
     root.SnackDashTokyoQA=qa; // retained test API name, not a city dependency
-    return {ready:render.ready,renderMenu,resize,syncHUD,syncSound,draw:render.draw,update:render.update,
+    return {ready:render.ready,renderMenu,resize,syncHUD,syncSound,draw,update:render.update,event,reset,menu,message,hint,
       roadCenter:render.roadCenter,roadHalfWidth:render.roadHalfWidth,runnerScale:render.runnerScale,trafficFootprint:render.trafficFootprint,
       populate:render.populate,visible:render.visible,pickSlot:render.pickSlot,pickRunner:render.pickRunner,handPoint:render.handPoint,
-      throwStarted:render.throwStarted,suspended:()=>syncOrientation(),
-      pauseHit:(x,y)=>x>=W/2-150&&x<=W/2+150&&y>=H/2-75&&y<=H/2+75,
-      raceStarted:g=>{render.setElevation(g,0);syncOrientation(g)}};
+      suspended:()=>syncOrientation(),pauseHit:()=>false,
+      raceStarted:g=>{syncOrientation(g);syncHUD(g)}};
   };
 })(window);

@@ -1,0 +1,340 @@
+{
+  "canvas": [
+    1280,
+    720
+  ],
+  "camera": {
+    "yControlPoints": [
+      194,
+      215,
+      242,
+      280,
+      330,
+      390,
+      470,
+      550,
+      635,
+      720
+    ],
+    "leftX": [
+      732,
+      710,
+      658,
+      601,
+      533,
+      467,
+      392,
+      345,
+      304,
+      270
+    ],
+    "rightX": [
+      846,
+      895,
+      946,
+      999,
+      1057,
+      1121,
+      1190,
+      1261,
+      1336,
+      1420
+    ],
+    "laneFractions": [
+      0,
+      0.3333333333333333,
+      0.6666666666666666,
+      1
+    ]
+  },
+  "perspective": {
+    "baseHeight": 18,
+    "heightPerFoot": 0.36,
+    "bibToFoot": 0.391,
+    "minHeight": 85,
+    "maxHeight": 300,
+    "scaleUnit": 128,
+    "lookRange": [
+      0.96,
+      1.04
+    ],
+    "boostCap": 0.08,
+    "boostStep": 0.025,
+    "trafficBox": [
+      0.32,
+      0.55,
+      0.45
+    ]
+  },
+  "traffic": {
+    "visibleRect": [
+      330,
+      205,
+      928,
+      495
+    ],
+    "initialEntryY": 260,
+    "entryY": [
+      260,
+      266,
+      272,
+      278
+    ],
+    "startBands": [
+      {
+        "count": 2,
+        "y": 520,
+        "step": 20
+      },
+      {
+        "count": 3,
+        "y": 390,
+        "step": 6
+      },
+      {
+        "count": 3,
+        "y": 260,
+        "step": 5
+      }
+    ],
+    "jitter": 3,
+    "removeCellForSix": 4,
+    "hitPadding": 10
+  },
+  "table": {
+    "left": 0,
+    "right": 290,
+    "top": 501,
+    "contact": 533,
+    "front": 564,
+    "bottom": 720
+  },
+  "staff": {
+    "ground": [
+      143,
+      680
+    ],
+    "table": [
+      143,
+      533
+    ],
+    "height": 444.6,
+    "enterMs": 550,
+    "exitMs": 420,
+    "layerThreshold": 0.55,
+    "itemSize": 69,
+    "bubble": {
+      "size": [
+        104,
+        72
+      ],
+      "offset": [
+        14,
+        -95
+      ],
+      "xRange": [
+        212,
+        270
+      ],
+      "yRange": [
+        105,
+        350
+      ],
+      "text": [
+        0.5,
+        0.43
+      ],
+      "fontSize": 40
+    },
+    "idleElevation": 0
+  },
+  "slots": [
+    {
+      "rect": [
+        12,
+        548,
+        148,
+        82
+      ],
+      "icon": [
+        0.29,
+        0.5,
+        0.67
+      ],
+      "number": [
+        0.71,
+        0.5,
+        0.43
+      ],
+      "fontSize": 39
+    },
+    {
+      "rect": [
+        12,
+        635,
+        148,
+        80
+      ],
+      "icon": [
+        0.29,
+        0.5,
+        0.67
+      ],
+      "number": [
+        0.71,
+        0.5,
+        0.43
+      ],
+      "fontSize": 39
+    }
+  ],
+  "crowd": {
+    "clipMargin": {
+      "left": 65,
+      "right": 35
+    }
+  },
+  "uiText": {
+    "ink": "#15243a",
+    "feverInk": "#9b2456",
+    "infernoInk": "#522277"
+  },
+  "bib": {
+    "minimumWidth": [
+      43,
+      43,
+      56,
+      75
+    ],
+    "minimumHeight": [
+      28,
+      28,
+      28,
+      35
+    ],
+    "maxFont": 42,
+    "minFont": 14
+  },
+  "timing": {
+    "throwRecovery": 0.48,
+    "disableImpactPause": true,
+    "receiveMs": 180
+  },
+  "fixtures": {
+    "normal": [
+      [
+        260,
+        0
+      ],
+      [
+        270,
+        2
+      ],
+      [
+        279,
+        1
+      ],
+      [
+        390,
+        0
+      ],
+      [
+        417,
+        1
+      ],
+      [
+        535,
+        2
+      ]
+    ],
+    "dense": [
+      [
+        260,
+        0
+      ],
+      [
+        265,
+        1
+      ],
+      [
+        270,
+        2
+      ],
+      [
+        390,
+        0
+      ],
+      [
+        396,
+        1
+      ],
+      [
+        402,
+        2
+      ],
+      [
+        520,
+        0
+      ],
+      [
+        540,
+        2
+      ]
+    ]
+  },
+  "labels": {
+    "en-GB": {
+      "title": "Tokyo · technical review",
+      "normal": "Normal",
+      "fever": "花見 · Sakura Fever",
+      "inferno": "花火 · Fireworks Inferno"
+    },
+    "zh-Hans": {
+      "title": "东京 · 技术评审",
+      "normal": "普通",
+      "fever": "花見 · 樱花 FEVER",
+      "inferno": "花火 · 烟花 INFERNO"
+    }
+  },
+  "order": {
+    "runner": 30,
+    "staffGround": 40,
+    "staffTable": 60,
+    "bib": 110,
+    "slots": 112,
+    "bubble": 113,
+    "feedback": 105
+  },
+  "projectile": {
+    "normal": {
+      "arc": 60,
+      "size": 52,
+      "turns": 0.85
+    },
+    "fever": {
+      "arc": 92,
+      "size": 62,
+      "turns": 0.85
+    },
+    "inferno": {
+      "arc": 92,
+      "size": 62,
+      "turns": 0.85
+    }
+  },
+  "reaction": {
+    "offset": [
+      0,
+      -30
+    ],
+    "width": 170,
+    "height": 38,
+    "radius": 15,
+    "fontSize": 22,
+    "minFont": 11,
+    "color": "#27384f",
+    "background": "#fffdf6",
+    "border": "#786172",
+    "durationMs": 1120
+  }
+}

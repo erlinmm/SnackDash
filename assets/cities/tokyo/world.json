@@ -1,0 +1,265 @@
+{
+  "nodes": [
+    {
+      "id": "street",
+      "role": "street",
+      "rect": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "z": 0,
+      "images": {
+        "normal": "bg/normal",
+        "fever": "bg/fever",
+        "inferno": "bg/inferno"
+      },
+      "cache": true
+    },
+    {
+      "id": "atmosphere",
+      "rect": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "z": 15,
+      "images": {
+        "normal": {
+          "normal": "ambient/normal/normal",
+          "reduced": "ambient/normal/reduced"
+        },
+        "fever": {
+          "normal": "ambient/fever/normal",
+          "reduced": "ambient/fever/reduced"
+        },
+        "inferno": {
+          "normal": "ambient/inferno/normal",
+          "reduced": "ambient/inferno/reduced"
+        }
+      }
+    },
+    {
+      "id": "table-rear",
+      "role": "station",
+      "rect": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "z": 20,
+      "images": {
+        "normal": "station/layer/shared_table_rear_legs",
+        "fever": "station/layer/shared_table_rear_legs",
+        "inferno": "station/layer/shared_table_rear_legs"
+      }
+    },
+    {
+      "id": "table-body",
+      "role": "station",
+      "rect": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "z": 50,
+      "images": {
+        "normal": "station/layer/shared_table_frame",
+        "fever": "station/layer/shared_table_frame",
+        "inferno": "station/layer/shared_table_frame"
+      }
+    },
+    {
+      "id": "tabletop",
+      "role": "station",
+      "rect": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "z": 51,
+      "images": {
+        "normal": "station/layer/shared_tabletop",
+        "fever": "station/layer/shared_tabletop",
+        "inferno": "station/layer/shared_tabletop"
+      }
+    },
+    {
+      "id": "scroll",
+      "rect": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "z": 52,
+      "images": {
+        "normal": "station/layer/front_fascia_normal",
+        "fever": "station/layer/front_fascia_fever",
+        "inferno": "station/layer/front_fascia_inferno"
+      },
+      "revealRect": [
+        54,
+        550,
+        210,
+        166
+      ],
+      "state": {
+        "reveal": 1,
+        "skinMode": "normal"
+      },
+      "modeState": {
+        "normal": {
+          "skinMode": "normal",
+          "reveal": 1
+        },
+        "fever": {
+          "skinMode": "fever",
+          "reveal": 1
+        },
+        "inferno": {
+          "skinMode": "inferno",
+          "reveal": 1
+        }
+      }
+    },
+    {
+      "id": "bottle1",
+      "role": "decorative",
+      "rect": [
+        187,
+        477,
+        24,
+        48
+      ],
+      "z": 53,
+      "images": {
+        "normal": "supply/water/hand",
+        "fever": "supply/water/hand",
+        "inferno": "supply/water/hand"
+      },
+      "state": {
+        "position": [
+          199,
+          501
+        ],
+        "rotation": 0,
+        "visible": true,
+        "atHome": true,
+        "attach": null
+      },
+      "modeState": {
+        "inferno": {
+          "position": [
+            360,
+            730
+          ],
+          "visible": false,
+          "atHome": false,
+          "attach": null
+        }
+      }
+    },
+    {
+      "id": "bottle2",
+      "role": "decorative",
+      "rect": [
+        210,
+        473,
+        24,
+        48
+      ],
+      "z": 53,
+      "images": {
+        "normal": "supply/water/hand",
+        "fever": "supply/water/hand",
+        "inferno": "supply/water/hand"
+      },
+      "state": {
+        "position": [
+          222,
+          497
+        ],
+        "rotation": 0,
+        "visible": true,
+        "atHome": true,
+        "attach": null
+      },
+      "modeState": {
+        "inferno": {
+          "position": [
+            445,
+            742
+          ],
+          "visible": false,
+          "atHome": false,
+          "attach": null
+        }
+      }
+    },
+    {
+      "id": "bottle3",
+      "role": "decorative",
+      "rect": [
+        232,
+        469,
+        24,
+        48
+      ],
+      "z": 53,
+      "images": {
+        "normal": "supply/water/hand",
+        "fever": "supply/water/hand",
+        "inferno": "supply/water/hand"
+      },
+      "state": {
+        "position": [
+          244,
+          493
+        ],
+        "rotation": 0,
+        "visible": true,
+        "atHome": true,
+        "attach": null
+      },
+      "modeState": {
+        "inferno": {
+          "position": [
+            530,
+            754
+          ],
+          "visible": false,
+          "atHome": false,
+          "attach": null
+        }
+      }
+    }
+  ],
+  "staffState": {
+    "costume": "normal",
+    "elevation": 0,
+    "offset": [
+      0,
+      0
+    ]
+  },
+  "staffModeState": {
+    "normal": {
+      "costume": "normal",
+      "elevation": 0
+    },
+    "fever": {
+      "costume": "fever",
+      "elevation": 0
+    },
+    "inferno": {
+      "costume": "inferno",
+      "elevation": 1
+    }
+  }
+}

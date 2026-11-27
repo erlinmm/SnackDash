@@ -120,7 +120,7 @@ def assert_dimensions(page):
     g = page.evaluate("SnackDashTokyoQA.geometry()")
     b = page.locator('#scene').bounding_box()
     assert (g["width"], g["height"], g["lanes"]) == (1280,720,3), g
-    assert g["assetsReady"] and g["schemaVersion"]==1,g
+    assert g["assetsReady"] and g["schemaVersion"]==2,g
     assert g["cityId"]=="tokyo",g
     assert g["runnerCast"]>=2 and g["runFrames"]>=g["runnerCast"],g
     assert g["pages"]<g["sprites"],g
@@ -264,7 +264,7 @@ def run(browser):
     hits=page.evaluate(HITS_JS,{"count":5,"correct":True})
     page.locator("#gameScreen").screenshot(path=str(OUT/"live_race_fever.png"))
     hits+=page.evaluate(HITS_JS,{"count":5,"correct":True})
-    page.evaluate("for(let i=0;i<12;i++)SnackDashDebug.getGame().update(.05);SnackDashDebug.getGame().draw()")
+    page.evaluate("for(let i=0;i<36;i++)SnackDashDebug.getGame().update(.05);SnackDashDebug.getGame().draw()")
     page.locator("#gameScreen").screenshot(path=str(OUT/"live_race_inferno.png"))
     assert hits[3]["combo"]==4 and not hits[3]["fever"]
     assert hits[4]["combo"]==5 and hits[4]["fever"] and not hits[4]["inferno"]
@@ -308,7 +308,7 @@ def run(browser):
           const g=SnackDashDebug.getGame();
           const r=g.runners.filter(r=>g.onScreen(r)&&GameMath.matches(g.supplies.held.number,r.number))
             .sort((a,b)=>Math.abs(a.y-390)-Math.abs(b.y-390))[0];
-          return {x:g.runnerX(r),y:r.y};
+          const b=SnackDashLandscapeQA.trace().runners.find(a=>a.id===r.id).bib;return {x:b[0],y:b[1]};
         }""")
         tap(page,target["x"],target["y"],touch)
         page.wait_for_function("SnackDashDebug.getGame().correct + SnackDashDebug.getGame().wrong > 0")

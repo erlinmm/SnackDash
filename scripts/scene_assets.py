@@ -34,111 +34,291 @@ def local(path):
     return p
 
 def load_pack(city, seen=()):
+    """Resolve explicitly shared parts and inherited patches at build time."""
     require(re.fullmatch(r"[a-z0-9][a-z0-9-]*",city), f"Invalid city id: {city}")
     require(city not in seen, f"City pack inheritance cycle: {city}")
     path = ROOT / "assets/cities" / city / "pack.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    require(data.get("schemaVersion")==1 and data.get("id")==city, f"Invalid pack identity/schema: {path}")
-    if "extends" not in data:
-        return data
-    result = load_pack(data["extends"],(*seen,city))
-    result.update({k:copy.deepcopy(v) for k,v in data.items() if k not in ("extends","patches")})
+    require(data.get("schemaVersion")==2 and data.get("id")==city, f"Invalid pack identity/schema: {path}")
+    result=load_pack(data["extends"],(*seen,city)) if "extends" in data else {}
+    result.update({k:copy.deepcopy(v) for k,v in data.items() if k not in ("extends","patches","parts")})
+    for name,relative in data.get("parts",{}).items():
+        require(name not in data,f"Duplicate inline and file part: {name}")
+        require(name not in ("id","schemaVersion","reviewStatus","raceCityId"),f"Reserved part: {name}")
+        part=(path.parent/relative).resolve()
+        require(part.is_relative_to(ROOT) and part.is_file(),f"Missing or external pack part: {part}")
+        result[name]=json.loads(part.read_text(encoding="utf-8"))
     for patch in data.get("patches",[]):
-        parts = patch["path"]
-        require(parts and parts[0] not in ("id","schemaVersion"), "Invalid patch path")
-        target = result
-        for part in parts[:-1]:
-            target=target[part]
+        parts=patch["path"]
+        require(parts and parts[0] not in ("id","schemaVersion"),"Invalid patch path")
+        target=result
+        for part in parts[:-1]:target=target[part]
         target[parts[-1]]=copy.deepcopy(patch["value"])
     return result
 
-def point(v, n, name):
-    require(isinstance(v,list) and len(v)==n and all(isinstance(x,(int,float)) and not isinstance(x,bool) and abs(x)<1e7 for x in v),f"Invalid {name}")
+def number(v,name,minimum=None,maximum=None):
+    require(isinstance(v,(int,float)) and not isinstance(v,bool) and abs(v)<1e8 and
+        (minimum is None or v>=minimum) and (maximum is None or v<=maximum),f"Invalid {name}: {v!r}")
+
+def point(v,n,name):
+    require(isinstance(v,list) and len(v)==n,f"Invalid {name}")
+    for x in v:number(x,name)
+
+def rect(v,name):
+    point(v,4,name);require(v[2]>0 and v[3]>0,f"Empty {name}")
+
+ACTIONS={
+ "runner":("run","receive_supply","thanks","pain","surprise","disappointment","cheer","selected"),
+ "staff":("idle","swap","throw"),
+ "crowd":("idle","cheer","miss","festival")
+}
+HUD_BINDINGS={
+ "score.current","score.exact","score.goal","race.index","race.phase","race.fixture",
+ "race.countdownVisible","race.countdown","race.celebrating","time.remaining","combo.count",
+ "combo.progress","combo.label","mode.current","mode.label","progress.cityCleared",
+ "audio.enabled","audio.glyph","audio.label","controls.pauseGlyph","controls.pauseLabel",
+ "result.visible","result.won","result.heading","result.text","result.stats","result.primary",
+ "held.number","held.type","message.text","message.active","hint.text"
+}
+COMMANDS={"menu","pause","restart","sound","fullscreen","result.next"}
+EVENTS={"swap","throw.start","throw.release","hit","miss","score","mode.change","marker",
+    "runner.reaction","countdown","go","race.finish","transition.start","transition.complete","transition.cancel"}
+SYNTH={"countdown","go","throw","correct","wrong","combo","grab","swapConfirm","victory","fail",
+    "feverStart","infernoStart","feverHit","megaHit","feverEnd","music"}
+MOTION=("normal","reduced")
 
 def validate(pack):
-    resources=pack["resources"]
     required=set()
-    def asset(key, context):
-        require(isinstance(key,str) and key in resources, f"{context}: undeclared resource {key!r}")
+    resources=pack["resources"];library=pack["clips"];scene=pack["scene"];actors=pack["actors"]
+    def asset(key,context):
+        require(isinstance(key,str) and key in resources,f"{context}: undeclared resource {key!r}")
         required.add(key)
-    def frames(items, context, actor=None):
-        require(isinstance(items,list) and items, f"{context}: empty animation")
-        for f in items:
-            asset(f["image"],context)
-            require(isinstance(f["durationMs"],(int,float)) and 0<f["durationMs"]<=60000,f"{context}: invalid duration")
-            if actor:
-                point(f["sourceSize"],2,context+" sourceSize")
-                require(all(x>0 for x in f["sourceSize"]), f"{context}: zero frame size")
-                point(f["pivot"],2,context+" pivot")
-                point(f["anchors"]["hand"],2,context+" hand")
-                if actor=="runner":
-                    point(f["anchors"]["bib"],4,context+" bib")
-    require(pack["schemaVersion"]==1,"Unsupported asset schema")
+    def clip_ref(ref,context):
+        if isinstance(ref,list):
+            require(bool(ref),f"{context}: no animation variants")
+            return [x for v in ref for x in clip_ref(v,context)]
+        if isinstance(ref,dict):
+            require(set(ref)==set(MOTION),f"{context}: normal/reduced animation variants required")
+            return [x for v in ref.values() for x in clip_ref(v,context)]
+        require(isinstance(ref,str) and ref in library,f"{context}: undeclared clip {ref!r}")
+        return [ref]
+    def by_mode(mapping,callback,context):
+        require(isinstance(mapping,dict) and set(mapping)==set(MODES),f"{context}: all three modes required")
+        for m,ref in mapping.items():
+            if isinstance(ref,dict):
+                require(set(ref)==set(MOTION),f"{context}/{m}: normal and reduced required")
+                for r in ref.values():callback(r,context+"/"+m)
+            else:callback(ref,context+"/"+m)
+    def event_rule(rule,context):
+        require(rule["event"] in EVENTS,f"{context}: unknown event {rule['event']}")
+        require(rule.get("mode","after") in ("before","after","visual"),f"{context}: bad mode source")
+        if "modes" in rule:require(set(rule["modes"])<=set(MODES),f"{context}: bad modes")
+    require(pack["schemaVersion"]==2,"Unsupported asset schema")
     require(pack["reviewStatus"] in ("approved","review","rejected-art-technical-fixture","test-only"),"Unknown art review status")
-    scene=pack["scene"]; point(scene["canvas"],2,"canvas")
-    require(scene["canvas"]==[1280,720],"Landscape v1 logical canvas must be 1280x720")
-    camera=scene["camera"]; ys=camera["yControlPoints"]
+    require(scene["canvas"]==[1280,720],"Landscape v2 logical world must be 1280x720")
+    camera=scene["camera"];ys=camera["yControlPoints"]
     require(len(ys)>=2 and len(ys)==len(camera["leftX"])==len(camera["rightX"]),"Camera point count mismatch")
     require(all(b>a for a,b in zip(ys,ys[1:])) and all(r>l for l,r in zip(camera["leftX"],camera["rightX"])),"Invalid road boundaries")
     require(len(camera["laneFractions"])==4,"Exactly three lanes are required")
     require(len(scene["slots"])==2,"Exactly two reserve slots are required")
-    for i,s in enumerate(scene["slots"]):
-        point(s["rect"],4,f"slot {i} rect");point(s["icon"],3,f"slot {i} icon");point(s["number"],3,f"slot {i} number")
-        x,y,w,h=s["rect"]
-        require(x>=0 and y>=0 and w>0 and h>0 and x+w<=1280 and y+h<=720,f"slot {i}: outside canvas")
-    for name,s in scene["hud"].items():
-        point(s["rect"],4,f"HUD {name}")
-        x,y,w,h=s["rect"]
-        require(x>=0 and y>=0 and w>0 and h>0 and x+w<=1280 and y+h<=720,f"HUD {name}: outside canvas")
-    require(set(scene["hud"])=={"levels","race","time","score","combo","restart","pause","sound","fullscreen"},"Missing functional HUD slot")
-    require(0<scene["timing"]["throwRecovery"] and scene["timing"]["throwRecovery"]>=.41,"Recovery cannot precede the canonical hit")
-    require(len(pack["runners"])>=2 and {r["gender"] for r in pack["runners"]}>={"female","male"},"Both runner cast groups required")
-    require(len({r["id"] for r in pack["runners"]})==len(pack["runners"]),"Duplicate runner ids")
-    for runner in pack["runners"]:
-        frames(runner["frames"],runner["id"],"runner")
-        for action in ("receive_supply","thanks","pain","surprise","disappointment","cheer","selected"):
-            frames(runner["states"][action]["frames"],runner["id"]+"/"+action,"runner")
-    for mode in MODES:
-        asset(pack["backgrounds"][mode],mode+" background")
-        for layer in pack["station"][mode]["layers"]:
-            asset(layer["image"],mode+" station")
-            point(layer["rect"],4,"station rect")
-            require(layer["layer"] in ("back","body","front"),"Invalid station layer")
-        for motion in ("normal","reduced"):
-            asset(pack["ambient"][mode+"/"+motion],mode+" atmosphere")
-        for sex in ("female","male"):
-            staff=pack["staff"][sex+"-"+mode]
-            frames(list(staff["frames"].values()),sex+"-"+mode,"staff")
-            for action in ("idle","swap","throw","enter","exit"):
-                clip=staff["clips"][action]
-                require(clip and all(f in staff["frames"] for f in clip),f"{sex}/{mode}/{action}: invalid frame reference")
-            seq=[staff["frames"][i] for i in staff["clips"]["throw"]]
-            require(sum(f.get("event")=="release" for f in seq)==1,f"{sex}/{mode}: exactly one release marker required")
-            release=next(i for i,f in enumerate(seq) if f.get("event")=="release")
-            require(release>0,f"{sex}/{mode}: windup must precede release")
-            require(sum(f["durationMs"] for f in seq[:release])<410,f"{sex}/{mode}: release after gameplay hit")
-        for c in scene["crowd"]["placements"]:
-            frames(pack["crowd"][mode+"/"+c["depth"]+"/"+c["side"]]["frames"],mode+" crowd")
-        for event in ("swap","throw","receive","score","mode_enter","mode_exit","miss"):
-            for motion in ("normal","reduced"):
-                fx=pack["fx"][mode+"/"+event+"/"+motion]
-                point(fx["canvas"],2,"FX canvas")
-                frames(fx["frames"],mode+"/"+event+"/"+motion)
-        for hud in scene["hud"].values():
-            asset(pack["ui"][mode+"/"+hud["skin"]],mode+" HUD")
-            require(resources[pack["ui"][mode+"/"+hud["skin"]]].get("standalone"),"HUD skin must be standalone")
+    for i,slot in enumerate(scene["slots"]):
+        rect(slot["rect"],f"slot {i} rect");point(slot["icon"],3,"slot icon");point(slot["number"],3,"slot number")
+        x,y,w,h=slot["rect"];require(x>=0 and y>=0 and x+w<=1280 and y+h<=720,"Reserve outside world")
+    number(scene["timing"]["throwRecovery"],"throw recovery",.41,10)
+    point(scene["staff"]["ground"],2,"staff ground");point(scene["staff"]["table"],2,"staff table")
+    require(scene["staff"]["table"][1]==scene["table"]["contact"],"Staff must stand on fixed tabletop")
+    number(scene["staff"]["height"],"staff height",1)
+    for m in MODES:
+        proj=scene["projectile"][m]
+        for k in ("arc","size","turns"):number(proj[k],f"projectile/{m}/{k}")
+    for k,v in scene["order"].items():number(v,"layer "+k)
+    for cid,clip in library.items():
+        require(clip.get("playback") in ("once","loop","hold"),f"{cid}: invalid playback")
+        require(isinstance(clip["frames"],list) and bool(clip["frames"]),f"{cid}: empty clip")
+        if "repeat" in clip:require(isinstance(clip["repeat"],int) and clip["repeat"]>=0,f"{cid}: invalid repeat")
+        for frame in clip["frames"]:
+            asset(frame["image"],cid);number(frame["durationMs"],cid+" duration",.001,60000)
+            require(all(isinstance(x,str) and x for x in frame.get("marks",[])),f"{cid}: invalid marker")
+        if "size" in clip:
+            point(clip["size"],2,cid+" size");require(min(clip["size"])>0,f"{cid}: zero size")
+    def actor(set_,role):
+        require(set(set_["modes"])==set(MODES),f"{set_['id']}: all modes required")
+        for mode,actions in set_["modes"].items():
+            require(set(ACTIONS[role])<=set(actions),f"{set_['id']}/{mode}: missing required action")
+            for action,ref in actions.items():
+                for cid in clip_ref(ref,set_["id"]+"/"+mode+"/"+action):
+                    c=library[cid]
+                    if "next" in c:require(c["next"] in actions,f"{cid}: missing next action")
+                    if role!="crowd":
+                        for f in c["frames"]:
+                            point(f["sourceSize"],2,cid+" sourceSize");require(min(f["sourceSize"])>0,f"{cid}: bad source size")
+                            point(f["pivot"],2,cid+" pivot");point(f["anchors"]["hand"],2,cid+" hand")
+                            point(f["anchors"]["head"],2,cid+" head")
+                            if role=="runner":
+                                point(f["anchors"]["bib"],4,cid+" bib")
+                                require(min(f["anchors"]["bib"][2:])>0,f"{cid}: empty bib")
+                            else:point(f["anchors"]["prop"],2,cid+" decorative prop hand")
+                    if role=="staff" and action=="throw":
+                        times=marker_times(c,"release")
+                        require(len(times)==1 and times[0]>0,f"{cid}: exactly one release marker after windup")
+                        release=times[0]/clip_length(c)*scene["timing"]["throwRecovery"]
+                        require(release<.41,f"{cid}: release marker after gameplay hit")
+    require(len(actors["runners"])>=2 and {r["gender"] for r in actors["runners"]}>={"female","male"},"Both runner cast groups required")
+    require(len({r["id"] for r in actors["runners"]})==len(actors["runners"]),"Duplicate runner ids")
+    require(set(actors["staff"])=={"female","male"},"Both staff appearances required")
+    for r in actors["runners"]:actor(r,"runner")
+    for a in actors["staff"].values():actor(a,"staff")
+    crowd_ids=set()
+    for c in actors["crowds"]:
+        require(c["id"] not in crowd_ids,"Duplicate crowd id");crowd_ids.add(c["id"])
+        rect(c["rect"],c["id"]);number(c["z"],c["id"]+" z");actor(c,"crowd")
+    for role,rules in pack["bindings"].items():
+        require(role in ACTIONS,"Unknown actor role")
+        sets=actors["runners"] if role=="runner" else list(actors["staff"].values()) if role=="staff" else actors["crowds"]
+        for rule in rules:
+            event_rule(rule,role)
+            require(rule.get("interrupt","higher") in ("never","higher","allow"),"Invalid interruption policy")
+            for a in sets:
+                for m in MODES:clip_ref(a["modes"][m][rule["action"]],a["id"]+" binding")
+    nodes=pack["world"]["nodes"];node_ids={n["id"] for n in nodes}
+    require(len(node_ids)==len(nodes) and "staff" not in node_ids and not node_ids&crowd_ids,"Duplicate world object id")
+    street=[n for n in nodes if n.get("role")=="street"]
+    require(len(street)==1,"Exactly one base street layer required")
+    for node in nodes:
+        rect(node["rect"],node["id"]);number(node["z"],node["id"]+" z")
+        require("images" in node or "clips" in node,f"{node['id']}: no artwork")
+        if "images" in node:by_mode(node["images"],asset,node["id"])
+        if "clips" in node:by_mode(node["clips"],clip_ref,node["id"])
+        if "revealRect" in node:rect(node["revealRect"],node["id"]+" reveal")
+        for m in node.get("modeState",{}):require(m in MODES,"Invalid object mode")
+    require(set(pack["world"]["staffModeState"])==set(MODES),"Missing staff mode posture")
+    for m in MODES:
+        v=pack["world"]["staffModeState"][m]
+        require(v["costume"]==m and v["elevation"]==(1 if m=="inferno" else 0),"Wrong terminal staff posture")
+    targets=node_ids|crowd_ids|{"staff"}
+    transitions=pack["transitions"]
+    require({"normal>fever","fever>inferno","fever>normal","inferno>normal"}<=set(transitions),"Missing mode transition")
+    for name,spec in transitions.items():
+        require(len(name.split(">"))==2 and set(name.split(">"))<=set(MODES),"Invalid transition name")
+        require(bool(spec["tracks"]),"Empty transition")
+        for sex,staff in actors["staff"].items():
+            for motion in MOTION:
+                validate_timeline(name,spec,staff,motion,library,actors["crowds"],targets,clip_ref)
+        for destination,route in spec.get("interruptions",{}).items():
+            require(destination in MODES and route in transitions,"Invalid interrupted transition route")
+    hud=pack["hud"];point(hud["canvas"],2,"HUD canvas");require(min(hud["canvas"])>0,"Zero HUD canvas")
+    widget_ids=set();bindings=set();commands=set()
+    def widget(w):
+        require(w["id"] not in widget_ids,f"Duplicate HUD id {w['id']}")
+        widget_ids.add(w["id"])
+        require(w["type"] in ("container","text","image","animation","button","progress"),f"Unsupported HUD widget {w['type']}")
+        rect(w["rect"],w["id"])
+        for m,r in w.get("rectByMode",{}).items():require(m in MODES,"Unknown HUD mode");rect(r,w["id"]+"/"+m)
+        for key in ("binding","labelBinding"):
+            if key in w:require(w[key] in HUD_BINDINGS,f"Unknown HUD binding {w[key]}");bindings.add(w[key])
+        for key in ("visibleWhen","enabledWhen"):
+            if key in w:require(w[key]["binding"] in HUD_BINDINGS,"Unknown HUD condition binding")
+        if w["type"]=="button":
+            require(w["command"] in COMMANDS,f"Unknown HUD command {w['command']}");commands.add(w["command"])
+        if "images" in w:by_mode(w["images"],asset,w["id"])
+        if "clips" in w:by_mode(w["clips"],clip_ref,w["id"])
+        for child in w.get("children",[]):widget(child)
+    for w in hud["widgets"]:widget(w)
+    require(commands>=COMMANDS,"Missing required HUD control commands")
+    for a in hud["animations"]:
+        event_rule(a,"HUD animation");require(a["target"] in widget_ids,"Unknown HUD animation target")
+        if "clips" in a:by_mode(a["clips"],clip_ref,"HUD animation")
+        else:number(a["durationMs"],"HUD animation duration",.001)
+        validate_keyframes(a.get("keyframes",[]))
+    for rule in pack["fx"]["bindings"]:
+        event_rule(rule,"effect")
+        for m,ref in rule["clips"].items():
+            require(m in MODES,"Invalid FX mode")
+            for cid in clip_ref(ref,rule["id"]):require("size" in library[cid],f"{cid}: missing FX size")
+        require(set(rule["clips"])==set(MODES),"All FX modes required")
+        anchor=rule["anchor"];kind=anchor["type"]
+        require(kind in ("screen","projectile","object","hud.binding","hud.score") or kind.startswith(("staff.","runner.")),"Unknown effect anchor")
+        if kind=="screen":point(anchor["position"],2,"screen anchor")
+        if kind=="object":require(anchor["target"] in node_ids,"Unknown effect object")
+        if kind in ("hud.binding","hud.score"):require(anchor.get("binding","score.current") in bindings,"FX refers to absent HUD binding")
+        number(rule["width"],"FX width",.001);number(rule["z"],"FX layer")
+        if "durationMs" in rule:number(rule["durationMs"],"FX duration",.001)
     for name in ("slot","bubble","avatar/female","avatar/male"):
         asset(pack["ui"][name],name)
+    for key in ("avatar/female","avatar/male"):
+        require(resources[pack["ui"][key]].get("standalone"),"Staff avatar must be standalone")
     for item in set(CANONICAL_ITEMS)|set(pack["supplies"]):
-        for placement in ("hand","slot","flight"):
-            asset(pack["supplies"][item][placement],item+"/"+placement)
-    for key in required:
-        local(resources[key]["path"])
-    for path in pack["sounds"].values():
-        require(local(path).suffix.lower()==".wav",f"Unsupported sound: {path}")
-    # A technical pack may explicitly retain unapproved assets. Release must
-    # fail closed, not silently fall back to them.
+        for placement in ("hand","slot","flight"):asset(pack["supplies"][item][placement],item+"/"+placement)
+    def sound_rule(rule):
+        require(("sound" in rule)!=("synth" in rule),"Sound binding must choose sample or synth")
+        if "sound" in rule:require(rule["sound"] in pack["sounds"],"Missing sound "+rule["sound"])
+        else:require(rule["synth"] in SYNTH,"Unknown synthesized cue")
+        if "volume" in rule:number(rule["volume"],"volume",0,1)
+    for rule in pack["audio"]["bindings"]:event_rule(rule,"audio");sound_rule(rule)
+    require(set(pack["audio"]["music"])==set(MODES),"All music modes required")
+    for r in pack["audio"]["music"].values():sound_rule(r)
+    for key in required:local(resources[key]["path"])
+    for path in pack["sounds"].values():require(local(path).suffix.lower() in (".wav",".ogg",".mp3"),f"Unsupported sound: {path}")
     return required
+
+def clip_length(clip):return sum(f["durationMs"] for f in clip["frames"])
+
+def marker_times(clip,name):
+    total=0;result=[]
+    for f in clip["frames"]:
+        result.extend(total for m in f.get("marks",[]) if m==name)
+        total+=f["durationMs"]
+    return result
+
+def validate_keyframes(frames):
+    last=-1
+    for f in frames:
+        number(f["at"],"keyframe position",0,1)
+        require(f["at"]>last,"Keyframes must be ordered");last=f["at"]
+
+def validate_timeline(name,spec,staff,motion,library,crowds,targets,clip_ref):
+    """Validate dependency graph and actual per-clip marker timings.
+    The JS scheduler resolves the same references for its selected variant.
+    """
+    records={}
+    def time(ref):
+        if isinstance(ref,(int,float)):return ref
+        require(ref["track"] in records,f"{name}: reference must name earlier track")
+        start,end,clips,scale=records[ref["track"]]
+        if "marker" in ref:
+            require(bool(clips),f"{name}: marker reference is not a clip")
+            offsets=[]
+            for cid in clips:
+                values=marker_times(library[cid],ref["marker"])
+                require(len(values)==1,f"{name}/{cid}: expected one marker {ref['marker']}")
+                offsets.append(values[0]*scale)
+            t=start+offsets[0]
+        else:t=end if ref.get("point")=="end" else start
+        return t+ref.get("offsetMs",0)
+    for t in spec["tracks"]:
+        require(t["id"] not in records,f"{name}: duplicate track")
+        require(t["target"] in targets,f"{name}: unknown track target {t['target']}")
+        require(t["type"] in ("clip","set","tween","cue"),f"{name}: invalid track type")
+        start=time(t.get("start",0));number(start,"track start",0)
+        ids=[]
+        if t["type"]=="clip":
+            if "clip" in t:ids=clip_ref(t["clip"],name)
+            else:
+                actor=staff if t["target"]=="staff" else next((c for c in crowds if c["id"]==t["target"]),None)
+                require(actor is not None,f"{name}: clip track has no actor")
+                m=t["mode"];require(m in MODES,f"{name}: explicit transition mode required")
+                ref=actor["modes"][m][t["action"]]
+                if isinstance(ref,dict):ref=ref[motion]
+                ids=clip_ref(ref,name)
+        natural=clip_length(library[ids[0]]) if ids else 0
+        length=time(t["end"])-start if "end" in t else t.get("durationMs",natural)
+        number(length,"track duration",.001 if t["type"] in ("clip","tween") else 0)
+        records[t["id"]]=(start,start+length,ids,length/natural if natural else 1)
+        if "when" in t:require(t["when"]["target"] in targets,"Unknown track condition target")
+        if t["type"]=="tween":
+            require(bool(t["to"]),"Empty tween")
+            validate_keyframes(t.get("keyframes",[]))
+    return records
 
 def encode(data,mime):
     return "data:"+mime+";base64,"+base64.b64encode(data).decode("ascii")
@@ -184,7 +364,7 @@ def compile_pack(pack, release=False):
     if release:
         require(pack["reviewStatus"]=="approved","Asset pack is not visually approved; release refused")
         require(not any(pack["resources"][k].get("reviewFallback") for k in required),"Unapproved fallback artwork; release refused")
-        require(not any(c.get("staticReview") for c in pack["crowd"].values()),"Crowd animation not approved; release refused")
+        require(not any(c.get("reviewFallback") for c in pack["clips"].values()),"Unapproved animation; release refused")
     images={}; sprites={}; sources={}; sheets=[]; dedup={}; cache={}
     sheet=None; cursor_x=cursor_y=row_h=0; sheet_id=None
     def finish_sheet():
@@ -242,15 +422,13 @@ def compile_pack(pack, release=False):
     # Actor frames refer to untrimmed authoring coordinates, not packed pixels.
     def check_frame(f):
         require(f["sourceSize"]==sprites[f["image"]]["sourceSize"],f"Frame sourceSize mismatch: {f['image']}")
-    for r in pack["runners"]:
-        for f in r["frames"]:check_frame(f)
-        for clip in r["states"].values():
-            for f in clip["frames"]:check_frame(f)
-    for a in pack["staff"].values():
-        for f in a["frames"].values():check_frame(f)
+    for clip in pack["clips"].values():
+        for f in clip["frames"]:
+            if "sourceSize" in f:check_frame(f)
     manifest={k:copy.deepcopy(v) for k,v in pack.items() if k not in ("resources","sounds")}
     manifest["sourceFiles"]=sources
-    sounds={k:encode(local(v).read_bytes(),"audio/wav") for k,v in pack["sounds"].items()}
+    audio_mime={".wav":"audio/wav",".ogg":"audio/ogg",".mp3":"audio/mpeg"}
+    sounds={k:encode(local(v).read_bytes(),audio_mime[local(v).suffix.lower()]) for k,v in pack["sounds"].items()}
     return {"manifest":manifest,"images":images,"sprites":sprites,"sounds":sounds}
 
 def compile_city(city, release=False):

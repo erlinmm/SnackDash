@@ -100,47 +100,11 @@
     </div>
 
     <section class="game-screen hidden" id="gameScreen" aria-label="Snack Dash gameplay" data-i18n-aria-label="game.gameplayAria">
-      <div class="scoreboard">
-        <button class="small-btn" id="levelsBtn" type="button" aria-label="Return to level selection" data-i18n-aria-label="hud.backToLevels">‹ <span data-i18n="hud.levels">Levels</span></button>
-        <div class="score-pill level-pill"><span class="score-label" data-i18n="hud.race">RACE</span><strong id="hudLevel">1</strong></div>
-        <div class="score-pill time-pill" id="timePill"><span class="score-label" data-i18n="hud.time">TIME</span><strong id="hudTime">01:00</strong></div>
-        <div class="score-pill total-pill"><span class="score-label" data-i18n="hud.points">POINTS</span><strong><span id="hudScore">0</span><small> / 10</small></strong></div>
-        <button class="small-btn restart-btn" id="restartBtn" type="button" title="Restart level" aria-label="Restart level" data-i18n-title="game.restartLevel" data-i18n-aria-label="game.restartLevel">↻</button>
-        <button class="small-btn pause-btn" id="pauseBtn" type="button" aria-label="Pause game" data-i18n-aria-label="game.pause">Ⅱ</button>
-        <button class="small-btn" id="tokyoSoundBtn" type="button" aria-label="Sound">♪</button>
-        <button class="small-btn" id="gameFullscreenBtn" type="button" aria-label="Fullscreen">⛶</button>
-      </div>
-      <div class="combo-panel" id="comboPanel" aria-live="off">
-        <div class="combo-indicator"><span id="comboIcon">⚡</span> <strong id="comboValue">COMBO 0</strong><small id="comboDetail">5 IN A ROW → FEVER</small></div>
-        <div class="combo-meter" aria-hidden="true"><div id="comboFill"></div></div>
-        <div class="fever-plaque" id="feverPlaque" aria-hidden="true">🔥 FEVER!! 🔥</div>
-        <span class="fever-status" id="feverStatus">READY?</span>
-      </div>
       <div class="scene-shell" id="sceneShell">
         <canvas id="scene" width="1280" height="720" aria-label="Marathon road with moving runners. Tap a runner to throw the held supply." data-i18n-aria-label="game.sceneAria" role="img"></canvas>
-        <div class="result-overlay hidden" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultHeading">
-          <div class="result-card">
-            <div class="result-mascot" id="resultMascot">🏆</div>
-            <div class="eyebrow" id="resultKicker">SUPPLY SERVICE COMPLETE!</div>
-            <h2 id="resultHeading">AID STATION STAR!</h2>
-            <div class="result-score" id="resultScore"><strong class="score-main">12</strong><span class="score-unit">points</span></div>
-            <p id="resultText">The staff member completed the support mission!</p>
-            <div class="result-stats" id="resultStats"></div>
-            <button class="btn btn-primary full" id="resultPrimary" type="button">NEXT RACE ➜</button>
-            <div class="result-actions">
-              <button class="btn btn-outline" id="retryBtn" type="button" data-i18n="game.retry">↻ Retry</button>
-              <button class="btn btn-outline" id="backBtn" type="button" data-i18n="game.levels">Levels</button>
-            </div>
-          </div>
-        </div>
-        <div class="game-message" id="gameMessage" aria-live="polite"></div>
         <span class="visually-hidden" id="runnerReactionText" role="status" aria-live="polite" aria-atomic="true"></span>
       </div>
-      <div class="game-control-strip">
-        <div class="held-status"><span class="held-icon" id="heldIcon">💧</span><div><small data-i18n="hud.inHand">IN YOUR HAND</small><strong id="heldNumber">6</strong></div></div>
-        <div class="hand-rule"><strong data-i18n="hud.findMatch">Find a whole-number match!</strong><span id="matchHint" data-i18n="hud.tapRunner">Tap a runner to throw.</span></div>
-      </div>
-      <p class="game-footnote" data-i18n="instructions.footnote">5 Combo → Fever · 10 Combo → Inferno. Tap table items to swap. FEVER: Combo² × 3^(prior hits); INFERNO: Combo² × (Combo−9) × 4^(prior hits); misses end bonus mode without a penalty.</p>
+      <div id="landscapeHud"></div>
     </section>
     <div id="tokyoRotate" data-i18n="tokyo.rotate" role="status">Rotate your device to landscape.</div>
   </main>
@@ -149,7 +113,10 @@
   <!-- BUILD:LOCALES -->
   <!-- BUILD:MATH -->
   <!-- BUILD:REACTIONS -->
+  <!-- BUILD:ANIMATION -->
   <!-- BUILD:RENDERER -->
+  <!-- BUILD:HUD -->
+  <!-- BUILD:AUDIO -->
   <!-- BUILD:PRESENTATION -->
   <!-- BUILD:GAME -->
 </body>

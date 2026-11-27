@@ -11,7 +11,10 @@ FILES={
  "LOCALES":("src/js/locales.js","script"),
  "MATH":("src/js/math.js","script"),
  "REACTIONS":("src/js/reactions.js","script"),
+ "ANIMATION":("src/landscape/animation.js","script"),
  "RENDERER":("src/landscape/renderer.js","script"),
+ "HUD":("src/landscape/hud.js","script"),
+ "AUDIO":("src/landscape/audio.js","script"),
  "PRESENTATION":("src/landscape/presentation.js","script"),
  "GAME":("src/js/game.js","script"),
 }

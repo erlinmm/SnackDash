@@ -5,7 +5,7 @@ The three Tokyo street textures are retained unchanged. The previous
 Tokyo-specific renderer and build-time game-code substitutions have been
 superseded by the shared landscape presentation and asset compiler.
 
-See [Landscape asset contract v1](landscape-asset-contract.md) for the
+See [Landscape Engine V2 asset contract](landscape-asset-contract.md) for the
 architecture, pack schema, replacement workflow, build commands, and
 cross-pack acceptance tests.
 

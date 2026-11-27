@@ -1,0 +1,3238 @@
+{
+  "bg/normal": {
+    "path": "assets/source/approved-rebuild-r03/street/tokyo/normal_empty_environment_plate.webp",
+    "standalone": true,
+    "preserveBytes": true
+  },
+  "station/normal": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/assembled_station_normal.png",
+    "reviewFallback": true
+  },
+  "ambient/normal/normal": {
+    "path": "assets/source/fx/tokyo/normal/city_ambient_normal.svg",
+    "reviewFallback": true
+  },
+  "ambient/normal/reduced": {
+    "path": "assets/source/fx/tokyo/normal/city_ambient_reduced.svg",
+    "reviewFallback": true
+  },
+  "crowd/normal/near/left": {
+    "path": "assets/source/crowd/tokyo/normal/near/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/normal/mid/left": {
+    "path": "assets/source/crowd/tokyo/normal/mid/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/normal/far/left": {
+    "path": "assets/source/crowd/tokyo/normal/far/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/normal/near/right": {
+    "path": "assets/source/crowd/tokyo/normal/near/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/normal/mid/right": {
+    "path": "assets/source/crowd/tokyo/normal/mid/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/normal/far/right": {
+    "path": "assets/source/crowd/tokyo/normal/far/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "hud/normal/race_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/normal/race_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/normal/time_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/normal/time_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/normal/score_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/normal/score_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/normal/festival_banner_2line_empty": {
+    "path": "assets/source/ui/tokyo_v2/normal/festival_banner_2line_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/normal/pause_button_empty": {
+    "path": "assets/source/ui/tokyo_v2/normal/pause_button_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/normal/progress_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/normal/progress_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/normal/fullscreen_button_empty": {
+    "path": "assets/source/ui/tokyo_v2/normal/fullscreen_button_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/swap/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/swap/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/swap/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/throw/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/throw/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/throw/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/receive/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/receive/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/receive/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/score/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/score/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/score/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/miss/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/miss/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/miss/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "bg/fever": {
+    "path": "assets/source/approved-rebuild-r03/street/tokyo/fever_empty_environment_plate.webp",
+    "standalone": true,
+    "preserveBytes": true
+  },
+  "station/fever": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/assembled_station_fever.png",
+    "reviewFallback": true
+  },
+  "ambient/fever/normal": {
+    "path": "assets/source/fx/tokyo/fever/city_ambient_normal.svg",
+    "reviewFallback": true
+  },
+  "ambient/fever/reduced": {
+    "path": "assets/source/fx/tokyo/fever/city_ambient_reduced.svg",
+    "reviewFallback": true
+  },
+  "crowd/fever/near/left": {
+    "path": "assets/source/crowd/tokyo/fever/near/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/fever/mid/left": {
+    "path": "assets/source/crowd/tokyo/fever/mid/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/fever/far/left": {
+    "path": "assets/source/crowd/tokyo/fever/far/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/fever/near/right": {
+    "path": "assets/source/crowd/tokyo/fever/near/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/fever/mid/right": {
+    "path": "assets/source/crowd/tokyo/fever/mid/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/fever/far/right": {
+    "path": "assets/source/crowd/tokyo/fever/far/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "hud/fever/race_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/fever/race_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/fever/time_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/fever/time_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/fever/score_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/fever/score_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/fever/festival_banner_2line_empty": {
+    "path": "assets/source/ui/tokyo_v2/fever/festival_banner_2line_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/fever/pause_button_empty": {
+    "path": "assets/source/ui/tokyo_v2/fever/pause_button_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/fever/progress_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/fever/progress_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/fever/fullscreen_button_empty": {
+    "path": "assets/source/ui/tokyo_v2/fever/fullscreen_button_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/swap/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/swap/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/swap/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/throw/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/throw/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/throw/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/receive/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/receive/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/receive/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/score/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/score/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/score/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/miss/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/miss/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/miss/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "bg/inferno": {
+    "path": "assets/source/approved-rebuild-r03/street/tokyo/inferno_empty_environment_plate.webp",
+    "standalone": true,
+    "preserveBytes": true
+  },
+  "station/inferno": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/assembled_station_inferno.png",
+    "reviewFallback": true
+  },
+  "ambient/inferno/normal": {
+    "path": "assets/source/fx/tokyo/inferno/city_ambient_normal.svg",
+    "reviewFallback": true
+  },
+  "ambient/inferno/reduced": {
+    "path": "assets/source/fx/tokyo/inferno/city_ambient_reduced.svg",
+    "reviewFallback": true
+  },
+  "crowd/inferno/near/left": {
+    "path": "assets/source/crowd/tokyo/inferno/near/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/inferno/mid/left": {
+    "path": "assets/source/crowd/tokyo/inferno/mid/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/inferno/far/left": {
+    "path": "assets/source/crowd/tokyo/inferno/far/crowd_left.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/inferno/near/right": {
+    "path": "assets/source/crowd/tokyo/inferno/near/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/inferno/mid/right": {
+    "path": "assets/source/crowd/tokyo/inferno/mid/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "crowd/inferno/far/right": {
+    "path": "assets/source/crowd/tokyo/inferno/far/crowd_right.svg",
+    "stripGroups": [
+      "barrier_foreground"
+    ],
+    "reviewFallback": true
+  },
+  "hud/inferno/race_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/inferno/race_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/inferno/time_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/inferno/time_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/inferno/score_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/inferno/score_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/inferno/festival_banner_2line_empty": {
+    "path": "assets/source/ui/tokyo_v2/inferno/festival_banner_2line_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/inferno/pause_button_empty": {
+    "path": "assets/source/ui/tokyo_v2/inferno/pause_button_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/inferno/progress_panel_empty": {
+    "path": "assets/source/ui/tokyo_v2/inferno/progress_panel_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "hud/inferno/fullscreen_button_empty": {
+    "path": "assets/source/ui/tokyo_v2/inferno/fullscreen_button_empty.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/swap/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/swap/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/swap/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/throw/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/throw/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/throw/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/receive/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/receive/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/receive/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/score/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/score/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/score/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/miss/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/miss/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/miss/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "slot": {
+    "path": "assets/source/approved-rebuild-r03/ui/backup_slot_empty.png",
+    "reviewFallback": true
+  },
+  "bubble": {
+    "path": "assets/source/approved-rebuild-r03/ui/speech_number_empty.png",
+    "reviewFallback": true
+  },
+  "avatar/female": {
+    "path": "assets/source/volunteer/tokyo/female/avatar.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "staff/female/normal/idle": {
+    "path": "assets/source/volunteer/tokyo/female/normal/actions/frame_00_idle.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/normal/reach": {
+    "path": "assets/source/volunteer/tokyo/female/normal/actions/frame_01_reach.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/normal/grab": {
+    "path": "assets/source/volunteer/tokyo/female/normal/actions/frame_02_grab.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/normal/raise": {
+    "path": "assets/source/volunteer/tokyo/female/normal/actions/frame_03_raise.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/normal/windup": {
+    "path": "assets/source/volunteer/tokyo/female/normal/actions/frame_04_windup.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/normal/release": {
+    "path": "assets/source/volunteer/tokyo/female/normal/actions/frame_05_release.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/normal/follow": {
+    "path": "assets/source/volunteer/tokyo/female/normal/actions/frame_06_follow.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/normal/recover": {
+    "path": "assets/source/volunteer/tokyo/female/normal/actions/frame_07_recover.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/fever/idle": {
+    "path": "assets/source/volunteer/tokyo/female/fever/actions/frame_00_idle.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/fever/reach": {
+    "path": "assets/source/volunteer/tokyo/female/fever/actions/frame_01_reach.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/fever/grab": {
+    "path": "assets/source/volunteer/tokyo/female/fever/actions/frame_02_grab.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/fever/raise": {
+    "path": "assets/source/volunteer/tokyo/female/fever/actions/frame_03_raise.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/fever/windup": {
+    "path": "assets/source/volunteer/tokyo/female/fever/actions/frame_04_windup.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/fever/release": {
+    "path": "assets/source/volunteer/tokyo/female/fever/actions/frame_05_release.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/fever/follow": {
+    "path": "assets/source/volunteer/tokyo/female/fever/actions/frame_06_follow.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/fever/recover": {
+    "path": "assets/source/volunteer/tokyo/female/fever/actions/frame_07_recover.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/behind": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_00_behind.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/step": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_01_step.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/rise": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_02_rise.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/stand": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_03_stand.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/windup": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_04_windup.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/release": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_05_release.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/follow": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_06_follow.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/recover": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_07_recover.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/female/inferno/descend": {
+    "path": "assets/source/volunteer/tokyo/female/inferno/actions/frame_08_descend.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "avatar/male": {
+    "path": "assets/source/volunteer/tokyo/male/avatar.svg",
+    "standalone": true,
+    "reviewFallback": true
+  },
+  "staff/male/normal/idle": {
+    "path": "assets/source/volunteer/tokyo/male/normal/actions/frame_00_idle.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/normal/reach": {
+    "path": "assets/source/volunteer/tokyo/male/normal/actions/frame_01_reach.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/normal/grab": {
+    "path": "assets/source/volunteer/tokyo/male/normal/actions/frame_02_grab.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/normal/raise": {
+    "path": "assets/source/volunteer/tokyo/male/normal/actions/frame_03_raise.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/normal/windup": {
+    "path": "assets/source/volunteer/tokyo/male/normal/actions/frame_04_windup.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/normal/release": {
+    "path": "assets/source/volunteer/tokyo/male/normal/actions/frame_05_release.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/normal/follow": {
+    "path": "assets/source/volunteer/tokyo/male/normal/actions/frame_06_follow.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/normal/recover": {
+    "path": "assets/source/volunteer/tokyo/male/normal/actions/frame_07_recover.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/fever/idle": {
+    "path": "assets/source/volunteer/tokyo/male/fever/actions/frame_00_idle.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/fever/reach": {
+    "path": "assets/source/volunteer/tokyo/male/fever/actions/frame_01_reach.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/fever/grab": {
+    "path": "assets/source/volunteer/tokyo/male/fever/actions/frame_02_grab.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/fever/raise": {
+    "path": "assets/source/volunteer/tokyo/male/fever/actions/frame_03_raise.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/fever/windup": {
+    "path": "assets/source/volunteer/tokyo/male/fever/actions/frame_04_windup.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/fever/release": {
+    "path": "assets/source/volunteer/tokyo/male/fever/actions/frame_05_release.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/fever/follow": {
+    "path": "assets/source/volunteer/tokyo/male/fever/actions/frame_06_follow.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/fever/recover": {
+    "path": "assets/source/volunteer/tokyo/male/fever/actions/frame_07_recover.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/behind": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_00_behind.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/step": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_01_step.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/rise": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_02_rise.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/stand": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_03_stand.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/windup": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_04_windup.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/release": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_05_release.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/follow": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_06_follow.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/recover": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_07_recover.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "staff/male/inferno/descend": {
+    "path": "assets/source/volunteer/tokyo/male/inferno/actions/frame_08_descend.svg",
+    "stripGroups": [
+      "held_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_01/frame_00": {
+    "path": "assets/source/runner/body_01/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_01/frame_01": {
+    "path": "assets/source/runner/body_01/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_01/frame_02": {
+    "path": "assets/source/runner/body_01/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_01/frame_03": {
+    "path": "assets/source/runner/body_01/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_01/frame_04": {
+    "path": "assets/source/runner/body_01/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_01/frame_05": {
+    "path": "assets/source/runner/body_01/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_01/frame_06": {
+    "path": "assets/source/runner/body_01/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_01/frame_07": {
+    "path": "assets/source/runner/body_01/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_01/receive_supply": {
+    "path": "assets/source/runner/body_01/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_01/thanks": {
+    "path": "assets/source/runner/body_01/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_01/pain": {
+    "path": "assets/source/runner/body_01/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_01/surprise": {
+    "path": "assets/source/runner/body_01/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_01/disappointment": {
+    "path": "assets/source/runner/body_01/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_01/cheer": {
+    "path": "assets/source/runner/body_01/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_01/selected": {
+    "path": "assets/source/runner/body_01/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_02/frame_00": {
+    "path": "assets/source/runner/body_02/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_02/frame_01": {
+    "path": "assets/source/runner/body_02/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_02/frame_02": {
+    "path": "assets/source/runner/body_02/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_02/frame_03": {
+    "path": "assets/source/runner/body_02/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_02/frame_04": {
+    "path": "assets/source/runner/body_02/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_02/frame_05": {
+    "path": "assets/source/runner/body_02/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_02/frame_06": {
+    "path": "assets/source/runner/body_02/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_02/frame_07": {
+    "path": "assets/source/runner/body_02/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_02/receive_supply": {
+    "path": "assets/source/runner/body_02/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_02/thanks": {
+    "path": "assets/source/runner/body_02/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_02/pain": {
+    "path": "assets/source/runner/body_02/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_02/surprise": {
+    "path": "assets/source/runner/body_02/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_02/disappointment": {
+    "path": "assets/source/runner/body_02/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_02/cheer": {
+    "path": "assets/source/runner/body_02/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_02/selected": {
+    "path": "assets/source/runner/body_02/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_03/frame_00": {
+    "path": "assets/source/runner/body_03/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_03/frame_01": {
+    "path": "assets/source/runner/body_03/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_03/frame_02": {
+    "path": "assets/source/runner/body_03/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_03/frame_03": {
+    "path": "assets/source/runner/body_03/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_03/frame_04": {
+    "path": "assets/source/runner/body_03/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_03/frame_05": {
+    "path": "assets/source/runner/body_03/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_03/frame_06": {
+    "path": "assets/source/runner/body_03/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_03/frame_07": {
+    "path": "assets/source/runner/body_03/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_03/receive_supply": {
+    "path": "assets/source/runner/body_03/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_03/thanks": {
+    "path": "assets/source/runner/body_03/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_03/pain": {
+    "path": "assets/source/runner/body_03/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_03/surprise": {
+    "path": "assets/source/runner/body_03/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_03/disappointment": {
+    "path": "assets/source/runner/body_03/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_03/cheer": {
+    "path": "assets/source/runner/body_03/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_03/selected": {
+    "path": "assets/source/runner/body_03/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_04/frame_00": {
+    "path": "assets/source/runner/body_04/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_04/frame_01": {
+    "path": "assets/source/runner/body_04/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_04/frame_02": {
+    "path": "assets/source/runner/body_04/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_04/frame_03": {
+    "path": "assets/source/runner/body_04/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_04/frame_04": {
+    "path": "assets/source/runner/body_04/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_04/frame_05": {
+    "path": "assets/source/runner/body_04/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_04/frame_06": {
+    "path": "assets/source/runner/body_04/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_04/frame_07": {
+    "path": "assets/source/runner/body_04/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_04/receive_supply": {
+    "path": "assets/source/runner/body_04/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_04/thanks": {
+    "path": "assets/source/runner/body_04/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_04/pain": {
+    "path": "assets/source/runner/body_04/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_04/surprise": {
+    "path": "assets/source/runner/body_04/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_04/disappointment": {
+    "path": "assets/source/runner/body_04/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_04/cheer": {
+    "path": "assets/source/runner/body_04/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_04/selected": {
+    "path": "assets/source/runner/body_04/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_05/frame_00": {
+    "path": "assets/source/runner/body_05/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_05/frame_01": {
+    "path": "assets/source/runner/body_05/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_05/frame_02": {
+    "path": "assets/source/runner/body_05/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_05/frame_03": {
+    "path": "assets/source/runner/body_05/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_05/frame_04": {
+    "path": "assets/source/runner/body_05/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_05/frame_05": {
+    "path": "assets/source/runner/body_05/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_05/frame_06": {
+    "path": "assets/source/runner/body_05/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_05/frame_07": {
+    "path": "assets/source/runner/body_05/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_05/receive_supply": {
+    "path": "assets/source/runner/body_05/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_05/thanks": {
+    "path": "assets/source/runner/body_05/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_05/pain": {
+    "path": "assets/source/runner/body_05/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_05/surprise": {
+    "path": "assets/source/runner/body_05/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_05/disappointment": {
+    "path": "assets/source/runner/body_05/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_05/cheer": {
+    "path": "assets/source/runner/body_05/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_05/selected": {
+    "path": "assets/source/runner/body_05/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_06/frame_00": {
+    "path": "assets/source/runner/body_06/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_06/frame_01": {
+    "path": "assets/source/runner/body_06/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_06/frame_02": {
+    "path": "assets/source/runner/body_06/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_06/frame_03": {
+    "path": "assets/source/runner/body_06/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_06/frame_04": {
+    "path": "assets/source/runner/body_06/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_06/frame_05": {
+    "path": "assets/source/runner/body_06/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_06/frame_06": {
+    "path": "assets/source/runner/body_06/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_06/frame_07": {
+    "path": "assets/source/runner/body_06/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_06/receive_supply": {
+    "path": "assets/source/runner/body_06/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_06/thanks": {
+    "path": "assets/source/runner/body_06/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_06/pain": {
+    "path": "assets/source/runner/body_06/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_06/surprise": {
+    "path": "assets/source/runner/body_06/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_06/disappointment": {
+    "path": "assets/source/runner/body_06/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_06/cheer": {
+    "path": "assets/source/runner/body_06/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_06/selected": {
+    "path": "assets/source/runner/body_06/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_07/frame_00": {
+    "path": "assets/source/runner/body_07/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_07/frame_01": {
+    "path": "assets/source/runner/body_07/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_07/frame_02": {
+    "path": "assets/source/runner/body_07/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_07/frame_03": {
+    "path": "assets/source/runner/body_07/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_07/frame_04": {
+    "path": "assets/source/runner/body_07/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_07/frame_05": {
+    "path": "assets/source/runner/body_07/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_07/frame_06": {
+    "path": "assets/source/runner/body_07/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_07/frame_07": {
+    "path": "assets/source/runner/body_07/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_07/receive_supply": {
+    "path": "assets/source/runner/body_07/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_07/thanks": {
+    "path": "assets/source/runner/body_07/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_07/pain": {
+    "path": "assets/source/runner/body_07/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_07/surprise": {
+    "path": "assets/source/runner/body_07/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_07/disappointment": {
+    "path": "assets/source/runner/body_07/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_07/cheer": {
+    "path": "assets/source/runner/body_07/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_07/selected": {
+    "path": "assets/source/runner/body_07/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_08/frame_00": {
+    "path": "assets/source/runner/body_08/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_08/frame_01": {
+    "path": "assets/source/runner/body_08/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_08/frame_02": {
+    "path": "assets/source/runner/body_08/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_08/frame_03": {
+    "path": "assets/source/runner/body_08/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_08/frame_04": {
+    "path": "assets/source/runner/body_08/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_08/frame_05": {
+    "path": "assets/source/runner/body_08/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_08/frame_06": {
+    "path": "assets/source/runner/body_08/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_08/frame_07": {
+    "path": "assets/source/runner/body_08/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_08/receive_supply": {
+    "path": "assets/source/runner/body_08/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_08/thanks": {
+    "path": "assets/source/runner/body_08/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_08/pain": {
+    "path": "assets/source/runner/body_08/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_08/surprise": {
+    "path": "assets/source/runner/body_08/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_08/disappointment": {
+    "path": "assets/source/runner/body_08/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_08/cheer": {
+    "path": "assets/source/runner/body_08/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_08/selected": {
+    "path": "assets/source/runner/body_08/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_09/frame_00": {
+    "path": "assets/source/runner/body_09/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_09/frame_01": {
+    "path": "assets/source/runner/body_09/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_09/frame_02": {
+    "path": "assets/source/runner/body_09/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_09/frame_03": {
+    "path": "assets/source/runner/body_09/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_09/frame_04": {
+    "path": "assets/source/runner/body_09/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_09/frame_05": {
+    "path": "assets/source/runner/body_09/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_09/frame_06": {
+    "path": "assets/source/runner/body_09/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_09/frame_07": {
+    "path": "assets/source/runner/body_09/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_09/receive_supply": {
+    "path": "assets/source/runner/body_09/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_09/thanks": {
+    "path": "assets/source/runner/body_09/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_09/pain": {
+    "path": "assets/source/runner/body_09/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_09/surprise": {
+    "path": "assets/source/runner/body_09/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_09/disappointment": {
+    "path": "assets/source/runner/body_09/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_09/cheer": {
+    "path": "assets/source/runner/body_09/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_09/selected": {
+    "path": "assets/source/runner/body_09/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_10/frame_00": {
+    "path": "assets/source/runner/body_10/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_10/frame_01": {
+    "path": "assets/source/runner/body_10/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_10/frame_02": {
+    "path": "assets/source/runner/body_10/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_10/frame_03": {
+    "path": "assets/source/runner/body_10/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_10/frame_04": {
+    "path": "assets/source/runner/body_10/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_10/frame_05": {
+    "path": "assets/source/runner/body_10/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_10/frame_06": {
+    "path": "assets/source/runner/body_10/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_10/frame_07": {
+    "path": "assets/source/runner/body_10/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_10/receive_supply": {
+    "path": "assets/source/runner/body_10/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_10/thanks": {
+    "path": "assets/source/runner/body_10/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_10/pain": {
+    "path": "assets/source/runner/body_10/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_10/surprise": {
+    "path": "assets/source/runner/body_10/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_10/disappointment": {
+    "path": "assets/source/runner/body_10/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_10/cheer": {
+    "path": "assets/source/runner/body_10/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_10/selected": {
+    "path": "assets/source/runner/body_10/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_11/frame_00": {
+    "path": "assets/source/runner/body_11/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_11/frame_01": {
+    "path": "assets/source/runner/body_11/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_11/frame_02": {
+    "path": "assets/source/runner/body_11/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_11/frame_03": {
+    "path": "assets/source/runner/body_11/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_11/frame_04": {
+    "path": "assets/source/runner/body_11/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_11/frame_05": {
+    "path": "assets/source/runner/body_11/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_11/frame_06": {
+    "path": "assets/source/runner/body_11/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_11/frame_07": {
+    "path": "assets/source/runner/body_11/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_11/receive_supply": {
+    "path": "assets/source/runner/body_11/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_11/thanks": {
+    "path": "assets/source/runner/body_11/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_11/pain": {
+    "path": "assets/source/runner/body_11/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_11/surprise": {
+    "path": "assets/source/runner/body_11/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_11/disappointment": {
+    "path": "assets/source/runner/body_11/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_11/cheer": {
+    "path": "assets/source/runner/body_11/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_11/selected": {
+    "path": "assets/source/runner/body_11/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_12/frame_00": {
+    "path": "assets/source/runner/body_12/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_12/frame_01": {
+    "path": "assets/source/runner/body_12/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_12/frame_02": {
+    "path": "assets/source/runner/body_12/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_12/frame_03": {
+    "path": "assets/source/runner/body_12/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_12/frame_04": {
+    "path": "assets/source/runner/body_12/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_12/frame_05": {
+    "path": "assets/source/runner/body_12/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_12/frame_06": {
+    "path": "assets/source/runner/body_12/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_12/frame_07": {
+    "path": "assets/source/runner/body_12/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_12/receive_supply": {
+    "path": "assets/source/runner/body_12/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_12/thanks": {
+    "path": "assets/source/runner/body_12/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_12/pain": {
+    "path": "assets/source/runner/body_12/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_12/surprise": {
+    "path": "assets/source/runner/body_12/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_12/disappointment": {
+    "path": "assets/source/runner/body_12/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_12/cheer": {
+    "path": "assets/source/runner/body_12/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_12/selected": {
+    "path": "assets/source/runner/body_12/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_13/frame_00": {
+    "path": "assets/source/runner/body_13/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_13/frame_01": {
+    "path": "assets/source/runner/body_13/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_13/frame_02": {
+    "path": "assets/source/runner/body_13/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_13/frame_03": {
+    "path": "assets/source/runner/body_13/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_13/frame_04": {
+    "path": "assets/source/runner/body_13/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_13/frame_05": {
+    "path": "assets/source/runner/body_13/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_13/frame_06": {
+    "path": "assets/source/runner/body_13/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_13/frame_07": {
+    "path": "assets/source/runner/body_13/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_13/receive_supply": {
+    "path": "assets/source/runner/body_13/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_13/thanks": {
+    "path": "assets/source/runner/body_13/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_13/pain": {
+    "path": "assets/source/runner/body_13/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_13/surprise": {
+    "path": "assets/source/runner/body_13/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_13/disappointment": {
+    "path": "assets/source/runner/body_13/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_13/cheer": {
+    "path": "assets/source/runner/body_13/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_13/selected": {
+    "path": "assets/source/runner/body_13/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_14/frame_00": {
+    "path": "assets/source/runner/body_14/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_14/frame_01": {
+    "path": "assets/source/runner/body_14/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_14/frame_02": {
+    "path": "assets/source/runner/body_14/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_14/frame_03": {
+    "path": "assets/source/runner/body_14/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_14/frame_04": {
+    "path": "assets/source/runner/body_14/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_14/frame_05": {
+    "path": "assets/source/runner/body_14/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_14/frame_06": {
+    "path": "assets/source/runner/body_14/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_14/frame_07": {
+    "path": "assets/source/runner/body_14/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_14/receive_supply": {
+    "path": "assets/source/runner/body_14/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_14/thanks": {
+    "path": "assets/source/runner/body_14/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_14/pain": {
+    "path": "assets/source/runner/body_14/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_14/surprise": {
+    "path": "assets/source/runner/body_14/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_14/disappointment": {
+    "path": "assets/source/runner/body_14/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_14/cheer": {
+    "path": "assets/source/runner/body_14/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_14/selected": {
+    "path": "assets/source/runner/body_14/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_15/frame_00": {
+    "path": "assets/source/runner/body_15/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_15/frame_01": {
+    "path": "assets/source/runner/body_15/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_15/frame_02": {
+    "path": "assets/source/runner/body_15/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_15/frame_03": {
+    "path": "assets/source/runner/body_15/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_15/frame_04": {
+    "path": "assets/source/runner/body_15/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_15/frame_05": {
+    "path": "assets/source/runner/body_15/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_15/frame_06": {
+    "path": "assets/source/runner/body_15/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_15/frame_07": {
+    "path": "assets/source/runner/body_15/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_15/receive_supply": {
+    "path": "assets/source/runner/body_15/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_15/thanks": {
+    "path": "assets/source/runner/body_15/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_15/pain": {
+    "path": "assets/source/runner/body_15/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_15/surprise": {
+    "path": "assets/source/runner/body_15/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_15/disappointment": {
+    "path": "assets/source/runner/body_15/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_15/cheer": {
+    "path": "assets/source/runner/body_15/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_15/selected": {
+    "path": "assets/source/runner/body_15/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_16/frame_00": {
+    "path": "assets/source/runner/body_16/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_16/frame_01": {
+    "path": "assets/source/runner/body_16/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_16/frame_02": {
+    "path": "assets/source/runner/body_16/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_16/frame_03": {
+    "path": "assets/source/runner/body_16/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_16/frame_04": {
+    "path": "assets/source/runner/body_16/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_16/frame_05": {
+    "path": "assets/source/runner/body_16/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_16/frame_06": {
+    "path": "assets/source/runner/body_16/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_16/frame_07": {
+    "path": "assets/source/runner/body_16/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_16/receive_supply": {
+    "path": "assets/source/runner/body_16/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_16/thanks": {
+    "path": "assets/source/runner/body_16/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_16/pain": {
+    "path": "assets/source/runner/body_16/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_16/surprise": {
+    "path": "assets/source/runner/body_16/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_16/disappointment": {
+    "path": "assets/source/runner/body_16/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_16/cheer": {
+    "path": "assets/source/runner/body_16/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_16/selected": {
+    "path": "assets/source/runner/body_16/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_17/frame_00": {
+    "path": "assets/source/runner/body_17/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_17/frame_01": {
+    "path": "assets/source/runner/body_17/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_17/frame_02": {
+    "path": "assets/source/runner/body_17/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_17/frame_03": {
+    "path": "assets/source/runner/body_17/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_17/frame_04": {
+    "path": "assets/source/runner/body_17/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_17/frame_05": {
+    "path": "assets/source/runner/body_17/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_17/frame_06": {
+    "path": "assets/source/runner/body_17/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_17/frame_07": {
+    "path": "assets/source/runner/body_17/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_17/receive_supply": {
+    "path": "assets/source/runner/body_17/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_17/thanks": {
+    "path": "assets/source/runner/body_17/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_17/pain": {
+    "path": "assets/source/runner/body_17/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_17/surprise": {
+    "path": "assets/source/runner/body_17/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_17/disappointment": {
+    "path": "assets/source/runner/body_17/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_17/cheer": {
+    "path": "assets/source/runner/body_17/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_17/selected": {
+    "path": "assets/source/runner/body_17/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_18/frame_00": {
+    "path": "assets/source/runner/body_18/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_18/frame_01": {
+    "path": "assets/source/runner/body_18/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_18/frame_02": {
+    "path": "assets/source/runner/body_18/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_18/frame_03": {
+    "path": "assets/source/runner/body_18/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_18/frame_04": {
+    "path": "assets/source/runner/body_18/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_18/frame_05": {
+    "path": "assets/source/runner/body_18/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_18/frame_06": {
+    "path": "assets/source/runner/body_18/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_18/frame_07": {
+    "path": "assets/source/runner/body_18/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_18/receive_supply": {
+    "path": "assets/source/runner/body_18/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_18/thanks": {
+    "path": "assets/source/runner/body_18/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_18/pain": {
+    "path": "assets/source/runner/body_18/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_18/surprise": {
+    "path": "assets/source/runner/body_18/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_18/disappointment": {
+    "path": "assets/source/runner/body_18/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_18/cheer": {
+    "path": "assets/source/runner/body_18/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_18/selected": {
+    "path": "assets/source/runner/body_18/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_19/frame_00": {
+    "path": "assets/source/runner/body_19/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_19/frame_01": {
+    "path": "assets/source/runner/body_19/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_19/frame_02": {
+    "path": "assets/source/runner/body_19/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_19/frame_03": {
+    "path": "assets/source/runner/body_19/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_19/frame_04": {
+    "path": "assets/source/runner/body_19/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_19/frame_05": {
+    "path": "assets/source/runner/body_19/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_19/frame_06": {
+    "path": "assets/source/runner/body_19/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_19/frame_07": {
+    "path": "assets/source/runner/body_19/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_19/receive_supply": {
+    "path": "assets/source/runner/body_19/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_19/thanks": {
+    "path": "assets/source/runner/body_19/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_19/pain": {
+    "path": "assets/source/runner/body_19/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_19/surprise": {
+    "path": "assets/source/runner/body_19/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_19/disappointment": {
+    "path": "assets/source/runner/body_19/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_19/cheer": {
+    "path": "assets/source/runner/body_19/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_19/selected": {
+    "path": "assets/source/runner/body_19/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_20/frame_00": {
+    "path": "assets/source/runner/body_20/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_20/frame_01": {
+    "path": "assets/source/runner/body_20/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_20/frame_02": {
+    "path": "assets/source/runner/body_20/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_20/frame_03": {
+    "path": "assets/source/runner/body_20/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_20/frame_04": {
+    "path": "assets/source/runner/body_20/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_20/frame_05": {
+    "path": "assets/source/runner/body_20/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_20/frame_06": {
+    "path": "assets/source/runner/body_20/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_20/frame_07": {
+    "path": "assets/source/runner/body_20/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_20/receive_supply": {
+    "path": "assets/source/runner/body_20/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_20/thanks": {
+    "path": "assets/source/runner/body_20/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_20/pain": {
+    "path": "assets/source/runner/body_20/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_20/surprise": {
+    "path": "assets/source/runner/body_20/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_20/disappointment": {
+    "path": "assets/source/runner/body_20/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_20/cheer": {
+    "path": "assets/source/runner/body_20/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_20/selected": {
+    "path": "assets/source/runner/body_20/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_21/frame_00": {
+    "path": "assets/source/runner/body_21/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_21/frame_01": {
+    "path": "assets/source/runner/body_21/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_21/frame_02": {
+    "path": "assets/source/runner/body_21/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_21/frame_03": {
+    "path": "assets/source/runner/body_21/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_21/frame_04": {
+    "path": "assets/source/runner/body_21/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_21/frame_05": {
+    "path": "assets/source/runner/body_21/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_21/frame_06": {
+    "path": "assets/source/runner/body_21/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_21/frame_07": {
+    "path": "assets/source/runner/body_21/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_21/receive_supply": {
+    "path": "assets/source/runner/body_21/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_21/thanks": {
+    "path": "assets/source/runner/body_21/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_21/pain": {
+    "path": "assets/source/runner/body_21/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_21/surprise": {
+    "path": "assets/source/runner/body_21/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_21/disappointment": {
+    "path": "assets/source/runner/body_21/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_21/cheer": {
+    "path": "assets/source/runner/body_21/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_21/selected": {
+    "path": "assets/source/runner/body_21/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_22/frame_00": {
+    "path": "assets/source/runner/body_22/run_front/frames/frame_00.svg",
+    "reviewFallback": true
+  },
+  "runner/body_22/frame_01": {
+    "path": "assets/source/runner/body_22/run_front/frames/frame_01.svg",
+    "reviewFallback": true
+  },
+  "runner/body_22/frame_02": {
+    "path": "assets/source/runner/body_22/run_front/frames/frame_02.svg",
+    "reviewFallback": true
+  },
+  "runner/body_22/frame_03": {
+    "path": "assets/source/runner/body_22/run_front/frames/frame_03.svg",
+    "reviewFallback": true
+  },
+  "runner/body_22/frame_04": {
+    "path": "assets/source/runner/body_22/run_front/frames/frame_04.svg",
+    "reviewFallback": true
+  },
+  "runner/body_22/frame_05": {
+    "path": "assets/source/runner/body_22/run_front/frames/frame_05.svg",
+    "reviewFallback": true
+  },
+  "runner/body_22/frame_06": {
+    "path": "assets/source/runner/body_22/run_front/frames/frame_06.svg",
+    "reviewFallback": true
+  },
+  "runner/body_22/frame_07": {
+    "path": "assets/source/runner/body_22/run_front/frames/frame_07.svg",
+    "reviewFallback": true
+  },
+  "runner/body_22/receive_supply": {
+    "path": "assets/source/runner/body_22/receive_supply.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_22/thanks": {
+    "path": "assets/source/runner/body_22/thanks.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_22/pain": {
+    "path": "assets/source/runner/body_22/pain.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_22/surprise": {
+    "path": "assets/source/runner/body_22/surprise.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_22/disappointment": {
+    "path": "assets/source/runner/body_22/disappointment.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_22/cheer": {
+    "path": "assets/source/runner/body_22/cheer.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "runner/body_22/selected": {
+    "path": "assets/source/runner/body_22/selected.svg",
+    "stripGroups": [
+      "received_supply"
+    ],
+    "reviewFallback": true
+  },
+  "supply/water/hand": {
+    "path": "assets/source/approved-rebuild-r03/supply/water/hand.png",
+    "reviewFallback": true
+  },
+  "supply/water/slot": {
+    "path": "assets/source/approved-rebuild-r03/supply/water/slot.png",
+    "reviewFallback": true
+  },
+  "supply/water/flight": {
+    "path": "assets/source/approved-rebuild-r03/supply/water/flight.png",
+    "reviewFallback": true
+  },
+  "supply/banana/hand": {
+    "path": "assets/source/approved-rebuild-r03/supply/banana/hand.png",
+    "reviewFallback": true
+  },
+  "supply/banana/slot": {
+    "path": "assets/source/approved-rebuild-r03/supply/banana/slot.png",
+    "reviewFallback": true
+  },
+  "supply/banana/flight": {
+    "path": "assets/source/approved-rebuild-r03/supply/banana/flight.png",
+    "reviewFallback": true
+  },
+  "supply/gel/hand": {
+    "path": "assets/source/approved-rebuild-r03/supply/gel/hand.png",
+    "reviewFallback": true
+  },
+  "supply/gel/slot": {
+    "path": "assets/source/approved-rebuild-r03/supply/gel/slot.png",
+    "reviewFallback": true
+  },
+  "supply/gel/flight": {
+    "path": "assets/source/approved-rebuild-r03/supply/gel/flight.png",
+    "reviewFallback": true
+  },
+  "supply/apple/legacy": {
+    "path": "assets/exports/tokyo/supplies.webp",
+    "rect": [
+      269,
+      9,
+      102,
+      110
+    ],
+    "sourceSize": [
+      102,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "supply/orange/legacy": {
+    "path": "assets/exports/tokyo/supplies.webp",
+    "rect": [
+      394,
+      9,
+      108,
+      110
+    ],
+    "sourceSize": [
+      108,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "supply/bar/legacy": {
+    "path": "assets/exports/tokyo/supplies.webp",
+    "rect": [
+      521,
+      10,
+      110,
+      108
+    ],
+    "sourceSize": [
+      110,
+      108
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "supply/juice/legacy": {
+    "path": "assets/exports/tokyo/supplies.webp",
+    "rect": [
+      668,
+      9,
+      72,
+      110
+    ],
+    "sourceSize": [
+      72,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "station/layer/shared_table_frame": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/shared_table_frame.svg",
+    "reviewFallback": true
+  },
+  "station/layer/shared_table_rear_legs": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/shared_table_rear_legs.svg",
+    "reviewFallback": true
+  },
+  "station/layer/shared_tabletop": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/shared_tabletop.svg",
+    "reviewFallback": true
+  },
+  "station/layer/front_fascia_normal": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/front_fascia_normal.svg",
+    "reviewFallback": true
+  },
+  "station/layer/front_fascia_fever": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/front_fascia_fever.svg",
+    "reviewFallback": true
+  },
+  "station/layer/front_fascia_inferno": {
+    "path": "assets/source/approved-rebuild-r03/station/tokyo/front_fascia_inferno.svg",
+    "reviewFallback": true
+  }
+}

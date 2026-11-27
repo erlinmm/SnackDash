@@ -1,0 +1,37 @@
+{
+  "water": {
+    "hand": "supply/water/hand",
+    "slot": "supply/water/slot",
+    "flight": "supply/water/flight"
+  },
+  "banana": {
+    "hand": "supply/banana/hand",
+    "slot": "supply/banana/slot",
+    "flight": "supply/banana/flight"
+  },
+  "gel": {
+    "hand": "supply/gel/hand",
+    "slot": "supply/gel/slot",
+    "flight": "supply/gel/flight"
+  },
+  "apple": {
+    "hand": "supply/apple/legacy",
+    "slot": "supply/apple/legacy",
+    "flight": "supply/apple/legacy"
+  },
+  "orange": {
+    "hand": "supply/orange/legacy",
+    "slot": "supply/orange/legacy",
+    "flight": "supply/orange/legacy"
+  },
+  "bar": {
+    "hand": "supply/bar/legacy",
+    "slot": "supply/bar/legacy",
+    "flight": "supply/bar/legacy"
+  },
+  "juice": {
+    "hand": "supply/juice/legacy",
+    "slot": "supply/juice/legacy",
+    "flight": "supply/juice/legacy"
+  }
+}

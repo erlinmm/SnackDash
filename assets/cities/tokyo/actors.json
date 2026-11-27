@@ -1,0 +1,1082 @@
+{
+  "runners": [
+    {
+      "id": "body_01",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_01/run",
+          "receive_supply": "body_01/receive_supply",
+          "thanks": "body_01/thanks",
+          "pain": "body_01/pain",
+          "surprise": "body_01/surprise",
+          "disappointment": "body_01/disappointment",
+          "cheer": "body_01/cheer",
+          "selected": "body_01/selected"
+        },
+        "fever": {
+          "run": "body_01/run",
+          "receive_supply": "body_01/receive_festival",
+          "thanks": "body_01/thanks",
+          "pain": "body_01/pain",
+          "surprise": "body_01/surprise",
+          "disappointment": "body_01/disappointment",
+          "cheer": "body_01/cheer",
+          "selected": "body_01/selected"
+        },
+        "inferno": {
+          "run": "body_01/run",
+          "receive_supply": "body_01/receive_festival",
+          "thanks": "body_01/thanks",
+          "pain": "body_01/pain",
+          "surprise": "body_01/surprise",
+          "disappointment": "body_01/disappointment",
+          "cheer": "body_01/cheer",
+          "selected": "body_01/selected"
+        }
+      }
+    },
+    {
+      "id": "body_02",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_02/run",
+          "receive_supply": "body_02/receive_supply",
+          "thanks": "body_02/thanks",
+          "pain": "body_02/pain",
+          "surprise": "body_02/surprise",
+          "disappointment": "body_02/disappointment",
+          "cheer": "body_02/cheer",
+          "selected": "body_02/selected"
+        },
+        "fever": {
+          "run": "body_02/run",
+          "receive_supply": "body_02/receive_festival",
+          "thanks": "body_02/thanks",
+          "pain": "body_02/pain",
+          "surprise": "body_02/surprise",
+          "disappointment": "body_02/disappointment",
+          "cheer": "body_02/cheer",
+          "selected": "body_02/selected"
+        },
+        "inferno": {
+          "run": "body_02/run",
+          "receive_supply": "body_02/receive_festival",
+          "thanks": "body_02/thanks",
+          "pain": "body_02/pain",
+          "surprise": "body_02/surprise",
+          "disappointment": "body_02/disappointment",
+          "cheer": "body_02/cheer",
+          "selected": "body_02/selected"
+        }
+      }
+    },
+    {
+      "id": "body_03",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_03/run",
+          "receive_supply": "body_03/receive_supply",
+          "thanks": "body_03/thanks",
+          "pain": "body_03/pain",
+          "surprise": "body_03/surprise",
+          "disappointment": "body_03/disappointment",
+          "cheer": "body_03/cheer",
+          "selected": "body_03/selected"
+        },
+        "fever": {
+          "run": "body_03/run",
+          "receive_supply": "body_03/receive_festival",
+          "thanks": "body_03/thanks",
+          "pain": "body_03/pain",
+          "surprise": "body_03/surprise",
+          "disappointment": "body_03/disappointment",
+          "cheer": "body_03/cheer",
+          "selected": "body_03/selected"
+        },
+        "inferno": {
+          "run": "body_03/run",
+          "receive_supply": "body_03/receive_festival",
+          "thanks": "body_03/thanks",
+          "pain": "body_03/pain",
+          "surprise": "body_03/surprise",
+          "disappointment": "body_03/disappointment",
+          "cheer": "body_03/cheer",
+          "selected": "body_03/selected"
+        }
+      }
+    },
+    {
+      "id": "body_04",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_04/run",
+          "receive_supply": "body_04/receive_supply",
+          "thanks": "body_04/thanks",
+          "pain": "body_04/pain",
+          "surprise": "body_04/surprise",
+          "disappointment": "body_04/disappointment",
+          "cheer": "body_04/cheer",
+          "selected": "body_04/selected"
+        },
+        "fever": {
+          "run": "body_04/run",
+          "receive_supply": "body_04/receive_festival",
+          "thanks": "body_04/thanks",
+          "pain": "body_04/pain",
+          "surprise": "body_04/surprise",
+          "disappointment": "body_04/disappointment",
+          "cheer": "body_04/cheer",
+          "selected": "body_04/selected"
+        },
+        "inferno": {
+          "run": "body_04/run",
+          "receive_supply": "body_04/receive_festival",
+          "thanks": "body_04/thanks",
+          "pain": "body_04/pain",
+          "surprise": "body_04/surprise",
+          "disappointment": "body_04/disappointment",
+          "cheer": "body_04/cheer",
+          "selected": "body_04/selected"
+        }
+      }
+    },
+    {
+      "id": "body_05",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_05/run",
+          "receive_supply": "body_05/receive_supply",
+          "thanks": "body_05/thanks",
+          "pain": "body_05/pain",
+          "surprise": "body_05/surprise",
+          "disappointment": "body_05/disappointment",
+          "cheer": "body_05/cheer",
+          "selected": "body_05/selected"
+        },
+        "fever": {
+          "run": "body_05/run",
+          "receive_supply": "body_05/receive_festival",
+          "thanks": "body_05/thanks",
+          "pain": "body_05/pain",
+          "surprise": "body_05/surprise",
+          "disappointment": "body_05/disappointment",
+          "cheer": "body_05/cheer",
+          "selected": "body_05/selected"
+        },
+        "inferno": {
+          "run": "body_05/run",
+          "receive_supply": "body_05/receive_festival",
+          "thanks": "body_05/thanks",
+          "pain": "body_05/pain",
+          "surprise": "body_05/surprise",
+          "disappointment": "body_05/disappointment",
+          "cheer": "body_05/cheer",
+          "selected": "body_05/selected"
+        }
+      }
+    },
+    {
+      "id": "body_06",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_06/run",
+          "receive_supply": "body_06/receive_supply",
+          "thanks": "body_06/thanks",
+          "pain": "body_06/pain",
+          "surprise": "body_06/surprise",
+          "disappointment": "body_06/disappointment",
+          "cheer": "body_06/cheer",
+          "selected": "body_06/selected"
+        },
+        "fever": {
+          "run": "body_06/run",
+          "receive_supply": "body_06/receive_festival",
+          "thanks": "body_06/thanks",
+          "pain": "body_06/pain",
+          "surprise": "body_06/surprise",
+          "disappointment": "body_06/disappointment",
+          "cheer": "body_06/cheer",
+          "selected": "body_06/selected"
+        },
+        "inferno": {
+          "run": "body_06/run",
+          "receive_supply": "body_06/receive_festival",
+          "thanks": "body_06/thanks",
+          "pain": "body_06/pain",
+          "surprise": "body_06/surprise",
+          "disappointment": "body_06/disappointment",
+          "cheer": "body_06/cheer",
+          "selected": "body_06/selected"
+        }
+      }
+    },
+    {
+      "id": "body_07",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_07/run",
+          "receive_supply": "body_07/receive_supply",
+          "thanks": "body_07/thanks",
+          "pain": "body_07/pain",
+          "surprise": "body_07/surprise",
+          "disappointment": "body_07/disappointment",
+          "cheer": "body_07/cheer",
+          "selected": "body_07/selected"
+        },
+        "fever": {
+          "run": "body_07/run",
+          "receive_supply": "body_07/receive_festival",
+          "thanks": "body_07/thanks",
+          "pain": "body_07/pain",
+          "surprise": "body_07/surprise",
+          "disappointment": "body_07/disappointment",
+          "cheer": "body_07/cheer",
+          "selected": "body_07/selected"
+        },
+        "inferno": {
+          "run": "body_07/run",
+          "receive_supply": "body_07/receive_festival",
+          "thanks": "body_07/thanks",
+          "pain": "body_07/pain",
+          "surprise": "body_07/surprise",
+          "disappointment": "body_07/disappointment",
+          "cheer": "body_07/cheer",
+          "selected": "body_07/selected"
+        }
+      }
+    },
+    {
+      "id": "body_08",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_08/run",
+          "receive_supply": "body_08/receive_supply",
+          "thanks": "body_08/thanks",
+          "pain": "body_08/pain",
+          "surprise": "body_08/surprise",
+          "disappointment": "body_08/disappointment",
+          "cheer": "body_08/cheer",
+          "selected": "body_08/selected"
+        },
+        "fever": {
+          "run": "body_08/run",
+          "receive_supply": "body_08/receive_festival",
+          "thanks": "body_08/thanks",
+          "pain": "body_08/pain",
+          "surprise": "body_08/surprise",
+          "disappointment": "body_08/disappointment",
+          "cheer": "body_08/cheer",
+          "selected": "body_08/selected"
+        },
+        "inferno": {
+          "run": "body_08/run",
+          "receive_supply": "body_08/receive_festival",
+          "thanks": "body_08/thanks",
+          "pain": "body_08/pain",
+          "surprise": "body_08/surprise",
+          "disappointment": "body_08/disappointment",
+          "cheer": "body_08/cheer",
+          "selected": "body_08/selected"
+        }
+      }
+    },
+    {
+      "id": "body_09",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_09/run",
+          "receive_supply": "body_09/receive_supply",
+          "thanks": "body_09/thanks",
+          "pain": "body_09/pain",
+          "surprise": "body_09/surprise",
+          "disappointment": "body_09/disappointment",
+          "cheer": "body_09/cheer",
+          "selected": "body_09/selected"
+        },
+        "fever": {
+          "run": "body_09/run",
+          "receive_supply": "body_09/receive_festival",
+          "thanks": "body_09/thanks",
+          "pain": "body_09/pain",
+          "surprise": "body_09/surprise",
+          "disappointment": "body_09/disappointment",
+          "cheer": "body_09/cheer",
+          "selected": "body_09/selected"
+        },
+        "inferno": {
+          "run": "body_09/run",
+          "receive_supply": "body_09/receive_festival",
+          "thanks": "body_09/thanks",
+          "pain": "body_09/pain",
+          "surprise": "body_09/surprise",
+          "disappointment": "body_09/disappointment",
+          "cheer": "body_09/cheer",
+          "selected": "body_09/selected"
+        }
+      }
+    },
+    {
+      "id": "body_10",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_10/run",
+          "receive_supply": "body_10/receive_supply",
+          "thanks": "body_10/thanks",
+          "pain": "body_10/pain",
+          "surprise": "body_10/surprise",
+          "disappointment": "body_10/disappointment",
+          "cheer": "body_10/cheer",
+          "selected": "body_10/selected"
+        },
+        "fever": {
+          "run": "body_10/run",
+          "receive_supply": "body_10/receive_festival",
+          "thanks": "body_10/thanks",
+          "pain": "body_10/pain",
+          "surprise": "body_10/surprise",
+          "disappointment": "body_10/disappointment",
+          "cheer": "body_10/cheer",
+          "selected": "body_10/selected"
+        },
+        "inferno": {
+          "run": "body_10/run",
+          "receive_supply": "body_10/receive_festival",
+          "thanks": "body_10/thanks",
+          "pain": "body_10/pain",
+          "surprise": "body_10/surprise",
+          "disappointment": "body_10/disappointment",
+          "cheer": "body_10/cheer",
+          "selected": "body_10/selected"
+        }
+      }
+    },
+    {
+      "id": "body_11",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_11/run",
+          "receive_supply": "body_11/receive_supply",
+          "thanks": "body_11/thanks",
+          "pain": "body_11/pain",
+          "surprise": "body_11/surprise",
+          "disappointment": "body_11/disappointment",
+          "cheer": "body_11/cheer",
+          "selected": "body_11/selected"
+        },
+        "fever": {
+          "run": "body_11/run",
+          "receive_supply": "body_11/receive_festival",
+          "thanks": "body_11/thanks",
+          "pain": "body_11/pain",
+          "surprise": "body_11/surprise",
+          "disappointment": "body_11/disappointment",
+          "cheer": "body_11/cheer",
+          "selected": "body_11/selected"
+        },
+        "inferno": {
+          "run": "body_11/run",
+          "receive_supply": "body_11/receive_festival",
+          "thanks": "body_11/thanks",
+          "pain": "body_11/pain",
+          "surprise": "body_11/surprise",
+          "disappointment": "body_11/disappointment",
+          "cheer": "body_11/cheer",
+          "selected": "body_11/selected"
+        }
+      }
+    },
+    {
+      "id": "body_12",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_12/run",
+          "receive_supply": "body_12/receive_supply",
+          "thanks": "body_12/thanks",
+          "pain": "body_12/pain",
+          "surprise": "body_12/surprise",
+          "disappointment": "body_12/disappointment",
+          "cheer": "body_12/cheer",
+          "selected": "body_12/selected"
+        },
+        "fever": {
+          "run": "body_12/run",
+          "receive_supply": "body_12/receive_festival",
+          "thanks": "body_12/thanks",
+          "pain": "body_12/pain",
+          "surprise": "body_12/surprise",
+          "disappointment": "body_12/disappointment",
+          "cheer": "body_12/cheer",
+          "selected": "body_12/selected"
+        },
+        "inferno": {
+          "run": "body_12/run",
+          "receive_supply": "body_12/receive_festival",
+          "thanks": "body_12/thanks",
+          "pain": "body_12/pain",
+          "surprise": "body_12/surprise",
+          "disappointment": "body_12/disappointment",
+          "cheer": "body_12/cheer",
+          "selected": "body_12/selected"
+        }
+      }
+    },
+    {
+      "id": "body_13",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_13/run",
+          "receive_supply": "body_13/receive_supply",
+          "thanks": "body_13/thanks",
+          "pain": "body_13/pain",
+          "surprise": "body_13/surprise",
+          "disappointment": "body_13/disappointment",
+          "cheer": "body_13/cheer",
+          "selected": "body_13/selected"
+        },
+        "fever": {
+          "run": "body_13/run",
+          "receive_supply": "body_13/receive_festival",
+          "thanks": "body_13/thanks",
+          "pain": "body_13/pain",
+          "surprise": "body_13/surprise",
+          "disappointment": "body_13/disappointment",
+          "cheer": "body_13/cheer",
+          "selected": "body_13/selected"
+        },
+        "inferno": {
+          "run": "body_13/run",
+          "receive_supply": "body_13/receive_festival",
+          "thanks": "body_13/thanks",
+          "pain": "body_13/pain",
+          "surprise": "body_13/surprise",
+          "disappointment": "body_13/disappointment",
+          "cheer": "body_13/cheer",
+          "selected": "body_13/selected"
+        }
+      }
+    },
+    {
+      "id": "body_14",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_14/run",
+          "receive_supply": "body_14/receive_supply",
+          "thanks": "body_14/thanks",
+          "pain": "body_14/pain",
+          "surprise": "body_14/surprise",
+          "disappointment": "body_14/disappointment",
+          "cheer": "body_14/cheer",
+          "selected": "body_14/selected"
+        },
+        "fever": {
+          "run": "body_14/run",
+          "receive_supply": "body_14/receive_festival",
+          "thanks": "body_14/thanks",
+          "pain": "body_14/pain",
+          "surprise": "body_14/surprise",
+          "disappointment": "body_14/disappointment",
+          "cheer": "body_14/cheer",
+          "selected": "body_14/selected"
+        },
+        "inferno": {
+          "run": "body_14/run",
+          "receive_supply": "body_14/receive_festival",
+          "thanks": "body_14/thanks",
+          "pain": "body_14/pain",
+          "surprise": "body_14/surprise",
+          "disappointment": "body_14/disappointment",
+          "cheer": "body_14/cheer",
+          "selected": "body_14/selected"
+        }
+      }
+    },
+    {
+      "id": "body_15",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_15/run",
+          "receive_supply": "body_15/receive_supply",
+          "thanks": "body_15/thanks",
+          "pain": "body_15/pain",
+          "surprise": "body_15/surprise",
+          "disappointment": "body_15/disappointment",
+          "cheer": "body_15/cheer",
+          "selected": "body_15/selected"
+        },
+        "fever": {
+          "run": "body_15/run",
+          "receive_supply": "body_15/receive_festival",
+          "thanks": "body_15/thanks",
+          "pain": "body_15/pain",
+          "surprise": "body_15/surprise",
+          "disappointment": "body_15/disappointment",
+          "cheer": "body_15/cheer",
+          "selected": "body_15/selected"
+        },
+        "inferno": {
+          "run": "body_15/run",
+          "receive_supply": "body_15/receive_festival",
+          "thanks": "body_15/thanks",
+          "pain": "body_15/pain",
+          "surprise": "body_15/surprise",
+          "disappointment": "body_15/disappointment",
+          "cheer": "body_15/cheer",
+          "selected": "body_15/selected"
+        }
+      }
+    },
+    {
+      "id": "body_16",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_16/run",
+          "receive_supply": "body_16/receive_supply",
+          "thanks": "body_16/thanks",
+          "pain": "body_16/pain",
+          "surprise": "body_16/surprise",
+          "disappointment": "body_16/disappointment",
+          "cheer": "body_16/cheer",
+          "selected": "body_16/selected"
+        },
+        "fever": {
+          "run": "body_16/run",
+          "receive_supply": "body_16/receive_festival",
+          "thanks": "body_16/thanks",
+          "pain": "body_16/pain",
+          "surprise": "body_16/surprise",
+          "disappointment": "body_16/disappointment",
+          "cheer": "body_16/cheer",
+          "selected": "body_16/selected"
+        },
+        "inferno": {
+          "run": "body_16/run",
+          "receive_supply": "body_16/receive_festival",
+          "thanks": "body_16/thanks",
+          "pain": "body_16/pain",
+          "surprise": "body_16/surprise",
+          "disappointment": "body_16/disappointment",
+          "cheer": "body_16/cheer",
+          "selected": "body_16/selected"
+        }
+      }
+    },
+    {
+      "id": "body_17",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_17/run",
+          "receive_supply": "body_17/receive_supply",
+          "thanks": "body_17/thanks",
+          "pain": "body_17/pain",
+          "surprise": "body_17/surprise",
+          "disappointment": "body_17/disappointment",
+          "cheer": "body_17/cheer",
+          "selected": "body_17/selected"
+        },
+        "fever": {
+          "run": "body_17/run",
+          "receive_supply": "body_17/receive_festival",
+          "thanks": "body_17/thanks",
+          "pain": "body_17/pain",
+          "surprise": "body_17/surprise",
+          "disappointment": "body_17/disappointment",
+          "cheer": "body_17/cheer",
+          "selected": "body_17/selected"
+        },
+        "inferno": {
+          "run": "body_17/run",
+          "receive_supply": "body_17/receive_festival",
+          "thanks": "body_17/thanks",
+          "pain": "body_17/pain",
+          "surprise": "body_17/surprise",
+          "disappointment": "body_17/disappointment",
+          "cheer": "body_17/cheer",
+          "selected": "body_17/selected"
+        }
+      }
+    },
+    {
+      "id": "body_18",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_18/run",
+          "receive_supply": "body_18/receive_supply",
+          "thanks": "body_18/thanks",
+          "pain": "body_18/pain",
+          "surprise": "body_18/surprise",
+          "disappointment": "body_18/disappointment",
+          "cheer": "body_18/cheer",
+          "selected": "body_18/selected"
+        },
+        "fever": {
+          "run": "body_18/run",
+          "receive_supply": "body_18/receive_festival",
+          "thanks": "body_18/thanks",
+          "pain": "body_18/pain",
+          "surprise": "body_18/surprise",
+          "disappointment": "body_18/disappointment",
+          "cheer": "body_18/cheer",
+          "selected": "body_18/selected"
+        },
+        "inferno": {
+          "run": "body_18/run",
+          "receive_supply": "body_18/receive_festival",
+          "thanks": "body_18/thanks",
+          "pain": "body_18/pain",
+          "surprise": "body_18/surprise",
+          "disappointment": "body_18/disappointment",
+          "cheer": "body_18/cheer",
+          "selected": "body_18/selected"
+        }
+      }
+    },
+    {
+      "id": "body_19",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_19/run",
+          "receive_supply": "body_19/receive_supply",
+          "thanks": "body_19/thanks",
+          "pain": "body_19/pain",
+          "surprise": "body_19/surprise",
+          "disappointment": "body_19/disappointment",
+          "cheer": "body_19/cheer",
+          "selected": "body_19/selected"
+        },
+        "fever": {
+          "run": "body_19/run",
+          "receive_supply": "body_19/receive_festival",
+          "thanks": "body_19/thanks",
+          "pain": "body_19/pain",
+          "surprise": "body_19/surprise",
+          "disappointment": "body_19/disappointment",
+          "cheer": "body_19/cheer",
+          "selected": "body_19/selected"
+        },
+        "inferno": {
+          "run": "body_19/run",
+          "receive_supply": "body_19/receive_festival",
+          "thanks": "body_19/thanks",
+          "pain": "body_19/pain",
+          "surprise": "body_19/surprise",
+          "disappointment": "body_19/disappointment",
+          "cheer": "body_19/cheer",
+          "selected": "body_19/selected"
+        }
+      }
+    },
+    {
+      "id": "body_20",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_20/run",
+          "receive_supply": "body_20/receive_supply",
+          "thanks": "body_20/thanks",
+          "pain": "body_20/pain",
+          "surprise": "body_20/surprise",
+          "disappointment": "body_20/disappointment",
+          "cheer": "body_20/cheer",
+          "selected": "body_20/selected"
+        },
+        "fever": {
+          "run": "body_20/run",
+          "receive_supply": "body_20/receive_festival",
+          "thanks": "body_20/thanks",
+          "pain": "body_20/pain",
+          "surprise": "body_20/surprise",
+          "disappointment": "body_20/disappointment",
+          "cheer": "body_20/cheer",
+          "selected": "body_20/selected"
+        },
+        "inferno": {
+          "run": "body_20/run",
+          "receive_supply": "body_20/receive_festival",
+          "thanks": "body_20/thanks",
+          "pain": "body_20/pain",
+          "surprise": "body_20/surprise",
+          "disappointment": "body_20/disappointment",
+          "cheer": "body_20/cheer",
+          "selected": "body_20/selected"
+        }
+      }
+    },
+    {
+      "id": "body_21",
+      "gender": "female",
+      "modes": {
+        "normal": {
+          "run": "body_21/run",
+          "receive_supply": "body_21/receive_supply",
+          "thanks": "body_21/thanks",
+          "pain": "body_21/pain",
+          "surprise": "body_21/surprise",
+          "disappointment": "body_21/disappointment",
+          "cheer": "body_21/cheer",
+          "selected": "body_21/selected"
+        },
+        "fever": {
+          "run": "body_21/run",
+          "receive_supply": "body_21/receive_festival",
+          "thanks": "body_21/thanks",
+          "pain": "body_21/pain",
+          "surprise": "body_21/surprise",
+          "disappointment": "body_21/disappointment",
+          "cheer": "body_21/cheer",
+          "selected": "body_21/selected"
+        },
+        "inferno": {
+          "run": "body_21/run",
+          "receive_supply": "body_21/receive_festival",
+          "thanks": "body_21/thanks",
+          "pain": "body_21/pain",
+          "surprise": "body_21/surprise",
+          "disappointment": "body_21/disappointment",
+          "cheer": "body_21/cheer",
+          "selected": "body_21/selected"
+        }
+      }
+    },
+    {
+      "id": "body_22",
+      "gender": "male",
+      "modes": {
+        "normal": {
+          "run": "body_22/run",
+          "receive_supply": "body_22/receive_supply",
+          "thanks": "body_22/thanks",
+          "pain": "body_22/pain",
+          "surprise": "body_22/surprise",
+          "disappointment": "body_22/disappointment",
+          "cheer": "body_22/cheer",
+          "selected": "body_22/selected"
+        },
+        "fever": {
+          "run": "body_22/run",
+          "receive_supply": "body_22/receive_festival",
+          "thanks": "body_22/thanks",
+          "pain": "body_22/pain",
+          "surprise": "body_22/surprise",
+          "disappointment": "body_22/disappointment",
+          "cheer": "body_22/cheer",
+          "selected": "body_22/selected"
+        },
+        "inferno": {
+          "run": "body_22/run",
+          "receive_supply": "body_22/receive_festival",
+          "thanks": "body_22/thanks",
+          "pain": "body_22/pain",
+          "surprise": "body_22/surprise",
+          "disappointment": "body_22/disappointment",
+          "cheer": "body_22/cheer",
+          "selected": "body_22/selected"
+        }
+      }
+    }
+  ],
+  "staff": {
+    "female": {
+      "id": "female",
+      "modes": {
+        "normal": {
+          "idle": "staff/female/normal/idle",
+          "swap": "staff/female/normal/swap",
+          "throw": "staff/female/normal/throw",
+          "change": "staff/female/normal/change",
+          "climb": "staff/female/normal/climb",
+          "kick": "staff/female/normal/kick",
+          "descend": "staff/female/normal/descend",
+          "stand": "staff/female/normal/idle",
+          "pickup": "staff/female/normal/pickup",
+          "change_fever": "staff/female/fever_to_normal",
+          "change_inferno": "staff/female/inferno_to_normal"
+        },
+        "fever": {
+          "idle": "staff/female/fever/idle",
+          "swap": "staff/female/fever/swap",
+          "throw": "staff/female/fever/throw",
+          "change": "staff/female/fever/change",
+          "climb": "staff/female/fever/climb",
+          "kick": "staff/female/fever/kick",
+          "descend": "staff/female/fever/descend",
+          "stand": "staff/female/fever/idle",
+          "pickup": "staff/female/fever/pickup",
+          "change_normal": "staff/female/normal_to_fever"
+        },
+        "inferno": {
+          "idle": "staff/female/inferno/idle",
+          "swap": "staff/female/inferno/swap",
+          "throw": "staff/female/inferno/throw",
+          "change": "staff/female/inferno/change",
+          "climb": "staff/female/inferno/climb",
+          "kick": "staff/female/inferno/kick",
+          "descend": "staff/female/inferno/descend",
+          "stand": "staff/female/inferno/stand",
+          "pickup": "staff/female/inferno/pickup",
+          "change_fever": "staff/female/fever_to_inferno"
+        }
+      }
+    },
+    "male": {
+      "id": "male",
+      "modes": {
+        "normal": {
+          "idle": "staff/male/normal/idle",
+          "swap": "staff/male/normal/swap",
+          "throw": "staff/male/normal/throw",
+          "change": "staff/male/normal/change",
+          "climb": "staff/male/normal/climb",
+          "kick": "staff/male/normal/kick",
+          "descend": "staff/male/normal/descend",
+          "stand": "staff/male/normal/idle",
+          "pickup": "staff/male/normal/pickup",
+          "change_fever": "staff/male/fever_to_normal",
+          "change_inferno": "staff/male/inferno_to_normal"
+        },
+        "fever": {
+          "idle": "staff/male/fever/idle",
+          "swap": "staff/male/fever/swap",
+          "throw": "staff/male/fever/throw",
+          "change": "staff/male/fever/change",
+          "climb": "staff/male/fever/climb",
+          "kick": "staff/male/fever/kick",
+          "descend": "staff/male/fever/descend",
+          "stand": "staff/male/fever/idle",
+          "pickup": "staff/male/fever/pickup",
+          "change_normal": "staff/male/normal_to_fever"
+        },
+        "inferno": {
+          "idle": "staff/male/inferno/idle",
+          "swap": "staff/male/inferno/swap",
+          "throw": "staff/male/inferno/throw",
+          "change": "staff/male/inferno/change",
+          "climb": "staff/male/inferno/climb",
+          "kick": "staff/male/inferno/kick",
+          "descend": "staff/male/inferno/descend",
+          "stand": "staff/male/inferno/stand",
+          "pickup": "staff/male/inferno/pickup",
+          "change_fever": "staff/male/fever_to_inferno"
+        }
+      }
+    }
+  },
+  "crowds": [
+    {
+      "id": "crowd-far-left",
+      "rect": [
+        516,
+        150,
+        220,
+        82
+      ],
+      "side": "left",
+      "depth": "far",
+      "skew": -0.2,
+      "z": 10,
+      "modes": {
+        "normal": {
+          "idle": "crowd-far-left/normal/idle",
+          "cheer": "crowd-far-left/normal/cheer",
+          "miss": "crowd-far-left/normal/miss",
+          "festival": "crowd-far-left/normal/festival"
+        },
+        "fever": {
+          "idle": "crowd-far-left/fever/idle",
+          "cheer": "crowd-far-left/fever/cheer",
+          "miss": "crowd-far-left/fever/miss",
+          "festival": "crowd-far-left/fever/festival"
+        },
+        "inferno": {
+          "idle": "crowd-far-left/inferno/idle",
+          "cheer": "crowd-far-left/inferno/cheer",
+          "miss": "crowd-far-left/inferno/miss",
+          "festival": "crowd-far-left/inferno/festival"
+        }
+      }
+    },
+    {
+      "id": "crowd-mid-left",
+      "rect": [
+        330,
+        203,
+        250,
+        148
+      ],
+      "side": "left",
+      "depth": "mid",
+      "skew": -0.43,
+      "z": 10.01,
+      "modes": {
+        "normal": {
+          "idle": "crowd-mid-left/normal/idle",
+          "cheer": "crowd-mid-left/normal/cheer",
+          "miss": "crowd-mid-left/normal/miss",
+          "festival": "crowd-mid-left/normal/festival"
+        },
+        "fever": {
+          "idle": "crowd-mid-left/fever/idle",
+          "cheer": "crowd-mid-left/fever/cheer",
+          "miss": "crowd-mid-left/fever/miss",
+          "festival": "crowd-mid-left/fever/festival"
+        },
+        "inferno": {
+          "idle": "crowd-mid-left/inferno/idle",
+          "cheer": "crowd-mid-left/inferno/cheer",
+          "miss": "crowd-mid-left/inferno/miss",
+          "festival": "crowd-mid-left/inferno/festival"
+        }
+      }
+    },
+    {
+      "id": "crowd-near-left",
+      "rect": [
+        0,
+        270,
+        390,
+        250
+      ],
+      "side": "left",
+      "depth": "near",
+      "skew": -0.48,
+      "z": 10.02,
+      "modes": {
+        "normal": {
+          "idle": "crowd-near-left/normal/idle",
+          "cheer": "crowd-near-left/normal/cheer",
+          "miss": "crowd-near-left/normal/miss",
+          "festival": "crowd-near-left/normal/festival"
+        },
+        "fever": {
+          "idle": "crowd-near-left/fever/idle",
+          "cheer": "crowd-near-left/fever/cheer",
+          "miss": "crowd-near-left/fever/miss",
+          "festival": "crowd-near-left/fever/festival"
+        },
+        "inferno": {
+          "idle": "crowd-near-left/inferno/idle",
+          "cheer": "crowd-near-left/inferno/cheer",
+          "miss": "crowd-near-left/inferno/miss",
+          "festival": "crowd-near-left/inferno/festival"
+        }
+      }
+    },
+    {
+      "id": "crowd-far-right",
+      "rect": [
+        865,
+        160,
+        210,
+        82
+      ],
+      "side": "right",
+      "depth": "far",
+      "skew": 0.18,
+      "z": 10.03,
+      "modes": {
+        "normal": {
+          "idle": "crowd-far-right/normal/idle",
+          "cheer": "crowd-far-right/normal/cheer",
+          "miss": "crowd-far-right/normal/miss",
+          "festival": "crowd-far-right/normal/festival"
+        },
+        "fever": {
+          "idle": "crowd-far-right/fever/idle",
+          "cheer": "crowd-far-right/fever/cheer",
+          "miss": "crowd-far-right/fever/miss",
+          "festival": "crowd-far-right/fever/festival"
+        },
+        "inferno": {
+          "idle": "crowd-far-right/inferno/idle",
+          "cheer": "crowd-far-right/inferno/cheer",
+          "miss": "crowd-far-right/inferno/miss",
+          "festival": "crowd-far-right/inferno/festival"
+        }
+      }
+    },
+    {
+      "id": "crowd-mid-right",
+      "rect": [
+        1035,
+        190,
+        220,
+        145
+      ],
+      "side": "right",
+      "depth": "mid",
+      "skew": 0.4,
+      "z": 10.04,
+      "modes": {
+        "normal": {
+          "idle": "crowd-mid-right/normal/idle",
+          "cheer": "crowd-mid-right/normal/cheer",
+          "miss": "crowd-mid-right/normal/miss",
+          "festival": "crowd-mid-right/normal/festival"
+        },
+        "fever": {
+          "idle": "crowd-mid-right/fever/idle",
+          "cheer": "crowd-mid-right/fever/cheer",
+          "miss": "crowd-mid-right/fever/miss",
+          "festival": "crowd-mid-right/fever/festival"
+        },
+        "inferno": {
+          "idle": "crowd-mid-right/inferno/idle",
+          "cheer": "crowd-mid-right/inferno/cheer",
+          "miss": "crowd-mid-right/inferno/miss",
+          "festival": "crowd-mid-right/inferno/festival"
+        }
+      }
+    },
+    {
+      "id": "crowd-near-right",
+      "rect": [
+        1195,
+        260,
+        335,
+        220
+      ],
+      "side": "right",
+      "depth": "near",
+      "skew": 0.48,
+      "z": 10.05,
+      "modes": {
+        "normal": {
+          "idle": "crowd-near-right/normal/idle",
+          "cheer": "crowd-near-right/normal/cheer",
+          "miss": "crowd-near-right/normal/miss",
+          "festival": "crowd-near-right/normal/festival"
+        },
+        "fever": {
+          "idle": "crowd-near-right/fever/idle",
+          "cheer": "crowd-near-right/fever/cheer",
+          "miss": "crowd-near-right/fever/miss",
+          "festival": "crowd-near-right/fever/festival"
+        },
+        "inferno": {
+          "idle": "crowd-near-right/inferno/idle",
+          "cheer": "crowd-near-right/inferno/cheer",
+          "miss": "crowd-near-right/inferno/miss",
+          "festival": "crowd-near-right/inferno/festival"
+        }
+      }
+    }
+  ]
+}

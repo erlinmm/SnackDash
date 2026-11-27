@@ -32,47 +32,25 @@ h1,h2,p{margin:0}h1{font-size:clamp(24px,5vw,45px);letter-spacing:-1.5px;line-he
 .in-game .topbar{display:none}.game-screen{position:relative;flex:none;overflow:hidden;isolation:isolate;container-type:inline-size}
 .scene-shell{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;touch-action:none;background:#a9d8eb}
 .scene-shell canvas{display:block;width:100%;height:100%;touch-action:none}
-.scoreboard{position:absolute;z-index:3;top:1.4%;left:1.3%;right:1.3%;display:flex;gap:clamp(3px,.6cqw,9px);align-items:stretch;pointer-events:none;height:10.5%}
-.scoreboard>*{pointer-events:auto}.scoreboard .small-btn{min-height:0;min-width:36px;width:auto;padding:0 clamp(5px,.8cqw,13px);font-size:clamp(13px,2.2cqw,27px);border-radius:10px;box-shadow:0 2px 3px #14243a33}
-.scoreboard .small-btn span{font-size:clamp(10px,1.5cqw,18px)}.score-pill{min-width:9%;padding:2px 8px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#fffdf4;border:1.5px solid #d3dae4;border-radius:10px;font-weight:900;box-shadow:0 2px 3px #14243a33}
-.score-label{font-size:clamp(8px,1cqw,13px);line-height:1}.score-pill strong{font-size:clamp(13px,2.1cqw,27px);line-height:1.1;white-space:nowrap}.score-pill small{font-size:.55em}.time-pill.warning,.time-pill.urgent{color:#c23146}.total-pill{min-width:14%}.total-pill.goal-met{background:#fff0ad}.scoreboard #restartBtn{margin-left:auto}
-.combo-panel{position:absolute;z-index:4;left:52%;right:25%;top:1.4%;height:10.5%;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding:3px 6px;border:1.5px solid #d2dbe5;background:#fffdf5;border-radius:10px;font-weight:900;overflow:hidden;box-shadow:0 2px 4px #14243a33}
-.combo-indicator{display:flex;align-items:center;gap:3px;font-size:clamp(11px,1.7cqw,23px);white-space:nowrap}.combo-indicator small,.combo-meter,.fever-status{display:none}.fever-plaque{font-size:clamp(8px,1.1cqw,15px);line-height:1.05;text-align:center;color:#3d526f}
-.combo-panel.fever{background:#ffe2ea;border-color:#f97b9d;color:#a11d51}.combo-panel.inferno{background:#36265e;border-color:#ee9de2;color:#fff2a6}.combo-panel.inferno .fever-plaque{color:#fff0f7}
-.game-control-strip,.game-footnote{position:absolute;left:0;bottom:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-.game-message{position:absolute;z-index:4;left:2.2%;top:13%;width:25%;font-weight:900;font-size:clamp(9px,1.35cqw,18px);line-height:1.15;text-align:center;color:#fff;background:#29374ee8;border:1px solid #fff8;border-radius:8px;padding:5px;opacity:0;pointer-events:none}
-.game-message.show{opacity:1}
-.result-overlay{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:#14243ac9;padding:12px;overflow:auto}
-.result-card{width:min(430px,95vw);max-height:95dvh;overflow:auto;text-align:center;border-radius:18px;background:#fffaf1;padding:15px;border:2px solid white;box-shadow:0 10px 40px #14243a66}
-.result-card h2{font-size:clamp(18px,3vw,28px);margin:5px 0}.result-mascot{font-size:30px}.result-score{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:5px;margin:8px 0}.score-main{font-size:32px;color:#be3d6c}.score-exact{width:100%;font-size:12px}.result-card p,.result-stats{font-size:12px;margin:7px 0}.result-actions{display:flex;gap:8px;justify-content:center;margin-top:7px}.result-card .full{width:100%}
 dialog{max-width:min(560px,95vw);max-height:90dvh;border:2px solid #d54b75;border-radius:14px;padding:18px;background:#fffaf1;color:#243447;overflow:auto}dialog::backdrop{background:#14243a99}.help-copy{font-size:14px;line-height:1.4}.help-copy p{margin:7px 0}
 .city-invitation-overlay{display:none!important}
-@media(max-height:480px) and (orientation:landscape){.app:not(.in-game){padding:6px max(10px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}.topbar{margin-bottom:4px}.brand-title{font-size:15px}.brand-tag{display:none}.brand-icon{font-size:20px}.icon-btn{min-height:32px;padding:4px 8px}.menu-heading{padding:4px 0 6px}.menu-heading h1{font-size:24px}.menu-heading p{font-size:10px;margin-top:2px}.selection-card{padding:9px}.level-grid{margin:6px 0;gap:4px}.level-tile{min-height:42px}.level-tile strong{font-size:19px}.level-tile small{font-size:8px}.selection-copy{min-height:34px;font-size:12px;margin-bottom:4px}.selection-copy small{font-size:9px}.selection-card>.primary{min-height:38px;font-size:13px}.staff-options{margin:5px 0}.staff-options button,.settings-row select,.settings-card>.btn{min-height:32px;padding:4px 7px;font-size:12px}.mode-key{font-size:9px;margin-top:4px;gap:1px}.qa-panel{padding-top:4px;margin-top:4px;font-size:10px}.menu-footer{font-size:9px;margin-top:4px}.scoreboard .small-btn{min-width:32px}}
-@media(orientation:portrait){.menu-columns{grid-template-columns:1fr}#tokyoRotate{display:block;background:#fff7e6;color:#5a3c50;font-weight:900;border-radius:9px;padding:9px;text-align:center;margin-top:8px} .app.in-game[data-orientation=portrait] #tokyoRotate{position:absolute;inset:0;display:grid;place-content:center;background:#14243af2;color:white;z-index:20;margin:0;font-size:21px;padding:24px}.app.in-game .game-screen{pointer-events:none}}
+@media(max-height:480px) and (orientation:landscape){.app:not(.in-game){padding:6px max(10px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}.topbar{margin-bottom:4px}.brand-title{font-size:15px}.brand-tag{display:none}.brand-icon{font-size:20px}.icon-btn{min-height:32px;padding:4px 8px}.menu-heading{padding:4px 0 6px}.menu-heading h1{font-size:24px}.menu-heading p{font-size:10px;margin-top:2px}.selection-card{padding:9px}.level-grid{margin:6px 0;gap:4px}.level-tile{min-height:42px}.level-tile strong{font-size:19px}.level-tile small{font-size:8px}.selection-copy{min-height:34px;font-size:12px;margin-bottom:4px}.selection-copy small{font-size:9px}.selection-card>.primary{min-height:38px;font-size:13px}.staff-options{margin:5px 0}.staff-options button,.settings-row select,.settings-card>.btn{min-height:32px;padding:4px 7px;font-size:12px}.mode-key{font-size:9px;margin-top:4px;gap:1px}.qa-panel{padding-top:4px;margin-top:4px;font-size:10px}.menu-footer{font-size:9px;margin-top:4px}}
+@media(orientation:portrait){.menu-columns{grid-template-columns:1fr}#tokyoRotate{display:block;background:#fff7e6;color:#5a3c50;font-weight:900;border-radius:9px;padding:9px;text-align:center;margin-top:8px} .app.in-game[data-orientation=portrait] #tokyoRotate{position:absolute;inset:0;display:grid;place-content:center;background:#14243af2;color:white;z-index:20;margin:0;font-size:21px;padding:24px}.app.in-game .game-screen,.app.in-game .hud-button{pointer-events:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-/* Illustrated art pass: the HUD remains a separate responsive layer. */
-.scoreboard{top:1.25%;height:9.3%;gap:clamp(4px,.65cqw,10px)}.combo-panel{top:1.25%;height:9.3%;left:51%;right:25%;border:2px solid #fff9;border-radius:16px}.score-pill,.scoreboard .small-btn{border-radius:13px;background:linear-gradient(#fffef8,#fff3dd);border:1.8px solid #f4f7ff;box-shadow:0 3px 0 #20384a47,0 0 0 1px #34536f40}.combo-panel.fever{background:linear-gradient(110deg,#ff6bab,#be367c);color:white;border-color:#ffe2f1}.combo-panel.fever .fever-plaque{color:#fff7db}.combo-panel.inferno{background:linear-gradient(110deg,#482a88,#9c43a5);border-color:#f3c5ff;color:#fff1b0}.game-message{left:35%;top:12%;width:25%;font-size:clamp(9px,1.2cqw,16px)}
-
-/* r03 independent, blank HUD skins: keep all existing DOM buttons, labels and
-   score text live, not baked into the underlying SVG. */
-.scoreboard .tokyo-asset-skin,.combo-panel.tokyo-asset-skin{background-color:transparent!important;background-size:100% 100%!important;background-repeat:no-repeat!important;box-shadow:none!important;border-color:transparent!important}
 .staff-mark.has-portrait{width:47px;height:47px;border-radius:8px;background-size:cover;background-position:center;color:transparent;font-size:0;flex:none}
 @media(max-height:480px) and (orientation:landscape){.staff-mark.has-portrait{width:31px;height:31px}}
 
-/* r03 festival skins have ivory centers in all three modes. Retain high
-   contrast when the old gradient styling would have used white text. */
-.combo-panel.tokyo-asset-skin.fever,.combo-panel.tokyo-asset-skin.fever .fever-plaque{color:#9b2456!important;text-shadow:none!important}
-.combo-panel.tokyo-asset-skin.inferno,.combo-panel.tokyo-asset-skin.inferno .fever-plaque{color:#522277!important;text-shadow:none!important}
 
-/* Stable DOM roles; every city positions them through the asset pack. */
-.scoreboard{inset:0;width:100%;height:100%;display:block;pointer-events:none}
-.scoreboard>*{position:absolute;pointer-events:auto;margin:0!important;min-width:0!important}
-.scoreboard .score-pill,.scoreboard .small-btn,.combo-panel{min-width:0;min-height:0;max-width:none;box-sizing:border-box;overflow:hidden;background-color:transparent!important;background-size:100% 100%!important;background-repeat:no-repeat!important;border:0!important;box-shadow:none!important;padding:2px;right:auto;bottom:auto}
-.scoreboard .small-btn{display:flex;align-items:center;justify-content:center;font-size:var(--hud-font,2cqw)!important}
-.scoreboard .small-btn span{font-size:inherit}
-.scoreboard .score-pill strong{font-size:var(--hud-font,2cqw)}
-.scoreboard .score-label{font-size:clamp(8px,1.1cqw,15px)}
-.combo-panel .combo-indicator{font-size:var(--hud-font,2cqw)}
-.combo-panel .fever-plaque{color:inherit!important}
-.combo-panel{display:flex;flex-direction:column;justify-content:center;align-items:center}
+/* The root owns independent design coordinates. Only buttons and modal
+   overlays intercept pointer events; moving art never creates a hit area. */
+.landscape-hud{position:absolute;left:0;top:0;z-index:10;transform-origin:0 0;pointer-events:none;font-family:inherit}
+.hud-widget{position:absolute;box-sizing:border-box;display:flex;align-items:center;justify-content:center;pointer-events:none;isolation:isolate}
+.hud-widget[hidden]{display:none!important}
+.hud-button{pointer-events:auto;cursor:pointer;padding:0;min-width:0;min-height:0;appearance:none;-webkit-appearance:none;touch-action:manipulation}
+.hud-button:disabled{cursor:default;opacity:.55!important}
+.hud-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;border-radius:inherit}
+.hud-text-value{display:block;max-width:100%;text-overflow:clip;line-height:1.12;pointer-events:none}
+.hud-progress{justify-content:flex-start!important;overflow:hidden!important}
+.hud-fill{height:100%;pointer-events:none}
+.hud-modal{pointer-events:auto}

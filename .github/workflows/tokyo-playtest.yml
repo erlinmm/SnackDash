@@ -1,4 +1,4 @@
-name: Landscape asset contract validation
+name: Landscape Engine V2 validation
 on:
   push:
     branches: [feature/tokyo-landscape-playtest]
@@ -24,9 +24,12 @@ jobs:
           node --check src/js/i18n.js
           node --check src/js/math.js
           node --check src/js/game.js
+          node --check src/landscape/animation.js
+          node --check src/landscape/hud.js
+          node --check src/landscape/audio.js
           node --check src/landscape/renderer.js
           node --check src/landscape/presentation.js
-          node --test tests/test_math.cjs tests/test_i18n.cjs tests/test_reactions.cjs
+          node --test tests/test_math.cjs tests/test_i18n.cjs tests/test_reactions.cjs tests/test_animation.cjs
           python -m unittest discover -s tests -p 'test_*.py'
       - name: Build canonical game and both landscape packs
         run: |

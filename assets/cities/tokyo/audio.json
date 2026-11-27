@@ -1,0 +1,125 @@
+{
+  "bindings": [
+    {
+      "event": "swap",
+      "sound": "supply_swap"
+    },
+    {
+      "event": "throw.release",
+      "synth": "throw"
+    },
+    {
+      "event": "hit",
+      "mode": "before",
+      "modes": [
+        "normal"
+      ],
+      "sound": "supply_catch"
+    },
+    {
+      "event": "hit",
+      "mode": "before",
+      "modes": [
+        "fever",
+        "inferno"
+      ],
+      "synth": "feverHit",
+      "args": [
+        "combo"
+      ]
+    },
+    {
+      "event": "miss",
+      "sound": "miss_soft"
+    },
+    {
+      "event": "mode.change",
+      "when": {
+        "to": [
+          "fever"
+        ]
+      },
+      "sound": "fever_enter"
+    },
+    {
+      "event": "mode.change",
+      "when": {
+        "to": [
+          "inferno"
+        ]
+      },
+      "sound": "inferno_enter"
+    },
+    {
+      "event": "mode.change",
+      "when": {
+        "to": [
+          "normal"
+        ]
+      },
+      "synth": "feverEnd"
+    },
+    {
+      "event": "marker",
+      "when": {
+        "marker": [
+          "costume.changed",
+          "table.contact",
+          "ground.contact",
+          "bottle.grab",
+          "bottle.place"
+        ]
+      },
+      "synth": "grab"
+    },
+    {
+      "event": "marker",
+      "when": {
+        "marker": [
+          "bottle.kick"
+        ]
+      },
+      "synth": "wrong"
+    },
+    {
+      "event": "countdown",
+      "synth": "countdown",
+      "args": [
+        "digit"
+      ]
+    },
+    {
+      "event": "go",
+      "synth": "go"
+    },
+    {
+      "event": "race.finish",
+      "when": {
+        "won": [
+          true
+        ]
+      },
+      "synth": "victory"
+    },
+    {
+      "event": "race.finish",
+      "when": {
+        "won": [
+          false
+        ]
+      },
+      "synth": "fail"
+    }
+  ],
+  "music": {
+    "normal": {
+      "synth": "music"
+    },
+    "fever": {
+      "synth": "music"
+    },
+    "inferno": {
+      "synth": "music"
+    }
+  }
+}

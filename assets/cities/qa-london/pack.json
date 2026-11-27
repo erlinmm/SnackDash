@@ -1,14 +1,20 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "extends": "tokyo",
   "id": "qa-london",
   "raceCityId": "london",
-  "artRevision": "synthetic-replacement-test",
+  "artRevision": "v2-synthetic-replacement",
   "reviewStatus": "test-only",
+  "parts": {
+    "hud": "../../hud/themes/technical-london.json"
+  },
   "patches": [
     {
       "path": [
-        "backgrounds",
+        "world",
+        "nodes",
+        0,
+        "images",
         "normal"
       ],
       "value": "bg/fever"
@@ -33,84 +39,322 @@
     },
     {
       "path": [
+        "clips",
+        "qa-run-normal"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 65
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 135
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 90
+          }
+        ],
+        "playback": "loop",
+        "rate": "runnerSpeed"
+      }
+    },
+    {
+      "path": [
+        "actors",
         "runners",
         0,
-        "frames"
+        "modes",
+        "normal",
+        "run"
       ],
-      "value": [
-        {
-          "image": "fixture/runner/a",
-          "sourceSize": [
-            384,
-            480
-          ],
-          "pivot": [
-            192,
-            272
-          ],
-          "anchors": {
-            "bib": [
-              192,
-              272,
-              140,
-              78
+      "value": "qa-run-normal"
+    },
+    {
+      "path": [
+        "clips",
+        "qa-run-fever"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
             ],
-            "hand": [
-              292,
-              220
-            ]
-          },
-          "durationMs": 65
-        },
-        {
-          "image": "fixture/runner/b",
-          "sourceSize": [
-            384,
-            480
-          ],
-          "pivot": [
-            192,
-            272
-          ],
-          "anchors": {
-            "bib": [
+            "pivot": [
               192,
-              272,
-              140,
-              78
+              272
             ],
-            "hand": [
-              292,
-              220
-            ]
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 40
           },
-          "durationMs": 135
-        },
-        {
-          "image": "fixture/runner/a",
-          "sourceSize": [
-            384,
-            480
-          ],
-          "pivot": [
-            192,
-            272
-          ],
-          "anchors": {
-            "bib": [
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
               192,
-              272,
-              140,
-              78
+              272
             ],
-            "hand": [
-              292,
-              220
-            ]
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 75
           },
-          "durationMs": 90
-        }
-      ]
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "loop"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "fever",
+        "run"
+      ],
+      "value": "qa-run-fever"
+    },
+    {
+      "path": [
+        "clips",
+        "qa-run-inferno"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 40
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 75
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "loop"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "inferno",
+        "run"
+      ],
+      "value": "qa-run-inferno"
     },
     {
       "path": [
@@ -144,10 +388,10 @@
     },
     {
       "path": [
-        "staff",
-        "female-normal",
+        "clips",
+        "staff/female/normal/idle",
         "frames",
-        "idle",
+        0,
         "anchors",
         "hand"
       ],
@@ -187,20 +431,6 @@
     {
       "path": [
         "scene",
-        "hud",
-        "score",
-        "rect"
-      ],
-      "value": [
-        414,
-        100,
-        174,
-        70
-      ]
-    },
-    {
-      "path": [
-        "scene",
         "labels"
       ],
       "value": {
@@ -217,6 +447,3528 @@
           "inferno": "测试 INFERNO"
         }
       }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/sky.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/sky.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/table.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/table.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/crowd-a.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/crowd-a.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/crowd-b.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/crowd-b.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/fx-a.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/fx-a.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/fx-b.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/fx-b.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/hud-logo.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/hud-logo.svg",
+        "standalone": true,
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/staff-a.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/staff-a.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/staff-b.svg"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/staff-b.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "world",
+        "nodes",
+        2,
+        "images"
+      ],
+      "value": {
+        "normal": "qa/table.svg",
+        "fever": "qa/table.svg",
+        "inferno": "qa/table.svg"
+      }
+    },
+    {
+      "path": [
+        "world",
+        "nodes"
+      ],
+      "value": [
+        {
+          "id": "street",
+          "role": "street",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "z": 0,
+          "images": {
+            "normal": "bg/fever",
+            "fever": "bg/fever",
+            "inferno": "bg/inferno"
+          },
+          "cache": true
+        },
+        {
+          "id": "atmosphere",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "z": 15,
+          "images": {
+            "normal": {
+              "normal": "ambient/normal/normal",
+              "reduced": "ambient/normal/reduced"
+            },
+            "fever": {
+              "normal": "ambient/fever/normal",
+              "reduced": "ambient/fever/reduced"
+            },
+            "inferno": {
+              "normal": "ambient/inferno/normal",
+              "reduced": "ambient/inferno/reduced"
+            }
+          }
+        },
+        {
+          "id": "table-rear",
+          "role": "station",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "z": 20,
+          "images": {
+            "normal": "qa/table.svg",
+            "fever": "qa/table.svg",
+            "inferno": "qa/table.svg"
+          }
+        },
+        {
+          "id": "table-body",
+          "role": "station",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "z": 50,
+          "images": {
+            "normal": "station/layer/shared_table_frame",
+            "fever": "station/layer/shared_table_frame",
+            "inferno": "station/layer/shared_table_frame"
+          }
+        },
+        {
+          "id": "tabletop",
+          "role": "station",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "z": 51,
+          "images": {
+            "normal": "station/layer/shared_tabletop",
+            "fever": "station/layer/shared_tabletop",
+            "inferno": "station/layer/shared_tabletop"
+          }
+        },
+        {
+          "id": "scroll",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "z": 52,
+          "images": {
+            "normal": "qa/scroll-normal",
+            "fever": "qa/scroll-fever",
+            "inferno": "qa/scroll-inferno"
+          },
+          "revealRect": [
+            54,
+            550,
+            210,
+            166
+          ],
+          "state": {
+            "reveal": 1,
+            "skinMode": "normal"
+          },
+          "modeState": {
+            "normal": {
+              "skinMode": "normal",
+              "reveal": 1
+            },
+            "fever": {
+              "skinMode": "fever",
+              "reveal": 1
+            },
+            "inferno": {
+              "skinMode": "inferno",
+              "reveal": 1
+            }
+          }
+        },
+        {
+          "id": "bottle1",
+          "role": "decorative",
+          "rect": [
+            187,
+            477,
+            24,
+            48
+          ],
+          "z": 53,
+          "images": {
+            "normal": "supply/water/hand",
+            "fever": "supply/water/hand",
+            "inferno": "supply/water/hand"
+          },
+          "state": {
+            "position": [
+              199,
+              501
+            ],
+            "rotation": 0,
+            "visible": true,
+            "atHome": true,
+            "attach": null
+          },
+          "modeState": {
+            "inferno": {
+              "position": [
+                360,
+                730
+              ],
+              "visible": false,
+              "atHome": false,
+              "attach": null
+            }
+          }
+        },
+        {
+          "id": "bottle2",
+          "role": "decorative",
+          "rect": [
+            210,
+            473,
+            24,
+            48
+          ],
+          "z": 53,
+          "images": {
+            "normal": "supply/water/hand",
+            "fever": "supply/water/hand",
+            "inferno": "supply/water/hand"
+          },
+          "state": {
+            "position": [
+              222,
+              497
+            ],
+            "rotation": 0,
+            "visible": true,
+            "atHome": true,
+            "attach": null
+          },
+          "modeState": {
+            "inferno": {
+              "position": [
+                445,
+                742
+              ],
+              "visible": false,
+              "atHome": false,
+              "attach": null
+            }
+          }
+        },
+        {
+          "id": "bottle3",
+          "role": "decorative",
+          "rect": [
+            232,
+            469,
+            24,
+            48
+          ],
+          "z": 53,
+          "images": {
+            "normal": "supply/water/hand",
+            "fever": "supply/water/hand",
+            "inferno": "supply/water/hand"
+          },
+          "state": {
+            "position": [
+              244,
+              493
+            ],
+            "rotation": 0,
+            "visible": true,
+            "atHome": true,
+            "attach": null
+          },
+          "modeState": {
+            "inferno": {
+              "position": [
+                530,
+                754
+              ],
+              "visible": false,
+              "atHome": false,
+              "attach": null
+            }
+          }
+        },
+        {
+          "id": "independent-sky",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "z": -1,
+          "images": {
+            "normal": "qa/sky.svg",
+            "fever": "qa/sky.svg",
+            "inferno": "qa/sky.svg"
+          }
+        },
+        {
+          "id": "independent-far-sky",
+          "rect": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "z": 1,
+          "images": {
+            "normal": "qa/sky.svg",
+            "fever": "qa/sky.svg",
+            "inferno": "qa/sky.svg"
+          }
+        }
+      ]
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/normal/idle"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "loop"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "normal",
+        "idle"
+      ],
+      "value": "qa/crowd-far-left/normal/idle"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/normal/cheer"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "normal",
+        "cheer"
+      ],
+      "value": "qa/crowd-far-left/normal/cheer"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/normal/miss"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "normal",
+        "miss"
+      ],
+      "value": "qa/crowd-far-left/normal/miss"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/normal/festival"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "normal",
+        "festival"
+      ],
+      "value": "qa/crowd-far-left/normal/festival"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/fx/normal/receive"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/fx-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/fx-b.svg",
+            "durationMs": 220
+          }
+        ],
+        "size": [
+          180,
+          180
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "fx",
+        "bindings",
+        2,
+        "clips",
+        "normal",
+        "normal"
+      ],
+      "value": "qa/fx/normal/receive"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/fx/normal/miss"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/fx-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/fx-b.svg",
+            "durationMs": 220
+          }
+        ],
+        "size": [
+          180,
+          180
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "fx",
+        "bindings",
+        6,
+        "clips",
+        "normal",
+        "normal"
+      ],
+      "value": "qa/fx/normal/miss"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/fever/idle"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "loop"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "fever",
+        "idle"
+      ],
+      "value": "qa/crowd-far-left/fever/idle"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/fever/cheer"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "fever",
+        "cheer"
+      ],
+      "value": "qa/crowd-far-left/fever/cheer"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/fever/miss"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "fever",
+        "miss"
+      ],
+      "value": "qa/crowd-far-left/fever/miss"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/fever/festival"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "fever",
+        "festival"
+      ],
+      "value": "qa/crowd-far-left/fever/festival"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/fx/fever/receive"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/fx-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/fx-b.svg",
+            "durationMs": 220
+          }
+        ],
+        "size": [
+          180,
+          180
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "fx",
+        "bindings",
+        2,
+        "clips",
+        "fever",
+        "normal"
+      ],
+      "value": "qa/fx/fever/receive"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/fx/fever/miss"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/fx-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/fx-b.svg",
+            "durationMs": 220
+          }
+        ],
+        "size": [
+          180,
+          180
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "fx",
+        "bindings",
+        6,
+        "clips",
+        "fever",
+        "normal"
+      ],
+      "value": "qa/fx/fever/miss"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/inferno/idle"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "loop"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "inferno",
+        "idle"
+      ],
+      "value": "qa/crowd-far-left/inferno/idle"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/inferno/cheer"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "inferno",
+        "cheer"
+      ],
+      "value": "qa/crowd-far-left/inferno/cheer"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/inferno/miss"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "inferno",
+        "miss"
+      ],
+      "value": "qa/crowd-far-left/inferno/miss"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/crowd-far-left/inferno/festival"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/crowd-b.svg",
+            "durationMs": 100
+          },
+          {
+            "image": "qa/crowd-a.svg",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "crowds",
+        0,
+        "modes",
+        "inferno",
+        "festival"
+      ],
+      "value": "qa/crowd-far-left/inferno/festival"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/fx/inferno/receive"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/fx-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/fx-b.svg",
+            "durationMs": 220
+          }
+        ],
+        "size": [
+          180,
+          180
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "fx",
+        "bindings",
+        2,
+        "clips",
+        "inferno",
+        "normal"
+      ],
+      "value": "qa/fx/inferno/receive"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/fx/inferno/miss"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/fx-a.svg",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/fx-b.svg",
+            "durationMs": 220
+          }
+        ],
+        "size": [
+          180,
+          180
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "fx",
+        "bindings",
+        6,
+        "clips",
+        "inferno",
+        "normal"
+      ],
+      "value": "qa/fx/inferno/miss"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/staff/throw"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/staff-a.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "qa/staff-b.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                345,
+                120
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 90,
+            "marks": [
+              "release"
+            ]
+          },
+          {
+            "image": "qa/staff-a.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 180
+          },
+          {
+            "image": "qa/staff-b.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                345,
+                120
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 70
+          }
+        ],
+        "playback": "once",
+        "next": "idle"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "staff",
+        "female",
+        "modes",
+        "normal",
+        "throw"
+      ],
+      "value": "qa/staff/throw"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/staff/idle"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/staff-a.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 180
+          },
+          {
+            "image": "qa/staff-b.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                345,
+                120
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 160
+          }
+        ],
+        "playback": "loop"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "staff",
+        "female",
+        "modes",
+        "normal",
+        "idle"
+      ],
+      "value": "qa/staff/idle"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/normal/receive_supply"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "thanks",
+        "attachItem": "hand"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "normal",
+        "receive_supply"
+      ],
+      "value": "qa/runner/normal/receive_supply"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/normal/thanks"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "normal",
+        "thanks"
+      ],
+      "value": "qa/runner/normal/thanks"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/normal/cheer"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "normal",
+        "cheer"
+      ],
+      "value": "qa/runner/normal/cheer"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/normal/pain"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "disappointment"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "normal",
+        "pain"
+      ],
+      "value": "qa/runner/normal/pain"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/normal/disappointment"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "normal",
+        "disappointment"
+      ],
+      "value": "qa/runner/normal/disappointment"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/normal/selected"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "normal",
+        "selected"
+      ],
+      "value": "qa/runner/normal/selected"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/fever/receive_supply"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "cheer",
+        "attachItem": "hand"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "fever",
+        "receive_supply"
+      ],
+      "value": "qa/runner/fever/receive_supply"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/fever/thanks"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "fever",
+        "thanks"
+      ],
+      "value": "qa/runner/fever/thanks"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/fever/cheer"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "fever",
+        "cheer"
+      ],
+      "value": "qa/runner/fever/cheer"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/fever/pain"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "disappointment"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "fever",
+        "pain"
+      ],
+      "value": "qa/runner/fever/pain"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/fever/disappointment"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "fever",
+        "disappointment"
+      ],
+      "value": "qa/runner/fever/disappointment"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/fever/selected"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "fever",
+        "selected"
+      ],
+      "value": "qa/runner/fever/selected"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/inferno/receive_supply"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          }
+        ],
+        "playback": "once",
+        "next": "cheer",
+        "attachItem": "hand"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "inferno",
+        "receive_supply"
+      ],
+      "value": "qa/runner/inferno/receive_supply"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/inferno/thanks"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "inferno",
+        "thanks"
+      ],
+      "value": "qa/runner/inferno/thanks"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/inferno/cheer"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "inferno",
+        "cheer"
+      ],
+      "value": "qa/runner/inferno/cheer"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/inferno/pain"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          }
+        ],
+        "playback": "once",
+        "next": "disappointment"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "inferno",
+        "pain"
+      ],
+      "value": "qa/runner/inferno/pain"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/inferno/disappointment"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "inferno",
+        "disappointment"
+      ],
+      "value": "qa/runner/inferno/disappointment"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/runner/inferno/selected"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                260,
+                188
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 110
+          },
+          {
+            "image": "fixture/runner/b",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                276,
+                204
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 85
+          },
+          {
+            "image": "fixture/runner/a",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              192,
+              272
+            ],
+            "anchors": {
+              "bib": [
+                192,
+                272,
+                140,
+                78
+              ],
+              "hand": [
+                292,
+                220
+              ],
+              "head": [
+                192,
+                115
+              ]
+            },
+            "durationMs": 60
+          }
+        ],
+        "playback": "once",
+        "next": "run"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "runners",
+        0,
+        "modes",
+        "inferno",
+        "selected"
+      ],
+      "value": "qa/runner/inferno/selected"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/staff/climb"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/staff-a.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 80
+          },
+          {
+            "image": "qa/staff-b.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 115
+          },
+          {
+            "image": "qa/staff-a.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 60
+          },
+          {
+            "image": "qa/staff-b.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 70,
+            "marks": [
+              "table.contact"
+            ]
+          }
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "staff",
+        "female",
+        "modes",
+        "inferno",
+        "climb"
+      ],
+      "value": "qa/staff/climb"
+    },
+    {
+      "path": [
+        "clips",
+        "qa/staff/kick"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/staff-b.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 50
+          },
+          {
+            "image": "qa/staff-a.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 75,
+            "marks": [
+              "bottle.kick"
+            ]
+          },
+          {
+            "image": "qa/staff-b.svg",
+            "sourceSize": [
+              384,
+              480
+            ],
+            "pivot": [
+              145,
+              455
+            ],
+            "anchors": {
+              "hand": [
+                330,
+                200
+              ],
+              "prop": [
+                58,
+                260
+              ],
+              "head": [
+                150,
+                100
+              ]
+            },
+            "durationMs": 110
+          }
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "actors",
+        "staff",
+        "female",
+        "modes",
+        "inferno",
+        "kick"
+      ],
+      "value": "qa/staff/kick"
+    },
+    {
+      "path": [
+        "resources",
+        "qa/scroll-normal"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/scroll-normal.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/scroll-fever"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/scroll-fever.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/scroll-inferno"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/scroll-inferno.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "resources",
+        "qa/scroll-partial"
+      ],
+      "value": {
+        "path": "assets/cities/qa-london/scroll-partial.svg",
+        "reviewFallback": true
+      }
+    },
+    {
+      "path": [
+        "clips",
+        "qa/scroll-roll"
+      ],
+      "value": {
+        "frames": [
+          {
+            "image": "qa/scroll-normal",
+            "durationMs": 75
+          },
+          {
+            "image": "qa/scroll-partial",
+            "durationMs": 80
+          },
+          {
+            "image": "qa/scroll-fever",
+            "durationMs": 90
+          }
+        ],
+        "playback": "once"
+      }
+    },
+    {
+      "path": [
+        "transitions",
+        "normal>fever"
+      ],
+      "value": {
+        "tracks": [
+          {
+            "id": "change",
+            "type": "clip",
+            "target": "staff",
+            "action": "change_normal",
+            "mode": "fever",
+            "start": 0,
+            "when": {
+              "target": "staff",
+              "property": "costume",
+              "equals": "normal"
+            }
+          },
+          {
+            "id": "costume",
+            "type": "set",
+            "target": "staff",
+            "start": {
+              "track": "change",
+              "marker": "costume.changed",
+              "offsetMs": 0
+            },
+            "values": {
+              "costume": "fever"
+            }
+          },
+          {
+            "id": "scroll-close",
+            "type": "tween",
+            "target": "scroll",
+            "start": 0,
+            "durationMs": 125,
+            "to": {
+              "reveal": 0
+            }
+          },
+          {
+            "id": "scroll-skin",
+            "type": "set",
+            "target": "scroll",
+            "start": {
+              "track": "scroll-close",
+              "point": "end",
+              "offsetMs": 0
+            },
+            "values": {
+              "skinMode": "fever"
+            }
+          },
+          {
+            "id": "scroll-open",
+            "type": "tween",
+            "target": "scroll",
+            "start": {
+              "track": "scroll-close",
+              "point": "end",
+              "offsetMs": 0
+            },
+            "durationMs": 165,
+            "to": {
+              "reveal": 1
+            }
+          },
+          {
+            "id": "scroll-animated",
+            "type": "clip",
+            "target": "scroll",
+            "clip": "qa/scroll-roll",
+            "start": 0
+          }
+        ],
+        "interruptions": {
+          "normal": "fever>normal"
+        }
+      }
+    },
+    {
+      "path": [
+        "audio",
+        "bindings",
+        0,
+        "sound"
+      ],
+      "value": "supply_catch"
     }
   ]
 }

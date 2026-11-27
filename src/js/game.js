@@ -511,6 +511,7 @@
       return this.context;
     }
     tone(freq,duration=.11,volume=.04,wave='sine',offset=0,attack=.008){
+      if(this.presentationDriven&&!this.presentationCue)return;
       const ac=this.audio;if(!ac)return;
       const t=ac.currentTime+offset,osc=ac.createOscillator(),gain=ac.createGain();
       osc.type=wave;osc.frequency.setValueAtTime(freq,t);gain.gain.setValueAtTime(0.0001,t);
@@ -538,6 +539,7 @@
     feverEnd(){[660,440].forEach((f,i)=>this.tone(f,.12,.028,'triangle',i*.10));}
     // Quiet, original little two-bar backing groove (not a pre-existing tune).
     music(sceneTime){
+      if(this.presentationDriven&&!this.presentationCue)return;
       if(!this.enabled||!this.context)return;
       if(sceneTime<this.nextBeat)return;
       this.nextBeat=sceneTime+.39;
@@ -849,11 +851,22 @@
       this.traffic=new TrafficDirector(this);
       this.traffic.plan(true);
       this.learning=new LearningOpportunityDirector(this);
-      this.assertReady();this.syncHUD();
-      $('resultOverlay').classList.add('hidden');$('gameMessage').classList.remove('show');
+      this.assertReady();
+      if(presentation)presentation.reset(this);
+      else{
+        $('resultOverlay').classList.add('hidden');$('gameMessage').classList.remove('show');
+        $('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label',tr('game.pause'));
+      }
       $('runnerReactionText').textContent='';
-      $('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label',tr('game.pause'));
       audio.nextBeat=0;audio.beatNumber=0;
+      this.syncHUD();
+    }
+    visualEvent(type,payload={}){
+      if(!presentation)return;
+      const mode=this.inferno?'inferno':this.fever?'fever':'normal';
+      // Immutable semantic data; the visual system does not choose outcomes.
+      presentation.event(this,Object.freeze({type,at:this.sceneTime*1000,modeBefore:mode,modeAfter:mode,
+        combo:this.combo,score:this.score,...payload}));
     }
     random(){return this.rng();}
     rand(min,max){return rr(this.rng,min,max);}
@@ -980,10 +993,10 @@
         this.countdown-=dt;
         const digit=Math.max(0,Math.ceil(this.countdown));
         if(digit!==this.lastCountdownDigit){
-          if(digit>0)audio.countdown(digit);
+          if(digit>0){audio.countdown(digit);this.visualEvent('countdown',{digit});}
           this.lastCountdownDigit=digit;
         }
-        if(this.countdown<=0){this.phase='playing';this.goFlash=.8;audio.go();showMessage(tr('game.ready'),1100);}
+        if(this.countdown<=0){this.phase='playing';this.goFlash=.8;audio.go();this.visualEvent('go');showMessage(tr('game.ready'),1100);}
         this.tickRunners(dt);
       }else if(this.phase==='playing'){
         this.remaining=Math.max(0,this.remaining-dt);
@@ -1238,6 +1251,7 @@
       this.effects=this.effects.filter(f=>f.kind!=='athleteReaction'||f.runnerId!==runner.id);
       this.popEffect({kind:'athleteReaction',runnerId:runner.id,reaction,x,y,life:1.12});
       $('runnerReactionText').textContent=reaction.text;
+      this.visualEvent('runner.reaction',{runnerId:runner.id,text:reaction.text,reaction:event});
     }
     tickThrow(dt){
       if(!this.throwing)return;
@@ -1317,6 +1331,15 @@
           this.emitRunnerReaction(runner,'pain',fxX,fxY-71);
           updateMatchHint(tr('feedback.incorrect',{supply:t.supply.number,runner:runner.number,points:I18n.formatNumber(outcome.delta)}));
         }
+        // Publish the real transaction, retaining both sides of the mode
+        // change. A miss in Inferno must never choose a Normal miss effect.
+        const nextMode=this.inferno?'inferno':this.fever?'fever':'normal';
+        const visualOutcome={runnerId:runner.id,item:{...t.supply},delta:outcome.delta,
+          modeBefore:previousMode,modeAfter:nextMode,correct:yes,runnerNumber:runner.number,
+          successes:runner.successes,combo:this.combo,score:this.score};
+        this.visualEvent(yes?'hit':'miss',visualOutcome);
+        if(outcome.delta!==0)this.visualEvent('score',visualOutcome);
+        if(previousMode!==nextMode)this.visualEvent('mode.change',{...visualOutcome,from:previousMode,to:nextMode});
         // The runner might have left the screen during the throwing pose.
         // Replace them while the *previous* supply roster is still in force.
         // This also releases a runner that was held at the visible edge.
@@ -1356,8 +1379,8 @@
       // text or effects on the tray, where the player's finger covers them.
       this.swapCue={age:0,duration:.45,number:this.supplies.held.number,
         mode:this.inferno?'inferno':this.fever?'fever':'normal'};
-      audio.swapConfirm();this.assertReady();this.syncHUD();
-      return true;
+      audio.swapConfirm();this.visualEvent('swap',{slotIndex:i,item:{...this.supplies.held}});
+      this.assertReady();this.syncHUD();return true;
     }
     tryThrow(x,y){
       if(this.qaFixture||this.phase!=='playing'||this.throwing||this.pendingSupply)return;
@@ -1385,7 +1408,7 @@
       if(!nearest)return false;
       this.swapCue=null; // A throw cancels the cue; the new supply is already active.
       this.throwing={runnerId:nearest.id,supply:this.supplies.held,elapsed:0,hit:false,reloaded:false,feverAtRelease:this.fever};
-      presentation?.throwStarted(this,this.throwing);
+      this.visualEvent('throw.start',{runnerId:nearest.id,item:{...this.supplies.held}});
       audio.throw();return true;
     }
     popEffect(fx){this.effects.push({age:0,...fx});}
@@ -1405,10 +1428,12 @@
         this.confetti=[];
         for(let i=0;i<110;i++)this.confetti.push({x:this.rand(0,W),y:this.rand(-530,-20),speed:this.rand(75,205),swing:this.rand(1,4),twist:this.rand(0,TAU),size:this.rand(4,9),color:pick(this.rng,['#ffad58','#e7797f','#8bcbb6','#f6da5a','#86a4e3','#fffaf1'])});
       }else{this.phase='results';this.throwing=null;audio.fail();this.showResults(false);}
+      this.visualEvent('race.finish',{won});
     }
     tickConfetti(dt){for(const c of this.confetti){c.y+=c.speed*dt;c.x+=Math.sin(this.sceneTime*2+c.twist)*c.swing*dt;if(c.y>H+12){c.y=-15;c.x=this.rand(0,W);}}}
     showResults(won){
       this.resultsShown=true;
+      if(presentation){this.syncHUD();renderLevelGrid();return;}
       $('resultMascot').textContent=won?'🏆':'💦';
       const city=CITIES[this.config.cityIndex];
       $('resultKicker').textContent=tr(won?'result.complete':'result.timeUp');
@@ -1439,12 +1464,19 @@
       renderLevelGrid();
     }
     pause(){
+      if(presentation){
+        if(this.qaFixture)return;
+        if(this.phase==='paused')this.phase=this.wasPhase||'playing';
+        else if(this.phase==='playing'||this.phase==='countdown'){this.wasPhase=this.phase;this.phase='paused';}
+        this.syncHUD();return;
+      }
       if(this.phase==='paused'){this.phase=this.wasPhase||'playing';$('pauseBtn').textContent='Ⅱ';$('pauseBtn').setAttribute('aria-label',tr('game.pause'));}
       else if(this.phase==='playing'||this.phase==='countdown'){
         this.wasPhase=this.phase;this.phase='paused';$('pauseBtn').textContent='▶';$('pauseBtn').setAttribute('aria-label',tr('game.resumeAria'));
       }
     }
     syncHUD(){
+      if(presentation){presentation.syncHUD(this);return;}
       $('hudLevel').textContent=this.config.event;
       const hudDisplay=shortScoreText(this.score,1);
       $('hudScore').textContent=hudDisplay;
@@ -1470,7 +1502,6 @@
       $('comboDetail').textContent=this.inferno?tr('hud.comboDetail.inferno'):this.fever?tr('hud.comboDetail.fever'):tr('hud.comboDetail.normal',{remaining:Math.max(0,5-this.combo)});
       $('comboFill').style.width=`${Math.min(100,this.combo/5*100)}%`;
       $('feverStatus').textContent=this.inferno?tr('hud.disco'):this.fever?tr('hud.onFire'):this.combo===0?tr('hud.ready'):`${this.combo}/5`;
-      presentation?.syncHUD(this);
     }
     draw(){
       if(presentation){presentation.draw(this);return;}
@@ -2388,7 +2419,8 @@
     resetPasswordQueue();
     if(previewCity!==null)debugMode=false;
     game=null;stage.style.transform='';stage.classList.remove('fever-active','inferno-active');$('app').classList.remove('in-game');$('gameScreen').classList.add('hidden');$('menuScreen').classList.remove('hidden');
-    $('resultOverlay').classList.add('hidden');
+    if(presentation)presentation.menu();
+    else $('resultOverlay').classList.add('hidden');
     reconcileCityUnlocks();
     renderLevelGrid();window.scrollTo({top:0,behavior:'instant'});
     showPendingCityInvitation();
@@ -2401,12 +2433,13 @@
     sizeScene();game=new Marathon(LEVELS[level-1],randSeed());
     presentation?.raceStarted(game);
     requestAnimationFrame(sizeScene);
-    $('matchHint').textContent=tr('hud.tapRunner');
+    updateMatchHint(tr('hud.tapRunner'));
     window.scrollTo({top:0,behavior:'instant'});
     audio.audio; // Unlock audio in direct response to Start click (mobile browsers).
   }
-  function updateMatchHint(hint){$('matchHint').textContent=hint;}
+  function updateMatchHint(hint){if(presentation)presentation.hint(hint);else $('matchHint').textContent=hint;}
   function showMessage(str,duration=700){
+    if(presentation){presentation.message(str,duration);return;}
     if(toastTimeout)clearTimeout(toastTimeout);
     const el=$('gameMessage');el.textContent=str;el.classList.add('show');
     toastTimeout=setTimeout(()=>el.classList.remove('show'),duration);
@@ -2428,6 +2461,44 @@
     }
     renderLevelGrid();
   }
+
+  // Read-only view model and commands for independently composed HUDs.
+  // The portrait DOM is deliberately not part of this interface.
+  function hudSnapshot(g){
+    const mode=g.inferno?'inferno':g.fever?'fever':'normal',won=g.score>=GOAL;
+    const next=g.resultsShown&&won?nextPlayable(g.config.level):null;
+    const city=CITIES[g.config.cityIndex];
+    return Object.freeze({
+      'score.current':g.score,'score.exact':fullScoreText(g.score),'score.goal':GOAL,
+      'race.index':g.config.event,'race.phase':g.phase,'race.fixture':Boolean(g.qaFixture),
+      'race.countdownVisible':g.phase==='countdown'||(g.phase==='playing'&&g.goFlash>0),
+      'race.countdown':g.phase==='countdown'?String(Math.max(1,Math.ceil(g.countdown/.5))):tr('tokyo.go'),
+      'race.celebrating':g.phase==='celebrate'&&!g.resultsShown,
+      'time.remaining':g.remaining,'combo.count':g.combo,'combo.progress':Math.min(1,g.combo/(g.fever?10:5)),
+      'combo.label':tr(g.fever?'hud.comboPower':'hud.comboNormal',{combo:g.combo}),
+      'mode.current':mode,'progress.cityCleared':cityCleared(prefs.best,g.config.cityIndex),
+      'audio.enabled':prefs.sound,'audio.glyph':prefs.sound?'🔊':'🔇','audio.label':tr(prefs.sound?'game.soundOff':'game.soundOn'),
+      'controls.pauseGlyph':g.phase==='paused'?'▶':'Ⅱ','controls.pauseLabel':tr(g.phase==='paused'?'game.resumeAria':'game.pause'),
+      'result.visible':g.resultsShown,'result.won':won,'result.heading':g.resultsShown?tr(won?(g.config.level===100?'result.world':'result.super'):'result.retry'):'',
+      'result.text':g.resultsShown?tr(!won?'result.failure':g.config.level===100?'result.allComplete':'result.stamped',
+        {city:cityText(city,'name'),race:g.config.event,completed:cityCleared(prefs.best,g.config.cityIndex)}):'',
+      'result.stats':g.resultsShown?tr('result.stats',{correct:g.correct,wrong:g.wrong,
+        accuracy:g.correct+g.wrong?Math.round(g.correct/(g.correct+g.wrong)*100):0,combo:g.maxCombo}):'',
+      'result.primary':tr(next?'result.next':'result.playAgain'),
+      'held.number':g.supplies.held.number,'held.type':g.supplies.held.type
+    });
+  }
+  function toggleSound(){
+    prefs.sound=!prefs.sound;audio.enabled=prefs.sound;savePrefs();updateSoundIcon();
+  }
+  function hudCommand(command){
+    if(command==='menu'){showMenu();return;}
+    if(command==='sound'){toggleSound();return;}
+    if(!game||game.qaFixture)return;
+    if(command==='pause')game.pause();
+    else if(command==='restart')startLevel(game.config.level);
+    else if(command==='result.next'&&game.resultsShown)startLevel((game.score>=GOAL&&nextPlayable(game.config.level))||game.config.level);
+  }
   // Stable installation boundary. No generated source, closure injection or
   // prototype monkey-patching is needed by a new city pack.
   if(window.SnackDashCreatePresentation){
@@ -2435,6 +2506,7 @@
       W,H,GOAL,TAU,$,canvas,ctx,stage,I18n,tr,cityText,LEVELS,CITIES,previewCity,LANES,
       clamp,mix,randInt,approach,runnerXAt,runnerScale,runnerVisualOffset,reducedMotion,
       fitLabel,roundedRect,audio,throwTiming,cityCleared,isWon,renderSelection,
+      snapshot:hudSnapshot,command:hudCommand,
       getGame:()=>game,getPrefs:()=>prefs,getSelected:()=>selected,
       select:level=>{if(isOpen(level))selected=level;},renderLevelGrid,
       startLevel,showMenu,
@@ -2464,15 +2536,15 @@
     enterRaceFullscreen();
     startLevel(selected);
   });
-  $('levelsBtn').addEventListener('click',showMenu);
-  $('backBtn').addEventListener('click',showMenu);
-  $('retryBtn').addEventListener('click',()=>game&&startLevel(game.config.level));
-  $('resultPrimary').addEventListener('click',doPrimaryResult);
-  $('pauseBtn').addEventListener('click',()=>game&&game.pause());
-  $('restartBtn').addEventListener('click',()=>game&&startLevel(game.config.level));
-  $('soundBtn').addEventListener('click',()=>{
-    prefs.sound=!prefs.sound;audio.enabled=prefs.sound;savePrefs();updateSoundIcon();
-  });
+  if(!presentation){
+    $('levelsBtn').addEventListener('click',showMenu);
+    $('backBtn').addEventListener('click',showMenu);
+    $('retryBtn').addEventListener('click',()=>game&&startLevel(game.config.level));
+    $('resultPrimary').addEventListener('click',doPrimaryResult);
+    $('pauseBtn').addEventListener('click',()=>game&&game.pause());
+    $('restartBtn').addEventListener('click',()=>game&&startLevel(game.config.level));
+  }
+  $('soundBtn').addEventListener('click',toggleSound);
   function updateSoundIcon(){
     $('soundBtn').textContent=prefs.sound?'🔊':'🔇';
     const label=tr(prefs.sound?'game.soundOff':'game.soundOn');$('soundBtn').title=label;$('soundBtn').setAttribute('aria-label',label);
@@ -2498,7 +2570,7 @@
       sizeScene();requestAnimationFrame(sizeScene);
     });
   }
-  if(window.ResizeObserver){
+  if(window.ResizeObserver&&!presentation){
     const hudObserver=new ResizeObserver(()=>{if($('app').classList.contains('in-game'))sizeScene();});
     for(const el of [document.querySelector('.scoreboard'),$('comboPanel'),document.querySelector('.game-control-strip')]){
       if(el)hudObserver.observe(el);

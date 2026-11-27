@@ -1,0 +1,911 @@
+{
+  "normal>fever": {
+    "tracks": [
+      {
+        "id": "change",
+        "type": "clip",
+        "target": "staff",
+        "action": "change_normal",
+        "mode": "fever",
+        "start": 0,
+        "when": {
+          "target": "staff",
+          "property": "costume",
+          "equals": "normal"
+        }
+      },
+      {
+        "id": "costume",
+        "type": "set",
+        "target": "staff",
+        "start": {
+          "track": "change",
+          "marker": "costume.changed",
+          "offsetMs": 0
+        },
+        "values": {
+          "costume": "fever"
+        }
+      },
+      {
+        "id": "scroll-close",
+        "type": "tween",
+        "target": "scroll",
+        "start": 0,
+        "durationMs": 125,
+        "to": {
+          "reveal": 0
+        }
+      },
+      {
+        "id": "scroll-skin",
+        "type": "set",
+        "target": "scroll",
+        "start": {
+          "track": "scroll-close",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "values": {
+          "skinMode": "fever"
+        }
+      },
+      {
+        "id": "scroll-open",
+        "type": "tween",
+        "target": "scroll",
+        "start": {
+          "track": "scroll-close",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "durationMs": 165,
+        "to": {
+          "reveal": 1
+        }
+      }
+    ],
+    "interruptions": {
+      "normal": "fever>normal"
+    }
+  },
+  "fever>normal": {
+    "tracks": [
+      {
+        "id": "change",
+        "type": "clip",
+        "target": "staff",
+        "action": "change_fever",
+        "mode": "normal",
+        "start": 0,
+        "when": {
+          "target": "staff",
+          "property": "costume",
+          "equals": "fever"
+        }
+      },
+      {
+        "id": "costume",
+        "type": "set",
+        "target": "staff",
+        "start": {
+          "track": "change",
+          "marker": "costume.changed",
+          "offsetMs": 0
+        },
+        "values": {
+          "costume": "normal"
+        }
+      },
+      {
+        "id": "scroll-close",
+        "type": "tween",
+        "target": "scroll",
+        "start": 0,
+        "durationMs": 125,
+        "to": {
+          "reveal": 0
+        }
+      },
+      {
+        "id": "scroll-skin",
+        "type": "set",
+        "target": "scroll",
+        "start": {
+          "track": "scroll-close",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "values": {
+          "skinMode": "normal"
+        }
+      },
+      {
+        "id": "scroll-open",
+        "type": "tween",
+        "target": "scroll",
+        "start": {
+          "track": "scroll-close",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "durationMs": 165,
+        "to": {
+          "reveal": 1
+        }
+      }
+    ]
+  },
+  "fever>inferno": {
+    "tracks": [
+      {
+        "id": "change",
+        "type": "clip",
+        "target": "staff",
+        "action": "change_fever",
+        "mode": "inferno",
+        "start": 0,
+        "when": {
+          "target": "staff",
+          "property": "costume",
+          "equals": "fever"
+        }
+      },
+      {
+        "id": "costume",
+        "type": "set",
+        "target": "staff",
+        "start": {
+          "track": "change",
+          "marker": "costume.changed",
+          "offsetMs": 0
+        },
+        "values": {
+          "costume": "inferno"
+        }
+      },
+      {
+        "id": "climb",
+        "type": "clip",
+        "target": "staff",
+        "action": "climb",
+        "mode": "inferno",
+        "start": {
+          "track": "change",
+          "point": "end",
+          "offsetMs": 0
+        }
+      },
+      {
+        "id": "rise",
+        "type": "tween",
+        "target": "staff",
+        "start": {
+          "track": "change",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "end": {
+          "track": "climb",
+          "marker": "table.contact",
+          "offsetMs": 0
+        },
+        "to": {
+          "elevation": 1
+        }
+      },
+      {
+        "id": "kick",
+        "type": "clip",
+        "target": "staff",
+        "action": "kick",
+        "mode": "inferno",
+        "start": {
+          "track": "climb",
+          "marker": "table.contact",
+          "offsetMs": 0
+        }
+      },
+      {
+        "id": "launch-bottle1",
+        "type": "set",
+        "target": "bottle1",
+        "start": {
+          "track": "kick",
+          "marker": "bottle.kick",
+          "offsetMs": 0
+        },
+        "values": {
+          "atHome": false,
+          "attach": null
+        }
+      },
+      {
+        "id": "fly-bottle1",
+        "type": "tween",
+        "target": "bottle1",
+        "start": {
+          "track": "kick",
+          "marker": "bottle.kick",
+          "offsetMs": 0
+        },
+        "durationMs": 340,
+        "to": {
+          "position": [
+            360,
+            730
+          ],
+          "rotation": 360
+        },
+        "keyframes": [
+          {
+            "at": 0.4,
+            "values": {
+              "position": [
+                279,
+                401
+              ],
+              "rotation": 144
+            }
+          }
+        ],
+        "finish": {
+          "visible": false
+        }
+      },
+      {
+        "id": "launch-bottle2",
+        "type": "set",
+        "target": "bottle2",
+        "start": {
+          "track": "kick",
+          "marker": "bottle.kick",
+          "offsetMs": 0
+        },
+        "values": {
+          "atHome": false,
+          "attach": null
+        }
+      },
+      {
+        "id": "fly-bottle2",
+        "type": "tween",
+        "target": "bottle2",
+        "start": {
+          "track": "kick",
+          "marker": "bottle.kick",
+          "offsetMs": 0
+        },
+        "durationMs": 370,
+        "to": {
+          "position": [
+            445,
+            742
+          ],
+          "rotation": -360
+        },
+        "keyframes": [
+          {
+            "at": 0.4,
+            "values": {
+              "position": [
+                325,
+                387
+              ],
+              "rotation": -144
+            }
+          }
+        ],
+        "finish": {
+          "visible": false
+        }
+      },
+      {
+        "id": "launch-bottle3",
+        "type": "set",
+        "target": "bottle3",
+        "start": {
+          "track": "kick",
+          "marker": "bottle.kick",
+          "offsetMs": 0
+        },
+        "values": {
+          "atHome": false,
+          "attach": null
+        }
+      },
+      {
+        "id": "fly-bottle3",
+        "type": "tween",
+        "target": "bottle3",
+        "start": {
+          "track": "kick",
+          "marker": "bottle.kick",
+          "offsetMs": 0
+        },
+        "durationMs": 400,
+        "to": {
+          "position": [
+            530,
+            754
+          ],
+          "rotation": 360
+        },
+        "keyframes": [
+          {
+            "at": 0.4,
+            "values": {
+              "position": [
+                370,
+                373
+              ],
+              "rotation": 144
+            }
+          }
+        ],
+        "finish": {
+          "visible": false
+        }
+      },
+      {
+        "id": "stand",
+        "type": "clip",
+        "target": "staff",
+        "action": "stand",
+        "mode": "inferno",
+        "start": {
+          "track": "kick",
+          "point": "end",
+          "offsetMs": 0
+        }
+      },
+      {
+        "id": "scroll-close",
+        "type": "tween",
+        "target": "scroll",
+        "start": 0,
+        "durationMs": 125,
+        "to": {
+          "reveal": 0
+        }
+      },
+      {
+        "id": "scroll-skin",
+        "type": "set",
+        "target": "scroll",
+        "start": {
+          "track": "scroll-close",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "values": {
+          "skinMode": "inferno"
+        }
+      },
+      {
+        "id": "scroll-open",
+        "type": "tween",
+        "target": "scroll",
+        "start": {
+          "track": "scroll-close",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "durationMs": 165,
+        "to": {
+          "reveal": 1
+        }
+      }
+    ],
+    "interruptions": {
+      "normal": "inferno>normal"
+    }
+  },
+  "inferno>normal": {
+    "tracks": [
+      {
+        "id": "descend",
+        "type": "clip",
+        "target": "staff",
+        "action": "descend",
+        "mode": "inferno",
+        "start": 0,
+        "when": {
+          "target": "staff",
+          "property": "elevation",
+          "gt": 0
+        }
+      },
+      {
+        "id": "land",
+        "type": "tween",
+        "target": "staff",
+        "start": 0,
+        "end": {
+          "track": "descend",
+          "marker": "ground.contact",
+          "offsetMs": 0
+        },
+        "to": {
+          "elevation": 0
+        },
+        "when": {
+          "target": "staff",
+          "property": "elevation",
+          "gt": 0
+        }
+      },
+      {
+        "id": "change",
+        "type": "clip",
+        "target": "staff",
+        "action": "change_inferno",
+        "mode": "normal",
+        "start": {
+          "track": "descend",
+          "marker": "ground.contact",
+          "offsetMs": 0
+        },
+        "when": {
+          "target": "staff",
+          "property": "costume",
+          "equals": "inferno"
+        }
+      },
+      {
+        "id": "change-from-fever",
+        "type": "clip",
+        "target": "staff",
+        "action": "change_fever",
+        "mode": "normal",
+        "start": {
+          "track": "descend",
+          "marker": "ground.contact",
+          "offsetMs": 0
+        },
+        "when": {
+          "target": "staff",
+          "property": "costume",
+          "equals": "fever"
+        }
+      },
+      {
+        "id": "costume",
+        "type": "set",
+        "target": "staff",
+        "start": {
+          "track": "change",
+          "marker": "costume.changed",
+          "offsetMs": 0
+        },
+        "values": {
+          "costume": "normal"
+        }
+      },
+      {
+        "id": "pickup-bottle1",
+        "type": "clip",
+        "target": "staff",
+        "action": "pickup",
+        "mode": "normal",
+        "start": {
+          "track": "change",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "when": {
+          "target": "bottle1",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "prepare-bottle1",
+        "type": "set",
+        "target": "bottle1",
+        "start": {
+          "track": "change",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "values": {
+          "visible": false,
+          "position": [
+            104,
+            669
+          ],
+          "rotation": 0,
+          "attach": null
+        },
+        "when": {
+          "target": "bottle1",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "grab-bottle1",
+        "type": "set",
+        "target": "bottle1",
+        "start": {
+          "track": "pickup-bottle1",
+          "marker": "bottle.grab",
+          "offsetMs": 0
+        },
+        "values": {
+          "visible": true,
+          "attach": {
+            "target": "staff",
+            "anchor": "prop"
+          }
+        },
+        "when": {
+          "target": "bottle1",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "lower-bottle1",
+        "type": "set",
+        "target": "bottle1",
+        "start": {
+          "track": "pickup-bottle1",
+          "marker": "bottle.lower"
+        },
+        "values": {
+          "attach": null
+        },
+        "when": {
+          "target": "bottle1",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "return-bottle1",
+        "type": "tween",
+        "target": "bottle1",
+        "start": {
+          "track": "pickup-bottle1",
+          "marker": "bottle.lower"
+        },
+        "end": {
+          "track": "pickup-bottle1",
+          "marker": "bottle.place"
+        },
+        "to": {
+          "position": [
+            199,
+            501
+          ]
+        },
+        "when": {
+          "target": "bottle1",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "place-bottle1",
+        "type": "set",
+        "target": "bottle1",
+        "start": {
+          "track": "pickup-bottle1",
+          "marker": "bottle.place",
+          "offsetMs": 0
+        },
+        "values": {
+          "attach": null,
+          "position": [
+            199,
+            501
+          ],
+          "rotation": 0,
+          "visible": true,
+          "atHome": true
+        },
+        "when": {
+          "target": "bottle1",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "pickup-bottle2",
+        "type": "clip",
+        "target": "staff",
+        "action": "pickup",
+        "mode": "normal",
+        "start": {
+          "track": "pickup-bottle1",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "when": {
+          "target": "bottle2",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "prepare-bottle2",
+        "type": "set",
+        "target": "bottle2",
+        "start": {
+          "track": "pickup-bottle1",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "values": {
+          "visible": false,
+          "position": [
+            128,
+            669
+          ],
+          "rotation": 0,
+          "attach": null
+        },
+        "when": {
+          "target": "bottle2",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "grab-bottle2",
+        "type": "set",
+        "target": "bottle2",
+        "start": {
+          "track": "pickup-bottle2",
+          "marker": "bottle.grab",
+          "offsetMs": 0
+        },
+        "values": {
+          "visible": true,
+          "attach": {
+            "target": "staff",
+            "anchor": "prop"
+          }
+        },
+        "when": {
+          "target": "bottle2",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "lower-bottle2",
+        "type": "set",
+        "target": "bottle2",
+        "start": {
+          "track": "pickup-bottle2",
+          "marker": "bottle.lower"
+        },
+        "values": {
+          "attach": null
+        },
+        "when": {
+          "target": "bottle2",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "return-bottle2",
+        "type": "tween",
+        "target": "bottle2",
+        "start": {
+          "track": "pickup-bottle2",
+          "marker": "bottle.lower"
+        },
+        "end": {
+          "track": "pickup-bottle2",
+          "marker": "bottle.place"
+        },
+        "to": {
+          "position": [
+            222,
+            497
+          ]
+        },
+        "when": {
+          "target": "bottle2",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "place-bottle2",
+        "type": "set",
+        "target": "bottle2",
+        "start": {
+          "track": "pickup-bottle2",
+          "marker": "bottle.place",
+          "offsetMs": 0
+        },
+        "values": {
+          "attach": null,
+          "position": [
+            222,
+            497
+          ],
+          "rotation": 0,
+          "visible": true,
+          "atHome": true
+        },
+        "when": {
+          "target": "bottle2",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "pickup-bottle3",
+        "type": "clip",
+        "target": "staff",
+        "action": "pickup",
+        "mode": "normal",
+        "start": {
+          "track": "pickup-bottle2",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "when": {
+          "target": "bottle3",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "prepare-bottle3",
+        "type": "set",
+        "target": "bottle3",
+        "start": {
+          "track": "pickup-bottle2",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "values": {
+          "visible": false,
+          "position": [
+            152,
+            669
+          ],
+          "rotation": 0,
+          "attach": null
+        },
+        "when": {
+          "target": "bottle3",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "grab-bottle3",
+        "type": "set",
+        "target": "bottle3",
+        "start": {
+          "track": "pickup-bottle3",
+          "marker": "bottle.grab",
+          "offsetMs": 0
+        },
+        "values": {
+          "visible": true,
+          "attach": {
+            "target": "staff",
+            "anchor": "prop"
+          }
+        },
+        "when": {
+          "target": "bottle3",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "lower-bottle3",
+        "type": "set",
+        "target": "bottle3",
+        "start": {
+          "track": "pickup-bottle3",
+          "marker": "bottle.lower"
+        },
+        "values": {
+          "attach": null
+        },
+        "when": {
+          "target": "bottle3",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "return-bottle3",
+        "type": "tween",
+        "target": "bottle3",
+        "start": {
+          "track": "pickup-bottle3",
+          "marker": "bottle.lower"
+        },
+        "end": {
+          "track": "pickup-bottle3",
+          "marker": "bottle.place"
+        },
+        "to": {
+          "position": [
+            244,
+            493
+          ]
+        },
+        "when": {
+          "target": "bottle3",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "place-bottle3",
+        "type": "set",
+        "target": "bottle3",
+        "start": {
+          "track": "pickup-bottle3",
+          "marker": "bottle.place",
+          "offsetMs": 0
+        },
+        "values": {
+          "attach": null,
+          "position": [
+            244,
+            493
+          ],
+          "rotation": 0,
+          "visible": true,
+          "atHome": true
+        },
+        "when": {
+          "target": "bottle3",
+          "property": "atHome",
+          "equals": false
+        }
+      },
+      {
+        "id": "scroll-close",
+        "type": "tween",
+        "target": "scroll",
+        "start": 0,
+        "durationMs": 125,
+        "to": {
+          "reveal": 0
+        }
+      },
+      {
+        "id": "scroll-skin",
+        "type": "set",
+        "target": "scroll",
+        "start": {
+          "track": "scroll-close",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "values": {
+          "skinMode": "normal"
+        }
+      },
+      {
+        "id": "scroll-open",
+        "type": "tween",
+        "target": "scroll",
+        "start": {
+          "track": "scroll-close",
+          "point": "end",
+          "offsetMs": 0
+        },
+        "durationMs": 165,
+        "to": {
+          "reveal": 1
+        }
+      }
+    ]
+  }
+}
