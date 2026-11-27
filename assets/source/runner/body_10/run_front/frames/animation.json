@@ -1,308 +1,277 @@
 {
   "assetId": "body_10",
-  "revision": "r02",
+  "revision": "r03",
   "sourceSize": [
     256,
     320
   ],
-  "cycleMs": 800,
+  "status": "review",
+  "loopMs": 800,
   "frames": [
     {
       "id": "frame_00",
-      "source": "frames/frame_00.svg",
+      "source": "frame_00.svg",
       "durationMs": 100,
-      "pivot": [
-        129,
-        304
-      ],
       "anchors": {
-        "feet_left": [
-          108,
-          295
-        ],
-        "feet_right": [
-          148,
-          295
-        ],
-        "hand_supply": [
-          199,
-          170
-        ],
         "head": [
           129,
-          75
+          78
         ],
         "torso": [
           129,
-          158
+          168
+        ],
+        "feet_left": [
+          92,
+          299
+        ],
+        "feet_right": [
+          166,
+          299
         ]
       },
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        0.97,
+        1.0490249999999999
       ]
     },
     {
       "id": "frame_01",
-      "source": "frames/frame_01.svg",
+      "source": "frame_01.svg",
       "durationMs": 100,
-      "pivot": [
-        129,
-        304
-      ],
       "anchors": {
-        "feet_left": [
-          108,
-          295
-        ],
-        "feet_right": [
-          148,
-          295
-        ],
-        "hand_supply": [
-          199,
-          170
-        ],
         "head": [
           129,
-          75
+          78
         ],
         "torso": [
           129,
-          158
+          168
+        ],
+        "feet_left": [
+          117.45584412271572,
+          290.5147186257614
+        ],
+        "feet_right": [
+          140.54415587728428,
+          299
         ]
       },
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        0.97,
+        1.0490249999999999
       ]
     },
     {
       "id": "frame_02",
-      "source": "frames/frame_02.svg",
+      "source": "frame_02.svg",
       "durationMs": 100,
-      "pivot": [
-        129,
-        304
-      ],
       "anchors": {
-        "feet_left": [
-          108,
-          295
-        ],
-        "feet_right": [
-          148,
-          295
-        ],
-        "hand_supply": [
-          199,
-          170
-        ],
         "head": [
           129,
-          75
+          78
         ],
         "torso": [
           129,
-          158
+          168
+        ],
+        "feet_left": [
+          128,
+          287
+        ],
+        "feet_right": [
+          130,
+          299
         ]
       },
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        0.97,
+        1.0490249999999999
       ]
     },
     {
       "id": "frame_03",
-      "source": "frames/frame_03.svg",
+      "source": "frame_03.svg",
       "durationMs": 100,
-      "pivot": [
-        129,
-        304
-      ],
       "anchors": {
-        "feet_left": [
-          108,
-          295
-        ],
-        "feet_right": [
-          148,
-          295
-        ],
-        "hand_supply": [
-          199,
-          170
-        ],
         "head": [
           129,
-          75
+          78
         ],
         "torso": [
           129,
-          158
+          168
+        ],
+        "feet_left": [
+          117.45584412271572,
+          290.5147186257614
+        ],
+        "feet_right": [
+          140.54415587728428,
+          299
         ]
       },
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        0.97,
+        1.0490249999999999
       ]
     },
     {
       "id": "frame_04",
-      "source": "frames/frame_04.svg",
+      "source": "frame_04.svg",
       "durationMs": 100,
-      "pivot": [
-        129,
-        304
-      ],
       "anchors": {
-        "feet_left": [
-          108,
-          295
-        ],
-        "feet_right": [
-          148,
-          295
-        ],
-        "hand_supply": [
-          199,
-          170
-        ],
         "head": [
           129,
-          75
+          78
         ],
         "torso": [
           129,
-          158
+          168
+        ],
+        "feet_left": [
+          92,
+          299
+        ],
+        "feet_right": [
+          166,
+          299
         ]
       },
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        0.97,
+        1.0490249999999999
       ]
     },
     {
       "id": "frame_05",
-      "source": "frames/frame_05.svg",
+      "source": "frame_05.svg",
       "durationMs": 100,
-      "pivot": [
-        129,
-        304
-      ],
       "anchors": {
-        "feet_left": [
-          108,
-          295
-        ],
-        "feet_right": [
-          148,
-          295
-        ],
-        "hand_supply": [
-          199,
-          170
-        ],
         "head": [
           129,
-          75
+          78
         ],
         "torso": [
           129,
-          158
+          168
+        ],
+        "feet_left": [
+          66.54415587728428,
+          299
+        ],
+        "feet_right": [
+          191.45584412271572,
+          290.5147186257614
         ]
       },
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        0.97,
+        1.0490249999999999
       ]
     },
     {
       "id": "frame_06",
-      "source": "frames/frame_06.svg",
+      "source": "frame_06.svg",
       "durationMs": 100,
-      "pivot": [
-        129,
-        304
-      ],
       "anchors": {
-        "feet_left": [
-          108,
-          295
-        ],
-        "feet_right": [
-          148,
-          295
-        ],
-        "hand_supply": [
-          199,
-          170
-        ],
         "head": [
           129,
-          75
+          78
         ],
         "torso": [
           129,
-          158
+          168
+        ],
+        "feet_left": [
+          56,
+          299
+        ],
+        "feet_right": [
+          202,
+          287
         ]
       },
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        0.97,
+        1.0490249999999999
       ]
     },
     {
       "id": "frame_07",
-      "source": "frames/frame_07.svg",
+      "source": "frame_07.svg",
       "durationMs": 100,
-      "pivot": [
-        129,
-        304
-      ],
       "anchors": {
-        "feet_left": [
-          108,
-          295
-        ],
-        "feet_right": [
-          148,
-          295
-        ],
-        "hand_supply": [
-          199,
-          170
-        ],
         "head": [
           129,
-          75
+          78
         ],
         "torso": [
           129,
-          158
+          168
+        ],
+        "feet_left": [
+          66.54415587728428,
+          299
+        ],
+        "feet_right": [
+          191.45584412271572,
+          290.5147186257614
         ]
       },
       "bibRect": [
-        101,
-        149,
-        57,
-        43
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        0.97,
+        1.0490249999999999
       ]
     }
   ],
-  "notes": "Illustrated key poses; anchors are review starting points. Confirm real extrema and registered positions before runtime integration."
+  "notes": "Review poses. Use source pivots plus body transform; runtime renderer not yet integrated. No throw/score game timing change."
 }
