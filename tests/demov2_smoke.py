@@ -60,28 +60,35 @@ HIT="""correct=>{
  if(!chosen||!g.throwSupply(chosen.id))throw Error('No tappable target for '+correct);
  const supply=g.throwing.supply.number,bib=chosen.number,before=g.score,mode=g.inferno?'inferno':g.fever?'fever':'normal';
  const expected=m.resolveHit(g.combo,g.fever,chosen.successes,correct),target=correct?m.transformRunnerNumber(bib,supply):bib;
- let flight=false,caught=false,miss=false,staff=new Set(),runnerFrames=new Set();
+ let flight=false,caught=false,miss=false,visibleAtImpact=false,retiredAtImpact=false,outcomeEvent=false,staff=new Set(),runnerFrames=new Set();
  for(let i=0;i<100&&g.throwing;i++){
    step();const t=qa.trace();staff.add(t.staff.frame.image);
    const r=t.runners.find(r=>r.id===chosen.id);
    if(r)runnerFrames.add(r.frame.image);
    if(g.throwing&&!g.throwing.hit&&t.events.some(e=>e.type==='throw.release'&&e.runnerId===chosen.id))flight=flight||t.assets.some(a=>a.key===SnackDashAssetPack.manifest.supplies[g.throwing.supply.type].flight);
-   if(g.throwing?.hit&&r){
-     caught=caught||r.action==='receive_supply';
-     miss=miss||t.effects.some(e=>e.id==='miss'&&e.mode===mode);
+   if(g.throwing?.hit){
+     outcomeEvent=outcomeEvent||t.events.some(e=>e.type===(correct?'hit':'miss')&&e.runnerId===chosen.id);
+     visibleAtImpact=visibleAtImpact||Boolean(r);
+     // The existing canonical engine retires off-screen targets immediately
+     // after impact and does not keep their sprite in the active roster.
+     // Such a hit must still resolve correctly, but has no on-screen receipt.
+     retiredAtImpact=retiredAtImpact||!r;
+     if(r){caught=caught||r.action==='receive_supply';miss=miss||t.effects.some(e=>e.id==='miss'&&e.mode===mode);}
    }
  }
  if(g.throwing||g.score!==before+expected.delta||g.combo!==expected.combo||g.fever!==expected.fever||g.inferno!==expected.inferno||chosen.number!==target)throw Error('Canonical outcome mismatch');
  if(!flight||staff.size<2)throw Error('Throw did not render the independent physical item and multiple staff frames');
- if(correct&&!caught)throw Error('Missing receipt animation');
- if(!correct&&!miss)throw Error('Wrong pre-hit miss effect');
+ if(!outcomeEvent)throw Error('Missing semantic outcome event');
+ if(correct&&visibleAtImpact&&!caught)throw Error('Missing on-screen receipt animation');
+ if(!correct&&visibleAtImpact&&!miss)throw Error('Wrong pre-hit miss effect');
+ if(!visibleAtImpact&&!retiredAtImpact)throw Error('Impact not sampled');
  g.assertReady();
- return {combo:g.combo,score:g.score,mode:g.inferno?'inferno':g.fever?'fever':'normal',before:mode,correct,staffFrames:staff.size,runnerFrames:runnerFrames.size};
+ return {combo:g.combo,score:g.score,mode:g.inferno?'inferno':g.fever?'fever':'normal',before:mode,correct,staffFrames:staff.size,runnerFrames:runnerFrames.size,visibleAtImpact,retiredAtImpact,caught,miss};
 }"""
 
 STEP="""dt=>{const g=SnackDashDebug.getGame();g.update(dt);g.draw();const t=SnackDashLandscapeQA.trace();return {mode:t.mode,transition:t.transition,staff:t.staff.action,staffClip:t.staff.clip,contact:t.staff.contact,objects:t.objects,nodes:t.nodes.map(n=>({id:n.id,key:n.key,clip:n.clip,index:n.index})),events:t.events};}"""
 
-def capture_transition(page,name,steps=42):
+def capture_transition(page,name,steps=42,gender='female'):
     images=[];all_steps=[]
     for i in range(steps):
         t=page.evaluate(STEP,.05)
@@ -91,7 +98,7 @@ def capture_transition(page,name,steps=42):
             im.thumbnail((960,540))
             images.append(im)
     assert all_steps[-1]["transition"]["done"],(name,all_steps[-1]["transition"])
-    images[0].save(OUT/(name+".gif"),save_all=True,append_images=images[1:],duration=100,loop=0,optimize=True)
+    images[0].save(OUT/(gender+"-"+name.replace(">","-to-")+".gif"),save_all=True,append_images=images[1:],duration=100,loop=0,optimize=True)
     t=all_steps[-1];marks=[e for e in t["events"] if e.get("type")=="marker" and e.get("transition")==name]
     # Use the latest start of this transition; earlier races can use the same id.
     start=max(i for i,e in enumerate(t["events"]) if e.get("type")=="transition.start" and e.get("transition")==name)
@@ -167,21 +174,22 @@ def run(browser):
         page.locator("#tokyo"+gender.capitalize()).click()
         page.evaluate(START,1)
         for _ in range(5):page.evaluate(HIT,True)
-        capture_transition(page,"normal>fever",16)
+        capture_transition(page,"normal>fever",16,gender)
         page.evaluate(HIT,False)
-        capture_transition(page,"fever>normal",16)
+        capture_transition(page,"fever>normal",16,gender)
         for _ in range(5):page.evaluate(HIT,True)
-        capture_transition(page,"normal>fever",16)
+        capture_transition(page,"normal>fever",16,gender)
         for _ in range(5):page.evaluate(HIT,True)
-        capture_transition(page,"fever>inferno",34)
+        capture_transition(page,"fever>inferno",34,gender)
         page.evaluate(HIT,False)
-        capture_transition(page,"inferno>normal",54)
+        capture_transition(page,"inferno>normal",54,gender)
         page.locator("#levelsBtn").click()
         record("complete real gameplay cycle",gender=gender)
     # Ten race wins and actual result controls. Original storage API used on CI.
     for race in range(1,11):
         page.evaluate(START,race)
-        for _ in range(4):page.evaluate(HIT,True)
+        hits=[page.evaluate(HIT,True) for _ in range(4)]
+        record("race receipt sampling",race=race,visible=sum(h["visibleAtImpact"] for h in hits),retired=sum(h["retiredAtImpact"] for h in hits))
         page.evaluate("""()=>{
           const g=SnackDashDebug.getGame();if(g.score<10)throw Error('Goal not achieved');
           g.remaining=.001;g.update(.02);
