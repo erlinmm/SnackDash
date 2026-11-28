@@ -1,0 +1,7 @@
+{
+  "supply_swap": "assets/source/audio/cues/supply_swap_review_r03.wav",
+  "supply_catch": "assets/source/audio/cues/supply_catch_review_r03.wav",
+  "fever_enter": "assets/source/audio/cues/fever_enter_review_r03.wav",
+  "inferno_enter": "assets/source/audio/cues/inferno_enter_review_r03.wav",
+  "miss_soft": "assets/source/audio/cues/miss_soft_review_r03.wav"
+}

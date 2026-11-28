@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "tokyo-demo",
+  "extends": "tokyo",
+  "raceCityId": "tokyo",
+  "artRevision": "demov2-illustrated-r02",
+  "reviewStatus": "review",
+  "sourceCommit": "e5faf6d6855dd16f03328fd46ef6312f3a94748b",
+  "parts": {
+    "resources": "../../source/demo-v2/tokyo/resources.json",
+    "scene": "../../source/demo-v2/tokyo/scene.json",
+    "clips": "../../source/demo-v2/tokyo/clips.json",
+    "actors": "../../source/demo-v2/tokyo/actors.json",
+    "world": "../../source/demo-v2/tokyo/world.json",
+    "bindings": "../../source/demo-v2/tokyo/bindings.json",
+    "transitions": "../../source/demo-v2/tokyo/transitions.json",
+    "fx": "../../source/demo-v2/tokyo/fx.json",
+    "audio": "../../source/demo-v2/tokyo/audio.json",
+    "hud": "../../source/demo-v2/tokyo/hud.json",
+    "supplies": "../../source/demo-v2/tokyo/supplies.json",
+    "ui": "../../source/demo-v2/tokyo/ui.json",
+    "sounds": "../../source/demo-v2/tokyo/sounds.json"
+  }
+}
