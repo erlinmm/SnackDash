@@ -1,0 +1,9819 @@
+{
+  "ambient/fever/normal": {
+    "path": "assets/source/fx/tokyo/fever/city_ambient_normal.svg",
+    "reviewFallback": true
+  },
+  "ambient/fever/reduced": {
+    "path": "assets/source/fx/tokyo/fever/city_ambient_reduced.svg",
+    "reviewFallback": true
+  },
+  "ambient/normal/normal": {
+    "path": "assets/source/fx/tokyo/normal/city_ambient_normal.svg",
+    "reviewFallback": true
+  },
+  "ambient/normal/reduced": {
+    "path": "assets/source/fx/tokyo/normal/city_ambient_reduced.svg",
+    "reviewFallback": true
+  },
+  "bg/fever": {
+    "path": "assets/source/approved-rebuild-r03/street/tokyo/fever_empty_environment_plate.webp",
+    "standalone": true,
+    "preserveBytes": true
+  },
+  "bg/inferno": {
+    "path": "assets/source/approved-rebuild-r03/street/tokyo/inferno_empty_environment_plate.webp",
+    "standalone": true,
+    "preserveBytes": true
+  },
+  "bg/normal": {
+    "path": "assets/source/approved-rebuild-r03/street/tokyo/normal_empty_environment_plate.webp",
+    "standalone": true,
+    "preserveBytes": true
+  },
+  "fx/fever/miss/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/miss/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/miss/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/miss/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/miss/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/miss/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_enter/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/mode_enter/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/mode_exit/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/mode_exit/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/receive/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/receive/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/receive/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/receive/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/receive/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/score/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/score/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/score/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/score/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/score/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/swap/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/swap/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/swap/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/swap/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/swap/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/fever/throw/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/fever/throw/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/fever/throw/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/fever/throw/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/fever/throw/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/miss/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/miss/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/miss/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/miss/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/miss/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_enter/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/mode_enter/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/mode_exit/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/mode_exit/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/receive/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/receive/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/receive/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/receive/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/receive/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/score/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/score/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/score/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/score/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/score/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/swap/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/swap/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/swap/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/swap/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/swap/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/inferno/throw/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/inferno/throw/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/inferno/throw/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/inferno/throw/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/inferno/throw/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/miss/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/miss/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/miss/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/miss/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/miss/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_enter/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/mode_enter/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/mode_exit/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/mode_exit/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/receive/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/receive/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/receive/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/receive/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/receive/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/score/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/score/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/score/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/score/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/score/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/swap/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/swap/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/swap/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/swap/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/swap/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_02.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_3": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_03.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/normal/frame_4": {
+    "path": "assets/source/fx/tokyo/normal/throw/normal/frame_04.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/reduced/frame_0": {
+    "path": "assets/source/fx/tokyo/normal/throw/reduced/frame_00.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/reduced/frame_1": {
+    "path": "assets/source/fx/tokyo/normal/throw/reduced/frame_01.svg",
+    "reviewFallback": true
+  },
+  "fx/normal/throw/reduced/frame_2": {
+    "path": "assets/source/fx/tokyo/normal/throw/reduced/frame_02.svg",
+    "reviewFallback": true
+  },
+  "supply/gel/flight": {
+    "path": "assets/source/approved-rebuild-r03/supply/gel/flight.png",
+    "reviewFallback": true
+  },
+  "supply/gel/hand": {
+    "path": "assets/source/approved-rebuild-r03/supply/gel/hand.png",
+    "reviewFallback": true
+  },
+  "supply/gel/slot": {
+    "path": "assets/source/approved-rebuild-r03/supply/gel/slot.png",
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      1,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      243,
+      1,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      486,
+      1,
+      242,
+      149
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      730,
+      1,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      972,
+      1,
+      239,
+      142
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1213,
+      1,
+      242,
+      139
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      152,
+      241,
+      149
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      244,
+      152,
+      239,
+      142
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      485,
+      152,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      727,
+      152,
+      240,
+      145
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      969,
+      152,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1211,
+      152,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      303,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      243,
+      303,
+      242,
+      145
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/fever/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      487,
+      303,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      730,
+      303,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      972,
+      303,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1215,
+      303,
+      242,
+      149
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      454,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      243,
+      454,
+      239,
+      142
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      484,
+      454,
+      242,
+      139
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      728,
+      454,
+      241,
+      149
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      971,
+      454,
+      239,
+      142
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1212,
+      454,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      605,
+      240,
+      145
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      243,
+      605,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      485,
+      605,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      728,
+      605,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      970,
+      605,
+      242,
+      145
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/inferno/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1214,
+      605,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      752,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      243,
+      752,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      486,
+      752,
+      242,
+      149
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      730,
+      752,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      972,
+      752,
+      239,
+      142
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1213,
+      752,
+      242,
+      139
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      903,
+      241,
+      149
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      244,
+      903,
+      239,
+      142
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      485,
+      903,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      727,
+      903,
+      240,
+      145
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      969,
+      903,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1211,
+      903,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      1054,
+      240,
+      143
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      243,
+      1054,
+      242,
+      145
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      35,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-0/normal/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      487,
+      1054,
+      241,
+      141
+    ],
+    "sourceSize": [
+      291,
+      166
+    ],
+    "trimOffset": [
+      36,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      730,
+      1054,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      920,
+      1054,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1110,
+      1054,
+      188,
+      105
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      17,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1300,
+      1054,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      1201,
+      187,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      190,
+      1201,
+      188,
+      96
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      380,
+      1201,
+      188,
+      107
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      17,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      570,
+      1201,
+      187,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      759,
+      1201,
+      188,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      949,
+      1201,
+      188,
+      101
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1139,
+      1201,
+      188,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1329,
+      1201,
+      189,
+      98
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      1310,
+      188,
+      100
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      191,
+      1310,
+      189,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      15,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/fever/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      382,
+      1310,
+      189,
+      98
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      573,
+      1310,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      763,
+      1310,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      953,
+      1310,
+      188,
+      105
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      17,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1143,
+      1310,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1333,
+      1310,
+      187,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1,
+      1417,
+      188,
+      96
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      191,
+      1417,
+      188,
+      107
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      17,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      381,
+      1417,
+      187,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      570,
+      1417,
+      188,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      760,
+      1417,
+      188,
+      101
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      950,
+      1417,
+      188,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1140,
+      1417,
+      189,
+      98
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-00.webp",
+    "rect": [
+      1331,
+      1417,
+      188,
+      100
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      1,
+      189,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      15,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/inferno/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      192,
+      1,
+      189,
+      98
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      383,
+      1,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      573,
+      1,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      763,
+      1,
+      188,
+      105
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      17,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      953,
+      1,
+      188,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1143,
+      1,
+      187,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1332,
+      1,
+      188,
+      96
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      108,
+      188,
+      107
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      17,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      191,
+      108,
+      187,
+      97
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      380,
+      108,
+      188,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      570,
+      108,
+      188,
+      101
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      760,
+      108,
+      188,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      950,
+      108,
+      189,
+      98
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1141,
+      108,
+      188,
+      100
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1331,
+      108,
+      189,
+      99
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      15,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-1/normal/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      217,
+      189,
+      98
+    ],
+    "sourceSize": [
+      217,
+      121
+    ],
+    "trimOffset": [
+      16,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      192,
+      217,
+      127,
+      58
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      321,
+      217,
+      128,
+      51
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      451,
+      217,
+      128,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      581,
+      217,
+      127,
+      58
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      710,
+      217,
+      127,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      839,
+      217,
+      129,
+      51
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      11,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      970,
+      217,
+      128,
+      63
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1100,
+      217,
+      127,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1229,
+      217,
+      128,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1359,
+      217,
+      128,
+      57
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      317,
+      128,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      131,
+      317,
+      128,
+      54
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      261,
+      317,
+      127,
+      57
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      13,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      390,
+      317,
+      127,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      13,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/fever/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      519,
+      317,
+      128,
+      54
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      649,
+      317,
+      127,
+      58
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      778,
+      317,
+      128,
+      51
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      908,
+      317,
+      128,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1038,
+      317,
+      127,
+      58
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1167,
+      317,
+      127,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1296,
+      317,
+      129,
+      51
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      11,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      378,
+      128,
+      63
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      131,
+      378,
+      127,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      260,
+      378,
+      128,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      390,
+      378,
+      128,
+      57
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      520,
+      378,
+      128,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      650,
+      378,
+      128,
+      54
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      780,
+      378,
+      127,
+      57
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      13,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      909,
+      378,
+      127,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      13,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/inferno/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1038,
+      378,
+      128,
+      54
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1168,
+      378,
+      127,
+      58
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1297,
+      378,
+      128,
+      51
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      443,
+      128,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      131,
+      443,
+      127,
+      58
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      260,
+      443,
+      127,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      389,
+      443,
+      129,
+      51
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      11,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      520,
+      443,
+      128,
+      63
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      650,
+      443,
+      127,
+      59
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      779,
+      443,
+      128,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      909,
+      443,
+      128,
+      57
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1039,
+      443,
+      128,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1169,
+      443,
+      128,
+      54
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1299,
+      443,
+      127,
+      57
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      13,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      508,
+      127,
+      55
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      13,
+      14
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-2/normal/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      130,
+      508,
+      128,
+      54
+    ],
+    "sourceSize": [
+      154,
+      76
+    ],
+    "trimOffset": [
+      12,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      260,
+      508,
+      75,
+      39
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      337,
+      508,
+      76,
+      34
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      415,
+      508,
+      76,
+      43
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      493,
+      508,
+      75,
+      39
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      570,
+      508,
+      75,
+      40
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      647,
+      508,
+      76,
+      37
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      725,
+      508,
+      78,
+      46
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      805,
+      508,
+      75,
+      40
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      882,
+      508,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      959,
+      508,
+      75,
+      37
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1036,
+      508,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1113,
+      508,
+      75,
+      35
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1190,
+      508,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1267,
+      508,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/fever/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1344,
+      508,
+      75,
+      35
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1421,
+      508,
+      75,
+      39
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      565,
+      76,
+      34
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      79,
+      565,
+      76,
+      43
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      157,
+      565,
+      75,
+      39
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      234,
+      565,
+      75,
+      40
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      311,
+      565,
+      76,
+      37
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      389,
+      565,
+      78,
+      46
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      469,
+      565,
+      75,
+      40
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      546,
+      565,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      623,
+      565,
+      75,
+      37
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      700,
+      565,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      777,
+      565,
+      75,
+      35
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      854,
+      565,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      931,
+      565,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/inferno/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1008,
+      565,
+      75,
+      35
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1085,
+      565,
+      75,
+      39
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1162,
+      565,
+      76,
+      34
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/cheer/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1240,
+      565,
+      76,
+      43
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/cheer/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1318,
+      565,
+      75,
+      39
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/festival/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1395,
+      565,
+      75,
+      40
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/festival/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      1,
+      613,
+      76,
+      37
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/festival/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      79,
+      613,
+      78,
+      46
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      10,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/festival/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      159,
+      613,
+      75,
+      40
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      236,
+      613,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      313,
+      613,
+      75,
+      37
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      390,
+      613,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/miss/00": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      467,
+      613,
+      75,
+      35
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/miss/01": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      544,
+      613,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/miss/02": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      621,
+      613,
+      75,
+      36
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/crowd/spectators-3/normal/miss/03": {
+    "path": "assets/source/demo-v2/tokyo/crowd-01.webp",
+    "rect": [
+      698,
+      613,
+      75,
+      35
+    ],
+    "sourceSize": [
+      95,
+      57
+    ],
+    "trimOffset": [
+      11,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/supply/apple": {
+    "path": "assets/source/demo-v2/tokyo/props-00.webp",
+    "rect": [
+      1,
+      1,
+      102,
+      110
+    ],
+    "sourceSize": [
+      102,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/supply/banana": {
+    "path": "assets/source/demo-v2/tokyo/props-00.webp",
+    "rect": [
+      105,
+      1,
+      109,
+      88
+    ],
+    "sourceSize": [
+      110,
+      88
+    ],
+    "trimOffset": [
+      1,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/supply/bar": {
+    "path": "assets/source/demo-v2/tokyo/props-00.webp",
+    "rect": [
+      216,
+      1,
+      110,
+      108
+    ],
+    "sourceSize": [
+      110,
+      108
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/supply/juice": {
+    "path": "assets/source/demo-v2/tokyo/props-00.webp",
+    "rect": [
+      328,
+      1,
+      72,
+      110
+    ],
+    "sourceSize": [
+      72,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/supply/orange": {
+    "path": "assets/source/demo-v2/tokyo/props-00.webp",
+    "rect": [
+      402,
+      1,
+      108,
+      110
+    ],
+    "sourceSize": [
+      108,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/supply/water": {
+    "path": "assets/source/demo-v2/tokyo/props-00.webp",
+    "rect": [
+      512,
+      1,
+      43,
+      104
+    ],
+    "sourceSize": [
+      43,
+      104
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1,
+      1,
+      135,
+      273
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      54
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      138,
+      1,
+      136,
+      275
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      52
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      276,
+      1,
+      131,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      409,
+      1,
+      131,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      542,
+      1,
+      124,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      668,
+      1,
+      122,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      792,
+      1,
+      121,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      915,
+      1,
+      117,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1034,
+      1,
+      131,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1167,
+      1,
+      129,
+      273
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      54
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1298,
+      1,
+      129,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1,
+      278,
+      131,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      134,
+      278,
+      132,
+      273
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      54
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      268,
+      278,
+      133,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      403,
+      278,
+      131,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      536,
+      278,
+      135,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      673,
+      278,
+      136,
+      271
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      56
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      811,
+      278,
+      128,
+      274
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      53
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/blue/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      941,
+      278,
+      128,
+      275
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      52
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1071,
+      278,
+      164,
+      289
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      39
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1237,
+      278,
+      165,
+      289
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      39
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1,
+      569,
+      161,
+      287
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      164,
+      569,
+      161,
+      288
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      40
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      327,
+      569,
+      155,
+      287
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      484,
+      569,
+      152,
+      288
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      40
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      638,
+      569,
+      151,
+      287
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      791,
+      569,
+      149,
+      288
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      40
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      942,
+      569,
+      161,
+      287
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1105,
+      569,
+      160,
+      289
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      39
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1267,
+      569,
+      160,
+      287
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1,
+      860,
+      161,
+      287
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      164,
+      860,
+      161,
+      289
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      39
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      327,
+      860,
+      162,
+      287
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      491,
+      860,
+      161,
+      288
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      40
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      654,
+      860,
+      164,
+      287
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      820,
+      860,
+      165,
+      288
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      40
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      987,
+      860,
+      158,
+      289
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      39
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/pink/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1147,
+      860,
+      158,
+      289
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      24,
+      39
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1307,
+      860,
+      152,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1,
+      1168,
+      153,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      156,
+      1168,
+      149,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      307,
+      1168,
+      149,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      458,
+      1168,
+      145,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      605,
+      1168,
+      143,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      750,
+      1168,
+      139,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      891,
+      1168,
+      132,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1025,
+      1168,
+      148,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1175,
+      1168,
+      148,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-00.webp",
+    "rect": [
+      1325,
+      1168,
+      147,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1,
+      1,
+      148,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      151,
+      1,
+      149,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      302,
+      1,
+      149,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      453,
+      1,
+      148,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      603,
+      1,
+      151,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      756,
+      1,
+      152,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      910,
+      1,
+      145,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world1/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1057,
+      1,
+      144,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      41,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1203,
+      1,
+      141,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1346,
+      1,
+      144,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1,
+      311,
+      137,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      60,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      140,
+      311,
+      137,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      60,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      279,
+      311,
+      133,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      61,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      414,
+      311,
+      131,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      62,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      547,
+      311,
+      126,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      62,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      675,
+      311,
+      121,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      62,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      798,
+      311,
+      137,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      60,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      937,
+      311,
+      136,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      60,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1075,
+      311,
+      135,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      61,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1212,
+      311,
+      137,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      60,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1351,
+      311,
+      138,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1,
+      619,
+      138,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      141,
+      619,
+      137,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      60,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      280,
+      619,
+      141,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      423,
+      619,
+      143,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      568,
+      619,
+      133,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      61,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world2/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      703,
+      619,
+      131,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      61,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      836,
+      619,
+      143,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      62,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      981,
+      619,
+      145,
+      309
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      62,
+      19
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1128,
+      619,
+      138,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1268,
+      619,
+      138,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1,
+      930,
+      133,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      65,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      136,
+      930,
+      131,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      66,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      269,
+      930,
+      126,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      65,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      397,
+      930,
+      119,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      66,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      518,
+      930,
+      137,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      657,
+      930,
+      137,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      796,
+      930,
+      136,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      934,
+      930,
+      137,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1073,
+      930,
+      139,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      63,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1214,
+      930,
+      139,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      63,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-01.webp",
+    "rect": [
+      1355,
+      930,
+      137,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1,
+      1,
+      142,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      63,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      145,
+      1,
+      144,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      62,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      291,
+      1,
+      134,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world3/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      427,
+      1,
+      133,
+      309
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      64,
+      19
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      562,
+      1,
+      142,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      706,
+      1,
+      144,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      852,
+      1,
+      139,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      993,
+      1,
+      139,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1134,
+      1,
+      135,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1271,
+      1,
+      135,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1,
+      312,
+      129,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      132,
+      312,
+      127,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      261,
+      312,
+      139,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      402,
+      312,
+      138,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      542,
+      312,
+      138,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      682,
+      312,
+      140,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      824,
+      312,
+      141,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      39,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      967,
+      312,
+      141,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      39,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1110,
+      312,
+      139,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1251,
+      312,
+      142,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1,
+      620,
+      143,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      146,
+      620,
+      135,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world4/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      283,
+      620,
+      135,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      40,
+      19
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      420,
+      620,
+      147,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      569,
+      620,
+      149,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      720,
+      620,
+      144,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      866,
+      620,
+      144,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1012,
+      620,
+      140,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1154,
+      620,
+      139,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1295,
+      620,
+      134,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1,
+      930,
+      127,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      130,
+      930,
+      143,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      275,
+      930,
+      143,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      420,
+      930,
+      143,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      565,
+      930,
+      143,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      710,
+      930,
+      144,
+      306
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      856,
+      930,
+      144,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1002,
+      930,
+      143,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1147,
+      930,
+      147,
+      304
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-02.webp",
+    "rect": [
+      1296,
+      930,
+      148,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      23
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1,
+      1,
+      140,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      21
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world5/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      143,
+      1,
+      139,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      42,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      284,
+      1,
+      143,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      429,
+      1,
+      145,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      19
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      576,
+      1,
+      140,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      718,
+      1,
+      139,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      49,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      859,
+      1,
+      136,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      997,
+      1,
+      134,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      49,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1133,
+      1,
+      130,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1265,
+      1,
+      124,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1391,
+      1,
+      140,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1,
+      311,
+      139,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      142,
+      311,
+      139,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      283,
+      311,
+      140,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      425,
+      311,
+      140,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      567,
+      311,
+      140,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      709,
+      311,
+      140,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      851,
+      311,
+      143,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      996,
+      311,
+      144,
+      305
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1142,
+      311,
+      137,
+      307
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/world6/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1281,
+      311,
+      136,
+      308
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      48,
+      19
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/cheer/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1,
+      621,
+      140,
+      284
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      53,
+      44
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/cheer/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      143,
+      621,
+      142,
+      286
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      52,
+      42
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/disappointment/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      287,
+      621,
+      134,
+      282
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      55,
+      46
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/disappointment/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      423,
+      621,
+      134,
+      283
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      55,
+      45
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/pain/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      559,
+      621,
+      126,
+      282
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      58,
+      46
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/pain/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      687,
+      621,
+      125,
+      283
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      59,
+      45
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/receive_supply/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      814,
+      621,
+      123,
+      282
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      60,
+      46
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/receive_supply/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      939,
+      621,
+      122,
+      283
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      61,
+      45
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/run/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1063,
+      621,
+      133,
+      282
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      55,
+      46
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/run/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1198,
+      621,
+      132,
+      284
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      56,
+      44
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/run/02": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1332,
+      621,
+      132,
+      282
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      56,
+      46
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/run/04": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      1,
+      909,
+      133,
+      282
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      55,
+      46
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/run/05": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      136,
+      909,
+      136,
+      284
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      54,
+      44
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/run/06": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      274,
+      909,
+      136,
+      282
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      54,
+      46
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/selected/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      412,
+      909,
+      133,
+      283
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      55,
+      45
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/surprise/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      547,
+      909,
+      140,
+      282
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      53,
+      46
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/surprise/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      689,
+      909,
+      142,
+      283
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      52,
+      45
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/thanks/00": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      833,
+      909,
+      129,
+      285
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      57,
+      43
+    ],
+    "reviewFallback": true
+  },
+  "demo/runner/yellow/shared/thanks/01": {
+    "path": "assets/source/demo-v2/tokyo/runners-03.webp",
+    "rect": [
+      964,
+      909,
+      128,
+      286
+    ],
+    "sourceSize": [
+      258,
+      334
+    ],
+    "trimOffset": [
+      57,
+      42
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/fever/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1,
+      1,
+      163,
+      313
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      55,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/fever/swap/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      166,
+      1,
+      204,
+      288
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      37,
+      30
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/fever/throw/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      372,
+      1,
+      243,
+      311
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      43,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/fever_to_inferno/2": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      617,
+      1,
+      156,
+      262
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      61,
+      55
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/fever_to_normal/0": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      775,
+      1,
+      188,
+      315
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      42,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/fever_to_normal/1": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      965,
+      1,
+      186,
+      314
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      43,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/fever_to_normal/2": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1153,
+      1,
+      156,
+      308
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      61,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/inferno/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1311,
+      1,
+      203,
+      258
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      56,
+      60
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/inferno/kick/00": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1,
+      318,
+      226,
+      257
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      79,
+      61
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/inferno/swap/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      229,
+      318,
+      151,
+      258
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      61,
+      60
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/inferno_to_normal/0": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      382,
+      318,
+      151,
+      261
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      61,
+      57
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/inferno_to_normal/1": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      535,
+      318,
+      154,
+      262
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      57,
+      55
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      691,
+      318,
+      159,
+      309
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      57,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      852,
+      318,
+      177,
+      308
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      49,
+      9
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal/idle/02": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1031,
+      318,
+      158,
+      307
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      58,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal/pickup/03": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1191,
+      318,
+      234,
+      314
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      45,
+      4
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal/swap/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1,
+      634,
+      191,
+      276
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      43,
+      42
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal/throw/00": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      194,
+      634,
+      184,
+      313
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      45,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal/throw/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      380,
+      634,
+      206,
+      314
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      55,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal/throw/02": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      588,
+      634,
+      255,
+      312
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      37,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal_to_fever/1": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      845,
+      634,
+      157,
+      308
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      56,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/female/normal_to_fever/2": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1004,
+      634,
+      191,
+      314
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      43,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/fever/pickup/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1197,
+      634,
+      231,
+      312
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      18,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/fever/pickup/02": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1,
+      950,
+      229,
+      310
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      18,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/fever/swap/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      232,
+      950,
+      237,
+      316
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      18,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/fever/throw/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      471,
+      950,
+      228,
+      316
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      18,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/fever_to_inferno/2": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      701,
+      950,
+      266,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/fever_to_normal/0": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      969,
+      950,
+      252,
+      314
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      18,
+      4
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/fever_to_normal/1": {
+    "path": "assets/source/demo-v2/tokyo/staff-00.webp",
+    "rect": [
+      1223,
+      950,
+      244,
+      317
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      18,
+      1
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/fever_to_normal/2": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      1,
+      1,
+      260,
+      317
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      13,
+      1
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/climb/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      263,
+      1,
+      262,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/descend/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      527,
+      1,
+      263,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/idle/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      792,
+      1,
+      269,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/kick/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      1063,
+      1,
+      257,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      85,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/pickup/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      1,
+      320,
+      250,
+      290
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      28
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/pickup/02": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      253,
+      320,
+      246,
+      289
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      29
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/stand/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      501,
+      320,
+      269,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/swap/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      772,
+      320,
+      256,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno/throw/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      1030,
+      320,
+      247,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno_to_normal/0": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      1,
+      616,
+      269,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/inferno_to_normal/1": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      272,
+      616,
+      262,
+      294
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      11,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/normal/idle/00": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      536,
+      616,
+      267,
+      314
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      12,
+      4
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/normal/pickup/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      805,
+      616,
+      246,
+      312
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      12,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/normal/pickup/02": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      1053,
+      616,
+      243,
+      310
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      12,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/normal/swap/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      1,
+      932,
+      253,
+      316
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      12,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/normal/throw/01": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      256,
+      932,
+      243,
+      316
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      12,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/normal_to_fever/1": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      501,
+      932,
+      260,
+      317
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      12,
+      1
+    ],
+    "reviewFallback": true
+  },
+  "demo/staff/male/normal_to_fever/2": {
+    "path": "assets/source/demo-v2/tokyo/staff-01.webp",
+    "rect": [
+      763,
+      932,
+      247,
+      317
+    ],
+    "sourceSize": [
+      353,
+      335
+    ],
+    "trimOffset": [
+      19,
+      1
+    ],
+    "reviewFallback": true
+  },
+  "demo/ui/avatar/female": {
+    "path": "assets/source/demo-v2/tokyo/demo-ui-avatar-female.webp",
+    "standalone": true,
+    "preserveBytes": true,
+    "reviewFallback": true
+  },
+  "demo/ui/avatar/male": {
+    "path": "assets/source/demo-v2/tokyo/demo-ui-avatar-male.webp",
+    "standalone": true,
+    "preserveBytes": true,
+    "reviewFallback": true
+  },
+  "demo/hud/button": {
+    "path": "assets/source/demo-v2/tokyo/ui-00.webp",
+    "rect": [
+      1,
+      1,
+      76,
+      72
+    ],
+    "sourceSize": [
+      76,
+      72
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/hud/logo": {
+    "path": "assets/source/demo-v2/tokyo/ui-00.webp",
+    "rect": [
+      79,
+      1,
+      280,
+      110
+    ],
+    "sourceSize": [
+      292,
+      115
+    ],
+    "trimOffset": [
+      8,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/hud/panel": {
+    "path": "assets/source/demo-v2/tokyo/ui-00.webp",
+    "rect": [
+      361,
+      1,
+      144,
+      70
+    ],
+    "sourceSize": [
+      144,
+      70
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/hud/title/fever": {
+    "path": "assets/source/demo-v2/tokyo/ui-00.webp",
+    "rect": [
+      507,
+      1,
+      438,
+      87
+    ],
+    "sourceSize": [
+      438,
+      90
+    ],
+    "trimOffset": [
+      0,
+      1
+    ],
+    "reviewFallback": true
+  },
+  "demo/hud/title/inferno": {
+    "path": "assets/source/demo-v2/tokyo/ui-00.webp",
+    "rect": [
+      947,
+      1,
+      505,
+      87
+    ],
+    "sourceSize": [
+      518,
+      90
+    ],
+    "trimOffset": [
+      6,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/ui/bubble": {
+    "path": "assets/source/demo-v2/tokyo/ui-00.webp",
+    "rect": [
+      1,
+      113,
+      145,
+      138
+    ],
+    "sourceSize": [
+      149,
+      140
+    ],
+    "trimOffset": [
+      1,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/ui/slot": {
+    "path": "assets/source/demo-v2/tokyo/ui-00.webp",
+    "rect": [
+      148,
+      113,
+      170,
+      90
+    ],
+    "sourceSize": [
+      172,
+      92
+    ],
+    "trimOffset": [
+      1,
+      1
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/fever/0": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      1,
+      255,
+      132
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      38,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/fever/1": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      258,
+      1,
+      290,
+      130
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      2,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/fever/2": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      550,
+      1,
+      292,
+      132
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      7,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/fever/3": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      844,
+      1,
+      271,
+      117
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      5,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/fever/4": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1117,
+      1,
+      268,
+      118
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      13,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/fever/5": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      135,
+      270,
+      114
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      19,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/fever/6": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      273,
+      135,
+      271,
+      117
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      24,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/fever/7": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      546,
+      135,
+      269,
+      116
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      31,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/inferno/0": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      817,
+      135,
+      255,
+      122
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      38,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/inferno/1": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1074,
+      135,
+      290,
+      122
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      2,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/inferno/2": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      259,
+      292,
+      122
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      7,
+      16
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/inferno/3": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      295,
+      259,
+      271,
+      82
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      5,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/inferno/4": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      568,
+      259,
+      268,
+      86
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      13,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/inferno/5": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      838,
+      259,
+      270,
+      84
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      19,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/inferno/6": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1110,
+      259,
+      271,
+      83
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      24,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/inferno/7": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      383,
+      269,
+      85
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      31,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/normal/0": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      272,
+      383,
+      219,
+      96
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      38,
+      32
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/normal/1": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      493,
+      383,
+      221,
+      94
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      42,
+      38
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/normal/2": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      716,
+      383,
+      224,
+      96
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      47,
+      42
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/normal/3": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      942,
+      383,
+      224,
+      82
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      52,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/normal/4": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1168,
+      383,
+      222,
+      86
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      59,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/normal/5": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      481,
+      227,
+      84
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      62,
+      11
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/normal/6": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      230,
+      481,
+      229,
+      82
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      66,
+      15
+    ],
+    "reviewFallback": true
+  },
+  "demo/ambient/petals/normal/7": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      461,
+      481,
+      228,
+      85
+    ],
+    "sourceSize": [
+      300,
+      140
+    ],
+    "trimOffset": [
+      72,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/0/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      691,
+      481,
+      72,
+      57
+    ],
+    "sourceSize": [
+      75,
+      62
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/0/inferno": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      765,
+      481,
+      72,
+      57
+    ],
+    "sourceSize": [
+      75,
+      62
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/0/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      839,
+      481,
+      72,
+      57
+    ],
+    "sourceSize": [
+      75,
+      62
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/1/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      913,
+      481,
+      59,
+      48
+    ],
+    "sourceSize": [
+      62,
+      54
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/1/inferno": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      974,
+      481,
+      59,
+      48
+    ],
+    "sourceSize": [
+      62,
+      54
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/1/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1035,
+      481,
+      59,
+      48
+    ],
+    "sourceSize": [
+      62,
+      54
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/2/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1096,
+      481,
+      53,
+      43
+    ],
+    "sourceSize": [
+      56,
+      49
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/2/inferno": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1151,
+      481,
+      53,
+      43
+    ],
+    "sourceSize": [
+      56,
+      49
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/2/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1206,
+      481,
+      53,
+      43
+    ],
+    "sourceSize": [
+      56,
+      49
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/3/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1261,
+      481,
+      44,
+      29
+    ],
+    "sourceSize": [
+      47,
+      35
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/3/inferno": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1307,
+      481,
+      44,
+      29
+    ],
+    "sourceSize": [
+      47,
+      35
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/3/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1353,
+      481,
+      44,
+      29
+    ],
+    "sourceSize": [
+      47,
+      35
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/4/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1399,
+      481,
+      34,
+      23
+    ],
+    "sourceSize": [
+      37,
+      29
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/4/inferno": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1435,
+      481,
+      34,
+      23
+    ],
+    "sourceSize": [
+      37,
+      29
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/4/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1471,
+      481,
+      34,
+      23
+    ],
+    "sourceSize": [
+      37,
+      29
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/5/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1507,
+      481,
+      28,
+      19
+    ],
+    "sourceSize": [
+      31,
+      24
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/5/inferno": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      568,
+      28,
+      19
+    ],
+    "sourceSize": [
+      31,
+      24
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/banner/5/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      31,
+      568,
+      28,
+      19
+    ],
+    "sourceSize": [
+      31,
+      24
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/drape/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      61,
+      568,
+      317,
+      103
+    ],
+    "sourceSize": [
+      317,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/drape/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      380,
+      568,
+      317,
+      103
+    ],
+    "sourceSize": [
+      317,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/drape/off": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      699,
+      568,
+      1,
+      1
+    ],
+    "sourceSize": [
+      317,
+      110
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/00": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      702,
+      568,
+      33,
+      33
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      47,
+      47
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/01": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      737,
+      568,
+      55,
+      55
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      36,
+      36
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/02": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      794,
+      568,
+      87,
+      85
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      20,
+      22
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/03": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      883,
+      568,
+      113,
+      110
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      7,
+      10
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/04": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      998,
+      568,
+      128,
+      124
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      0,
+      4
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/05": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1128,
+      568,
+      128,
+      124
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      0,
+      4
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/06": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1258,
+      568,
+      128,
+      124
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      0,
+      4
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/07": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1388,
+      568,
+      128,
+      124
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      0,
+      4
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/08": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      694,
+      125,
+      119
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      1,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/0/off": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      699,
+      568,
+      1,
+      1
+    ],
+    "sourceSize": [
+      128,
+      128
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/00": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      128,
+      694,
+      30,
+      29
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      43,
+      41
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/01": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      160,
+      694,
+      50,
+      48
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      33,
+      32
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/02": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      212,
+      694,
+      79,
+      74
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      19,
+      20
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/03": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      293,
+      694,
+      102,
+      97
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      8,
+      8
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/04": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      397,
+      694,
+      114,
+      109
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/05": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      513,
+      694,
+      114,
+      109
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/06": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      629,
+      694,
+      114,
+      109
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      2,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/07": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      745,
+      694,
+      114,
+      108
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      2,
+      4
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/08": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      861,
+      694,
+      108,
+      104
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      5,
+      6
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/1/off": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      699,
+      568,
+      1,
+      1
+    ],
+    "sourceSize": [
+      117,
+      112
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/00": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      971,
+      694,
+      22,
+      22
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      31,
+      31
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/01": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      995,
+      694,
+      37,
+      37
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      24,
+      24
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/02": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1034,
+      694,
+      57,
+      58
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      14,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/03": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1093,
+      694,
+      74,
+      75
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      6,
+      5
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/04": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1169,
+      694,
+      84,
+      85
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      1,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/05": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1255,
+      694,
+      84,
+      85
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      1,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/06": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1341,
+      694,
+      84,
+      85
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      1,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/07": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1427,
+      694,
+      83,
+      84
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      2,
+      1
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/08": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      815,
+      81,
+      82
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      3,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/2/off": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      699,
+      568,
+      1,
+      1
+    ],
+    "sourceSize": [
+      85,
+      85
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/00": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      84,
+      815,
+      12,
+      12
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      17,
+      17
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/01": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      98,
+      815,
+      20,
+      20
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      13,
+      13
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/02": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      120,
+      815,
+      32,
+      32
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      7,
+      7
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/03": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      154,
+      815,
+      41,
+      41
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      3,
+      3
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/04": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      197,
+      815,
+      47,
+      47
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/05": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      246,
+      815,
+      47,
+      47
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/06": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      295,
+      815,
+      47,
+      47
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/07": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      344,
+      815,
+      47,
+      47
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/08": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      393,
+      815,
+      44,
+      44
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      1,
+      2
+    ],
+    "reviewFallback": true
+  },
+  "demo/firework/3/off": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      699,
+      568,
+      1,
+      1
+    ],
+    "sourceSize": [
+      47,
+      47
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  },
+  "demo/rail/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      439,
+      815,
+      534,
+      275
+    ],
+    "sourceSize": [
+      1280,
+      720
+    ],
+    "trimOffset": [
+      208,
+      189
+    ],
+    "reviewFallback": true
+  },
+  "demo/rail/inferno": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      975,
+      815,
+      534,
+      275
+    ],
+    "sourceSize": [
+      1280,
+      720
+    ],
+    "trimOffset": [
+      208,
+      189
+    ],
+    "reviewFallback": true
+  },
+  "demo/rail/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1,
+      1092,
+      534,
+      275
+    ],
+    "sourceSize": [
+      1280,
+      720
+    ],
+    "trimOffset": [
+      208,
+      189
+    ],
+    "reviewFallback": true
+  },
+  "demo/station/body": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      537,
+      1092,
+      285,
+      218
+    ],
+    "sourceSize": [
+      285,
+      230
+    ],
+    "trimOffset": [
+      0,
+      12
+    ],
+    "reviewFallback": true
+  },
+  "demo/station/scroll/fever": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      824,
+      1092,
+      100,
+      189
+    ],
+    "sourceSize": [
+      285,
+      230
+    ],
+    "trimOffset": [
+      180,
+      25
+    ],
+    "reviewFallback": true
+  },
+  "demo/station/scroll/inferno": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      926,
+      1092,
+      100,
+      189
+    ],
+    "sourceSize": [
+      285,
+      230
+    ],
+    "trimOffset": [
+      180,
+      25
+    ],
+    "reviewFallback": true
+  },
+  "demo/station/scroll/normal": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1028,
+      1092,
+      100,
+      189
+    ],
+    "sourceSize": [
+      285,
+      230
+    ],
+    "trimOffset": [
+      180,
+      25
+    ],
+    "reviewFallback": true
+  },
+  "demo/station/top": {
+    "path": "assets/source/demo-v2/tokyo/world-00.webp",
+    "rect": [
+      1130,
+      1092,
+      285,
+      79
+    ],
+    "sourceSize": [
+      285,
+      230
+    ],
+    "trimOffset": [
+      0,
+      0
+    ],
+    "reviewFallback": true
+  }
+}
