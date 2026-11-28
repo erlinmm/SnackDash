@@ -1,0 +1,67 @@
+{
+  "edition": "r02",
+  "date": "2026-11-27",
+  "branch": "feature/main2-steps05-08-assets-r01",
+  "baseBranch": "main2",
+  "state": "review",
+  "targetCanvas": [
+    1280,
+    720
+  ],
+  "deliverables": {
+    "runnerMasters": 22,
+    "runnerLoopFrames": 176,
+    "runnerCatchPoses": 22,
+    "runnerReactionVariants": 88,
+    "staffCostumes": 6,
+    "staffKeyframes": 50,
+    "staffAvatars": 2,
+    "crowdGroups": 18,
+    "festivalLayers": 3,
+    "sceneMockups": 6,
+    "readingStressMockups": 1
+  },
+  "checks": [
+    {
+      "step": 5,
+      "scope": "22 runners, each full-body front master, 8 gait frames, one held-bottle catch and four reaction faces",
+      "status": "review",
+      "completeFiles": true,
+      "remaining": "Cast/style sign-off, four-digit readability on real device, measured pivots and alpha-export PNGs"
+    },
+    {
+      "step": 6,
+      "scope": "Tokyo male/female, three distinct clothes each, two separate avatars",
+      "status": "review",
+      "completeFiles": true,
+      "remaining": "Approval of likeness consistency and cultural details, hand/body occlusion check on mobile"
+    },
+    {
+      "step": 7,
+      "scope": "176 runner gait keyframes and 50 staff idle/swap/throw/climb/recovery keyframes",
+      "status": "review",
+      "completeFiles": true,
+      "remaining": "Frame-by-frame designer approval; gameplay-timed interpolation, atlas export, animation sync and edge cases"
+    },
+    {
+      "step": 8,
+      "scope": "Tokyo 18 spectator groups by mode/depth/side, three transparent local festival overlays",
+      "status": "review",
+      "completeFiles": true,
+      "remaining": "Spectator continuity/reaction review, festival text/source verification; remaining nine cities follow Tokyo approval"
+    }
+  ],
+  "manualCheckStatus": "not yet approved",
+  "deviceTests": "not done",
+  "runtimeIntegration": "not done",
+  "pngExport": "not done; editable SVG sources are review assets",
+  "testConstraints": [
+    "Only two visual reserve slots at bottom left",
+    "Only one number in volunteer bubble",
+    "Volunteer holds single physical bottle when ready",
+    "Bottle released once and travels as separate object in Inferno mockup",
+    "Same desk is used in all six composed scenes",
+    "No new nationality-to-skin mappings"
+  ],
+  "source": "SnackDash_V2_Landscape_Asset_Playbook.md r02"
+}

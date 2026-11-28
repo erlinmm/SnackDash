@@ -1,0 +1,664 @@
+{
+  "canvas": [
+    1280,
+    720
+  ],
+  "defaultColor": "#15243a",
+  "widgets": [
+    {
+      "id": "levelsBtn",
+      "type": "button",
+      "rect": [
+        15,
+        4,
+        235,
+        87
+      ],
+      "images": {
+        "normal": "demo/hud/logo",
+        "fever": "demo/hud/logo",
+        "inferno": "demo/hud/logo"
+      },
+      "command": "menu",
+      "labelKey": "hud.backToLevels",
+      "text": "",
+      "fontSize": 10
+    },
+    {
+      "id": "racePanel",
+      "type": "container",
+      "rect": [
+        429,
+        15,
+        116,
+        58
+      ],
+      "images": {
+        "normal": "demo/hud/panel",
+        "fever": "demo/hud/panel",
+        "inferno": "demo/hud/panel"
+      },
+      "children": [
+        {
+          "id": "racePanelLabel",
+          "type": "text",
+          "rect": [
+            0,
+            2,
+            116,
+            19
+          ],
+          "fontSize": 15,
+          "color": "#fff",
+          "textKey": "hud.race"
+        },
+        {
+          "id": "hudLevel",
+          "type": "text",
+          "rect": [
+            0,
+            22,
+            116,
+            32
+          ],
+          "fontSize": 27,
+          "color": "#fff",
+          "binding": "race.index"
+        }
+      ]
+    },
+    {
+      "id": "timePill",
+      "type": "container",
+      "rect": [
+        563,
+        15,
+        116,
+        58
+      ],
+      "images": {
+        "normal": "demo/hud/panel",
+        "fever": "demo/hud/panel",
+        "inferno": "demo/hud/panel"
+      },
+      "children": [
+        {
+          "id": "timePillLabel",
+          "type": "text",
+          "rect": [
+            0,
+            2,
+            116,
+            19
+          ],
+          "fontSize": 15,
+          "color": "#fff",
+          "textKey": "hud.time"
+        },
+        {
+          "id": "hudTime",
+          "type": "text",
+          "rect": [
+            0,
+            22,
+            116,
+            32
+          ],
+          "fontSize": 27,
+          "color": "#fff",
+          "binding": "time.remaining",
+          "format": "clock"
+        }
+      ]
+    },
+    {
+      "id": "scorePanel",
+      "type": "container",
+      "rect": [
+        697,
+        15,
+        117,
+        58
+      ],
+      "images": {
+        "normal": "demo/hud/panel",
+        "fever": "demo/hud/panel",
+        "inferno": "demo/hud/panel"
+      },
+      "children": [
+        {
+          "id": "scorePanelLabel",
+          "type": "text",
+          "rect": [
+            0,
+            2,
+            117,
+            19
+          ],
+          "fontSize": 15,
+          "color": "#fff",
+          "textKey": "hud.points"
+        },
+        {
+          "id": "hudScore",
+          "type": "text",
+          "rect": [
+            0,
+            22,
+            117,
+            32
+          ],
+          "fontSize": 27,
+          "color": "#ffe25e",
+          "binding": "score.current",
+          "format": "compact"
+        }
+      ]
+    },
+    {
+      "id": "pauseBtn",
+      "type": "button",
+      "rect": [
+        1122,
+        15,
+        62,
+        58
+      ],
+      "images": {
+        "normal": "demo/hud/button",
+        "fever": "demo/hud/button",
+        "inferno": "demo/hud/button"
+      },
+      "command": "pause",
+      "fontSize": 30,
+      "color": "#fff",
+      "binding": "controls.pauseGlyph",
+      "labelBinding": "controls.pauseLabel"
+    },
+    {
+      "id": "gameFullscreenBtn",
+      "type": "button",
+      "rect": [
+        1200,
+        15,
+        62,
+        58
+      ],
+      "images": {
+        "normal": "demo/hud/button",
+        "fever": "demo/hud/button",
+        "inferno": "demo/hud/button"
+      },
+      "command": "fullscreen",
+      "fontSize": 30,
+      "color": "#fff",
+      "text": "⛶",
+      "label": "Fullscreen"
+    },
+    {
+      "id": "restartBtn",
+      "type": "button",
+      "rect": [
+        1024,
+        17,
+        41,
+        41
+      ],
+      "images": {
+        "normal": "demo/hud/button",
+        "fever": "demo/hud/button",
+        "inferno": "demo/hud/button"
+      },
+      "command": "restart",
+      "fontSize": 18,
+      "color": "#fff",
+      "text": "↻",
+      "labelKey": "game.restartLevel"
+    },
+    {
+      "id": "tokyoSoundBtn",
+      "type": "button",
+      "rect": [
+        1071,
+        17,
+        41,
+        41
+      ],
+      "images": {
+        "normal": "demo/hud/button",
+        "fever": "demo/hud/button",
+        "inferno": "demo/hud/button"
+      },
+      "command": "sound",
+      "fontSize": 18,
+      "color": "#fff",
+      "binding": "audio.glyph",
+      "labelBinding": "audio.label"
+    },
+    {
+      "id": "comboPanel",
+      "type": "text",
+      "rect": [
+        825,
+        19,
+        110,
+        30
+      ],
+      "binding": "combo.label",
+      "fontSize": 16,
+      "color": "#fff8e6",
+      "background": "#0c3775b8",
+      "radius": 9,
+      "visibleWhen": {
+        "binding": "combo.count",
+        "gte": 0
+      }
+    },
+    {
+      "id": "feverTitle",
+      "type": "image",
+      "rect": [
+        430,
+        77,
+        376,
+        69
+      ],
+      "images": {
+        "normal": "demo/hud/title/fever",
+        "fever": "demo/hud/title/fever",
+        "inferno": "demo/hud/title/fever"
+      },
+      "visibleModes": [
+        "fever"
+      ]
+    },
+    {
+      "id": "infernoTitle",
+      "type": "image",
+      "rect": [
+        401,
+        77,
+        430,
+        69
+      ],
+      "images": {
+        "normal": "demo/hud/title/inferno",
+        "fever": "demo/hud/title/inferno",
+        "inferno": "demo/hud/title/inferno"
+      },
+      "visibleModes": [
+        "inferno"
+      ]
+    },
+    {
+      "id": "message",
+      "type": "text",
+      "rect": [
+        24,
+        95,
+        260,
+        45
+      ],
+      "binding": "message.text",
+      "fontSize": 17,
+      "color": "#fff",
+      "background": "#29374ee8",
+      "visibleWhen": {
+        "binding": "message.active",
+        "equals": true
+      }
+    },
+    {
+      "id": "countdown",
+      "type": "container",
+      "rect": [
+        566,
+        309,
+        148,
+        102
+      ],
+      "background": "#fff8dc",
+      "radius": 22,
+      "visibleWhen": {
+        "binding": "race.countdownVisible",
+        "equals": true
+      },
+      "children": [
+        {
+          "id": "countdownText",
+          "type": "text",
+          "rect": [
+            0,
+            0,
+            148,
+            102
+          ],
+          "binding": "race.countdown",
+          "fontSize": 58,
+          "color": "#bd416d"
+        }
+      ]
+    },
+    {
+      "id": "pauseOverlay",
+      "type": "container",
+      "rect": [
+        490,
+        295,
+        300,
+        130
+      ],
+      "background": "#fff8e9",
+      "radius": 22,
+      "visibleWhen": {
+        "binding": "race.phase",
+        "equals": "paused"
+      },
+      "children": [
+        {
+          "id": "pauseTitle",
+          "type": "text",
+          "rect": [
+            0,
+            5,
+            300,
+            50
+          ],
+          "textKey": "tokyo.paused",
+          "fontSize": 31
+        },
+        {
+          "id": "resumeBtn",
+          "type": "button",
+          "rect": [
+            10,
+            65,
+            280,
+            55
+          ],
+          "command": "pause",
+          "textKey": "game.resumeAria",
+          "fontSize": 23
+        }
+      ]
+    },
+    {
+      "id": "celebration",
+      "type": "text",
+      "rect": [
+        465,
+        103,
+        350,
+        52
+      ],
+      "textKey": "celebration.staffSuccess",
+      "fontSize": 27,
+      "background": "#fff7d8",
+      "visibleWhen": {
+        "binding": "race.celebrating",
+        "equals": true
+      }
+    },
+    {
+      "id": "qaLabel",
+      "type": "text",
+      "rect": [
+        1055,
+        83,
+        205,
+        32
+      ],
+      "textKey": "tokyo.qaActive",
+      "fontSize": 17,
+      "color": "#fff5ef",
+      "background": "#32284de8",
+      "visibleWhen": {
+        "binding": "race.fixture",
+        "equals": true
+      }
+    },
+    {
+      "id": "resultOverlay",
+      "type": "container",
+      "rect": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "background": "#14243acc",
+      "z": 200,
+      "visibleWhen": {
+        "binding": "result.visible",
+        "equals": true
+      },
+      "modal": true,
+      "children": [
+        {
+          "id": "resultCard",
+          "type": "container",
+          "rect": [
+            370,
+            112,
+            540,
+            496
+          ],
+          "background": "#fffaf1",
+          "radius": 20,
+          "children": [
+            {
+              "id": "resultHeading",
+              "type": "text",
+              "rect": [
+                20,
+                22,
+                500,
+                68
+              ],
+              "binding": "result.heading",
+              "fontSize": 36
+            },
+            {
+              "id": "resultScore",
+              "type": "text",
+              "rect": [
+                20,
+                98,
+                500,
+                84
+              ],
+              "binding": "score.current",
+              "fontSize": 54,
+              "format": "compact"
+            },
+            {
+              "id": "resultExact",
+              "type": "text",
+              "rect": [
+                20,
+                185,
+                500,
+                36
+              ],
+              "binding": "score.exact",
+              "fontSize": 18
+            },
+            {
+              "id": "resultText",
+              "type": "text",
+              "rect": [
+                20,
+                226,
+                500,
+                82
+              ],
+              "binding": "result.text",
+              "fontSize": 22
+            },
+            {
+              "id": "resultStats",
+              "type": "text",
+              "rect": [
+                20,
+                311,
+                500,
+                46
+              ],
+              "binding": "result.stats",
+              "fontSize": 20
+            },
+            {
+              "id": "resultPrimary",
+              "type": "button",
+              "rect": [
+                25,
+                367,
+                490,
+                60
+              ],
+              "command": "result.next",
+              "binding": "result.primary",
+              "fontSize": 27,
+              "background": "#f0be59",
+              "radius": 10
+            },
+            {
+              "id": "retryBtn",
+              "type": "button",
+              "rect": [
+                25,
+                437,
+                237,
+                48
+              ],
+              "command": "restart",
+              "textKey": "game.retry",
+              "fontSize": 22,
+              "background": "#dce4ec",
+              "radius": 8
+            },
+            {
+              "id": "backBtn",
+              "type": "button",
+              "rect": [
+                278,
+                437,
+                237,
+                48
+              ],
+              "command": "menu",
+              "textKey": "game.levels",
+              "fontSize": 22,
+              "background": "#dce4ec",
+              "radius": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "playtestDebugBadge",
+      "type": "text",
+      "rect": [
+        8,
+        98,
+        154,
+        28
+      ],
+      "text": "DEBUG · 2/4",
+      "fontSize": 16,
+      "color": "#fff7d1",
+      "background": "#243c75e6",
+      "radius": 8,
+      "visibleWhen": {
+        "binding": "race.debug",
+        "equals": true
+      }
+    }
+  ],
+  "animations": [
+    {
+      "event": "score",
+      "target": "scorePanel",
+      "durationMs": 320,
+      "keyframes": [
+        {
+          "at": 0,
+          "scale": 1
+        },
+        {
+          "at": 0.25,
+          "scale": 1.08
+        },
+        {
+          "at": 1,
+          "scale": 1
+        }
+      ],
+      "scaleBy": [
+        {
+          "minCombo": 5,
+          "multiplier": 1.5
+        },
+        {
+          "minCombo": 10,
+          "multiplier": 2
+        }
+      ]
+    },
+    {
+      "event": "mode.change",
+      "when": {
+        "to": [
+          "fever"
+        ]
+      },
+      "target": "feverTitle",
+      "durationMs": 500,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.2,
+          "scale": 0.72
+        },
+        {
+          "at": 0.35,
+          "opacity": 1,
+          "scale": 1.13
+        },
+        {
+          "at": 1,
+          "opacity": 1,
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "event": "mode.change",
+      "when": {
+        "to": [
+          "inferno"
+        ]
+      },
+      "target": "infernoTitle",
+      "durationMs": 500,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.2,
+          "scale": 0.72
+        },
+        {
+          "at": 0.35,
+          "opacity": 1,
+          "scale": 1.13
+        },
+        {
+          "at": 1,
+          "opacity": 1,
+          "scale": 1
+        }
+      ]
+    }
+  ]
+}

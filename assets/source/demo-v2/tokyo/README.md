@@ -1,0 +1,9 @@
+# Tokyo Demo V2 illustrated review assets — r03 polish
+
+Status: review, not final production-approved artwork. Retains the exact three street plates and existing independently authored staff/props/HUD/supplies and audio. This revision adds 14 source WebP atlases and 676 individually addressed cels; no flattened gameplay reference is used as a scene. See polish-provenance.json for the per-actor source mapping.
+
+The 22 appearance slots have eight-frame running loops and complete action mappings in Normal, Fever and Inferno. Nine previously illustrated bases use revised offline limb articulation; four newly generated character illustrations have four separately painted key poses per actor, with interpolated intermediate cels. Nine additional slots are explicitly derived color/body variants, not nine independently illustrated identities. The original 22 editable masters remain preserved in the source tree. The reaction and staff sequences are still subject to detailed pose/anchor and style review.
+
+The crowd uses longer and increasingly energetic per-mode sprite sequences with localized participant motion and light sticks. Fireworks have individually offset rise, burst, trail and fade cels; petals have looping sequences. Fever and Inferno receive, score and entry FX have distinct extended frame sequences, scale, timing and reduced-motion alternatives. All animation is compiled as independent assets and played by the Landscape Engine V2. The new debug settings and distance-aware number-callout parameters are optional pack configuration, consumed by the corresponding demov2 engine update. No game code is modified on this source branch.
+
+All new cels retain reviewFallback, preserving the production release gate. Existing original source sequences and previous atlas pages are retained. 

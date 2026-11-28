@@ -1,0 +1,277 @@
+{
+  "assetId": "body_20",
+  "revision": "r03",
+  "sourceSize": [
+    256,
+    320
+  ],
+  "status": "review",
+  "loopMs": 800,
+  "frames": [
+    {
+      "id": "frame_00",
+      "source": "frame_00.svg",
+      "durationMs": 100,
+      "anchors": {
+        "head": [
+          129,
+          78
+        ],
+        "torso": [
+          129,
+          168
+        ],
+        "feet_left": [
+          92,
+          299
+        ],
+        "feet_right": [
+          166,
+          299
+        ]
+      },
+      "bibRect": [
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        1.02,
+        1
+      ]
+    },
+    {
+      "id": "frame_01",
+      "source": "frame_01.svg",
+      "durationMs": 100,
+      "anchors": {
+        "head": [
+          129,
+          78
+        ],
+        "torso": [
+          129,
+          168
+        ],
+        "feet_left": [
+          117.45584412271572,
+          290.5147186257614
+        ],
+        "feet_right": [
+          140.54415587728428,
+          299
+        ]
+      },
+      "bibRect": [
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        1.02,
+        1
+      ]
+    },
+    {
+      "id": "frame_02",
+      "source": "frame_02.svg",
+      "durationMs": 100,
+      "anchors": {
+        "head": [
+          129,
+          78
+        ],
+        "torso": [
+          129,
+          168
+        ],
+        "feet_left": [
+          128,
+          287
+        ],
+        "feet_right": [
+          130,
+          299
+        ]
+      },
+      "bibRect": [
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        1.02,
+        1
+      ]
+    },
+    {
+      "id": "frame_03",
+      "source": "frame_03.svg",
+      "durationMs": 100,
+      "anchors": {
+        "head": [
+          129,
+          78
+        ],
+        "torso": [
+          129,
+          168
+        ],
+        "feet_left": [
+          117.45584412271572,
+          290.5147186257614
+        ],
+        "feet_right": [
+          140.54415587728428,
+          299
+        ]
+      },
+      "bibRect": [
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        1.02,
+        1
+      ]
+    },
+    {
+      "id": "frame_04",
+      "source": "frame_04.svg",
+      "durationMs": 100,
+      "anchors": {
+        "head": [
+          129,
+          78
+        ],
+        "torso": [
+          129,
+          168
+        ],
+        "feet_left": [
+          92,
+          299
+        ],
+        "feet_right": [
+          166,
+          299
+        ]
+      },
+      "bibRect": [
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        1.02,
+        1
+      ]
+    },
+    {
+      "id": "frame_05",
+      "source": "frame_05.svg",
+      "durationMs": 100,
+      "anchors": {
+        "head": [
+          129,
+          78
+        ],
+        "torso": [
+          129,
+          168
+        ],
+        "feet_left": [
+          66.54415587728428,
+          299
+        ],
+        "feet_right": [
+          191.45584412271572,
+          290.5147186257614
+        ]
+      },
+      "bibRect": [
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        1.02,
+        1
+      ]
+    },
+    {
+      "id": "frame_06",
+      "source": "frame_06.svg",
+      "durationMs": 100,
+      "anchors": {
+        "head": [
+          129,
+          78
+        ],
+        "torso": [
+          129,
+          168
+        ],
+        "feet_left": [
+          56,
+          299
+        ],
+        "feet_right": [
+          202,
+          287
+        ]
+      },
+      "bibRect": [
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        1.02,
+        1
+      ]
+    },
+    {
+      "id": "frame_07",
+      "source": "frame_07.svg",
+      "durationMs": 100,
+      "anchors": {
+        "head": [
+          129,
+          78
+        ],
+        "torso": [
+          129,
+          168
+        ],
+        "feet_left": [
+          66.54415587728428,
+          299
+        ],
+        "feet_right": [
+          191.45584412271572,
+          290.5147186257614
+        ]
+      },
+      "bibRect": [
+        82,
+        144,
+        94,
+        66
+      ],
+      "scale": [
+        1.02,
+        1
+      ]
+    }
+  ],
+  "notes": "Review poses. Use source pivots plus body transform; runtime renderer not yet integrated. No throw/score game timing change."
+}

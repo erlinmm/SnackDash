@@ -1,0 +1,338 @@
+{
+  "assetId": "volunteer_tokyo_female_inferno",
+  "revision": "r02",
+  "sourceSize": [
+    320,
+    390
+  ],
+  "referenceTabletopY": 315,
+  "sequenceType": "review_only",
+  "frames": [
+    {
+      "id": "behind",
+      "path": "frame_00_behind.svg",
+      "durationMs": 85,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          246,
+          161
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": null
+    },
+    {
+      "id": "step",
+      "path": "frame_01_step.svg",
+      "durationMs": 105,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          246,
+          161
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": null
+    },
+    {
+      "id": "rise",
+      "path": "frame_02_rise.svg",
+      "durationMs": 105,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          246,
+          161
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": null
+    },
+    {
+      "id": "stand",
+      "path": "frame_03_stand.svg",
+      "durationMs": 95,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          246,
+          161
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": null
+    },
+    {
+      "id": "windup",
+      "path": "frame_04_windup.svg",
+      "durationMs": 95,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          207,
+          96
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": null
+    },
+    {
+      "id": "release",
+      "path": "frame_05_release.svg",
+      "durationMs": 90,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          268,
+          111
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": "release"
+    },
+    {
+      "id": "follow",
+      "path": "frame_06_follow.svg",
+      "durationMs": 100,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          246,
+          161
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": null
+    },
+    {
+      "id": "recover",
+      "path": "frame_07_recover.svg",
+      "durationMs": 100,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          246,
+          161
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": null
+    },
+    {
+      "id": "descend",
+      "path": "frame_08_descend.svg",
+      "durationMs": 130,
+      "pivot": [
+        145,
+        355
+      ],
+      "anchors": {
+        "feet_left": [
+          116,
+          351
+        ],
+        "feet_right": [
+          174,
+          354
+        ],
+        "hand_supply": [
+          246,
+          161
+        ],
+        "head": [
+          137,
+          77
+        ],
+        "torso": [
+          142,
+          173
+        ],
+        "robe_hem": [
+          142,
+          353
+        ]
+      },
+      "reviewEvent": null
+    }
+  ],
+  "trigger": "visual only; gameplay throw and hit outcomes unchanged",
+  "notes": "Foot/bottle positions draft. In release frame bottle is absent from hand; flight is a separate prop."
+}

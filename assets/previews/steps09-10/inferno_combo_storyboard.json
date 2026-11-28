@@ -1,0 +1,23 @@
+{
+  "assetId": "tokyo_inferno_score_review_storyboard_r03",
+  "normalFramePaths": [
+    "assets/source/fx/tokyo/inferno/score/normal/frame_00.svg",
+    "assets/source/fx/tokyo/inferno/score/normal/frame_01.svg",
+    "assets/source/fx/tokyo/inferno/score/normal/frame_02.svg",
+    "assets/source/fx/tokyo/inferno/score/normal/frame_03.svg",
+    "assets/source/fx/tokyo/inferno/score/normal/frame_04.svg"
+  ],
+  "reducedFramePaths": [
+    "assets/source/fx/tokyo/inferno/score/reduced/frame_00.svg",
+    "assets/source/fx/tokyo/inferno/score/reduced/frame_01.svg",
+    "assets/source/fx/tokyo/inferno/score/reduced/frame_02.svg"
+  ],
+  "bodyTextCompositedOnly": true,
+  "textMask": [
+    65,
+    46,
+    260,
+    74
+  ],
+  "status": "review"
+}

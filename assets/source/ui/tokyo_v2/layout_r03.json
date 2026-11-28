@@ -1,0 +1,159 @@
+{
+  "revision": "r03",
+  "stageCanvas": [
+    1280,
+    720
+  ],
+  "status": "review",
+  "references": [
+    "assets/source/approved-rebuild-r03/camera/approved_camera_coordinates.json",
+    "assets/references/tokyo/approved/README.md"
+  ],
+  "hudTopOrder": [
+    "race",
+    "progress",
+    "time",
+    "score",
+    "festival",
+    "pause",
+    "fullscreen"
+  ],
+  "hud": {
+    "race": {
+      "asset": "race_panel_empty",
+      "rect": [
+        15,
+        12,
+        208,
+        82
+      ]
+    },
+    "progress": {
+      "asset": "progress_panel_empty",
+      "rect": [
+        228,
+        12,
+        207,
+        82
+      ]
+    },
+    "time": {
+      "asset": "time_panel_empty",
+      "rect": [
+        441,
+        12,
+        140,
+        82
+      ]
+    },
+    "score": {
+      "asset": "score_panel_empty",
+      "rect": [
+        587,
+        12,
+        196,
+        82
+      ],
+      "scoreFxAnchor": [
+        685,
+        54
+      ]
+    },
+    "festival": {
+      "asset": "festival_banner_2line_empty",
+      "rect": [
+        789,
+        12,
+        302,
+        82
+      ],
+      "lines": [
+        "nativeName",
+        "playerLanguageDescription"
+      ]
+    },
+    "pause": {
+      "asset": "pause_button_empty",
+      "rect": [
+        1100,
+        17,
+        67,
+        70
+      ]
+    },
+    "fullscreen": {
+      "asset": "fullscreen_button_empty",
+      "rect": [
+        1178,
+        17,
+        67,
+        70
+      ]
+    }
+  },
+  "volunteer": {
+    "numberBubble": {
+      "asset": "assets/source/approved-rebuild-r03/ui/speech_number_empty.svg",
+      "safeZone": [
+        215,
+        185,
+        384,
+        317
+      ],
+      "sample": [
+        "6",
+        "13"
+      ],
+      "textIndependent": true
+    }
+  },
+  "runner": {
+    "bibAsset": "assets/source/ui/tokyo_v2/normal/runner_bib_empty.svg",
+    "bibSize": [
+      94,
+      66
+    ],
+    "dynamic1to4Digits": true,
+    "reactionAsset": "assets/source/ui/tokyo_v2/normal/runner_reaction_bubble_empty.svg",
+    "nativeLanguageFrom": "src/js/reactions.js in feature/i18n-foundation (read only)",
+    "runnerLocalBibRect": [
+      82,
+      144,
+      94,
+      66
+    ],
+    "bibArtRevision": "Step05 r03, not integrated",
+    "readableAt640": "pending; mid/far 1000 at risk"
+  },
+  "reserve": {
+    "slotAsset": "assets/source/approved-rebuild-r03/ui/backup_slot_empty.svg",
+    "rects": [
+      [
+        12,
+        548,
+        148,
+        82
+      ],
+      [
+        12,
+        635,
+        148,
+        80
+      ]
+    ],
+    "count": 2,
+    "iconNumberSeparation": true
+  },
+  "staffSelection": {
+    "avatarFrame": "assets/source/ui/tokyo_v2/normal/staff_avatar_frame_normal.svg",
+    "selected": "assets/source/ui/tokyo_v2/normal/staff_avatar_frame_selected.svg",
+    "avatars": [
+      "assets/source/volunteer/tokyo/female/avatar.svg",
+      "assets/source/volunteer/tokyo/male/avatar.svg"
+    ],
+    "independentOfLocale": true
+  },
+  "alpha": "All skins contain no embedded mutable words or numbers. Standalone fonts are not included.",
+  "uiEffects": "FX source score flames must be behind independent score text layer, and never cover hudText mask.",
+  "reviewOnly": true
+}

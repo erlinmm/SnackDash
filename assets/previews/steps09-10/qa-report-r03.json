@@ -1,0 +1,140 @@
+{
+  "revision": "r03",
+  "date": "2026-11-27",
+  "branch": "feature/main2-steps05-08-assets-r01",
+  "baseBranch": "main2",
+  "stage": "review",
+  "canvas": [
+    1280,
+    720
+  ],
+  "referenceHierarchy": [
+    "assets/references/tokyo/approved/{tokyo_normal_approved_r02.webp,tokyo_fever_approved_r02.webp,tokyo_inferno_approved_r02.webp}",
+    "assets/source/approved-rebuild-r03/camera/approved_camera_coordinates.json",
+    "docs/SnackDash_V2_Landscape_Asset_Playbook.md"
+  ],
+  "scope": {
+    "step09": {
+      "events": [
+        "swap",
+        "throw",
+        "receive",
+        "score",
+        "mode_enter",
+        "mode_exit",
+        "miss"
+      ],
+      "modes": [
+        "normal",
+        "fever",
+        "inferno"
+      ],
+      "motionPolicies": [
+        "normal",
+        "reduced"
+      ],
+      "eventFamilies": 42,
+      "cityAmbientMasters": 6,
+      "totalFXMasters": 48,
+      "keyframeSVGCount": 168,
+      "soundWAVCount": 5,
+      "visualContact": "fx_event_peak_contact_r03.svg",
+      "comboAnimation": [
+        "tokyo_inferno_combo_animated_normal_r03.svg",
+        "tokyo_inferno_combo_animated_reduced_r03.svg"
+      ]
+    },
+    "step10": {
+      "blankUISkinCount": 30,
+      "fullGameplaySamples": 6,
+      "staticCorrectIncorrect": 2,
+      "stressCases": 1,
+      "comparisons": 2,
+      "multiscript": 1,
+      "staffChoice": 1,
+      "thumbnails640x360": 2,
+      "wideNarrow": 2,
+      "perModeReview": true,
+      "sourceBasedHUD": true
+    }
+  },
+  "reviewRequirements": [
+    {
+      "id": "approved_camera",
+      "result": "source-geometry-referenced",
+      "evidence": "r03 road geometry + approved camera runner coordinate table",
+      "needs": "Owner visual comparison with approved image"
+    },
+    {
+      "id": "table_invariance",
+      "result": "structural-source-check",
+      "evidence": "shared 1280x720 tabletop path used in three modes",
+      "needs": "Frame-by-frame foot/robe and throwing height approval"
+    },
+    {
+      "id": "number_only_bubble",
+      "result": "structural-source-check",
+      "evidence": "hand_number_bubble has a single dynamic digit; source number component blank",
+      "needs": "Actual-size legibility on phone"
+    },
+    {
+      "id": "two_reserve_cells",
+      "result": "structural-source-check",
+      "evidence": "exactly_two_backup_supplies group with icons and 4/8 numerals",
+      "needs": "Touch target and safe-area device validation"
+    },
+    {
+      "id": "bib_and_reaction",
+      "result": "structural-source-check",
+      "evidence": "bib numeral overlay and native JA athlete speech separate from runner source",
+      "needs": "Fast-moving 1000 and text collision QA"
+    },
+    {
+      "id": "FX_mask",
+      "result": "design-prepared",
+      "evidence": "source FX score centers transparent, FX below text",
+      "needs": "Check peak frame and simultaneous score events on phone"
+    },
+    {
+      "id": "reduced_motion",
+      "result": "assets-created",
+      "evidence": "normal vs reduced for 7 events x 3 modes and two scene comparisons",
+      "needs": "Real animation and user accessibility test"
+    },
+    {
+      "id": "sound",
+      "result": "original-waveforms-created",
+      "evidence": "5 original PCM WAV cues",
+      "needs": "Listen, set perceptual loudness, check overlapping triggers"
+    },
+    {
+      "id": "runtime_event_sync",
+      "result": "NOT_TESTED",
+      "needs": "Only after a separate user-authorized game-code branch decision"
+    },
+    {
+      "id": "phone_performance",
+      "result": "NOT_TESTED",
+      "needs": "Device, browser, FPS, offline loading"
+    },
+    {
+      "id": "pixel_art_approval",
+      "result": "NOT_APPROVED",
+      "needs": "Detail/quality match to owner-approved Tokyo reference images"
+    },
+    {
+      "id": "PNG/WebP_exports",
+      "result": "NOT_PRODUCED",
+      "needs": "Step 11 after approval of source designs"
+    },
+    {
+      "id": "localized_titles",
+      "result": "provisional-review-labels",
+      "needs": "Verify official local festival names and English player-language descriptions before release"
+    }
+  ],
+  "allPathsExistence": "Most new files saved through verified GitHub commits; sampled six-scene source geometry and WAV manifest fetched back in current branch.",
+  "codeChanges": false,
+  "githubGameFilesModified": false,
+  "githubPR": 6
+}

@@ -1,0 +1,488 @@
+{
+  "revision": "r03",
+  "date": "2026-11-27",
+  "approvedCameraReference": "assets/source/approved-rebuild-r03/camera/approved_camera_coordinates.json",
+  "scope": "Tokyo first art slice, Step 09",
+  "sourceCount": 48,
+  "vectorPoseFrames": 168,
+  "effects": [
+    {
+      "assetId": "fx_tokyo_normal_swap_normal",
+      "mode": "normal",
+      "event": "swap",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/normal/swap/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/swap/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_swap_reduced",
+      "mode": "normal",
+      "event": "swap",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/normal/swap/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/swap/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_throw_normal",
+      "mode": "normal",
+      "event": "throw",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/normal/throw/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/throw/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_throw_reduced",
+      "mode": "normal",
+      "event": "throw",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/normal/throw/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/throw/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_receive_normal",
+      "mode": "normal",
+      "event": "receive",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/normal/receive/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/receive/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_receive_reduced",
+      "mode": "normal",
+      "event": "receive",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/normal/receive/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/receive/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_score_normal",
+      "mode": "normal",
+      "event": "score",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/normal/score/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/score/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_score_reduced",
+      "mode": "normal",
+      "event": "score",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/normal/score/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/score/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_mode_enter_normal",
+      "mode": "normal",
+      "event": "mode_enter",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/normal/mode_enter/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/mode_enter/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_mode_enter_reduced",
+      "mode": "normal",
+      "event": "mode_enter",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/normal/mode_enter/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/mode_enter/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_mode_exit_normal",
+      "mode": "normal",
+      "event": "mode_exit",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/normal/mode_exit/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/mode_exit/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_mode_exit_reduced",
+      "mode": "normal",
+      "event": "mode_exit",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/normal/mode_exit/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/mode_exit/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_miss_normal",
+      "mode": "normal",
+      "event": "miss",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/normal/miss/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/miss/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_normal_miss_reduced",
+      "mode": "normal",
+      "event": "miss",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/normal/miss/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/normal/miss/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_swap_normal",
+      "mode": "fever",
+      "event": "swap",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/fever/swap/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/swap/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_swap_reduced",
+      "mode": "fever",
+      "event": "swap",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/fever/swap/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/swap/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_throw_normal",
+      "mode": "fever",
+      "event": "throw",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/fever/throw/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/throw/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_throw_reduced",
+      "mode": "fever",
+      "event": "throw",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/fever/throw/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/throw/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_receive_normal",
+      "mode": "fever",
+      "event": "receive",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/fever/receive/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/receive/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_receive_reduced",
+      "mode": "fever",
+      "event": "receive",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/fever/receive/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/receive/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_score_normal",
+      "mode": "fever",
+      "event": "score",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/fever/score/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/score/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_score_reduced",
+      "mode": "fever",
+      "event": "score",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/fever/score/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/score/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_mode_enter_normal",
+      "mode": "fever",
+      "event": "mode_enter",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/fever/mode_enter/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/mode_enter/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_mode_enter_reduced",
+      "mode": "fever",
+      "event": "mode_enter",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/fever/mode_enter/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/mode_enter/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_mode_exit_normal",
+      "mode": "fever",
+      "event": "mode_exit",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/fever/mode_exit/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/mode_exit/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_mode_exit_reduced",
+      "mode": "fever",
+      "event": "mode_exit",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/fever/mode_exit/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/mode_exit/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_miss_normal",
+      "mode": "fever",
+      "event": "miss",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/fever/miss/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/miss/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_fever_miss_reduced",
+      "mode": "fever",
+      "event": "miss",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/fever/miss/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/fever/miss/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_swap_normal",
+      "mode": "inferno",
+      "event": "swap",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/inferno/swap/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/swap/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_swap_reduced",
+      "mode": "inferno",
+      "event": "swap",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/inferno/swap/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/swap/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_throw_normal",
+      "mode": "inferno",
+      "event": "throw",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/inferno/throw/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/throw/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_throw_reduced",
+      "mode": "inferno",
+      "event": "throw",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/inferno/throw/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/throw/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_receive_normal",
+      "mode": "inferno",
+      "event": "receive",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/inferno/receive/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/receive/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_receive_reduced",
+      "mode": "inferno",
+      "event": "receive",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/inferno/receive/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/receive/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_score_normal",
+      "mode": "inferno",
+      "event": "score",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/inferno/score/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/score/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_score_reduced",
+      "mode": "inferno",
+      "event": "score",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/inferno/score/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/score/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_mode_enter_normal",
+      "mode": "inferno",
+      "event": "mode_enter",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/inferno/mode_enter/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/mode_enter/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_mode_enter_reduced",
+      "mode": "inferno",
+      "event": "mode_enter",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/inferno/mode_enter/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/mode_enter/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_mode_exit_normal",
+      "mode": "inferno",
+      "event": "mode_exit",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/inferno/mode_exit/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/mode_exit/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_mode_exit_reduced",
+      "mode": "inferno",
+      "event": "mode_exit",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/inferno/mode_exit/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/mode_exit/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_miss_normal",
+      "mode": "inferno",
+      "event": "miss",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/inferno/miss/normal/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/miss/normal/timeline.json",
+      "frameCount": 5,
+      "status": "review"
+    },
+    {
+      "assetId": "fx_tokyo_inferno_miss_reduced",
+      "mode": "inferno",
+      "event": "miss",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/inferno/miss/reduced/master.svg",
+      "timeline": "assets/source/fx/tokyo/inferno/miss/reduced/timeline.json",
+      "frameCount": 3,
+      "status": "review"
+    },
+    {
+      "assetId": "tokyo_city_normal_normal",
+      "mode": "normal",
+      "event": "city_ambient",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/normal/city_ambient_normal.svg",
+      "frameCount": 1,
+      "status": "review"
+    },
+    {
+      "assetId": "tokyo_city_normal_reduced",
+      "mode": "normal",
+      "event": "city_ambient",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/normal/city_ambient_reduced.svg",
+      "frameCount": 1,
+      "status": "review"
+    },
+    {
+      "assetId": "tokyo_city_fever_normal",
+      "mode": "fever",
+      "event": "city_ambient",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/fever/city_ambient_normal.svg",
+      "frameCount": 1,
+      "status": "review"
+    },
+    {
+      "assetId": "tokyo_city_fever_reduced",
+      "mode": "fever",
+      "event": "city_ambient",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/fever/city_ambient_reduced.svg",
+      "frameCount": 1,
+      "status": "review"
+    },
+    {
+      "assetId": "tokyo_city_inferno_normal",
+      "mode": "inferno",
+      "event": "city_ambient",
+      "motion": "normal",
+      "master": "assets/source/fx/tokyo/inferno/city_ambient_normal.svg",
+      "frameCount": 1,
+      "status": "review"
+    },
+    {
+      "assetId": "tokyo_city_inferno_reduced",
+      "mode": "inferno",
+      "event": "city_ambient",
+      "motion": "reduced",
+      "master": "assets/source/fx/tokyo/inferno/city_ambient_reduced.svg",
+      "frameCount": 1,
+      "status": "review"
+    }
+  ],
+  "performance": "Draft key poses only, no measured fps/memory budget",
+  "masks": "Bib, volunteer number, two slots and HUD text remain above FX; keep FX constrained to hand, flight, receiver, score outer edge, sky.",
+  "reducedMotion": "Separate low-density/static assets; no shake/sweep/flash",
+  "noCodeChanges": true
+}
