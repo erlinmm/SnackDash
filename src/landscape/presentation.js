@@ -28,11 +28,11 @@
     const common={
       'en-GB':{'tokyo.kicker':'SNACKDASH V2 · TECHNICAL REVIEW','tokyo.subtitle':'Marathon aid station · Ten races · Three modes',
         'tokyo.staff':'Choose staff','tokyo.female':'Female','tokyo.male':'Male','tokyo.qa':'QA · non-persistent scenes','tokyo.qaActive':'QA · VIEW ONLY',
-        'tokyo.dense':'8 runners / 4-digit bibs','tokyo.rotate':'Rotate your device to landscape.','tokyo.isolated':'Preview scores, preferences and practice history are separate from the regular game.',
+        'tokyo.debugOn':'DEBUG ON · 2/4 combo · normal speed','tokyo.debugOff':'Enable playable debug mode','tokyo.dense':'8 runners / 4-digit bibs','tokyo.rotate':'Rotate your device to landscape.','tokyo.isolated':'Preview scores, preferences and practice history are separate from the regular game.',
         'tokyo.progress':'{{count}} / 10 served','tokyo.paused':'Paused','tokyo.go':'GO!','tokyo.race':'Race {{race}}'},
       'zh-Hans':{'tokyo.kicker':'SNACKDASH V2 · 技术评审','tokyo.subtitle':'马拉松补给站 · 十场比赛 · 三种模式',
         'tokyo.staff':'选择补给员','tokyo.female':'女补给员','tokyo.male':'男补给员','tokyo.qa':'测试 · 不保存进度','tokyo.qaActive':'测试 · 仅供查看',
-        'tokyo.dense':'8 名运动员 / 四位数号码','tokyo.rotate':'请将设备旋转为横屏。','tokyo.isolated':'试玩版的成绩、设置和练习记录与正式版完全独立。',
+        'tokyo.debugOn':'DEBUG 已开启 · 2/4 连击 · 不加速','tokyo.debugOff':'开启可玩调试模式','tokyo.dense':'8 名运动员 / 四位数号码','tokyo.rotate':'请将设备旋转为横屏。','tokyo.isolated':'试玩版的成绩、设置和练习记录与正式版完全独立。',
         'tokyo.progress':'已完成 {{count}} / 10 场','tokyo.paused':'已暂停','tokyo.go':'开始！','tokyo.race':'第 {{race}} 场'}
     };
     const select=$('languageSelect');
@@ -66,8 +66,14 @@
         node.style.backgroundImage='url("'+render.imageURL(manifest.ui['avatar/'+sex])+'")';node.classList.add('has-portrait');
       }
     }).catch(e=>{document.documentElement.dataset.tokyoAssets='error';console.error(e);$('startBtn').textContent='Artwork failed to load'});
+    $('playtestDebugBtn').addEventListener('click',()=>ports.setDebug(!ports.getDebug()));
     function renderMenu(){
       const grid=$('levelGrid'),first=previewCity*10+1;
+      const debug=$('playtestDebugBtn');
+      debug.hidden=!ports.debugRules;
+      debug.setAttribute('aria-pressed',String(ports.getDebug()));
+      debug.textContent=tr(ports.getDebug()?'tokyo.debugOn':'tokyo.debugOff');
+      $('exitDebugBtn').classList.toggle('hidden',!ports.getDebug());
       if(ports.getSelected()<first||ports.getSelected()>=first+10)ports.select(first);
       grid.replaceChildren();
       $('tokyoProgress').textContent=tr('tokyo.progress',{count:cityCleared(ports.getPrefs().best,previewCity)});

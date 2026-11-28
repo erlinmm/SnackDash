@@ -639,6 +639,7 @@
       this.yields=0;this.cooperativeYields=0;
     }
     speed(r){
+      if(this.game.debugRules?.noAcceleration)return r.baseSpeed;
       const multipliers=this.game.inferno?INFERNO_SPEED_MULTIPLIERS:this.game.fever?FEVER_SPEED_MULTIPLIERS:CATCH_SPEED_MULTIPLIERS;
       return r.baseSpeed*multipliers[Math.min(r.successes,4)];
     }
@@ -746,7 +747,7 @@
       this.successThisRace=0;
     }
     save(){
-      if(debugMode)return;
+      if(this.game.nonPersistent||debugMode)return;
       try{localStorage.setItem(PRACTICE_KEY,JSON.stringify(this.history));}catch(_){}
     }
     // Swaps are observations, not penalties or evidence of failure.
@@ -834,7 +835,10 @@
   }
 
   class Marathon {
-    constructor(config,seed){
+    constructor(config,seed,options={}){
+      this.qaFixture=Boolean(options.fixture);
+      this.debugRules=debugMode&&!this.qaFixture?runtime.debugPlaytest:null;
+      this.nonPersistent=this.qaFixture||debugMode;
       this.config=config;this.rng=seededRandom(seed);this.director=new NumberDirector(config,this.rng);
       // Independent RNG: reaction diversity must not affect bibs or scoring.
       this.reactionRng=seededRandom((seed^0x9e3779b9)>>>0);
@@ -1264,7 +1268,7 @@
         const yes=matches(t.supply.number,runner.number);
         const fxX=this.runnerX(runner),fxY=runner.y+runnerVisualOffset(runner)-18*runnerScale(runner);
         const previousMode=this.inferno?'inferno':this.fever?'fever':'normal';
-      const outcome=resolveHit(this.combo,this.fever,runner.successes,yes);
+      const outcome=resolveHit(this.combo,this.fever,runner.successes,yes,this.debugRules);
         this.score+=outcome.delta;
         this.combo=outcome.combo;this.fever=outcome.fever;this.inferno=outcome.inferno;
         this.maxCombo=Math.max(this.maxCombo,this.combo);
@@ -1417,7 +1421,7 @@
       // the clock expires; otherwise the timer ends the round immediately.
       const won=this.score>=GOAL;
       if(won){
-        if(!debugMode){
+        if(!this.nonPersistent&&!debugMode){
           prefs.best[this.config.level]=Math.max(prefs.best[this.config.level]??-999,this.score);
           // Winning a race only records its stamp. Invitation + next-city
           // access are reconciled on the level-selection page, never here.
@@ -2417,7 +2421,6 @@
   function showMenu(){
     // Keep fullscreen active when returning to level selection.
     resetPasswordQueue();
-    if(previewCity!==null)debugMode=false;
     game=null;stage.style.transform='';stage.classList.remove('fever-active','inferno-active');$('app').classList.remove('in-game');$('gameScreen').classList.add('hidden');$('menuScreen').classList.remove('hidden');
     if(presentation)presentation.menu();
     else $('resultOverlay').classList.add('hidden');
@@ -2425,12 +2428,12 @@
     renderLevelGrid();window.scrollTo({top:0,behavior:'instant'});
     showPendingCityInvitation();
   }
-  function startLevel(level){
+  function startLevel(level,options={}){
     if(!isOpen(level)||presentation&&!presentation.ready())return;
     resetPasswordQueue();
-    stage.style.transform='';selected=level;selectedCity=Math.floor((level-1)/10);savePrefs();lastHudText='';
+    stage.style.transform='';selected=level;selectedCity=Math.floor((level-1)/10);if(!options.fixture)savePrefs();lastHudText='';
     $('menuScreen').classList.add('hidden');$('gameScreen').classList.remove('hidden');$('app').classList.add('in-game');
-    sizeScene();game=new Marathon(LEVELS[level-1],randSeed());
+    sizeScene();game=new Marathon(LEVELS[level-1],options.seed??randSeed(),options);
     presentation?.raceStarted(game);
     requestAnimationFrame(sizeScene);
     updateMatchHint(tr('hud.tapRunner'));
@@ -2451,11 +2454,11 @@
     else startLevel(game.config.level);
   }
   function setDebugMode(enabled){
-    if(previewCity!==null)return;
+    if(previewCity!==null&&!runtime.debugPlaytest)return;
     debugMode=Boolean(enabled);
     resetPasswordQueue();
     if(!debugMode){
-      selectedCity=clamp(selectedCity,0,unlockedCities-1);
+      selectedCity=previewCity??clamp(selectedCity,0,unlockedCities-1);
       selected=selectedCity*10+1;
       savePrefs();
     }
@@ -2470,17 +2473,17 @@
     const city=CITIES[g.config.cityIndex];
     return Object.freeze({
       'score.current':g.score,'score.exact':fullScoreText(g.score),'score.goal':GOAL,
-      'race.index':g.config.event,'race.phase':g.phase,'race.fixture':Boolean(g.qaFixture),
+      'race.index':g.config.event,'race.phase':g.phase,'race.fixture':Boolean(g.qaFixture),'race.debug':Boolean(g.debugRules),
       'race.countdownVisible':g.phase==='countdown'||(g.phase==='playing'&&g.goFlash>0),
       'race.countdown':g.phase==='countdown'?String(Math.max(1,Math.ceil(g.countdown/.5))):tr('tokyo.go'),
       'race.celebrating':g.phase==='celebrate'&&!g.resultsShown,
-      'time.remaining':g.remaining,'combo.count':g.combo,'combo.progress':Math.min(1,g.combo/(g.fever?10:5)),
+      'time.remaining':g.remaining,'combo.count':g.combo,'combo.progress':Math.min(1,g.combo/(g.fever?(g.debugRules?.infernoCombo??10):(g.debugRules?.feverCombo??5))),
       'combo.label':tr(g.fever?'hud.comboPower':'hud.comboNormal',{combo:g.combo}),
       'mode.current':mode,'progress.cityCleared':cityCleared(prefs.best,g.config.cityIndex),
       'audio.enabled':prefs.sound,'audio.glyph':prefs.sound?'🔊':'🔇','audio.label':tr(prefs.sound?'game.soundOff':'game.soundOn'),
       'controls.pauseGlyph':g.phase==='paused'?'▶':'Ⅱ','controls.pauseLabel':tr(g.phase==='paused'?'game.resumeAria':'game.pause'),
       'result.visible':g.resultsShown,'result.won':won,'result.heading':g.resultsShown?tr(won?(g.config.level===100?'result.world':'result.super'):'result.retry'):'',
-      'result.text':g.resultsShown?tr(!won?'result.failure':g.config.level===100?'result.allComplete':'result.stamped',
+      'result.text':g.resultsShown?tr(g.nonPersistent?'result.debug':!won?'result.failure':g.config.level===100?'result.allComplete':'result.stamped',
         {city:cityText(city,'name'),race:g.config.event,completed:cityCleared(prefs.best,g.config.cityIndex)}):'',
       'result.stats':g.resultsShown?tr('result.stats',{correct:g.correct,wrong:g.wrong,
         accuracy:g.correct+g.wrong?Math.round(g.correct/(g.correct+g.wrong)*100):0,combo:g.maxCombo}):'',
@@ -2509,8 +2512,9 @@
       snapshot:hudSnapshot,command:hudCommand,
       getGame:()=>game,getPrefs:()=>prefs,getSelected:()=>selected,
       select:level=>{if(isOpen(level))selected=level;},renderLevelGrid,
+      getDebug:()=>debugMode,setDebug:setDebugMode,debugRules:runtime.debugPlaytest,
       startLevel,showMenu,
-      createFixture(level,seed){debugMode=true;startLevel(level);game=new Marathon(LEVELS[level-1],seed);game.qaFixture=true;return game;},
+      createFixture(level,seed){startLevel(level,{fixture:true,seed});return game;},
       getPixelRatio:()=>pixelRatio,setPixelRatio:n=>{pixelRatio=n;}
     });
   }

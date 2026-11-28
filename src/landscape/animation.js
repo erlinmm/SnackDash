@@ -69,7 +69,7 @@
   class ActorPlayer {
     constructor(library,set,base,seed){
       this.library=library;this.set=set;this.base=base;this.seed=String(seed);
-      this.serial=0;this.active=null;this.baseMode=null;this.baseAt=0;
+      this.serial=0;this.active=null;this.baseMode=null;this.baseAt=0;this.baseClock=null;this.baseElapsed=0;
     }
     select(mode,action,token='',motion='normal'){
       return resolve(this.library,this.set,mode,action,this.seed+'/'+token,motion);
@@ -119,9 +119,13 @@
         const t=now-a.start,loop=a.clip.playback==='loop'&&(a.repeat===0||t<duration(a.clip)*a.repeat);
         return {...a,...sample(a.clip,t,loop)};
       }
-      if(this.baseMode!==mode){this.baseMode=mode;this.baseAt=now}
+      if(this.baseMode!==mode||this.baseClock===null){this.baseMode=mode;this.baseAt=now;this.baseClock=now;this.baseElapsed=0}
+      // Integrate cadence, rather than multiplying the entire past by the
+      // newest speed. Sampling twice in a frame is idempotent.
+      const dt=Math.max(0,now-this.baseClock);this.baseClock=now;
+      if(!options.freeze)this.baseElapsed+=dt*(options.rate??1);
       const selected=this.select(mode,this.base,'base',options.motion||'normal');
-      const elapsed=options.freeze?0:((now-this.baseAt)*(options.rate??1)+(options.phase??0));
+      const elapsed=options.freeze?0:this.baseElapsed+(options.phase??0);
       return {...selected,...sample(selected.clip,elapsed)};
     }
   }

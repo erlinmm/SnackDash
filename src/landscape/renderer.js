@@ -103,7 +103,7 @@
     function runnerPose(g,r,forced=null,forcedMode=mode(g)){
       const player=runnerPlayer(g,r);
       const selected=forced?player.select(forcedMode,forced,'target',motion()):player.pose(mode(g),now(g),{
-        motion:motion(),freeze:g.qaFixture||reducedMotion(),rate:clamp(r.speed/35,.8,2),phase:r.seed*113
+        motion:motion(),freeze:g.qaFixture||reducedMotion(),rate:clamp(r.speed/(scene.animation?.runnerReferenceSpeed??35),scene.animation?.runnerMinRate??.8,scene.animation?.runnerMaxRate??2),phase:r.seed*113
       });
       const f=forced?A.sample(selected.clip,0).frame:selected.frame,h=runnerScale(r)*p.scaleUnit,[sw,sh]=f.sourceSize,s=h/sh;
       const [ax,ay]=f.pivot,[bx,by,bw,bh]=f.anchors.bib;
@@ -122,15 +122,78 @@
     }
     function bibSize(r,pose){
       const n=String(r.number),i=clamp(n.length-1,0,scene.bib.minimumWidth.length-1),[, ,nw,nh]=pose.bib;
+      if(scene.bib.callout)return {n,w:nw,h:nh};
       return {n,w:Math.max(scene.bib.minimumWidth[i],nw),h:Math.max(scene.bib.minimumHeight[i],nh)};
     }
     function drawBib(r,pose){
       const [x,y,nw,nh]=pose.bib,{n,w,h}=bibSize(r,pose);
       if(w>nw+.2||h>nh+.2)rect(x-w/2,y-h/2,w,h,Math.max(2,h*.09),scene.bib.background||'#fffdf6',scene.bib.border||'#1e3051');
-      fitLabel(n,x,y,Math.min(scene.bib.maxFont,h*.8),w-5,scene.uiText.ink,scene.bib.minFont);
+      // Artwork owns the natural bib shape. Do not enlarge distant bibs
+      // to compensate for small screens; a separate number callout does that.
+      const natural=Boolean(scene.bib.callout),font=Math.min(scene.bib.maxFont,h*.8);
+      fitLabel(n,x,y,font,Math.max(1,w-(natural?Math.min(4,w*.12):5)),scene.uiText.ink,natural?Math.max(3,Math.min(font,6)):scene.bib.minFont);
+    }
+    function calloutLayout(g,poses){
+      const c=scene.bib.callout;
+      if(!c)return [];
+      const sx=Math.max(.1,ports.canvas.getBoundingClientRect().width/W);
+      const result=[];
+      const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
+      const active=poses.filter(({r})=>g.runners.includes(r)&&visible(g,r));
+      const obstructions=poses.flatMap(({r,pose})=>{
+        const [x,y,w,h]=pose.bib;
+        const hd=anchor(pose,'head');
+        // The bubble may sit next to another athlete's empty margin, but
+        // must not obscure the athlete's face, bib or a front runner's body.
+        return [{id:r.id,x:x-w/2-3,y:y-h/2-3,w:w+6,h:h+6},
+          {id:r.id,x:hd.x-pose.w*.23,y:pose.y,w:pose.w*.46,h:Math.max(18,hd.y-pose.y+pose.h*.12)}];
+      });
+      const b=scene.staff.bubble;
+      obstructions.push({id:-1,x:b.xRange[0]-6,y:b.yRange[0]-6,w:b.xRange[1]-b.xRange[0]+b.size[0]+12,h:b.yRange[1]-b.yRange[0]+b.size[1]+12});
+      // Protect the staff, reserve controls and top HUD area as well.
+      for(const s of scene.slots)obstructions.push({id:-1,x:s.rect[0],y:s.rect[1],w:s.rect[2],h:s.rect[3]});
+      for(const {r,pose} of active.sort((a,b)=>a.r.y-b.r.y||a.r.id-b.r.id)){
+        const [bx,by,bw,bh]=pose.bib,n=String(r.number);
+        const glyph=Math.min(scene.bib.maxFont,bh*.8,(bw*.88)/(n.length*.66));
+        // Perceived glyph size is evaluated in CSS pixels, not atlas pixels.
+        if(glyph*sx>=c.minGlyphPx)continue;
+        const head=anchor(pose,'head'),font=Math.min(c.maxFont??32,Math.max(c.minFont??20,c.minGlyphPx/sx+1));
+        const w=Math.max(c.minWidth??46,n.length*font*.68+20),h=font*1.43;
+        const top=pose.y-5;
+        const right=head.x+pose.w*.24+6,left=head.x-pose.w*.24-6-w;
+        const raw=[[head.x-w/2,top-h],[right,head.y-h*.85],[left,head.y-h*.85],
+          [right,by-h/2],[left,by-h/2],[head.x-w/2,top-h*1.8]];
+        let chosen=null;
+        for(const [x,y] of raw){
+          const box={id:r.id,x:clamp(x,4,W-w-4),y:clamp(y,c.topClearance??142,H-h-6),w,h,font,n,head};
+          if(obstructions.some(o=>overlap(box,o))||result.some(o=>overlap(box,o)))continue;
+          chosen=box;break;
+        }
+        // Never cover a different runner's number to force a callout. The
+        // renderer tries again on the next frame as the roster moves.
+        if(chosen)result.push(chosen);
+      }
+      return result;
+    }
+    function drawCallout(b){
+      const {x,y,w,h,font,n,head}=b;
+      const c=scene.bib.callout;
+      ctx.save();
+      const ink=c.ink||scene.uiText.ink,base=c.background||'#fffefa';
+      ctx.beginPath();
+      const tx=clamp(head.x,x+10,x+w-10);
+      ctx.moveTo(tx-6,y+h-2);ctx.lineTo(clamp(head.x,x-8,x+w+8),y+h+10);ctx.lineTo(tx+7,y+h-2);
+      ctx.closePath();ctx.fillStyle=base;ctx.fill();ctx.strokeStyle=ink;ctx.lineWidth=2;ctx.stroke();
+      rect(x,y,w,h,h*.44,base,ink);
+      fitLabel(n,x+w/2,y+h*.5,font,w-12,ink,10);ctx.restore();
     }
     function pickRunner(g,x,y){
       const pad=traffic.hitPadding,candidates=[];
+      if(scene.bib.callout){
+        const poses=[...g.runners,...g.departing].map(r=>({r,pose:runnerPose(g,r)}));
+        const b=calloutLayout(g,poses).find(b=>x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h);
+        if(b)return b.id;
+      }
       for(const r of g.runners){
         if(!visible(g,r))continue;
         const b=runnerPose(g,r),[bx,by]=b.bib,{w:bw,h:bh}=bibSize(r,b);
@@ -219,7 +282,7 @@
       fitLabel(String(g.supplies.held.number),x+w*b.text[0],y+h*b.text[1],b.fontSize,w*.65,scene.uiText.ink,25);
     }
     function crowdPose(g,c){
-      return state(g).crowds.get(c.id).pose(mode(g),now(g),{motion:motion(),freeze:g.qaFixture||reducedMotion(),phase:A.hash(c.id)%500});
+      return state(g).crowds.get(c.id).pose(mode(g),now(g),{motion:motion(),freeze:g.qaFixture||reducedMotion(),phase:A.hash(c.id)%500,rate:c.rateByMode?.[mode(g)]??1});
     }
     function drawCrowd(g,c,pose){
       const road=scene.camera,side=c.side;
@@ -246,7 +309,7 @@
       let selected=s.transition?.pose(node.id);
       if(!selected&&node.clips){
         const id=modeRef(node.clips,m);
-        if(id)selected={id,clip:lib[id],...A.sample(lib[id],g.qaFixture||reducedMotion()?0:now(g))};
+        if(id)selected={id,clip:lib[id],...A.sample(lib[id],g.qaFixture||reducedMotion()?0:now(g)+(node.phaseMs??0))};
       }
       if(selected)image=selected.frame.image;
       if(!image)throw Error('Missing object artwork: '+node.id+'/'+m);
@@ -309,7 +372,12 @@
         const m=A.eventMode(spec,event,s.view.staff.costume),id=modeRef(spec.clips,m),clip=lib[id];
         if(!clip)throw Error('Missing effect clip '+id);
         const length=spec.durationMs??A.duration(clip)/(spec.speed||1);
-        s.effects.push({spec,id,clip,mode:m,event,start:now(g),length,lastPoint:null});
+        const effect={spec,id,clip,mode:m,event,start:now(g),length,lastPoint:null};
+        // Resolve a stationary impact at the instant of the event, before a
+        // fast runner can leave the active roster. A moving effect continues
+        // to follow its declared anchor while the target exists.
+        if(spec.follow===false&&spec.anchor.type.startsWith('runner.'))effectAnchor(g,effect,null,null);
+        s.effects.push(effect);
       }
     }
     function drawEffect(g,e,staff,projectilePose){
@@ -318,7 +386,7 @@
       if(e.spec.anchor.type==='projectile'&&!projectilePose)return;
       const point=effectAnchor(g,e,staff,projectilePose);if(!point)return;
       const pose=A.sample(e.clip,e.spec.fitDuration?elapsed/e.length*A.duration(e.clip):elapsed*(e.spec.speed||1),e.clip.playback==='loop');
-      const w=e.spec.width*A.strength(e.spec.scaleBy,e.event),h=e.spec.height??w*e.clip.size[1]/e.clip.size[0];
+      const w=(e.spec.widthByMode?.[e.mode]??e.spec.width)*A.strength(e.spec.scaleBy,e.event),h=e.spec.height??w*e.clip.size[1]/e.clip.size[0];
       ctx.save();ctx.globalAlpha=e.spec.opacity??1;
       drawAsset(ctx,pose.frame.image,point.x-w/2,point.y-h/2,w,h);ctx.restore();
       if(e.spec.label&&e.event.delta!=null){
@@ -453,6 +521,7 @@
       const s=state(g),staff=staffPose(g),shot=projectile(g),queue=[];
       const add=(z,fn)=>queue.push({z,fn});
       const runnerPoses=[...g.runners,...g.departing].map(r=>({r,pose:runnerPose(g,r)}));
+      const callouts=calloutLayout(g,runnerPoses);
       const crowdPoses=actors.crowds.map(c=>({c,pose:crowdPose(g,c)}));
       for(const n of manifest.world.nodes){
         const pose=nodePose(g,n,staff);if(pose)add(pose.z,()=>drawNode(n,pose));
@@ -466,11 +535,13 @@
       if(shot)add(order.projectile??100,()=>supply(shot.item,shot.x,shot.y,shot.size,shot.rotation,'flight'));
       for(const e of s.effects)add(e.spec.z,()=>drawEffect(g,e,staff,shot));
       for(const e of s.reactions)add(order.feedback,()=>drawReaction(g,e));
+      for(const b of callouts)add(order.bubble-.5,()=>drawCallout(b));
       add(order.slots,()=>drawSlots(g));add(order.bubble,()=>drawNumberBubble(g,staff));
       queue.sort((a,b)=>a.z-b.z);
       for(const q of queue)q.fn();
       if(tracing){
         tracing.staff=staff;
+        tracing.callouts=callouts.map(({head,...b})=>b);
         tracing.runners=runnerPoses.filter(x=>g.runners.includes(x.r)).map(({r,pose})=>({id:r.id,...pose}));
         tracing.crowds=crowdPoses.map(({c,pose})=>({id:c.id,clip:pose.id,action:pose.action,mode:pose.mode,index:pose.index,frame:pose.frame}));
         tracing.objects=A.clone(s.view);tracing.events=A.clone(s.events);

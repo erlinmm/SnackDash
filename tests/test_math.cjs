@@ -96,3 +96,13 @@ test('each next city becomes eligible after 9 wins, not 8 or all 10', () => {
   for(let i=21;i<=100;i++)best[i]=10;
   assert.equal(math.cityUnlockedCount(best),10);
 });
+
+test('playable debug thresholds are isolated from default scoring',()=>{
+ const rules={feverCombo:2,infernoCombo:4,noAcceleration:true};
+ let combo=0,fever=false;
+ for(let i=1;i<=4;i++){const r=math.resolveHit(combo,fever,0,true,rules);assert.equal(r.fever,i>=2);assert.equal(r.inferno,i>=4);assert.ok(r.delta>0);combo=r.combo;fever=r.fever;}
+ assert.equal(math.resolveHit(3,true,0,false,rules).combo,0);
+ assert.equal(math.resolveHit(1,false,0,true).fever,false);
+ assert.equal(math.resolveHit(3,false,0,true).inferno,false);
+ assert.equal(math.resolveHit(9,true,0,true).inferno,true);
+});

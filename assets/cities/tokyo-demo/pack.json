@@ -3,9 +3,9 @@
   "id": "tokyo-demo",
   "extends": "tokyo",
   "raceCityId": "tokyo",
-  "artRevision": "demov2-illustrated-r02",
+  "artRevision": "demov2-illustrated-r03-polish",
   "reviewStatus": "review",
-  "sourceCommit": "e5faf6d6855dd16f03328fd46ef6312f3a94748b",
+  "sourceCommit": "f53cb7a9fc3f2c2173765568f6161f6bc59dbf7c",
   "parts": {
     "resources": "../../source/demo-v2/tokyo/resources.json",
     "scene": "../../source/demo-v2/tokyo/scene.json",

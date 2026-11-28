@@ -161,15 +161,16 @@
   // Runner repeat-hit multiplier is uncapped; fast runners make long streaks rare.
   // The hits reaching Combo 5 and 10 use their newly activated mode immediately.
   // A miss while powered-up ends the streak without subtracting points.
-  function resolveHit(combo,fever,successes,correct){
+  function resolveHit(combo,fever,successes,correct,rules){
+    const feverAt=rules?.feverCombo??5,infernoAt=rules?.infernoCombo??10;
     if(correct){
-      const nextCombo=combo+1, nextFever=nextCombo>=5;
-      const nextInferno=nextCombo>=10;
+      const nextCombo=combo+1, nextFever=nextCombo>=feverAt;
+      const nextInferno=nextCombo>=infernoAt;
       const runnerMultiplier=Math.pow(nextInferno?4:nextFever?3:2,successes);
-      const comboMultiplier=nextInferno?nextCombo**2*(nextCombo-9):nextFever?nextCombo**2:nextCombo;
+      const comboMultiplier=nextInferno?nextCombo**2*(nextCombo-infernoAt+1):nextFever?nextCombo**2:nextCombo;
       return {delta:comboMultiplier*runnerMultiplier,combo:nextCombo,
         fever:nextFever,inferno:nextInferno,activated:!fever&&nextFever,
-        infernoActivated:nextInferno&&combo<10,ended:false,runnerMultiplier};
+        infernoActivated:nextInferno&&combo<infernoAt,ended:false,runnerMultiplier};
     }
     const runnerMultiplier=Math.pow(2,successes);
     return {delta:fever?0:(successes>0?-runnerMultiplier:-2),combo:0,

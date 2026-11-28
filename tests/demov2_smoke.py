@@ -59,7 +59,7 @@ HIT="""correct=>{
  }
  if(!chosen||!g.throwSupply(chosen.id))throw Error('No tappable target for '+correct);
  const supply=g.throwing.supply.number,bib=chosen.number,before=g.score,mode=g.inferno?'inferno':g.fever?'fever':'normal';
- const expected=m.resolveHit(g.combo,g.fever,chosen.successes,correct),target=correct?m.transformRunnerNumber(bib,supply):bib;
+ const expected=m.resolveHit(g.combo,g.fever,chosen.successes,correct,g.debugRules),target=correct?m.transformRunnerNumber(bib,supply):bib;
  let flight=false,caught=false,miss=false,visibleAtImpact=false,retiredAtImpact=false,outcomeEvent=false,staff=new Set(),runnerFrames=new Set();
  for(let i=0;i<100&&g.throwing;i++){
    step();const t=qa.trace();staff.add(t.staff.frame.image);
@@ -154,6 +154,32 @@ def run(browser):
             page.locator("#gameScreen").screenshot(path=str(OUT/(gender+"_"+mode+".png")))
             page.locator("#levelsBtn").click()
     record("all six mode/gender render inspections")
+    # Validate the entire illustrated cast and its independent frame cels.
+    cast=page.evaluate("""()=>{const m=SnackDashAssetPack.manifest;
+      return m.actors.runners.map(a=>({id:a.id,slot:a.sourceSlot,
+        modes:Object.entries(a.modes).map(([mode,actions])=>({mode,frames:m.clips[actions.run].frames.map(f=>f.image)}))}));}""")
+    assert len(cast)==22 and len({a["slot"] for a in cast})==22
+    assert all(len(set(v["frames"]))==8 for a in cast for v in a["modes"])
+    page.evaluate(START,1)
+    motion=page.evaluate("""()=>{
+      const g=SnackDashDebug.getGame(),qa=SnackDashLandscapeQA;
+      const frames={},crowds={},natural=[],bubbles=[];
+      for(let i=0;i<48;i++){
+        g.update(.025);const t=qa.trace();
+        for(const r of t.runners){
+          (frames[r.id]??=new Set()).add(r.frame.image);
+          const b=r.frame.anchors.bib;
+          natural.push(Math.abs(r.bib[2]-b[2]*r.s)<.001&&Math.abs(r.bib[3]-b[3]*r.s)<.001);
+        }
+        for(const c of t.crowds)(crowds[c.id]??=new Set()).add(c.index);
+        bubbles.push(t.callouts.length);
+      }
+      return {run:Object.values(frames).map(s=>s.size),crowd:Object.values(crowds).map(s=>s.size),natural:natural.every(Boolean),bubbles};
+    }""")
+    assert min(motion["run"])>=3 and min(motion["crowd"])>=2,motion
+    assert motion["natural"] and max(motion["bubbles"])>0,motion
+    page.locator("#levelsBtn").click()
+    record("22 cast slots, distinct live gait/crowd frames and distance callouts",**motion)
     page.locator("#tokyoFemale").click()
     starts=page.evaluate("""()=>{
        let count=0;const rnd=Math.random,now=Date.now;
@@ -185,6 +211,64 @@ def run(browser):
         capture_transition(page,"inferno>normal",54,gender)
         page.locator("#levelsBtn").click()
         record("complete real gameplay cycle",gender=gender)
+    # Playable debug survives return/restart, but static QA and normal races are separate.
+    page.locator("#playtestDebugBtn").click()
+    page.evaluate(START,1)
+    assert page.locator("#playtestDebugBadge").is_visible()
+    saved=page.evaluate("JSON.stringify(localStorage)")
+    for i in range(1,5):
+        h=page.evaluate(HIT,True)
+        assert h["mode"]==("inferno" if i>=4 else "fever" if i>=2 else "normal"),h
+        assert page.evaluate("()=>{const g=SnackDashDebug.getGame();return g.runners.every(r=>g.traffic.speed(r)===r.baseSpeed)}")
+    page.evaluate("()=>{const g=SnackDashDebug.getGame();g.remaining=.001;g.update(.02);for(let i=0;i<65&&!g.resultsShown;i++)g.update(.05);g.draw()}")
+    assert page.evaluate("JSON.stringify(localStorage)")==saved,"Debug wrote progress or practice history"
+    page.locator("#backBtn").click()
+    assert page.evaluate("SnackDashDebug.isDebug()")
+    page.evaluate("SnackDashLandscapeQA.inspect('inferno')")
+    assert page.evaluate("SnackDashDebug.isDebug()&&SnackDashDebug.getGame().qaFixture")
+    page.locator("#levelsBtn").click()
+    page.evaluate(START,2)
+    assert page.evaluate("Boolean(SnackDashDebug.getGame().debugRules)&&!SnackDashDebug.getGame().qaFixture")
+    page.locator("#restartBtn").click()
+    assert page.evaluate("Boolean(SnackDashDebug.getGame().debugRules)")
+    page.locator("#levelsBtn").click()
+    page.locator("#playtestDebugBtn").click()
+    page.evaluate(START,1)
+    assert page.evaluate("!SnackDashDebug.isDebug()&&!SnackDashDebug.getGame().debugRules")
+    for i in range(1,5):assert page.evaluate(HIT,True)["mode"]=="normal"
+    assert page.evaluate(HIT,True)["mode"]=="fever"
+    assert page.evaluate("()=>{const g=SnackDashDebug.getGame();return g.traffic.speed({...g.runners[0],successes:1})>g.runners[0].baseSpeed}")
+    page.locator("#levelsBtn").click()
+    record("playable debug 2/4 and constant pace, isolated static QA, normal 5/10")
+    # Film a real powered-up round without catch acceleration, and collect
+    # the actual FX and sky animation frame indices from the renderer.
+    page.locator("#playtestDebugBtn").click()
+    page.evaluate(START,1)
+    observed={}
+    for mode,threshold in (("fever",2),("inferno",4)):
+        while page.evaluate("SnackDashDebug.getGame().combo")<threshold:
+            page.evaluate(HIT,True)
+        sample=page.evaluate("""()=>{
+          const g=SnackDashDebug.getGame(),qa=SnackDashLandscapeQA,seen={},sky={},crowd={};
+          for(let i=0;i<48;i++){
+            g.update(.025);const t=qa.trace();
+            for(const e of t.effects)(seen[e.id+'/'+e.mode]??=new Set()).add(e.frame);
+            for(const n of t.nodes.filter(n=>n.id.startsWith('firework-')||n.id.startsWith('animated-petals-')))(sky[n.id]??=new Set()).add(n.index);
+            for(const c of t.crowds)(crowd[c.id]??=new Set()).add(c.index);
+          }
+          const plain=o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v.size]));
+          return {seen:plain(seen),sky:plain(sky),crowd:plain(crowd)};
+        }""")
+        assert sample["seen"].get("mode_enter/"+mode,0)>=3,sample
+        assert sample["seen"].get("receive/"+mode,0)>=2,sample
+        assert min(sample["crowd"].values())>=3,sample
+        if mode=="inferno":assert min(v for k,v in sample["sky"].items() if k.startswith("firework-"))>=3,sample
+        else:assert min(v for k,v in sample["sky"].items() if k.startswith("animated-petals-"))>=3,sample
+        observed[mode]=sample
+        page.locator("#gameScreen").screenshot(path=str(OUT/("live_"+mode+"_polish.png")))
+    page.locator("#levelsBtn").click()
+    page.locator("#playtestDebugBtn").click()
+    record("powered-up hit, entry, sky and crowd animation frames",**observed)
     # Ten race wins and actual result controls. Original storage API used on CI.
     for race in range(1,11):
         page.evaluate(START,race)

@@ -74,7 +74,7 @@ ACTIONS={
 }
 HUD_BINDINGS={
  "score.current","score.exact","score.goal","race.index","race.phase","race.fixture",
- "race.countdownVisible","race.countdown","race.celebrating","time.remaining","combo.count",
+ "race.countdownVisible","race.countdown","race.celebrating","race.debug","time.remaining","combo.count",
  "combo.progress","combo.label","mode.current","mode.label","progress.cityCleared",
  "audio.enabled","audio.glyph","audio.label","controls.pauseGlyph","controls.pauseLabel",
  "result.visible","result.won","result.heading","result.text","result.stats","result.primary",
@@ -124,6 +124,10 @@ def validate(pack):
     for i,slot in enumerate(scene["slots"]):
         rect(slot["rect"],f"slot {i} rect");point(slot["icon"],3,"slot icon");point(slot["number"],3,"slot number")
         x,y,w,h=slot["rect"];require(x>=0 and y>=0 and x+w<=1280 and y+h<=720,"Reserve outside world")
+    if "debugPlaytest" in scene:
+        d=scene["debugPlaytest"]
+        require(isinstance(d["feverCombo"],int) and isinstance(d["infernoCombo"],int) and 1<=d["feverCombo"]<d["infernoCombo"],"Invalid debug thresholds")
+        require(isinstance(d["noAcceleration"],bool),"Invalid debug acceleration policy")
     number(scene["timing"]["throwRecovery"],"throw recovery",.41,10)
     point(scene["staff"]["ground"],2,"staff ground");point(scene["staff"]["table"],2,"staff table")
     require(scene["staff"]["table"][1]==scene["table"]["contact"],"Staff must stand on fixed tabletop")
@@ -242,6 +246,9 @@ def validate(pack):
         if kind=="object":require(anchor["target"] in node_ids,"Unknown effect object")
         if kind in ("hud.binding","hud.score"):require(anchor.get("binding","score.current") in bindings,"FX refers to absent HUD binding")
         number(rule["width"],"FX width",.001);number(rule["z"],"FX layer")
+        for mode,width in rule.get("widthByMode",{}).items():
+            require(mode in MODES,"Invalid per-mode effect width")
+            number(width,"Per-mode FX width",.001)
         if "durationMs" in rule:number(rule["durationMs"],"FX duration",.001)
     for name in ("slot","bubble","avatar/female","avatar/male"):
         asset(pack["ui"][name],name)
@@ -442,6 +449,7 @@ def runtime_settings(pack):
     return {"width":scene["canvas"][0],"height":scene["canvas"][1],
         "previewCityId":pack["raceCityId"],"backupCount":len(scene["slots"]),
         "initialEntryY":scene["traffic"]["initialEntryY"],"entryY":scene["traffic"]["entryY"],
+        **({"debugPlaytest":scene["debugPlaytest"]} if "debugPlaytest" in scene else {}),
         "throwRecovery":scene["timing"]["throwRecovery"],"disableImpactPause":scene["timing"]["disableImpactPause"],
         "storage":{"legacy":prefix+"LegacyV1","progress":prefix+"SaveV1","practice":prefix+"PracticeV1","locale":prefix+"LocaleV1","staff":prefix+"StaffV1"}}
 
